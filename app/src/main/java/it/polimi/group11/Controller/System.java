@@ -6,7 +6,6 @@ package it.polimi.group11.controller;
 public class System {
 
     public void newMatch() {
-
     }
 
     public void viewStatistics() {
