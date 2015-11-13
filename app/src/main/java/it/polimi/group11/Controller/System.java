@@ -6,6 +6,8 @@ package it.polimi.group11.controller;
 public class System {
 
     public void newMatch() {
+
+        Match partita= new Match();
     }
 
     public void viewStatistics() {
