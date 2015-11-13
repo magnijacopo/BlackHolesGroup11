@@ -1,4 +1,4 @@
-package it.polimi.group11.Controller;
+package it.polimi.group11.controller;
 
 /**
  * Created by rezzo on 13/11/2015.
