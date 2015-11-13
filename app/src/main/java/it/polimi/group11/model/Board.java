@@ -5,6 +5,8 @@ import android.content.res.TypedArray;
 
 import java.util.Objects;
 
+import it.polimi.group11.R;
+
 /**
  * Created by Lale on 13/11/2015.
  */
@@ -12,11 +14,13 @@ public class Board {
 
     private Resources res = getResources();
 
-    private TypedArray VERTICAL = res.obtainTypedArray(android.R.array.bool);
+    public TypedArray vertical = res.obtainTypedArray(R.array.vertical_position);
 
-    private boolean[][] VERTICALe = new boolean[7][9];
+    public TypedArray horizontal = res.obtainTypedArray(R.array.horizontal_position);
 
-    private boolean[][] HORIZONTAL = new boolean[7][9];
+    private boolean[][] VERT = new boolean[7][9];
+
+    private boolean[][] HORIZ = new boolean[7][9];
 
     private int[] verticalPosition=new int[7];
 
@@ -32,6 +36,23 @@ public class Board {
 
     private GameComands gameComands;
 
+    public void fillVertical(TypedArray vertical){
+        for(int i=0; i<7; i++){
+            for (int k=0; k<7; k++){
+                VERT[i][k] = vertical.getBoolean((i * k + k), true);
+            }
+        }
+
+    }
+    public void fillHorizontal(TypedArray horizontal){
+        for(int i=0; i<7; i++){
+            for (int k=0; k<7; k++){
+                VERT[i][k] = horizontal.getBoolean((i * k + k), true);
+            }
+        }
+
+    }
+
 
     public void move(String arg) {
 
@@ -42,21 +63,21 @@ public class Board {
 
         if (Objects.equals(orientation, "h")){
             if (Objects.equals("o", movement)) {
-                set=horizontalPosition[num]+1;
+                horizontalPosition[num]++;
             }
             if (Objects.equals(movement,"i")){
-                set=horizontalPosition[num]-1;
+                horizontalPosition[num]--;
             }
-            setRow(num,set);
+            setRow(num,horizontalPosition[num]);
         };
         if (Objects.equals(orientation, "v")){
             if (Objects.equals("o", movement)) {
-                set=verticalPosition[num]+1;
+                verticalPosition[num]++;
             }
             if (Objects.equals(movement,"i")){
-                set=verticalPosition[num]-1;
+                verticalPosition[num]--;
             }
-            setColumn(num, set);
+            setColumn(num, verticalPosition[num]);
         }
         return;
     };
@@ -70,13 +91,14 @@ public class Board {
 
     private void setRow(int row, int set){
       for(int i=0;i<7;i++){
-          grid[row][i].horizontalBar=HORIZONTAL[row][i+set];
+          grid[row][i].horizontalBar=HORIZ[row][i+set];
         }
     };
 
+
     private void setColumn(int column, int set){
         for(int i=0;i<7;i++){
-            grid[column][i].verticalBar=VERTICAL[column][i+set];
+            grid[column][i].verticalBar=VERT[column][i+set];
         }
 
     };
