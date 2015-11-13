@@ -34,7 +34,7 @@ public class Board {
 
     private Match match;
 
-    private GameComands gameComands;
+    private GameComamnds gameCommands;
 
     public void fillVertical(TypedArray vertical){
         for(int i=0; i<7; i++){
@@ -42,43 +42,40 @@ public class Board {
                 VERT[i][k] = vertical.getBoolean((i * k + k), true);
             }
         }
-
     }
+
     public void fillHorizontal(TypedArray horizontal){
         for(int i=0; i<7; i++){
             for (int k=0; k<7; k++){
                 VERT[i][k] = horizontal.getBoolean((i * k + k), true);
             }
         }
-
     }
-
 
     public void move(String arg) {
 
         char orientation = arg.charAt(0);
         int num=Integer.parseInt(arg.substring(1, 1));
         char movement=arg.charAt(2);
-        int set=0;
 
         if (Objects.equals(orientation, "h")){
             if (Objects.equals("o", movement)) {
                 horizontalPosition[num]++;
             }
-            if (Objects.equals(movement,"i")){
+            else if (Objects.equals(movement,"i")){
                 horizontalPosition[num]--;
             }
             setRow(num,horizontalPosition[num]);
-        };
-        if (Objects.equals(orientation, "v")){
+        }
+        else if (Objects.equals(orientation, "v")){
             if (Objects.equals("o", movement)) {
                 verticalPosition[num]++;
             }
-            if (Objects.equals(movement,"i")){
+            else if (Objects.equals(movement,"i")){
                 verticalPosition[num]--;
             }
             setColumn(num, verticalPosition[num]);
-        }
+        };
         return;
     };
 
@@ -91,14 +88,14 @@ public class Board {
 
     private void setRow(int row, int set){
       for(int i=0;i<7;i++){
-          grid[row][i].horizontalBar=HORIZ[row][i+set];
+          grid[row][i].setHorizontalBar(HORIZ[row][i+set]);
         }
     };
 
 
     private void setColumn(int column, int set){
         for(int i=0;i<7;i++){
-            grid[column][i].verticalBar=VERT[column][i+set];
+            grid[column][i].setVerticalBar(VERT[column][i+set]);
         }
 
     };
