@@ -218,11 +218,21 @@ public class Game {
         this.movesList = movesList;
     }
 
+
+    /**
+     * BREVE DESCRIZIONE
+     *
+     * @param moveToCheck mossa da controllare
+     * @return BOOLEAN true se la mossa si può fare false se la mossa è sbagliata
+     *
+     * @see Game#alivePlayers
+     * @see Move
+     */
     public boolean checkMove(Move moveToCheck){
         int movesToCheck = players.size()-1;
         if (!movesList.isEmpty()){
             if (movesList.size() > movesToCheck){
-                for (int i=movesList.size(); i>movesToCheck; i--){
+                for (int i=movesList.size(); i>movesList.size()-movesToCheck; i--){
                     if (movesList.get(i-1).getMoveId().substring(0, 2).equals(moveToCheck.getMoveId().substring(0, 2))){
                         error = "a player cannot move a bar already moved in this turn";
                         validity = false;
