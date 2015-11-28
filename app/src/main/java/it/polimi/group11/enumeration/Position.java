@@ -1,10 +1,6 @@
 package it.polimi.group11.enumeration;
 
 /**
- * Created by Jacopo Magni on 13/11/2015.
- */
-
-/**
  * Position that the bars can be set to.
  * Depending on the bar's position the holes correspond to 7 of 9 slots in the bar.
  */
@@ -24,6 +20,16 @@ public enum Position {
      * The middle 7 slots
      */
     OUTER;
+
+    private static Position[] values = values();
+
+    public Position next(){
+        return values[(this.ordinal()+1)%values.length];
+    }
+
+    public Position previous(){
+        return values[(this.ordinal()-1)%values.length];
+    }
 
 }
 
