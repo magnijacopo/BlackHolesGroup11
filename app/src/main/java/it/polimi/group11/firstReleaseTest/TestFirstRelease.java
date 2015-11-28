@@ -77,6 +77,7 @@ public class TestFirstRelease {
             }else{
                 lastConfiguration = configuration;
             }
+            lastConfiguration = lastConfiguration.substring(0, 1)+game.getLastPlayer()+lastConfiguration.substring(3, lastConfiguration.length());
             return lastConfiguration;
         }return "";
     }

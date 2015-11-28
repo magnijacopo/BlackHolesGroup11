@@ -82,7 +82,7 @@ public class Game {
             while(!beadsStatus.substring(i, i+1).equals(id) && i < (beadsStatus.length()-1)){
                 i++;
             }
-            if (i == beadsStatus.length()-1){
+            if (i == beadsStatus.length()-1 && !beadsStatus.substring(i, i+1).equals(id)){
                 nextMoving.setStatus(false);
                 System.out.println("player "+id+" is dead");
                 alivePlayers--;
@@ -263,7 +263,7 @@ public class Game {
         int j = movesList.size();
         int cont = 0;
 
-        if (players.get(Integer.parseInt(moveToCheck.getPlayerId())).getMovesNumber() >= 2){
+        if (players.get(Integer.parseInt(moveToCheck.getPlayerId())-1).getMovesNumber() >= 2){
             while (cont < 2){
                 if (movesList.get(j-1).getPlayerId().equals(moveToCheck.getPlayerId())){
                     if(movesList.get(j-1).getMoveId().substring(0, 2).equals(moveToCheck.getMoveId().substring(0, 2))){
@@ -306,5 +306,13 @@ public class Game {
             System.out.println("player "+nextMoving.getName()+" won the match!");
             return nextMoving.getId();
         }
+    }
+
+    public String getLastPlayer(){
+        iteratorNext();
+        while (nextMoving.getStatus()!=true){
+            iteratorNext();
+        }
+        return nextMoving.getId();
     }
 }
