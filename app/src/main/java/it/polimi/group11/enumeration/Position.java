@@ -25,5 +25,15 @@ public enum Position {
      */
     OUTER;
 
+    private static Position[] values = values();
+
+    public Position next(){
+        return values[(this.ordinal()+1)%values.length];
+    }
+
+    public Position previous(){
+        return values[(this.ordinal()-1)%values.length];
+    }
+
 }
 
