@@ -14,19 +14,19 @@ public class TestFirstRelease {
 
     int playersNumber;
     String movingPlayer;
-    String horizontalBarsPosition = new String();
-    String verticalBarsPosition = new String();
-    String beadsPosition = new String();
+    String horizontalBarsPosition;
+    String verticalBarsPosition ;
+    String beadsPosition;
 
     boolean checkConfigurationPlayers = true;
     boolean checkConfigurationMovingPlayer = true;
     boolean checkConfigurationBars = true;
     boolean checkConfigurationBeads = true;
 
-    String move = new String();
-    Queue<String> mosse = new LinkedList<String>();
+    String move;
+    Queue<String> moves = new LinkedList<>();
 
-    String lastConfiguration = new String();
+    String lastConfiguration;
     String output;
 
 
@@ -42,12 +42,12 @@ public class TestFirstRelease {
             if (checkConfigurationMovingPlayer){
                 if(checkConfigurationBars){
                     if(checkConfigurationBeads){
-                        if (checkInputLenght(test)){
+                        if (checkInputLength(test)){
                             int numMoves = ((test.length()-65)/3);
                             enqueueMove(test, numMoves);
 
                             String configuration = test.substring(0, 65);
-                            output = finalConfiguration(configuration, mosse.remove());
+                            output = finalConfiguration(configuration, moves.remove());
                         }else{
                             output = "error: input configuration has not a valid length";
                         }
@@ -72,8 +72,8 @@ public class TestFirstRelease {
             stringBuilder.append(playersNumber).append(movingPlayer);
             configuration = stringBuilder+horizontalBarsPosition+verticalBarsPosition+beadsPosition;
             System.out.println("  move "+configuration+" "+mossa);
-            if (mosse.peek() != null && !(game.getGameOver())){
-                finalConfiguration(configuration, mosse.remove());
+            if (moves.peek() != null && !(game.getGameOver())){
+                finalConfiguration(configuration, moves.remove());
             }else{
                 lastConfiguration = configuration;
             }
@@ -89,21 +89,15 @@ public class TestFirstRelease {
             horizontalBarsPosition += board.getHorizontalBarPosition(i);
             verticalBarsPosition += board.getVerticalBarPosition(i);
         }
-        return;
     }
 
     private String setBeads(String input){
         String checkGrid = board.checkGrid();
-        String testBeads = board.newBeadsPosition(checkGrid, input);
-        return testBeads;
+        return board.newBeadsPosition(checkGrid, input);
     }
 
-    private boolean checkInputLenght(String input){
-        if ((input.length() > 65) && ((input.length()-65)%3 == 0)){
-            return true;
-        }else{
-            return false;
-        }
+    private boolean checkInputLength(String input){
+        return ((input.length() > 65) && ((input.length()-65)%3 == 0));
     }
 
     private void setBarsPosition(String test){
@@ -126,7 +120,7 @@ public class TestFirstRelease {
     private void enqueueMove(String test, int numMoves){
         for (int i=0; i<numMoves; i++){
             move = test.substring(65+i*3, 68+i*3);
-            mosse.add(move);
+            moves.add(move);
         }
     }
 
@@ -138,7 +132,6 @@ public class TestFirstRelease {
             checkConfigurationPlayers = false;
             output = ("error: the number of players is invalid, it must be from 2 to 4");
         }
-        return;
     }
 
     private void setMovingPlayer(String input){

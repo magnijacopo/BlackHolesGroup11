@@ -27,8 +27,4 @@ public class MainSystem {
         reader.close();
         return playersNumber;
     }
-
-    public Game getGame() {
-        return game;
-    }
 }
