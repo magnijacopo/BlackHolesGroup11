@@ -63,7 +63,7 @@ public class Board {
     /**
      *  private constructor
      */
-    private Board(){} //
+    private Board(){}
 
     /**
      * The board is a singleton.

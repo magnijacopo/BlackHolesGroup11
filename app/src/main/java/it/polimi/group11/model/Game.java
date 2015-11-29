@@ -6,7 +6,7 @@ import java.util.ListIterator;
 
 
 /**
- * DESCRIZIONE CHE NON SO COSA METTERE
+ * Describe current game session
  */
 
 public class Game {

@@ -5,7 +5,8 @@ import it.polimi.group11.enumeration.PlayerID;
 
 /**
  * Player class. Represent an instance of a player that is playing a game.
- *
+ * Define the attributes of a player and contains method to change or read this attributes,
+ * and method to make moves.
  */
 public class Player {
 

@@ -2,7 +2,7 @@ package it.polimi.group11.model;
 
 
 /**
- * Class move
+ * This class represents the move of the current round and which player done it
  *
  */
 
