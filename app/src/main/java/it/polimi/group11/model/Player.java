@@ -162,7 +162,6 @@ public class Player {
     /**
      *
      * @return movesNumber {@link Player#movesNumber}
-     * @see Player#movesNumber
      */
     public int getMovesNumber() {
         return movesNumber;

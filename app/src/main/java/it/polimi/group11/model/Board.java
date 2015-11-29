@@ -1,14 +1,14 @@
 package it.polimi.group11.model;
 
 /**
- * describe the situation of the game board,
- * define the structure of vertical and horizontal bars and their position on the board
- * Finally contains methods to change the setting of the board
+ * Describe the situation of the game board,
+ * define the structure of vertical and horizontal bars and their position on the board,
+ * finally contains methods to change the setting of the board
  */
 
 public class Board {
     /**
-     *  non mutable holes configuration in the vertical bars
+     *  Non mutable holes configuration in the vertical bars
      */
     private final boolean[][] VERTICALHOLES = {
             {true, false, false, false, false, true, false, true, true },
@@ -21,7 +21,7 @@ public class Board {
     };
 
     /**
-     *  non mutable holes configuration in the horizontal bars
+     *  Non mutable holes configuration in the horizontal bars
      */
     private final boolean[][] HORIZONTALHOLES = { //
             {true, false, true, false, true, false, true, false, true},

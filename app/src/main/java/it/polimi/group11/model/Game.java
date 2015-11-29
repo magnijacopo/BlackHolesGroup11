@@ -180,7 +180,7 @@ public class Game {
 
 
     /**
-     *
+     * ??
      */
     private void iteratorNext(){
         if(!iterator.hasNext())
