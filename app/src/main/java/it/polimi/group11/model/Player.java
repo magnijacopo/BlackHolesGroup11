@@ -53,8 +53,7 @@ public class Player {
      * Constructor used for testing purposed.
      * The name is set equal to the id, because the players have no name in the test.
      *
-     * @param id id of the player
-     * @see Player#id
+     * @param id {@link Player#id}
      */
     public Player(int id){ //
         this.setName(Integer.toString(id));
@@ -65,13 +64,9 @@ public class Player {
     /**
      * Full constructor
      *
-     * @param playerName player's name
-     * @param playerID player's id
-     * @param colour player's colour
-     *
-     * @see Player#name
-     * @see Player#id
-     * @see Player#colour
+     * @param playerName player's name {@link Player#name}
+     * @param playerID player's id {@link Player#id}
+     * @param colour player's colour {@link Player#colour}
      */
     public Player(String playerName, PlayerID playerID, String colour){
         this.setName(playerName);
@@ -86,8 +81,7 @@ public class Player {
 
     /**
      *
-     * @return name
-     * @see Player#name
+     * @return name {@link Player#name}
      */
     public String getName() {
         return name;
@@ -95,8 +89,7 @@ public class Player {
 
     /**
      *
-     * @param name
-     * @see Player#name
+     * @param name {@link Player#name}
      */
     public void setName(String name) {
         this.name = name;
@@ -104,8 +97,7 @@ public class Player {
 
     /**
      *
-     * @return id
-     * @see Player#id
+     * @return id {@link Player#id}
      */
     public String getId() {
         return id;
@@ -113,8 +105,7 @@ public class Player {
 
     /**
      *
-     * @param id
-     * @see Player#id
+     * @param id {@link Player#id}
      */
     public void setId(String id) {
         this.id = id;
@@ -122,8 +113,7 @@ public class Player {
 
     /**
      *
-     * @return status
-     * @see Player#status
+     * @return status {@link Player#status}
      */
     public boolean getStatus() {
         return status;
@@ -131,8 +121,7 @@ public class Player {
 
     /**
      *
-     * @param status
-     * @see Player#status
+     * @param status {@link Player#status}
      */
     public void setStatus(boolean status) {
         this.status = status;
@@ -140,8 +129,7 @@ public class Player {
 
     /**
      *
-     * @return profile
-     * @see Player#profile
+     * @return profile {@link Player#profile}
      */
     public Profile getProfile() {
         return profile;
@@ -149,8 +137,7 @@ public class Player {
 
     /**
      *
-     * @param profile
-     * @see Player#profile
+     * @param profile {@link Player#profile}
      */
     public void setProfile(Profile profile) {
         this.profile = profile;
@@ -158,8 +145,7 @@ public class Player {
 
     /**
      *
-     * @return colour
-     * @see Player#colour
+     * @return colour {@link Player#colour}
      */
     public String getColour() {
         return colour;
@@ -167,8 +153,7 @@ public class Player {
 
     /**
      *
-     * @param colour
-     * @see Player#colour
+     * @param colour {@link Player#colour}
      */
     public void setColour(String colour) {
         this.colour = colour;
@@ -176,7 +161,7 @@ public class Player {
 
     /**
      *
-     * @return movesNumber
+     * @return movesNumber {@link Player#movesNumber}
      * @see Player#movesNumber
      */
     public int getMovesNumber() {
@@ -185,22 +170,20 @@ public class Player {
 
     /**
      *
-     * @param movesNumber
-     * @see Player#movesNumber
+     * @param movesNumber {@link Player#movesNumber}
      */
     public void setMovesNumber(int movesNumber) {
         this.movesNumber = movesNumber;
     }
 
+
     //Methods
 
     /**
      * makeMove allows players to make moves.
-     * It checks the input and rearrange the position of the bars,
-     * vertical or horizontal, inward or outward.
+     * It checks the input and rearrange the position of the bars.
      *
-     * @param input the String that represents the move. {@link  }
-     * @see Move#moveId
+     * @param input the String that represents the move. {@link Move#moveId}
      */
     public void makeMove(String input) {
 
@@ -209,20 +192,24 @@ public class Player {
         int number = Character.getNumericValue(input.charAt(1))-1; //number of the bar
         char movement = input.charAt(2); //inward or outward slide movement
 
-        if (orientation == 'h') { //horizontal
-            if (movement == 'o') { //outward
+        if (orientation == 'h') {
+            if (movement == 'o') {
+                // Horizontal + Outward
                 board.setHorizontalBarPosition(board.getHorizontalBarPosition(number)+1, number);
             }
-            else if (movement == 'i') { //inward
+            else if (movement == 'i') {
+                // Horizontal + Inward
                 board.setHorizontalBarPosition(board.getHorizontalBarPosition(number)-1, number);
             }
             board.setRow(number, board.getHorizontalBarPosition(number));
         }
-        else if (orientation == 'v') { //vertical
+        else if (orientation == 'v') {
             if (movement == 'o') {
+                // Vertical + Outward
                 board.setVerticalBarPosition(board.getVerticalBarPosition(number)+1, number);
             }
             else if (movement == 'i') {
+                //Vertical + Inward
                 board.setVerticalBarPosition(board.getVerticalBarPosition(number)-1, number);
             }
             board.setColumn(number, board.getVerticalBarPosition(number));

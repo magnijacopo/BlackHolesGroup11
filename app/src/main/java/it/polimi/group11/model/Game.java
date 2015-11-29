@@ -80,7 +80,7 @@ public class Game {
 
     /**
      *
-     * @return
+     * @return {@link Game#players}
      */
     public List<Player> getPlayers(){
         return players;
@@ -88,7 +88,7 @@ public class Game {
 
     /**
      *
-     * @return
+     * @return {@link Game#gameOver}
      */
     public boolean getGameOver(){
         return gameOver;
@@ -96,7 +96,7 @@ public class Game {
 
     /**
      *
-     * @return
+     * @return {@link Game#validity}
      */
     public boolean getValidity(){
         return validity;
@@ -104,7 +104,7 @@ public class Game {
 
     /**
      *
-     * @return
+     * @return {@link Game#error}
      */
     public String getError(){
         return error;
@@ -112,7 +112,7 @@ public class Game {
 
     /**
      *
-     * @return
+     * @return alivePlayers {@link Game#alivePlayers}
      */
     public int getAlivePlayers(){
         return alivePlayers;
@@ -122,8 +122,9 @@ public class Game {
     // Methods
 
     /**
-     * It adds the
+     * It adds the player in the ArrayList of the players.
      * @param playerNumber number of the players that play the game
+     * @see Game#players
      */
     private void definePlayers(int playerNumber){
         for (int i=1; i<=playerNumber; i++){
@@ -136,7 +137,7 @@ public class Game {
 
     /**
      *
-     * @param newBeadsPosition
+     * @param newBeadsPosition {}
      * @param id
      */
     private void checkLives(String newBeadsPosition, String id) {
@@ -293,6 +294,11 @@ public class Game {
                 }
             }
         }
+        /*
+            DA CREARE UN METODO A PARTE GENERALCHECK CHE CHIAMA PRIMA CHECKMOVE E CHE POI CHECKMOVE PER DUE PLAYER!
+
+            Checks the number of player alive, if they are two call the method for check the extra rule
+         */
         if (alivePlayers == 2){
             if(!checkMoveTwoPlayers(moveToCheck)){
                 error = "when two players remain, a player cannot move the same bar for more than two consecutive turns";
@@ -303,29 +309,51 @@ public class Game {
         return validity;
     }
 
+    /**
+     * This method checks the extra rule for two players.
+     * When only two players are left, a player
+     * cannot slide the same bar for more than two
+     * consecutive turns.
+     *
+     *
+     * @param moveToCheck {@link Move#moveId}
+     * @return {@link Game#validity}
+     */
     public boolean checkMoveTwoPlayers(Move moveToCheck){
 
-        int j = movesList.size();
-        int cont = 0;
+        int sizeL = movesList.size(); //
+        int contMoves = 0; // contMoves count the move made by the same player
 
         if (players.get(Integer.parseInt(moveToCheck.getPlayerId())-1).getMovesNumber() >= 2){
-            while (cont < 2){
-                if (movesList.get(j-1).getPlayerId().equals(moveToCheck.getPlayerId())){
-                    if(movesList.get(j-1).getMoveId().substring(0, 2).equals(moveToCheck.getMoveId().substring(0, 2))){
-                        j--;
-                        cont++;
+            /*
+                While the moves checked are less than two
+                it check that the id of the player it is the same,
+                and then that the id of the move is equal.
+             */
+            while (contMoves < 2){
+                if (movesList.get(sizeL-1).getPlayerId().equals(moveToCheck.getPlayerId())){
+                    if(movesList.get(sizeL-1).getMoveId().substring(0, 2).equals(moveToCheck.getMoveId().substring(0, 2))){
+                        sizeL--; // Decrease the size to scan all the List backward
+                        contMoves++; //If it has checked a move increase the variable
                     }else{
-                        return true;
+                        return validity;
                     }
                 }else{
-                    j--;
+                    sizeL--; // Decrease the size to scan all the List backward
                 }
             }
-            return false;
+            validity = false;
+            return validity;
         }
-        return true;
+        return validity;
     }
 
+    /**
+     *
+     * @param move
+     * @param beadsStatus
+     * @return
+     */
     public String nextPlayer(String move, String beadsStatus){
         if (!gameOver){
             iteratorNext();
@@ -353,6 +381,10 @@ public class Game {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public String getLastPlayer(){
         iteratorNext();
         while (nextMoving.getStatus()!=true){

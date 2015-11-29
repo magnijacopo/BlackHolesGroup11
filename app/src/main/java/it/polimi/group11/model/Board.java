@@ -5,8 +5,12 @@ package it.polimi.group11.model;
  * define the structure of vertical and horizontal bars and their position on the board
  * Finally contains methods to change the setting of the board
  */
+
 public class Board {
-    private final boolean[][] VERTICALHOLES = { //non mutable holes configuration in the vertical bars
+    /**
+     *  non mutable holes configuration in the vertical bars
+     */
+    private final boolean[][] VERTICALHOLES = {
             {true, false, false, false, false, true, false, true, true },
             {true, false, false, false, true, true, false, false, true },
             {true, false, true, false, false, true, false, true, true },
@@ -15,7 +19,11 @@ public class Board {
             {true, true, false, false, false, false, false, true, true },
             {true, false, false, true, false, false, true, false, true }
     };
-    private final boolean[][] HORIZONTALHOLES = { //non mutable holes configuration in the horizontal bars
+
+    /**
+     *  non mutable holes configuration in the horizontal bars
+     */
+    private final boolean[][] HORIZONTALHOLES = { //
             {true, false, true, false, true, false, true, false, true},
             {true, false, false, true, false, false, true, false, true},
             {true, false, false, false, true, false, false, false, true},
@@ -25,21 +33,42 @@ public class Board {
             {true, false, false, true, false, true, false, true, true}
     };
 
-    private boolean[][] gridY = new boolean[7][7]; //distribution of the vertical bar's holes in the board grid
-    private boolean[][] gridX = new boolean[7][7]; //distribution of the horizontal bar's holes in the board grid
-
-    private int[] verticalBarsPosition = new int[7]; //position of the vertical bars on the board
-    private int[] horizontalBarsPosition = new int[7]; //position of the horizontal bars on the board
-
-    private static Board board;
-
-
-    private Board(){} //private constructor
+    /**
+     *  distribution of the vertical bar's holes in the board grid
+     */
+    private boolean[][] gridY = new boolean[7][7];
 
     /**
-      * the board is a singleton
-      * @return it returns an instance of the class Board, if it isn't already been created
-      * @see Board
+     *  distribution of the horizontal bar's holes in the board grid
+     */
+    private boolean[][] gridX = new boolean[7][7];
+
+    /**
+     *  position of the vertical bars on the board
+     */
+    private int[] verticalBarsPosition = new int[7];
+
+    /**
+     *  position of the horizontal bars on the board
+     */
+    private int[] horizontalBarsPosition = new int[7];
+
+
+    // Constructors
+    /**
+     *
+     */
+    private static Board board;
+
+    /**
+     *  private constructor
+     */
+    private Board(){} //
+
+    /**
+     * The board is a singleton.
+     *
+     * @return it returns an instance of the class Board, if it isn't already been created, {@link Board#board}
       */
     public static Board getInstance(){
         if (board == null){
@@ -48,8 +77,88 @@ public class Board {
         return board;
     }
 
+
+    // Getters and Setters
+
     /**
-     * set the position of all the bars in the board's grid
+     * Return the positions all of the horizontal bars.
+     *
+     * @return {@link Board#horizontalBarsPosition}
+     */
+    public int[] getHorizontalBarsPosition(){
+        return horizontalBarsPosition;
+    }
+
+    /**
+     * Return the positions all of the vertical bars.
+     *
+     * @return {@link Board#verticalBarsPosition}
+     */
+    public int[] getVerticalBarsPosition(){
+        return verticalBarsPosition;
+    }
+
+    /**
+     * Return the position of a specific horizontal bars.
+     *
+     * @param position the specific bar
+     * @return {@link Board#horizontalBarsPosition}
+     */
+    public int getHorizontalBarPosition(int position){
+        return horizontalBarsPosition[position];
+    }
+
+    /**
+     * Return the position of a specific vertical bars.
+     *
+     * @param position the specific bar
+     * @return {@link Board#horizontalBarsPosition}
+     */
+    public int getVerticalBarPosition(int position){
+        return verticalBarsPosition[position];
+    }
+
+    /**
+     * Sets the position of the horizontal bars.
+     *
+     * @param horizontalPosition the position which will take the bar
+     * @param position the specific bar
+     */
+    public void setHorizontalBarPosition(int horizontalPosition, int position){
+        this.horizontalBarsPosition[position] = horizontalPosition;
+    }
+
+    /**
+     * Sets the position of the vertical bars.
+     *
+     * @param verticalPosition the position which will take the bar
+     * @param position the specific bar
+     */
+    public void setVerticalBarPosition(int verticalPosition, int position){
+        this.verticalBarsPosition[position] = verticalPosition;
+    }
+
+    /**
+     * Sets the position of the horizontal bars.
+     *
+     * @param horizontalPositions the position which will take the bars
+     */
+    public void setHorizontalBarsPosition(int[] horizontalPositions){
+        this.horizontalBarsPosition = horizontalPositions;
+    }
+
+    /**
+     * Sets the position of the vertical bars.
+     *
+     * @param verticalPositions the position which will take the bars
+     */
+    public void setVerticalBarsPosition(int[] verticalPositions){
+        this.verticalBarsPosition = verticalPositions;
+    }
+
+    /**
+     * Set the position of all the bars in the board's grid.
+     *
      * @see Board#setRow(int, int)
      * @see Board#setColumn(int, int)
      */
@@ -61,7 +170,8 @@ public class Board {
     }
 
     /**
-     * updates the row of the horizontal bar's hole distribution indicated by the input
+     * Updates the row of the horizontal bar's hole distribution indicated by the input.
+     *
      * @param row the row currently considered
      * @param barPosition {@link Board#horizontalBarsPosition}
      * @see Board#gridX
@@ -73,7 +183,8 @@ public class Board {
     }
 
     /**
-     * updates the column of the vertical bar's holes distribution indicated by the input
+     * Updates the column of the vertical bar's holes distribution indicated by the input.
+     *
      * @param column the column currently considered
      * @param barPosition {@link Board#verticalBarsPosition}
      * @see Board#gridY
@@ -84,8 +195,12 @@ public class Board {
         }
     }
 
+
+    // Methods
+
     /**
-     * overlaps the vertical and the horizontal holes distribution grids
+     * Overlaps the vertical and the horizontal holes distribution grids.
+     *
      * @return a string mapping the condition of each cell
      * @see Board#gridX
      * @see Board#gridY
@@ -113,10 +228,12 @@ public class Board {
     }
 
     /**
-     * updates the position of the beads on the board based on a configuration of the bars and the latest beads positions inputs
+     * Updates the position of the beads on the board based on,
+     * a configuration of the bars and the latest beads positions inputs.
+     *
      * @param grid the return of the method {@link Board#checkGrid()}
      * @param beadsPosition the current positions of the beads
-     * @return it returns a string rappresenting the new position of each beads
+     * @return it returns a string representing the new position of each beads
      */
     public String newBeadsPosition(String grid, String beadsPosition) {
         String newBeadsPosition = new String();
@@ -130,71 +247,5 @@ public class Board {
         return newBeadsPosition;
     }
 
-    /**
-     * return the positions all of the horizontal bars
-     * @return {@link Board#horizontalBarsPosition}
-     */
-    public int[] getHorizontalBarsPosition(){
-        return horizontalBarsPosition;
-    }
 
-    /**
-     * return the positions all of the vertical bars
-     * @return {@link Board#verticalBarsPosition}
-     */
-    public int[] getVerticalBarsPosition(){
-        return verticalBarsPosition;
-    }
-
-    /**
-     * return the position of a specific horizontal bars
-     * @param position the specific bar
-     * @return {@link Board#horizontalBarsPosition}
-     */
-    public int getHorizontalBarPosition(int position){
-        return horizontalBarsPosition[position];
-    }
-
-    /**
-     * return the position of a specific vertical bars
-     * @param position the specific bar
-     * @return {@link Board#horizontalBarsPosition}
-     */
-    public int getVerticalBarPosition(int position){
-        return verticalBarsPosition[position];
-    }
-
-    /**
-     * sets the position of the horizontal bars
-     * @param horizontalPosition the position which will take the bar
-     * @param position the specific bar
-     */
-    public void setHorizontalBarPosition(int horizontalPosition, int position){
-        this.horizontalBarsPosition[position] = horizontalPosition;
-    }
-
-    /**
-     * sets the position of the vertical bars
-     * @param verticalPosition the position which will take the bar
-     * @param position the specific bar
-     */
-    public void setVerticalBarPosition(int verticalPosition, int position){
-        this.verticalBarsPosition[position] = verticalPosition;
-    }
-
-    /**
-     * sets the position of the horizontal bars
-     * @param horizontalPositions the position which will take the bars
-     */
-    public void setHorizontalBarsPosition(int[] horizontalPositions){
-        this.horizontalBarsPosition = horizontalPositions;
-    }
-
-    /**
-     * sets the position of the vertical bars
-     * @param verticalPositions the position which will take the bars
-     */
-    public void setVerticalBarsPosition(int[] verticalPositions){
-        this.verticalBarsPosition = verticalPositions;
-    }
 }
