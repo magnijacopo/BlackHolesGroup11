@@ -30,11 +30,8 @@ public class Move {
     /**
      * Move Constructor
      *
-     * @param move
-     * @param player
-     *
-     * @see Move#moveId
-     * @see Move#playerId
+     * @param move {@link Move#moveId}
+     * @param player {@link Move#playerId}
      */
     public Move(String move, String player){
         this.moveId = move;
@@ -45,18 +42,16 @@ public class Move {
     // Getter
 
     /**
-     *
-     * @return playerId
-     * @see Move#playerId
+     * Getter for playerId
+     * @return playerId {@link Move#playerId}
      */
     public String getPlayerId(){
         return playerId;
     }
 
     /**
-     *
-     * @return moveId
-     * @see Move#moveId
+     * Getter for moveId
+     * @return moveId {@link Move#moveId}
      */
     public String getMoveId(){
         return moveId;

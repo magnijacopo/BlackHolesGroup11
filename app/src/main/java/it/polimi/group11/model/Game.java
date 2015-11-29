@@ -4,70 +4,141 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
+
+/**
+ * DESCRIZIONE CHE NON SO COSA METTERE
+ */
+
 public class Game {
+
+    /**
+     * The game is paired with the board instantiated in this game session.
+     */
     Board board = Board.getInstance();
 
-    private List<Player> players = new ArrayList<Player>();
+    /**
+     * List of the players that will play this game.
+     * @see Player
+     */
+    private List<Player> players = new ArrayList<>();
+
+    /**
+     * Iterator for iterate the ArrayList players
+     */
     private ListIterator<Player> iterator;
+
+    /**
+     * It is the player that should be the next to move the bars.
+     * @see Player
+     */
     private Player nextMoving;
 
-    /*private final int MAXQUEUEDMOVES = 4;
-    private String[] lastMoves = {"xx","xx","xx","xx"};*/
-    private ArrayList<Move> movesList = new ArrayList<Move>();
+    /**
+     * ArrayList with the list of the moves done by the players.
+     * @see Move
+     */
+    private ArrayList<Move> movesList = new ArrayList<>();
 
+    /**
+     * Number of the players that are still alive.
+     */
     private int alivePlayers;
-    //private int turnToCheck;
 
+    /**
+     * Boolean that indicates if the game is over or not,
+     * True if the game is finished,
+     * False if the game is not finished.
+     */
     private boolean gameOver;
 
-    private String error = new String();
+    /**
+     * String that represent the error message related to some error during the game.
+     */
+    private String error;
+
+    /**
+     * Boolean that represent the validity of the moves,
+     * True if the move is valid,
+     * False if the move is not valid.
+     */
     private boolean validity = true;
 
+
+    // Constructor
+
+    /**
+     * Constructor of the class
+     * @param playerNumber number of the players that play the game
+     */
     public Game(int playerNumber){
         alivePlayers = playerNumber;
         definePlayers(playerNumber);
     }
 
+
+    // Getters and Setters
+
+    /**
+     *
+     * @return
+     */
     public List<Player> getPlayers(){
         return players;
     }
 
+    /**
+     *
+     * @return
+     */
+    public boolean getGameOver(){
+        return gameOver;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public boolean getValidity(){
+        return validity;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getError(){
+        return error;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public int getAlivePlayers(){
+        return alivePlayers;
+    }
+
+
+    // Methods
+
+    /**
+     * It adds the
+     * @param playerNumber number of the players that play the game
+     */
     private void definePlayers(int playerNumber){
         for (int i=1; i<=playerNumber; i++){
-            if(players.size() < 4){
+            if(players.size() < 4){     // QUESTO IF MI SEMBRA INUTILE, TANTO AGGIUNGE SOLO FINO A PLAYERNUMBER QUINDI MAI PIU DI 4
                 players.add(new Player(i));
             }
         }
         iterator = players.listIterator();
     }
 
-	/*public String nextPlayer(String move, String beadsStatus){
-		if(!gameOver){
-			Board.getInstance(); //what?
-			if (checkMove(move) && checkBoundsValidity(move)){
-				iteratorNext();
-				checkLife(beadsStatus, nextMoving.getId()); //preliminary life check in order to control if the input configuration string has a number of players not corresponding to the beads set
-				if (nextMoving.getStatus()){
-					nextMoving.makeMove(move);
-					checkLives(board.newBeadsPosition(board.checkGrid(), beadsStatus), nextMoving.getId());
-					System.out.println("the move > "+move+" < is valid");
-					updateLastMoves(move);
-					return nextMoving.getId();
-				}else{
-					return nextPlayer(move, beadsStatus);//the next allowed player makes the input move
-				} 
-			}else{
-				iteratorCurrent(); //se la mossa di un giocatore non è valida, la rifa
-				System.out.println("the move > "+move+" < is not valid");
-				return nextMoving.getId();
-			}
-		}else{
-			iteratorNext();
-			System.out.println("GG");
-			return nextMoving.getId();
-		}
-	}*/
-
+    /**
+     *
+     * @param newBeadsPosition
+     * @param id
+     */
     private void checkLives(String newBeadsPosition, String id) {
         iteratorNext();
         while(id != nextMoving.getId()){
@@ -76,6 +147,11 @@ public class Game {
         }
     }
 
+    /**
+     *
+     * @param beadsStatus
+     * @param id
+     */
     private void checkLife(String beadsStatus, String id) {
         if (nextMoving.getStatus()){
             int i = 0;
@@ -92,102 +168,77 @@ public class Game {
         checkVictory();
     }
 
+    /**
+     * It checks if the game is over.
+     * The game ends when only one player is alive.
+     */
     private void checkVictory() {
         if (alivePlayers == 1)
             gameOver = true;
     }
 
-    public boolean getGameOver(){
-        return gameOver;
-    }
 
+    /**
+     *
+     */
     private void iteratorNext(){
         if(!iterator.hasNext())
             iterator = players.listIterator();
         nextMoving = iterator.next();
     }
 
-	/*private void iteratorCurrent(){
-		if(!iterator.hasNext()){
-			iterator.previous();
-			nextMoving = iterator.next();
-		}else{
-			iterator.next();
-			nextMoving = iterator.previous();
-		}
-	}*/
+    /**
+     *
+     * @param move String that represent the move to check {@link Move#moveId}
+     * @return validity {@link Game#validity}
+     */
+    public boolean checkBoundsValidity(String move) {
 
-	/*private boolean checkMove(String move){
-		turnToCheck = 3;
-		while(turnToCheck > (MAXQUEUEDMOVES-alivePlayers)){
-			if (!(move.substring(0, 2).equals(lastMoves[turnToCheck].substring(0, 2)))){
-				turnToCheck--;
-			}else{
-				error="normal rule!";
-				return false;
-			}
-		}
-		if (alivePlayers == 2){
-			if(!checkExtra(move)){
-				error="extra rule!";
-				return false;
-			}else{
-				return true;}
-		}
-		return true;
-	}*/
+        char orientation = move.charAt(0); // Orientation of the bar: vertical (v) or horizontal (h)
+        int number = Character.getNumericValue(move.charAt(1))-1; //Number of the bar
+        char movement = move.charAt(2); //Slide movement of the bar: inward (i) or outward (o)
 
-	/*private boolean checkExtra(String move){
-		if (!(move.substring(0, 2).equals(lastMoves[2].substring(0, 2))) || (!(move.substring(0, 2).equals(lastMoves[0].substring(0, 2))))){
-			return true;
-		}else{
-			System.out.println("extra rule(only for 2 players): "+move+" is not a valid move");
-			return false;	
-		}
-	}*/
-
-    public int getAlivePlayers(){
-        return alivePlayers;
-    }
-
-	/*public void updateLastMoves(String move){
-		for(int i=0; i<MAXQUEUEDMOVES-1; i++){
-			lastMoves[i] = lastMoves[i+1];
-		}
-		lastMoves[MAXQUEUEDMOVES-1] = move;
-	}*/
-
-    public boolean checkBoundsValidity(String move) { //
-        char orientation = move.charAt(0); //vertical or horizontal bar
-        int number = Character.getNumericValue(move.charAt(1))-1; //number of the bar
-        char movement = move.charAt(2); //inward or outward slide movement
+        /*
+          The first three if check that the move is sintactically correct
+          the orientation can be only "h" or "v"
+          the number can be between 0 and 6
+          the movement can be only "o" or "i"
+         */
         if ((orientation == 'h') || (orientation == 'v')){
             if((number >= 0) && (number <= 6)){
                 if((movement == 'o') || (movement == 'i')){
-                    if (orientation == 'h') { //horizontal
-                        if (movement == 'o') { //outward
+
+                    // Now it checks all possible combination
+                    if (orientation == 'h') {
+                        if (movement == 'o') {
+                            // Horizontal + Outward
                             if(board.getHorizontalBarPosition(number) == 2){
                                 validity = false;
                                 error = "the horizontal bar number "+(number+1)+" can not be pushed out";}
                         }
-                        else if (movement == 'i') { //inward
+                        else if (movement == 'i') {
+                            //Horizontal + Inward
                             if(board.getHorizontalBarPosition(number) == 0){
                                 validity = false;
                                 error = "the horizontal bar number "+(number+1)+" can not be pushed in";}
                         }
                     }
-                    else if (orientation == 'v') { //vertical
+                    else if (orientation == 'v') {
                         if (movement == 'o') {
+                            //Vertical + Outward
                             if (board.getVerticalBarPosition(number) == 2){
                                 error = "the vertical bar number "+(number+1)+" can not be pushed out";
                                 validity = false;}
                         }
                         else if (movement == 'i') {
+                            //Vertical + Inward
                             if (board.getVerticalBarPosition(number) == 0){
                                 error = "the vertical bar number "+(number+1)+" can not be pushed in";
                                 validity = false;}
                         }
-                    }}else{
+                    }}
+                // End of the possible combination. Else for possible error in the input
+                else{
                     error = "invalid input, the third character must be 'o' or 'i'";
                     validity = false;
                 }
@@ -202,49 +253,42 @@ public class Game {
         return validity;
     }
 
-    public boolean getValidity(){
-        return validity;
-    }
-
-    public String getError(){
-        return error;
-    }
-
-    public ArrayList<Move> getMovesList() {
-        return movesList;
-    }
-
-    public void setMovesList(ArrayList<Move> movesList) {
-        this.movesList = movesList;
-    }
-
-
     /**
-     * BREVE DESCRIZIONE
+     * It checks that the player is not moving the same bar
+     * that is been already moved by a different player in the same turn.
      *
-     * @param moveToCheck mossa da controllare
-     * @return BOOLEAN true se la mossa si può fare false se la mossa è sbagliata
+     * @param moveToCheck The move that has to be checked {@link Move}
+     * @return {@link Game#validity}
      *
-     * @see Game#alivePlayers
-     * @see Move
      */
     public boolean checkMove(Move moveToCheck){
+
         int movesToCheck = players.size()-1;
+        /*
+            The first two if check that the list of the moves is not empty
+            and that its size is greater than the number of moves to check.
+            If it's true starting from the end of the list it check that
+            the movesId of the last moves is not equal to the moveToCheck.
+         */
         if (!movesList.isEmpty()){
             if (movesList.size() > movesToCheck){
                 for (int i=movesList.size(); i>movesList.size()-movesToCheck; i--){
                     if (movesList.get(i-1).getMoveId().substring(0, 2).equals(moveToCheck.getMoveId().substring(0, 2))){
                         error = "a player cannot move a bar already moved in this turn";
                         validity = false;
-                        return false;
+                        return validity;
                     }
                 }
+            /*
+                If the two if are false it starts from the beginning of the list
+                and go through all the moves already done.
+             */
             }else{
                 for(int i=0; i<movesList.size(); i++){
                     if (movesList.get(i).getMoveId().substring(0, 2).equals(moveToCheck.getMoveId().substring(0, 2))){
                         error = "a player cannot move a bar already moved in this turn";
                         validity = false;
-                        return false;
+                        return validity;
                     }
                 }
             }
@@ -253,13 +297,14 @@ public class Game {
             if(!checkMoveTwoPlayers(moveToCheck)){
                 error = "when two players remain, a player cannot move the same bar for more than two consecutive turns";
                 validity = false;
-                return false;
+                return validity;
             }
         }
-        return true;
+        return validity;
     }
 
     public boolean checkMoveTwoPlayers(Move moveToCheck){
+
         int j = movesList.size();
         int cont = 0;
 

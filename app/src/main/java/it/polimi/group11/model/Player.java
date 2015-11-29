@@ -4,7 +4,7 @@ import it.polimi.group11.enumeration.PlayerID;
 
 
 /**
- * Player class. Represent a instance of a player that is playing a game.
+ * Player class. Represent an instance of a player that is playing a game.
  *
  */
 public class Player {
@@ -12,12 +12,12 @@ public class Player {
     /**
      * Name chosen for the player by the user
      */
-    private String name = new String();
+    private String name;
 
     /**
      * Player identifier variable inside a single game
      */
-    private String id = new String();
+    private String id;
 
     /**
      * The status of the player during the game.
@@ -199,7 +199,7 @@ public class Player {
      * It checks the input and rearrange the position of the bars,
      * vertical or horizontal, inward or outward.
      *
-     * @param input the String that represents the move.
+     * @param input the String that represents the move. {@link  }
      * @see Move#moveId
      */
     public void makeMove(String input) {
