@@ -1,8 +1,5 @@
 package it.polimi.group11.enumeration;
 
-/**
- * Created by Jacopo Magni on 13/11/2015.
- */
 
 /**
  * Every hole of the grid can be cover with a bead, and every bead has an owner.
