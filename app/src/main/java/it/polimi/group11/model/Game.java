@@ -142,7 +142,7 @@ public class Game {
      */
     private void checkLives(String newBeadsPosition, String id) {
         iteratorNext();
-        while(id != nextMoving.getId()){
+        while(!id.equals(nextMoving.getId())){
             checkLife(newBeadsPosition, nextMoving.getId());
             iteratorNext();
         }
@@ -276,8 +276,7 @@ public class Game {
                 for (int i=movesList.size(); i>movesList.size()-movesToCheck; i--){
                     if (movesList.get(i-1).getMoveId().substring(0, 2).equals(moveToCheck.getMoveId().substring(0, 2))){
                         error = "a player cannot move a bar already moved in this turn";
-                        validity = false;
-                        return validity;
+                        return validity = false;
                     }
                 }
             /*
@@ -288,8 +287,7 @@ public class Game {
                 for(int i=0; i<movesList.size(); i++){
                     if (movesList.get(i).getMoveId().substring(0, 2).equals(moveToCheck.getMoveId().substring(0, 2))){
                         error = "a player cannot move a bar already moved in this turn";
-                        validity = false;
-                        return validity;
+                        return validity = false;
                     }
                 }
             }
@@ -302,8 +300,7 @@ public class Game {
         if (alivePlayers == 2){
             if(!checkMoveTwoPlayers(moveToCheck)){
                 error = "when two players remain, a player cannot move the same bar for more than two consecutive turns";
-                validity = false;
-                return validity;
+                return validity = false;
             }
         }
         return validity;
@@ -387,7 +384,7 @@ public class Game {
      */
     public String getLastPlayer(){
         iteratorNext();
-        while (nextMoving.getStatus()!=true){
+        while (!nextMoving.getStatus()){
             iteratorNext();
         }
         return nextMoving.getId();
