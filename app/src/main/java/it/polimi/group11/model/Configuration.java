@@ -1,7 +1,7 @@
 package it.polimi.group11.model;
 
 public class Configuration {
-   /* private Board board;
+    /*private Board board;
     private Game game;
 
     private int playersNumber;
@@ -10,10 +10,11 @@ public class Configuration {
     private String verticalBarsPosition ;
     private String beadsPosition;
 
-    boolean checkConfigurationPlayers = true;
-    boolean checkConfigurationMovingPlayer = true;
-    boolean checkConfigurationBars = true;
-    boolean checkConfigurationBeads = true;
+
+    private boolean checkConfigurationPlayers = true;
+    private boolean checkConfigurationMovingPlayer = true;
+    private boolean checkConfigurationBars = true;
+    private boolean checkConfigurationBeads = true;
 
     private void setPlayersNumber(String input){
         playersNumber = Character.getNumericValue(input.charAt(0));

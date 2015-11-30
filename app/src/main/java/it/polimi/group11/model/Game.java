@@ -286,7 +286,6 @@ public class Game {
             }else{
                 for(int i=0; i<movesList.size(); i++){
                     if (movesList.get(i).getMoveId().substring(0, 2).equals(moveToCheck.getMoveId().substring(0, 2))){
-                        error = "a player cannot move a bar already moved in this turn";
                         return validity = false;
                     }
                 }
@@ -327,6 +326,7 @@ public class Game {
                     sizeL--; // Decrease the size to scan all the List backward
                 }
             }
+            error = "a player cannot move for more than two turns the same bar when two players remain";
             return validity = false;
         }
         return validity;
