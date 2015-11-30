@@ -206,17 +206,17 @@ public class Board {
      * @see Board#gridY
      */
     public String checkGrid() {
-        String checkGrid = new String();
-        String temp = new String();
+        String checkGrid = "";
+        String temp;
         for (int i=0; i<7; i++) {
             for (int j=0; j<7; j++) {
-                if (gridX[i][j] == true && gridY[j][i] == false){
+                if (gridX[i][j] && !gridY[j][i]){
                     temp = "1"; //the cell checked is covered by a horizontal bar
                 }
-                else if (gridX[i][j] == false && gridY[j][i] == true){
+                else if (!gridX[i][j] && gridY[j][i]){
                     temp = "2"; //the cell checked is covered by a vertical bar
                 }
-                else if (gridX[i][j] == true && gridY[j][i] == true){
+                else if (gridX[i][j] && gridY[j][i]){
                     temp = "3"; //the cell checked is covered by both bars
                 }else{
                     temp = "0"; //the cell checked is a hole

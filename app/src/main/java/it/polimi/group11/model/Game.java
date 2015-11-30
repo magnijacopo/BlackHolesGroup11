@@ -339,8 +339,7 @@ public class Game {
                     sizeL--; // Decrease the size to scan all the List backward
                 }
             }
-            validity = false;
-            return validity;
+            return validity = false;
         }
         return validity;
     }
