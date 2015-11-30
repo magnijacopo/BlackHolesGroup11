@@ -1,9 +1,7 @@
 package it.polimi.group11.model;
 
-
 /**
- * This class represents the move of the current round and which player done it
- *
+ * An instantiation of this class represents a tuple composed of a move and a player possibly executing the move
  */
 
 public class Move {
@@ -11,14 +9,14 @@ public class Move {
     /**
      * Id of the move.
      * It's a three characters string.
-     * First represent the position of the bar, horizontal or vertical,
-     * Second represent the number of the bar, 1-7,
-     * Third represent the movement of the bar, inward or outward.
+     * First character represents the position of the bar: horizontal or vertical.
+     * Second represents the number of the bar: 1-7.
+     * Third represents the movement of the bar: inward or outward.
      */
     private String moveId;
 
     /**
-     * Id of the Player that has done this move.
+     * Id of the Player paired with the move.
      *
      * @see Player#id
      */
