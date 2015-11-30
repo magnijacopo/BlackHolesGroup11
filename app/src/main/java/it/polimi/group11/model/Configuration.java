@@ -1,11 +1,14 @@
 package it.polimi.group11.model;
 
 public class Configuration {
-    /*int playersNumber;
-    String movingPlayer;
-    String horizontalBarsPosition;
-    String verticalBarsPosition ;
-    String beadsPosition;
+   /* private Board board;
+    private Game game;
+
+    private int playersNumber;
+    private String movingPlayer;
+    private String horizontalBarsPosition;
+    private String verticalBarsPosition ;
+    private String beadsPosition;
 
     boolean checkConfigurationPlayers = true;
     boolean checkConfigurationMovingPlayer = true;
@@ -59,5 +62,6 @@ public class Configuration {
     private String setBeads(String input){
         String checkGrid = board.checkGrid();
         return board.newBeadsPosition(checkGrid, input);
-    }*/
+    }
+    */
 }
