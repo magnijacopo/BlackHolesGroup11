@@ -25,16 +25,12 @@ public class MainActivity extends AppCompatActivity {
                 + "2101102" // positions of the vertical bars
                 + "0000000" // beads in the grid
                 + "0000000"
-                + "0000200"
-                + "0000010"
-                + "0010000"
-                + "2000000"
+                + "0000000"
+                + "0000000"
+                + "0000000"
+                + "0000000"
                 + "0001020"
-                + "h3i"
-                + "h6i"
-                + "h3o"
-                + "v5o"
-                + "h3i"
+                + "h7o"
         );
         String result = testFirstRelease.moveTest(arg);
         System.out.println(result);
