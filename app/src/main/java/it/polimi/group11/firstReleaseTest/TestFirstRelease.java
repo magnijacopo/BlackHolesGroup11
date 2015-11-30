@@ -23,12 +23,12 @@ public class TestFirstRelease {
     boolean checkConfigurationBars = true;
     boolean checkConfigurationBeads = true;
 
-    String move;
-    Queue<String> moves = new LinkedList<>();
-
     String lastConfiguration;
+
     String output;
 
+    String move;
+    Queue<String> moves = new LinkedList<>();
 
     public String moveTest(String test){
         setPlayersNumber(test);
@@ -76,8 +76,8 @@ public class TestFirstRelease {
                 finalConfiguration(configuration, moves.remove());
             }else{
                 lastConfiguration = configuration;
+                lastConfiguration = lastConfiguration.substring(0, 1)+game.getNextPlayer()+lastConfiguration.substring(3, lastConfiguration.length());
             }
-            lastConfiguration = lastConfiguration.substring(0, 1)+game.getNextPlayer()+lastConfiguration.substring(3, lastConfiguration.length());
             return lastConfiguration;
         }return "";
     }

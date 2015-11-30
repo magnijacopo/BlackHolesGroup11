@@ -1,7 +1,8 @@
 package it.polimi.group11.model;
 
 /**
- * An instantiation of this class represents a tuple composed of a move and a player possibly executing the move
+ * An instantiation of this class represents a tuple
+ * composed of a move and a player possibly executing the move
  */
 
 public class Move {
