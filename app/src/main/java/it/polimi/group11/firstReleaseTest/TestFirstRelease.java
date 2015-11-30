@@ -9,25 +9,79 @@ import it.polimi.group11.model.Game;
 
 public class TestFirstRelease {
 
+    /**
+     *
+     */
     private Board board;
+
+    /**
+     *
+     */
     private Game game;
 
+    /**
+     *
+     */
     int playersNumber;
+
+    /**
+     *
+     */
     String movingPlayer;
+
+    /**
+     *
+     */
     String horizontalBarsPosition;
+
+    /**
+     *
+     */
     String verticalBarsPosition ;
+
+    /**
+     *
+     */
     String beadsPosition;
 
+    /**
+     *
+     */
     boolean checkConfigurationPlayers = true;
+
+    /**
+     *
+     */
     boolean checkConfigurationMovingPlayer = true;
+
+    /**
+     *
+     */
     boolean checkConfigurationBars = true;
+
+    /**
+     *
+     */
     boolean checkConfigurationBeads = true;
 
+    /**
+     *
+     */
     String lastConfiguration;
 
+    /**
+     *
+     */
     String output;
 
+    /**
+     *
+     */
     String move;
+
+    /**
+     *
+     */
     Queue<String> moves = new LinkedList<>();
 
     public String moveTest(String test){
@@ -61,6 +115,12 @@ public class TestFirstRelease {
         return output;
     }
 
+    /**
+     *
+     * @param configuration
+     * @param mossa
+     * @return
+     */
     private String finalConfiguration(String configuration, String mossa){
         movingPlayer = game.currentPlayer(mossa, configuration.substring(16, 65));
         if (game.getValidity()){
@@ -82,6 +142,9 @@ public class TestFirstRelease {
         }return "";
     }
 
+    /**
+     * Sets the bars
+     */
     private void setBars(){
         horizontalBarsPosition = "";
         verticalBarsPosition = "";
@@ -91,15 +154,30 @@ public class TestFirstRelease {
         }
     }
 
+    /**
+     * Sets the beads.
+     * @param input
+     * @return
+     */
     private String setBeads(String input){
         String checkGrid = board.checkGrid();
         return board.newBeadsPosition(checkGrid, input);
     }
 
+    /**
+     *  Checks that the lenght of the input string is correct.
+     *  Longer than 65 characters and that after that it grows as a multiple of 3.
+     * @param input the String used as String test
+     * @return boolean, true if che lenght is correct, false otherwise.
+     */
     private boolean checkInputLength(String input){
         return ((input.length() > 65) && ((input.length()-65)%3 == 0));
     }
 
+    /**
+     * Sets the bars
+     * @param test The string used as a test.
+     */
     private void setBarsPosition(String test){
         for (int i=0; i<7; i++){
             if((Character.getNumericValue((test.charAt(i+2))) >= 0) && (Character.getNumericValue((test.charAt(i+2))) <= 2)){
@@ -117,6 +195,11 @@ public class TestFirstRelease {
         }
     }
 
+    /**
+     *
+     * @param test
+     * @param numMoves
+     */
     private void enqueueMove(String test, int numMoves){
         for (int i=0; i<numMoves; i++){
             move = test.substring(65+i*3, 68+i*3);
@@ -124,6 +207,10 @@ public class TestFirstRelease {
         }
     }
 
+    /**
+     * From the String used as a test it gets the numbers of players and create a game with that players.
+     * @param input
+     */
     private void setPlayersNumber(String input){
         playersNumber = Character.getNumericValue(input.charAt(0));
         if(playersNumber > 1 && playersNumber < 5){
@@ -135,6 +222,10 @@ public class TestFirstRelease {
         }
     }
 
+    /**
+     * From the String used as a test it gets and sets the first player to make a move.
+     * @param input
+     */
     private void setMovingPlayer(String input){
         movingPlayer = Character.toString((input.charAt(1)));
         if ((Character.getNumericValue(input.charAt(1)) > playersNumber) || (Character.getNumericValue(input.charAt(1)) < 1)){
@@ -143,6 +234,11 @@ public class TestFirstRelease {
         }
     }
 
+    /**
+     * From the String used as a test it gets and sets the configuration of the beads on the board.
+     * It checks also that the number of the beads it is not bigger than 5 for each player.
+     * @param test
+     */
     private void setConfigurationBeads(String test){
         int numBeads;
         for(int j=0; j<playersNumber; j++){
