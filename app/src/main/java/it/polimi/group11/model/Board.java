@@ -1,9 +1,9 @@
 package it.polimi.group11.model;
 
 /**
- * Describe the situation of the game board,
- * define the structure of vertical and horizontal bars and their position on the board,
- * finally contains methods to change the setting of the board
+ * Situation of the game board,
+ * definition of the structure of vertical and horizontal bars and their position on the board,
+ * it also contains methods to change the setting of the board
  */
 
 public class Board {
@@ -23,7 +23,7 @@ public class Board {
     /**
      *  Non mutable holes configuration in the horizontal bars
      */
-    private final boolean[][] HORIZONTALHOLES = { //
+    private final boolean[][] HORIZONTALHOLES = {
             {true, false, true, false, true, false, true, false, true},
             {true, false, false, true, false, false, true, false, true},
             {true, false, false, false, true, false, false, false, true},
@@ -54,10 +54,7 @@ public class Board {
     private int[] horizontalBarsPosition = new int[7];
 
 
-    // Constructors
-    /**
-     *
-     */
+    // singleton implementation
     private static Board board;
 
     /**
@@ -66,8 +63,6 @@ public class Board {
     private Board(){}
 
     /**
-     * The board is a singleton.
-     *
      * @return it returns an instance of the class Board, if it isn't already been created, {@link Board#board}
       */
     public static Board getInstance(){
@@ -76,6 +71,7 @@ public class Board {
         }
         return board;
     }
+    // end of singleton implementation
 
 
     // Getters and Setters
@@ -143,6 +139,8 @@ public class Board {
      *
      * @param horizontalPositions the position which will take the bars
      */
+    //this method and the next will be used in the real game when the main system will pass
+    // a random string to set all bars at once
     public void setHorizontalBarsPosition(int[] horizontalPositions){
         this.horizontalBarsPosition = horizontalPositions;
     }
@@ -155,6 +153,9 @@ public class Board {
     public void setVerticalBarsPosition(int[] verticalPositions){
         this.verticalBarsPosition = verticalPositions;
     }
+
+
+    // Methods
 
     /**
      * Set the position of all the bars in the board's grid.
@@ -195,9 +196,6 @@ public class Board {
         }
     }
 
-
-    // Methods
-
     /**
      * Overlaps the vertical and the horizontal holes distribution grids.
      *
@@ -228,15 +226,15 @@ public class Board {
     }
 
     /**
-     * Updates the position of the beads on the board based on,
+     * Updates the position of the beads on the board based on
      * a configuration of the bars and the latest beads positions inputs.
      *
      * @param grid the return of the method {@link Board#checkGrid()}
      * @param beadsPosition the current positions of the beads
-     * @return it returns a string representing the new position of each beads
+     * @return it returns a string representing the new position of each bead
      */
     public String newBeadsPosition(String grid, String beadsPosition) {
-        String newBeadsPosition = new String();
+        String newBeadsPosition = "";
         for (int i=0; i<beadsPosition.length(); i++) {
             if (grid.charAt(i) == '0') {
                 newBeadsPosition = newBeadsPosition+"0"; //if the cell checked is a hole, updates there can not be a bead on it
@@ -246,6 +244,4 @@ public class Board {
         }
         return newBeadsPosition;
     }
-
-
 }
