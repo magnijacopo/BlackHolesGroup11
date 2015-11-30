@@ -6,6 +6,7 @@ import static org.junit.Assert.*;
 
 public class BoardTest {
 
+    //given a chosen configuration, the board grid should updates itself with the correct holes and fills values
     @Test
     public void testCheckGrid() throws Exception {
         Board board=new Board();
@@ -24,6 +25,8 @@ public class BoardTest {
                 "1001012";
         assertEquals(expectedGrid,grid);
     }
+
+    //given an updated grid holes distribution and a beads configuration the method should returns the new beads configuration
     @Test
     public void testNewBeadsPosition() throws Exception {
         Board board = new Board();
