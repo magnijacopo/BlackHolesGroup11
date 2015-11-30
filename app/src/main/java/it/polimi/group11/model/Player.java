@@ -42,11 +42,6 @@ public class Player {
      */
     private int movesNumber;
 
-    /**
-     * The player is paired with the board instantiated in this game session
-     */
-    Board board = Board.getInstance();
-
 
     //Constructors
 
@@ -183,8 +178,7 @@ public class Player {
      *
      * @param input the String that represents the move. {@link Move#moveId}
      */
-    public void makeMove(String input) {
-
+    public void makeMove(String input, Board board) {
         //the input move is sliced in three parts:
         char orientation = input.charAt(0); //vertical or horizontal bar
         int number = Character.getNumericValue(input.charAt(1))-1; //number of the bar
@@ -214,7 +208,6 @@ public class Player {
         }else{
             System.out.println("wrong input");
         }
-        return;
     }
 
     public void placeBead(){

@@ -9,7 +9,7 @@ import it.polimi.group11.model.Game;
 
 public class TestFirstRelease {
 
-    Board board = Board.getInstance();
+    private Board board;
     private Game game;
 
     int playersNumber;
@@ -128,6 +128,7 @@ public class TestFirstRelease {
         playersNumber = Character.getNumericValue(input.charAt(0));
         if(playersNumber > 1 && playersNumber < 5){
             game = new Game(playersNumber);
+            board = game.getBoard();
         }else{
             checkConfigurationPlayers = false;
             output = ("error: the number of players is invalid, it must be from 2 to 4");

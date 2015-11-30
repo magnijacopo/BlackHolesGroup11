@@ -53,27 +53,6 @@ public class Board {
      */
     private int[] horizontalBarsPosition = new int[7];
 
-
-    // Singleton implementation
-    private static Board board;
-
-    /**
-     *  Private constructor
-     */
-    private Board(){}
-
-    /**
-     * @return It returns an instance of the class Board, if it isn't already been created, {@link Board#board}
-      */
-    public static Board getInstance(){
-        if (board == null){
-            board = new Board();
-        }
-        return board;
-    }
-    // End of singleton implementation
-
-
     // Getters and Setters
 
     /**
