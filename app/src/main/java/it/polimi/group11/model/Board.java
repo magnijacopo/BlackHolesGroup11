@@ -34,36 +34,36 @@ public class Board {
     };
 
     /**
-     *  distribution of the vertical bar's holes in the board grid
+     *  Distribution of the vertical bar's holes in the board grid
      */
     private boolean[][] gridY = new boolean[7][7];
 
     /**
-     *  distribution of the horizontal bar's holes in the board grid
+     *  Distribution of the horizontal bar's holes in the board grid
      */
     private boolean[][] gridX = new boolean[7][7];
 
     /**
-     *  position of the vertical bars on the board
+     *  Position of the vertical bars on the board
      */
     private int[] verticalBarsPosition = new int[7];
 
     /**
-     *  position of the horizontal bars on the board
+     *  Position of the horizontal bars on the board
      */
     private int[] horizontalBarsPosition = new int[7];
 
 
-    // singleton implementation
+    // Singleton implementation
     private static Board board;
 
     /**
-     *  private constructor
+     *  Private constructor
      */
     private Board(){}
 
     /**
-     * @return it returns an instance of the class Board, if it isn't already been created, {@link Board#board}
+     * @return It returns an instance of the class Board, if it isn't already been created, {@link Board#board}
       */
     public static Board getInstance(){
         if (board == null){
@@ -71,7 +71,7 @@ public class Board {
         }
         return board;
     }
-    // end of singleton implementation
+    // End of singleton implementation
 
 
     // Getters and Setters
