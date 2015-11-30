@@ -120,6 +120,10 @@ public class Game {
         return alivePlayers;
     }
 
+    public void setMovesList(ArrayList<Move> moves){
+        this.movesList = moves;
+    }
+
 
     // Methods
 
