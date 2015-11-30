@@ -12,11 +12,18 @@ import it.polimi.group11.model.Player;
 public class GameTest {
     @Test
     public void testCheckBoundsValidity_ReturnFalse() throws Exception {
-        Board board= new Board();
         Game game=new Game(3);
-        board.setHorizontalBarPosition(0, 2);
-        assertEquals(false,game.checkBoundsValidity("h0o"));
+        game.getBoard().setHorizontalBarPosition(2, 0);
+        assertFalse(game.checkBoundsValidity("h1o"));
     }
+
+    @Test
+    public void testCheckBoundsValidity_ReturnTrue() throws Exception {
+        Game game=new Game(3);
+        game.getBoard().setHorizontalBarPosition(1, 6);
+        assertTrue(game.checkBoundsValidity("h7i"));
+    }
+
     @Test
     public void testCheckMove_ReturnTrue() throws Exception {
         Game gameTest = new Game(3);
@@ -70,10 +77,36 @@ public class GameTest {
         movesList.add(5, move5);
         movesList.add(6, move6);
         gameTest.setMovesList(movesList);
-        Move moveToCheck = new Move("h4i", "2");
-        assertEquals(true, gameTest.checkMoveTwoPlayers(moveToCheck));
+        Move moveTest = new Move("h4i", "2");
+        assertTrue(gameTest.checkMoveTwoPlayers(moveTest));
     }
     @Test
-    public void testNextPlayer() throws Exception {
+    public void testNextPlayer_ValidMove() throws Exception {
+        Game gameTest = new Game(3);
+        gameTest.getBoard();
+        Move moveTest = new Move ("h4o", "1");
+        String beadsTest = "0000000"
+                         + "0000000"
+                         + "0000000"
+                         + "0000000"
+                         + "0000000"
+                         + "0000000"
+                         + "0001020";
+        assertEquals("1", gameTest.currentPlayer(moveTest.getMoveId(), beadsTest));
+    }
+
+    @Test
+    public void testCurrentPlayer_GameOver() throws Exception {
+        Game gameTest = new Game(3);
+        gameTest.getBoard();
+        Move moveTest = new Move ("h4o", "1");
+        String beadsTest = "0000000"
+                + "0000000"
+                + "0000000"
+                + "0000000"
+                + "0000000"
+                + "0000000"
+                + "0000000";
+        assertEquals("1", gameTest.currentPlayer(moveTest.getMoveId(), beadsTest));
     }
 }
