@@ -298,17 +298,6 @@ public class Game {
                 }
             }
         }
-        /*
-            DA CREARE UN METODO A PARTE GENERALCHECK CHE CHIAMA PRIMA CHECKMOVE E CHE POI CHECKMOVE PER DUE PLAYER!
-
-            if two players are alive, it calls the method to check the extra rule
-         */
-        if (alivePlayers == 2){
-            if(!checkMoveTwoPlayers(moveToCheck)){
-                error = "when two players remain, a player cannot move the same bar for more than two consecutive turns";
-                return validity = false;
-            }
-        }
         return validity;
     }
 
@@ -350,6 +339,24 @@ public class Game {
     }
 
     /**
+     * Checks the move
+     * @param moveCheck
+     * @return
+     */
+    public boolean generalMoveCheck(Move moveCheck){
+
+        validity = checkBoundsValidity(moveCheck.getMoveId()) && checkMove(moveCheck);
+
+        if( alivePlayers == 2){
+            boolean validityFlagTwo = checkMoveTwoPlayers(moveCheck);
+
+            return validity && validityFlagTwo;
+        }
+
+        return validity;
+    }
+
+    /**
      * Manages the relation between a move and the player doing it.
      * @param move
      * @param beadsStatus
@@ -361,7 +368,7 @@ public class Game {
             if(currentMovingPlayer.getStatus()){ //if he is alive
                 Move moveToCheck = new Move(move, currentMovingPlayer.getId());
                 // the validity of the input move is checked
-                if(checkMove(moveToCheck) && checkBoundsValidity(moveToCheck.getMoveId())){ //if the move is valid
+                if(generalMoveCheck(moveToCheck)){ //if the move is valid
                     currentMovingPlayer.makeMove(moveToCheck.getMoveId(), board); //the player makes the move
                     currentMovingPlayer.setMovesNumber(currentMovingPlayer.getMovesNumber()+1); //increases the number of moves made by him
                     checkLives(board.newBeadsPosition(board.checkGrid(), beadsStatus), currentMovingPlayer.getId()); //checks the life status of the other players
