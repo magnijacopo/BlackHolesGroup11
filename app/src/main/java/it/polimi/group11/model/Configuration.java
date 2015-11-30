@@ -1,7 +1,7 @@
 package it.polimi.group11.model;
 
 public class Configuration {
-    /*private Board board;
+    private Board board;
     private Game game;
 
     private int playersNumber;
@@ -10,24 +10,26 @@ public class Configuration {
     private String verticalBarsPosition ;
     private String beadsPosition;
 
+    private String output;
+
 
     private boolean checkConfigurationPlayers = true;
     private boolean checkConfigurationMovingPlayer = true;
     private boolean checkConfigurationBars = true;
     private boolean checkConfigurationBeads = true;
 
-    private void setPlayersNumber(String input){
+    public int setPlayersNumber(String input){
         playersNumber = Character.getNumericValue(input.charAt(0));
         if(playersNumber > 1 && playersNumber < 5){
-            game = new Game(playersNumber);
-            board = game.getBoard();
+            return playersNumber;
         }else{
             checkConfigurationPlayers = false;
             output = ("error: the number of players is invalid, it must be from 2 to 4");
+            return 0;
         }
     }
 
-    private void setMovingPlayer(String input){
+    public void setMovingPlayer(String input){
         movingPlayer = Character.toString((input.charAt(1)));
         if ((Character.getNumericValue(input.charAt(1)) > playersNumber) || (Character.getNumericValue(input.charAt(1)) < 1)){
             checkConfigurationMovingPlayer = false;
@@ -35,7 +37,7 @@ public class Configuration {
         }
     }
 
-    private void setConfigurationBeads(String test){
+    public void setConfigurationBeads(String test){
         int numBeads;
         for(int j=0; j<playersNumber; j++){
             numBeads = 0;
@@ -51,7 +53,7 @@ public class Configuration {
         }
     }
 
-    private void setBars(){
+    public void setBars(){
         horizontalBarsPosition = "";
         verticalBarsPosition = "";
         for (int i=0; i<7; i++){
@@ -60,9 +62,9 @@ public class Configuration {
         }
     }
 
-    private String setBeads(String input){
+    public String setBeads(String input){
         String checkGrid = board.checkGrid();
         return board.newBeadsPosition(checkGrid, input);
     }
-    */
+
 }

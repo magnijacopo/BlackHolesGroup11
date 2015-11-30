@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 import it.polimi.group11.model.Board;
+import it.polimi.group11.model.Configuration;
 import it.polimi.group11.model.Game;
 
 
@@ -11,6 +12,7 @@ public class TestFirstRelease {
 
     private Board board;
     private Game game;
+    private Configuration configuration;
 
     int playersNumber;
     String movingPlayer;
@@ -31,7 +33,9 @@ public class TestFirstRelease {
     Queue<String> moves = new LinkedList<>();
 
     public String moveTest(String test){
-        setPlayersNumber(test);
+        configuration = new Configuration();
+        int playersNumber = configuration.setPlayersNumber(test);
+        instantiateGame(playersNumber);
         setMovingPlayer(test);
         setBarsPosition(test);
         setConfigurationBeads(test);
@@ -157,5 +161,10 @@ public class TestFirstRelease {
                 output = "error: each player can set max 5 beads";
             }
         }
+    }
+
+    public void instantiateGame(int playersNumber){
+        game = new Game(playersNumber);
+        board = game.getBoard();
     }
 }
