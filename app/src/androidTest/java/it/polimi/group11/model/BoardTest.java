@@ -30,6 +30,7 @@ public class BoardTest {
 
     @Test
     public void testNewBeadsPosition() throws Exception {
+        Board board = new Board();
         String currentBeadsPosition="" +
                 "0000001" +
                 "0000200" +

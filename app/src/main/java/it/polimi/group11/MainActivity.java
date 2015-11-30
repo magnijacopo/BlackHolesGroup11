@@ -1,13 +1,12 @@
 package it.polimi.group11;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
-import android.view.MenuItem;
+
+
+import it.polimi.group11.firstReleaseTest.TestFirstRelease;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,18 +14,32 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        this.Start();
     }
+
+    public void Start(){
+        TestFirstRelease testFirstRelease = new TestFirstRelease();
+        String arg = ( "3" // number of players
+                + "1" // moving player
+                + "0120120" // positions of the horizontal bars
+                + "2101102" // positions of the vertical bars
+                + "0000000" // beads in the grid
+                + "0000000"
+                + "0022022"
+                + "0020000"
+                + "0000000"
+                + "0001000"
+                + "3000000"
+                + "v1i"
+                + "h5o"
+                + "v6o"
+                + "v1o"
+                + "v1i"
+        );
+        String result = testFirstRelease.moveTest(arg);
+        System.out.println(result);
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -35,18 +48,5 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 }
