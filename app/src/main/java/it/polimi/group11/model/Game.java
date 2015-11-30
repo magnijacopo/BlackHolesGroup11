@@ -360,7 +360,7 @@ public class Game {
      * @param beadsStatus {@link Board#newBeadsPosition(String, String)}
      * @return the player who executed the input move or an error if the move is not valid
      */
-    public String nextPlayer(String move, String beadsStatus){
+    public String currentPlayer(String move, String beadsStatus){
         if (!gameOver){
             iteratorNext(); //goes to the player who has to move
             if(currentMovingPlayer.getStatus()){ //if he is alive
@@ -379,7 +379,7 @@ public class Game {
             }else{
                 Move deadMove = new Move("RIP", currentMovingPlayer.getId());
                 movesList.add(deadMove); //if the player iterated is dead it inserts a mock move in the moves list
-                return nextPlayer(move, beadsStatus); //and reiterates itself
+                return currentPlayer(move, beadsStatus); //and reiterates itself
             }
         }else{
             iteratorNext(); //if the game is ended, the "moving player" set in the final configuration is the one who won
