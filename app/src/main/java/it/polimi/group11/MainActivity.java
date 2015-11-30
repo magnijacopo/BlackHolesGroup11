@@ -19,18 +19,23 @@ public class MainActivity extends AppCompatActivity {
 
     public void Start(){
         TestFirstRelease testFirstRelease = new TestFirstRelease();
-        String arg = ( "2" // number of players
-                + "1" // moving player
-                + "0120120" // positions of the horizontal bars
-                + "2101102" // positions of the vertical bars
-                + "0000000" // beads in the grid
-                + "0000000"
-                + "0000000"
-                + "0000000"
-                + "0000000"
-                + "0000000"
-                + "0001020"
-                + "h7o"
+        String arg = ( "4" + "1" +
+                "1111111" +
+                "1111111" +
+                "0304000" +
+                "0000000" +
+                "0000000" +
+                "0000000" +
+                "0000000" +
+                "0000000" +
+                "0000012" +
+                "h4i" +
+                "h3i" +
+                "h2i" +
+                "h1i" +
+                "h4o" +
+                "h3o" +
+                "h5o"
         );
         String result = testFirstRelease.moveTest(arg);
         System.out.println(result);
