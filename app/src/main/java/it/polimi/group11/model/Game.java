@@ -128,9 +128,7 @@ public class Game {
      */
     private void definePlayers(int playerNumber){
         for (int i=1; i<=playerNumber; i++){
-            if(players.size() < 4){     // QUESTO IF MI SEMBRA INUTILE, TANTO AGGIUNGE SOLO FINO A PLAYERNUMBER QUINDI MAI PIU DI 4
                 players.add(new Player(i));
-            }
         }
         iterator = players.listIterator();
     }
