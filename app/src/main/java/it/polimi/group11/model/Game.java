@@ -81,13 +81,11 @@ public class Game {
     // Getters and Setters
 
     /**
-     *
      * @return {@link Game#board}
      */
     public Board getBoard(){ return board; }
 
     /**
-     *
      * @return {@link Game#players}
      */
     public List<Player> getPlayers(){
@@ -95,7 +93,6 @@ public class Game {
     }
 
     /**
-     *
      * @return {@link Game#gameOver}
      */
     public boolean getGameOver(){
@@ -103,7 +100,6 @@ public class Game {
     }
 
     /**
-     *
      * @return {@link Game#validity}
      */
     public boolean getValidity(){
@@ -111,7 +107,6 @@ public class Game {
     }
 
     /**
-     *
      * @return {@link Game#error}
      */
     public String getError(){
@@ -119,7 +114,6 @@ public class Game {
     }
 
     /**
-     *
      * @return alivePlayers {@link Game#alivePlayers}
      */
     public int getAlivePlayers(){
@@ -142,8 +136,8 @@ public class Game {
 
     /**
      * Check the life status of all the players next to the player's id input, until the iterator reaches the current id player again.
-     * @param newBeadsPosition {}
-     * @param id
+     * @param newBeadsPosition {@link Board#newBeadsPosition(String, String)}
+     * @param id {@link Player#id}
      */
     private void checkLives(String newBeadsPosition, String id) {
         iteratorNext();
@@ -155,8 +149,8 @@ public class Game {
 
     /**
      * Checks in the beadsStatus input if the player associated with the id input has beads in it.
-     * @param beadsStatus
-     * @param id
+     * @param beadsStatus return of {@link Board#newBeadsPosition(String, String)}
+     * @param id {@link Player#id}
      */
     private void checkLife(String beadsStatus, String id) {
         if (currentMovingPlayer.getStatus()){
@@ -339,9 +333,9 @@ public class Game {
     }
 
     /**
-     * Checks the move
-     * @param moveCheck
-     * @return
+     * Calls the methods that check different rules and decides if the moves is valid or not
+     * @param moveCheck {@link Move}
+     * @return {@link Game#validity}
      */
     public boolean generalMoveCheck(Move moveCheck){
 
@@ -358,8 +352,8 @@ public class Game {
 
     /**
      * Manages the relation between a move and the player doing it.
-     * @param move
-     * @param beadsStatus
+     * @param move {@link Move#moveId}
+     * @param beadsStatus {@link Board#newBeadsPosition(String, String)}
      * @return the player who executed the input move or an error if the move is not valid
      */
     public String nextPlayer(String move, String beadsStatus){
@@ -391,7 +385,7 @@ public class Game {
 
     /**
      * Returns the player able to do the next move.
-     * @return
+     * @return {@link Player#id}
      */
     public String getNextPlayer(){
         iteratorNext();
