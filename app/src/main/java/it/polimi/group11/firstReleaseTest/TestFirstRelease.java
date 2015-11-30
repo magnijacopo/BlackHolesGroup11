@@ -136,7 +136,7 @@ public class TestFirstRelease {
                 finalConfiguration(configuration, moves.remove());
             }else{
                 lastConfiguration = configuration;
-                lastConfiguration = lastConfiguration.substring(0, 1)+game.getNextPlayer()+lastConfiguration.substring(3, lastConfiguration.length());
+                lastConfiguration = lastConfiguration.substring(0, 1)+game.getNextPlayer()+lastConfiguration.substring(2, lastConfiguration.length());
             }
             return lastConfiguration;
         }return "";
@@ -175,7 +175,7 @@ public class TestFirstRelease {
     }
 
     /**
-     * Sets the bars
+     * From the String used as a test it gets the position of the bars and check if there is some error.
      * @param test The string used as a test.
      */
     private void setBarsPosition(String test){
@@ -196,7 +196,8 @@ public class TestFirstRelease {
     }
 
     /**
-     *
+     * Breaks the input string in blocks of three characters (one move)
+     * and creates a queue with these blocks.
      * @param test
      * @param numMoves
      */
