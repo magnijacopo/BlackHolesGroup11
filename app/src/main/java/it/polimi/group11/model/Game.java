@@ -377,10 +377,10 @@ public class Game {
     }
 
     /**
-     * METODO DA FINIRE
+     * Returns the player able to do the next move.
      * @return
      */
-    public String getLastPlayer(){
+    public String getNextPlayer(){
         iteratorNext();
         while (!currentMovingPlayer.getStatus()){
             iteratorNext();
