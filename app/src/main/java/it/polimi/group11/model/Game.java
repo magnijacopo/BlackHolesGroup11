@@ -6,7 +6,7 @@ import java.util.ListIterator;
 
 
 /**
- * Describe current game session
+ * Current game session
  */
 
 public class Game {
@@ -200,7 +200,7 @@ public class Game {
         char movement = move.charAt(2); //Slide movement of the bar: inward (i) or outward (o)
 
         /*
-          The first three if check that the move is sintactically correct
+          The first three if conditions check that the move is sintactically correct
           the orientation can be only "h" or "v"
           the number can be between 0 and 6
           the movement can be only "o" or "i"
@@ -209,7 +209,7 @@ public class Game {
             if((number >= 0) && (number <= 6)){
                 if((movement == 'o') || (movement == 'i')){
 
-                    // Now it checks all possible combination
+                    // Now it checks all possible combinations
                     if (orientation == 'h') {
                         if (movement == 'o') {
                             // Horizontal + Outward
