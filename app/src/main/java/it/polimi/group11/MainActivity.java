@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void Start(){
         TestFirstRelease testFirstRelease = new TestFirstRelease();
-        String arg = ( "2" // number of players
+        String arg = ( "3" // number of players
                 + "1" // moving player
                 + "0120120" // positions of the horizontal bars
                 + "2101102" // positions of the vertical bars
@@ -30,7 +30,13 @@ public class MainActivity extends AppCompatActivity {
                 + "0000000"
                 + "0000000"
                 + "0001020"
+                + "h3i"
                 + "h7o"
+                + "w3i"
+                + "w5o"
+                + "h2i"
+                + "w6i"
+                + "w6i"
         );
         String result = testFirstRelease.moveTest(arg);
         System.out.println(result);
