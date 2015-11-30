@@ -14,7 +14,7 @@ public class Game {
     /**
      * The game is paired with the board instantiated in this game session.
      */
-    private Board board = Board.getInstance();
+    private Board board = new Board();
 
     /**
      * List of the players that will play this game.
@@ -79,6 +79,12 @@ public class Game {
 
 
     // Getters and Setters
+
+    /**
+     *
+     * @return {@link Game#board}
+     */
+    public Board getBoard(){ return board; }
 
     /**
      *
@@ -356,7 +362,7 @@ public class Game {
                 Move moveToCheck = new Move(move, currentMovingPlayer.getId());
                 // the validity of the input move is checked
                 if(checkMove(moveToCheck) && checkBoundsValidity(moveToCheck.getMoveId())){ //if the move is valid
-                    currentMovingPlayer.makeMove(moveToCheck.getMoveId()); //the player makes the move
+                    currentMovingPlayer.makeMove(moveToCheck.getMoveId(), board); //the player makes the move
                     currentMovingPlayer.setMovesNumber(currentMovingPlayer.getMovesNumber()+1); //increases the number of moves made by him
                     checkLives(board.newBeadsPosition(board.checkGrid(), beadsStatus), currentMovingPlayer.getId()); //checks the life status of the other players
                     System.out.println("the move > "+move+" < is valid");
@@ -377,10 +383,10 @@ public class Game {
     }
 
     /**
-     * METODO DA FINIRE
+     * Returns the player able to do the next move.
      * @return
      */
-    public String getLastPlayer(){
+    public String getNextPlayer(){
         iteratorNext();
         while (!currentMovingPlayer.getStatus()){
             iteratorNext();

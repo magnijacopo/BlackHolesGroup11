@@ -4,14 +4,14 @@ import it.polimi.group11.enumeration.PlayerID;
 
 
 /**
- * Player class. Represent an instance of a player that is playing a game.
- * Define the attributes of a player and contains method to change or read this attributes,
+ * Player class. Represents an instance of a player that is playing a game.
+ * Defines the attributes of a player and contains methods to change or read those attributes
  * and method to make moves.
  */
 public class Player {
 
     /**
-     * Name chosen for the player by the user
+     * Name chosen for the player
      */
     private String name;
 
@@ -33,27 +33,22 @@ public class Player {
 
     /**
      * The user will be associated with its own profile
-     * In this way a user can have statistics and preferences.
+     * In this way a user can have access to its statistics and data.
      */
     private Profile profile; //will become an Android persistent class
 
     /**
-     * The number of the moves that a player has done in the game.
+     * The number of the moves that a player has done in a game.
      */
     private int movesNumber;
-
-    /**
-     * The player is paired with the board instantiated in this game session
-     */
-    Board board = Board.getInstance();
 
 
     //Constructors
 
     /**
-     * Constructor used for testing purposed.
-     * The name is set equal to the id, because the players have no name in the test.
-     *
+     * Constructor used for testing purposes.
+     * The name is set equal to the id because there's not the possibility
+     * to give a name to a player during the tests.
      * @param id {@link Player#id}
      */
     public Player(int id){ //
@@ -74,9 +69,7 @@ public class Player {
         this.setId(playerID.toString());
         this.setStatus(true); //the player is alive when created
         this.setColour(colour);
-        //some lines should be added to check if the player is a new one or a profile owner one (has already played once)
     }
-
 
     // Getters and Setters
 
@@ -180,13 +173,12 @@ public class Player {
     //Methods
 
     /**
-     * makeMove allows players to make moves.
+     * Allows players to make moves.
      * It checks the input and rearrange the position of the bars.
      *
      * @param input the String that represents the move. {@link Move#moveId}
      */
-    public void makeMove(String input) {
-
+    public void makeMove(String input, Board board) {
         //the input move is sliced in three parts:
         char orientation = input.charAt(0); //vertical or horizontal bar
         int number = Character.getNumericValue(input.charAt(1))-1; //number of the bar
@@ -216,7 +208,9 @@ public class Player {
         }else{
             System.out.println("wrong input");
         }
-        return; //manca un messaggio che quando tiri una barra già in posizione inward ti dice che è wrong
     }
 
+    public void placeBead(){
+        //method to be implemented in order to let a player choose where to place a bead
+    }
 }
