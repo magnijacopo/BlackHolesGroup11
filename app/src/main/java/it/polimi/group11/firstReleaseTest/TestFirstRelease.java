@@ -131,7 +131,6 @@ public class TestFirstRelease {
                 finalConfiguration(configuration, moves.remove());
             }else{
                 lastConfiguration = configuration;
-                lastConfiguration = lastConfiguration.substring(0, 1)+game.getNextPlayer()+lastConfiguration.substring(2, lastConfiguration.length());
             }
             return lastConfiguration;
         }return "";
@@ -160,10 +159,10 @@ public class TestFirstRelease {
     }
 
     /**
-     *  Checks that the lenght of the input string is correct.
+     *  Checks that the length of the input string is correct.
      *  Longer than 65 characters and that after that it grows as a multiple of 3.
      * @param input the String used as String test
-     * @return boolean, true if che lenght is correct, false otherwise.
+     * @return boolean, true if che length is correct, false otherwise.
      */
     private boolean checkInputLength(String input){
         return ((input.length() > 65) && ((input.length()-65)%3 == 0));

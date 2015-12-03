@@ -19,24 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void Start(){
         TestFirstRelease testFirstRelease = new TestFirstRelease();
-        String arg = ( "4" + "1" +
-                "1111111" +
-                "1111111" +
-                "0304000" +
-                "0000000" +
-                "0000000" +
-                "0000000" +
-                "0000000" +
-                "0000000" +
-                "0000012" +
-                "h4i" +
-                "h3i" +
-                "h2i" +
-                "h1i" +
-                "h4o" +
-                "h3o" +
-                "h5o"
-        );
+        String arg = ("22101201022010220201010100000002000000000000000000000200100000000h7o");
         String result = testFirstRelease.moveTest(arg);
         System.out.println(result);
     }
