@@ -226,6 +226,8 @@ public class TestFirstRelease {
         if ((Character.getNumericValue(input.charAt(1)) > playersNumber) || (Character.getNumericValue(input.charAt(1)) < 1)){
             checkConfigurationMovingPlayer = false;
             output = ("error: the moving player must be between 1 and the number of players");
+        }else{
+            game.setFirstPlayer(movingPlayer);
         }
     }
 
