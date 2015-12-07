@@ -126,7 +126,7 @@ public class TestFirstRelease {
             playersNumber = game.getPlayers().size();
             stringBuilder.append(playersNumber).append(movingPlayer);
             configuration = stringBuilder+horizontalBarsPosition+verticalBarsPosition+beadsPosition;
-            System.out.println("  move "+configuration+" "+mossa);
+            System.out.println("  move "+configuration);
             if (moves.peek() != null && !(game.getGameOver())){
                 finalConfiguration(configuration, moves.remove());
             }else{

@@ -189,7 +189,6 @@ public class Game {
         if(!iterator.hasNext())
             iterator = players.listIterator();
         currentMovingPlayer = iterator.next();
-        System.out.println(currentMovingPlayer.getId());
     }
 
     /**
@@ -396,7 +395,6 @@ public class Game {
         do {
             iteratorNext();
         } while (!(firstPlayer.equals(currentMovingPlayer.getId())));
-        System.out.println("primo player "+currentMovingPlayer.getId());
     }
 
     public String getNextPlayer(){
