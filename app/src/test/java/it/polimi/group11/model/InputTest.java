@@ -9,13 +9,13 @@ import it.polimi.group11.firstReleaseTest.TestFirstRelease;
  */
 public class InputTest {
     @Test
-    public void test1_15_1() throws Exception{
+    public void test1_15_1() throws Exception{ //player 2 si suicida e finisce il gioco, l'ultimo status deve avere player 2
         String arg1_15_1="22101201022010220201010100000002000000000000000000000200100000000h7oh1oh7iv3oh1ih7oh6iv5ov6iv3iv4ov1iv7ih4iv2i";
         String result1_15_1 = new TestFirstRelease().moveTest(arg1_15_1);
         assertEquals("22101100111021110000000100000000000000000000000000000000100000000",result1_15_1);
     }
     @Test
-    public void test2_107_2() throws Exception {
+    public void test2_107_2() throws Exception { //player 2 si suicida e finisce il gioco, l'ultimo status deve avere player 2
         String arg2_107_2="42202221211112000000010004102200300030002000031000030000000001020v2oh6ov5ih4ih1ih7iv3oh3iv1iv4oh6ih7iv2ih4ov1ov2ov5ov1ov3ih5ih7oh1ov2ih5oh3ov2ov5ih2oh1ih7iv5ih2ih6ih1ih4ih1oh4ov3oh2oh1oh4iv7oh6oh7oh4iv2iv7iv2ih2oh6ov3ih3iv5oh2iv3ov4iv2ov5oh5iv1iv4ih1ih3iv7oh4oh1iv2oh7oh5oh3ov4ov5ih4ih5ih7ih6iv1ov4oh3iv1iv5ih4oh1oh3oh5oh1iv7ih5iv7oh6ov1ov2ih4ov7iv5ov7ov5iv3ih7ov6ov7oh7iv5ov3ih7iv5oh2i";
         String result2_107_2 = new TestFirstRelease().moveTest(arg2_107_2);
         assertEquals("42001212021022120000010000000000000000000000000000000000000000000",result2_107_2);
@@ -42,7 +42,7 @@ public class InputTest {
         assertEquals("22211211101212200010000000000000000000100000000000000000000000000",result5_16_1);
     }
     @Test
-    public void test6_54_1() throws Exception {
+    public void test6_54_1() throws Exception { //player 1 elimina player 2, l'ultimo status deve avere player 1. player 2 sembra non morire
         String arg6_54_1="22221221102212110000011000020000000002020000000000000100000000000v1ov2ih6ih7iv7ih3iv7ov2oh4iv6iv4ov6oh3oh4oh3oh6ov4ih1iv3iv6oh7ov6ih5iv4iv3ov6iv7oh5oh3iv2iv7iv1oh4ih3ov1ih6iv6oh1ih2ih4iv6ih3ih7oh5ih3oh4ov7oh5iv6oh1oh5ov2oh5iv3i";
         String result6_54_1 = new TestFirstRelease().moveTest(arg6_54_1);
         assertEquals("21112100212102120000010000000000000000000000000000000000000000000",result6_54_1);
