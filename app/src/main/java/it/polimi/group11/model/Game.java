@@ -11,6 +11,7 @@ import java.util.ListIterator;
 
 public class Game {
 
+    private String lastPlayer;
     /**
      * The game is paired with the board instantiated in this game session.
      */
@@ -72,8 +73,11 @@ public class Game {
      * @param playerNumber number of the players that play the game
      * @see Game#definePlayers(int)
      */
-    public Game(int playerNumber){
-        alivePlayers = playerNumber;
+    private int playerNumber;
+
+    public Game(int playerNum){
+        alivePlayers = playerNum;
+        playerNumber=playerNum;
         definePlayers(playerNumber);
     }
 
@@ -144,8 +148,7 @@ public class Game {
      * @param id {@link Player#id}
      */
     private void checkLives(String newBeadsPosition, String id) {
-        iteratorNext();
-        while(!id.equals(currentMovingPlayer.getId())){
+        for (int i=0;i<playerNumber;i++){
             checkLife(newBeadsPosition, currentMovingPlayer.getId());
             iteratorNext();
         }
@@ -362,17 +365,26 @@ public class Game {
      */
     public String currentPlayer(String move, String beadsStatus){
         if (!gameOver){
+            if (currentMovingPlayer.getStatus()){
+                lastPlayer = currentMovingPlayer.getId();}
             iteratorNext(); //goes to the player who has to move
             if(currentMovingPlayer.getStatus()){ //if he is alive
                 Move moveToCheck = new Move(move, currentMovingPlayer.getId());
                 // the validity of the input move is checked
                 if(generalMoveCheck(moveToCheck)){ //if the move is valid
                     currentMovingPlayer.makeMove(moveToCheck.getMoveId(), board); //the player makes the move
-                    currentMovingPlayer.setMovesNumber(currentMovingPlayer.getMovesNumber()+1); //increases the number of moves made by him
+                    System.out.println(currentMovingPlayer.getId());
+                    currentMovingPlayer.setMovesNumber(currentMovingPlayer.getMovesNumber() + 1); //increases the number of moves made by him
                     checkLives(board.newBeadsPosition(board.checkGrid(), beadsStatus), currentMovingPlayer.getId()); //checks the life status of the other players
+                    System.out.println(currentMovingPlayer.getId());
                     System.out.println("the move > "+move+" < is valid");
                     movesList.add(moveToCheck); //adds the move to the list of completed moves
-                    return currentMovingPlayer.getId();
+                    if (!gameOver){
+                        return currentMovingPlayer.getId();
+                    }else{
+                        System.out.println("gg");
+                        return lastPlayer;
+                    }
                 }else{
                     return null; //if the move is not valid, the validation method will return the correct error
                 }
@@ -391,6 +403,9 @@ public class Game {
      * Returns the player able to do the next move.
      * @return {@link Player#id}
      */
+
+
+
     public void setFirstPlayer(String firstPlayer){
         do {
             iteratorNext();
