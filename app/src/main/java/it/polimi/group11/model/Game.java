@@ -11,6 +11,8 @@ import java.util.ListIterator;
 
 public class Game {
 
+    private boolean movesFinished=false;
+
     private String lastPlayer;
     /**
      * The game is paired with the board instantiated in this game session.
@@ -145,9 +147,8 @@ public class Game {
     /**
      * Check the life status of all the players next to the player's id input, until the iterator reaches the current id player again.
      * @param newBeadsPosition {@link Board#newBeadsPosition(String, String)}
-     * @param id {@link Player#id}
      */
-    private void checkLives(String newBeadsPosition, String id) {
+    private void checkLives(String newBeadsPosition) {
         for (int i=0;i<playerNumber;i++){
             checkLife(newBeadsPosition, currentMovingPlayer.getId());
             iteratorNext();
@@ -179,8 +180,9 @@ public class Game {
      * Checks if the game is over.
      */
     private void checkVictory() {
-        if (alivePlayers == 1) //The game ends when only one player is alive
-            gameOver = true;
+        if (alivePlayers == 1){ //The game ends when only one player is alive
+            System.out.println("GG");
+            gameOver = true;}
     } // If a player moves, eliminates all the players and dies, he will results as the winner thanks to checkLives method's rules.
 
 
@@ -372,20 +374,29 @@ public class Game {
                 Move moveToCheck = new Move(move, currentMovingPlayer.getId());
                 // the validity of the input move is checked
                 if(generalMoveCheck(moveToCheck)){ //if the move is valid
-                    currentMovingPlayer.makeMove(moveToCheck.getMoveId(), board); //the player makes the move
-                    System.out.println(currentMovingPlayer.getId());
+                    currentMovingPlayer.makeMove(moveToCheck.getMoveId(), board);
+                    System.out.println("the move > " + move + " < is valid");//the player makes the move
+                    System.out.println("giocatore che muove " + currentMovingPlayer.getId());
                     currentMovingPlayer.setMovesNumber(currentMovingPlayer.getMovesNumber() + 1); //increases the number of moves made by him
-                    checkLives(board.newBeadsPosition(board.checkGrid(), beadsStatus), currentMovingPlayer.getId()); //checks the life status of the other players
-                    System.out.println(currentMovingPlayer.getId());
-                    System.out.println("the move > "+move+" < is valid");
+                    checkLives(board.newBeadsPosition(board.checkGrid(), beadsStatus)); //checks the life status of the other player
                     movesList.add(moveToCheck); //adds the move to the list of completed moves
+
+                    if (movesFinished && !gameOver){
+                       return getNextPlayer();
+                    }
+                    if (gameOver){
+                        return currentMovingPlayer.getId();
+                    }
+
                     if (!gameOver){
                         return currentMovingPlayer.getId();
+
                     }else{
                         System.out.println("gg");
                         return lastPlayer;
                     }
                 }else{
+
                     return null; //if the move is not valid, the validation method will return the correct error
                 }
             }else{
@@ -407,10 +418,18 @@ public class Game {
 
 
     public void setFirstPlayer(String firstPlayer){
-        do {
+        if (firstPlayer.equals("2")) {
             iteratorNext();
-        } while (!(firstPlayer.equals(currentMovingPlayer.getId())));
-    }
+        }
+        if (firstPlayer.equals("3")){
+            iteratorNext();
+            iteratorNext();
+        }
+        if (firstPlayer.equals("4")){
+            iteratorNext();
+            iteratorNext();
+            iteratorNext();}
+        }
 
     public String getNextPlayer(){
         iteratorNext();
@@ -418,5 +437,9 @@ public class Game {
             iteratorNext();
         }
         return currentMovingPlayer.getId();
+    }
+
+    public void setMovesFinished(boolean b) {
+        movesFinished=b;
     }
 }

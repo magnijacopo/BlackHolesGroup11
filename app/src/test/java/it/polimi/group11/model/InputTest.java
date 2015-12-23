@@ -14,6 +14,22 @@ public class InputTest {
         String result1_15_1 = new TestFirstRelease().moveTest(arg1_15_1);
         assertEquals("22101100111021110000000100000000000000000000000000000000100000000",result1_15_1);
     }
+
+    @Test
+    public void test5_1_1() throws Exception
+    {
+        String arg5_1_1 = "21120110011220200010000000000000000000100000000000000000000002002v3o";
+        String result5_1_1 = new TestFirstRelease().moveTest(arg5_1_1);
+        assertTrue(result5_1_1.startsWith("error"));
+    }
+
+    @Test
+    public void test1_2_1() throws Exception {
+        String arg1_2_1 = "22101201022010220201010100000002000000000000000000000200100000000h7oh1o";
+        String result1_2_1 = new TestFirstRelease().moveTest(arg1_2_1);
+        assertEquals("22201201122010220000000100000002000000000000000000000200100000000", result1_2_1);
+    }
+
     @Test
     public void test2_107_2() throws Exception { //player 2 si suicida e finisce il gioco, l'ultimo status deve avere player 2 !Risolto!
         String arg2_107_2="42202221211112000000010004102200300030002000031000030000000001020v2oh6ov5ih4ih1ih7iv3oh3iv1iv4oh6ih7iv2ih4ov1ov2ov5ov1ov3ih5ih7oh1ov2ih5oh3ov2ov5ih2oh1ih7iv5ih2ih6ih1ih4ih1oh4ov3oh2oh1oh4iv7oh6oh7oh4iv2iv7iv2ih2oh6ov3ih3iv5oh2iv3ov4iv2ov5oh5iv1iv4ih1ih3iv7oh4oh1iv2oh7oh5oh3ov4ov5ih4ih5ih7ih6iv1ov4oh3iv1iv5ih4oh1oh3oh5oh1iv7ih5iv7oh6ov1ov2ih4ov7iv5ov7ov5iv3ih7ov6ov7oh7iv5ov3ih7iv5oh2i";

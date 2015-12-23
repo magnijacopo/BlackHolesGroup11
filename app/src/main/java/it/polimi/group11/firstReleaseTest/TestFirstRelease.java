@@ -58,6 +58,9 @@ public class TestFirstRelease {
      * Remains true if it's less than 5(included), if not gives false
      */
     boolean checkConfigurationBeads = true;
+
+
+    boolean checkMove=true;
     /**
      * Indicates the last Configuration of the board , including setting of the bars,
      * position of the beads, and situation of the players before the current move
@@ -91,22 +94,22 @@ public class TestFirstRelease {
             if (checkConfigurationMovingPlayer){
                 if(checkConfigurationBars){
                     if(checkConfigurationBeads){
-                        if (checkInputLength(test)){
-                            int numMoves = ((test.length()-65)/3);
-                            enqueueMove(test, numMoves);
+                            if (checkInputLength(test)) {
+                                int numMoves = ((test.length() - 65) / 3);
+                                enqueueMove(test, numMoves);
+                                String configuration = test.substring(0, 65);
+                                output = finalConfiguration(configuration, moves.remove());
+                            }
 
-                            String configuration = test.substring(0, 65);
-                            output = finalConfiguration(configuration, moves.remove());
-                        }else{
-                            output = "error: input configuration has not a valid length";
+                            if (!game.getValidity()) {
+                                output = ("error: " + game.getError());
+                            }
                         }
-
-                        if (!game.getValidity()){
-                            output = ("error: "+game.getError());}
+                        else{
+                        output="error : move doesn't work";}
                     }
                 }
             }
-        }
         return output;
     }
 
@@ -117,6 +120,10 @@ public class TestFirstRelease {
      * @return
      */
     private String finalConfiguration(String configuration, String mossa){
+
+        if (moves.size() == 0){
+            game.setMovesFinished(true);}
+
         movingPlayer = game.currentPlayer(mossa, configuration.substring(16, 65));
         if (game.getValidity()){
             setBars();
@@ -230,6 +237,7 @@ public class TestFirstRelease {
             game.setFirstPlayer(movingPlayer);
         }
     }
+
 
     /**
      * From the String used as a test it gets and sets the configuration of the beads on the board.
