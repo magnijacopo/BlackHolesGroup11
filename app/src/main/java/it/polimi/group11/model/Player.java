@@ -211,6 +211,5 @@ public class Player {
     }
 
     public void placeBead(){
-        //method to be implemented in order to let a player choose where to place a bead
     }
 }

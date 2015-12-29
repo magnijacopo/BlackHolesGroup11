@@ -19,8 +19,8 @@ public class Board2 {
 
     private void setInitialPositions() {
         for (int i = 0; i < 7; i++) {
-            horizontalBar[i].setPosition((int) Math.random() * 3 - 1);
-            verticalBar[i].setPosition((int) Math.random() * 3 - 1);
+            horizontalBar[i].setPosition((int)( Math.random() * 3 - 1));
+            verticalBar[i].setPosition((int)( Math.random() * 3 - 1));
         }
     }
 
