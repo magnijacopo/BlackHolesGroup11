@@ -41,6 +41,26 @@ public class Board2 {
         }
     }
 
+    public String checkGrid() {
+        String checkGrid = "";
+        String temp="";
+        for (int i=0; i<7; i++) {
+            for (int j = 0; j < 7; j++) {
+                if ((grid[i][j].getHorizontal()) && (grid[i][j].getVertical()))
+                    temp = "3";
+                if ((!grid[i][j].getHorizontal()) && (grid[i][j].getVertical()))
+                    temp = "2";
+                if ((grid[i][j].getHorizontal()) && (!grid[i][j].getVertical()))
+                    temp = "1";
+                if ((!grid[i][j].getHorizontal()) && (!grid[i][j].getVertical()))
+                    temp = "0";
+                checkGrid = (checkGrid+temp);
+            }
+        }
+        return checkGrid;
+    }
+
+
     public void generateBoard(){
         setHolesOfBars();
         setInitialPositions();
@@ -131,4 +151,25 @@ public class Board2 {
             }
         }
     }
+
+    public String getBeadsPosition(){
+        String beadsPosition="";
+        for(int i=0; i < 7;i++) {
+            for (int j=0; j < 7; j++) {
+                if (grid[i][j].getBead())
+                    beadsPosition=beadsPosition + grid[i][j].getOwner();
+                else
+                    beadsPosition=beadsPosition+"0";
+            }
+        }
+        return beadsPosition;
+    }
+
+    public String getBarStatus(){
+        String barStatus="";
+        for(int i=0;i<7;i++)
+            barStatus=barStatus+String.valueOf(horizontalBar[i].getPosition());
+        for(int i=0;i<7;i++)
+            barStatus=barStatus+String.valueOf(verticalBar[i].getPosition());
+        return barStatus;}
 }

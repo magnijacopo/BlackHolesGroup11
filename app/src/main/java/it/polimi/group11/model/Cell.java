@@ -6,9 +6,10 @@ package it.polimi.group11.model;
 public class Cell {
 
 
-    private boolean horizontal;
-    private boolean vertical;
-    private boolean bead;
+    private boolean horizontal=false;
+    private boolean vertical=false;
+    private boolean bead=false;
+    private String owner="0";
 
 
     public void setHorizontal(boolean horizontal) {
@@ -35,4 +36,10 @@ public class Cell {
         return bead;
     }
 
+    public void setOwner(String owner){
+        this.owner=owner;
+    }
+    public String getOwner(){
+        return owner;
+    }
 }

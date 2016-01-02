@@ -9,11 +9,14 @@ import it.polimi.group11.enumeration.PlayerID;
  * and method to make moves.
  */
 public class Player {
-
     /**
      * Name chosen for the player
      */
     private String name;
+
+    private int beadsInBoard=0;
+
+    private Bead[] bead=new Bead[5];
 
     /**
      * Player identifier variable inside a single game
@@ -25,6 +28,8 @@ public class Player {
      * True means the player is alive, False means eliminated
      */
     private boolean status;
+
+    private Board2 board;
 
     /**
      * The players can choose the colour of their beads
@@ -176,9 +181,9 @@ public class Player {
      * Allows players to make moves.
      * It checks the input and rearrange the position of the bars.
      *
-     * @param input the String that represents the move. {@link Move#moveId}
+     * @param /input the String that represents the move. {@link Move#moveId}
      */
-    public void makeMove(String input, Board board) {
+    /*public void makeMove(String input, Board board) {
         //the input move is sliced in three parts:
         char orientation = input.charAt(0); //vertical or horizontal bar
         int number = Character.getNumericValue(input.charAt(1))-1; //number of the bar
@@ -208,8 +213,31 @@ public class Player {
         }else{
             System.out.println("wrong input");
         }
+    }*/
+
+    public void makeMove(String move, Board2 board){
+        board.moveBar(move);
     }
 
-    public void placeBead(){
+    private boolean checkPlace(int rowPosition, int columnPosition){
+        if ((board.grid[rowPosition][columnPosition].getHorizontal())||(board.grid[rowPosition][columnPosition].getVertical()))
+            return true;
+        else
+            return false;
+    }
+
+    public void placeBead(String owner, int rowPosition, int columnPosition){
+        if (beadsInBoard<5){
+            if ((!board.grid[rowPosition][columnPosition].getBead()) &&(checkPlace(rowPosition,columnPosition)))
+            {
+                board.grid[rowPosition][columnPosition].setBead(true);
+                board.grid[rowPosition][columnPosition].setOwner(id);
+                bead[beadsInBoard].setColumnPosition(columnPosition);
+                bead[beadsInBoard].setRowPosition(rowPosition);
+                bead[beadsInBoard].setOwner(owner);
+                bead[beadsInBoard].setLife(true);
+                beadsInBoard++;
+            }
+        }
     }
 }
