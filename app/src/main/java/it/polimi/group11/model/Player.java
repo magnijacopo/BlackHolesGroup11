@@ -180,8 +180,9 @@ public class Player {
     /**
      * Allows players to make moves.
      * It checks the input and rearrange the position of the bars.
-     *
-     * @param /input the String that represents the move. {@link Move#moveId}
+     *  @param /input the String that represents the move. {@link Move#moveId}
+     * @param /board
+     * @param board
      */
     /*public void makeMove(String input, Board board) {
         //the input move is sliced in three parts:
@@ -215,8 +216,8 @@ public class Player {
         }
     }*/
 
-    public void makeMove(String move, Board2 board){
-        board.moveBar(move);
+    public void makeMove(String move, Board board){
+        this.board.moveBar(move);
     }
 
     private boolean checkPlace(int rowPosition, int columnPosition){
