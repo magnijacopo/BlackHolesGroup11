@@ -12,6 +12,7 @@ public class Bead {
     public void setLife(boolean life) {
         this.life = life;
     }
+
     public boolean getLife(){
         return life;
     }
@@ -19,6 +20,7 @@ public class Bead {
     public void setOwner(String owner){
         this.owner=owner;
     }
+
     public String getOwner(){
         return owner;
     }
@@ -26,6 +28,7 @@ public class Bead {
     public void setRowPosition(int rowPosition){
         this.rowPosition=rowPosition;
     }
+
     public int getRowPosition(){
         return rowPosition;
     }
