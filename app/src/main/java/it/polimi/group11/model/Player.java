@@ -29,7 +29,7 @@ public class Player {
      */
     private boolean status;
 
-    private Board2 board;
+    private Board board;
 
     /**
      * The players can choose the colour of their beads
@@ -182,8 +182,9 @@ public class Player {
      * It checks the input and rearrange the position of the bars.
      *
      * @param /input the String that represents the move. {@link Move#moveId}
+     * @param board
      */
-    /*public void makeMove(String input, Board board) {
+     void makeMove(String input, Board board) {
         //the input move is sliced in three parts:
         char orientation = input.charAt(0); //vertical or horizontal bar
         int number = Character.getNumericValue(input.charAt(1))-1; //number of the bar
@@ -213,20 +214,20 @@ public class Player {
         }else{
             System.out.println("wrong input");
         }
-    }*/
-
-    public void makeMove(String move, Board2 board){
-        board.moveBar(move);
     }
 
-    private boolean checkPlace(int rowPosition, int columnPosition){
+    /*public void makeMove2(String move, Board board){
+        board.moveBar(move);
+    }*/
+
+    /*private boolean checkPlace(int rowPosition, int columnPosition){
         if ((board.grid[rowPosition][columnPosition].getHorizontal())||(board.grid[rowPosition][columnPosition].getVertical()))
             return true;
         else
             return false;
-    }
+    }*/
 
-    public void placeBead(String owner, int rowPosition, int columnPosition){
+    /*public void placeBead(String owner, int rowPosition, int columnPosition){
         if (beadsInBoard<5){
             if ((!board.grid[rowPosition][columnPosition].getBead()) &&(checkPlace(rowPosition,columnPosition)))
             {
@@ -239,5 +240,5 @@ public class Player {
                 beadsInBoard++;
             }
         }
-    }
+    }*/
 }
