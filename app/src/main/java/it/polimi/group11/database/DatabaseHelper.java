@@ -40,8 +40,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE " + PLAYER_TABLE_NAME + "(" +
                 PLAYER_COLUMN_ID + " INTEGER PRIMARY KEY, " +
-                PLAYER_COLUMN_NAME + " TEXT, " +
-                PLAYER_COLUMN_CREATEDAT + " TEXT)");
+                PLAYER_COLUMN_NAME + " TEXT UNIQUE, " +
+                PLAYER_COLUMN_CREATEDAT + " DATETIME DEFAULT CURRENT_TIMESTAMP)");
 
         db.execSQL("CREATE TABLE " + MATCHMAKING_TABLE_NAME + "(" +
                 MATCHMAKING_COLUMN_ID + " INTEGER PRIMARY KEY, " +
@@ -50,7 +50,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE " + MATCH_TABLE_NAME + "(" +
                 MATCH_COLUMN_ID + " INTEGER PRIMARY KEY, " +
-                MATCH_COLUMN_DATE + " TEXT, " + MATCH_COLUMN_DURATION + " TEXT, " +
+                MATCH_COLUMN_DATE + " DATETIME DEFAULT CURRENT_TIMESTAMP, " + MATCH_COLUMN_DURATION + " TEXT, " +
                 MATCH_COLUMN_WINNER + " INTEGER, " +
                 MATCH_COLUMN_MOVESNUMBER + " INTEGER)");
     }
@@ -66,16 +66,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     /**
      * Insert a new profile into the DB.
      * @param name
-     * @param date
      * @return
      */
-    public boolean insertProfile(String name, String date) {
+    public boolean insertProfile(String name) {
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(PLAYER_COLUMN_NAME, name);
-        contentValues.put(PLAYER_COLUMN_CREATEDAT, date);
 
         db.insert(PLAYER_TABLE_NAME, null, contentValues);
         return true;
@@ -147,15 +145,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //--------------- "matchmaking" table methods ---------------//
 
-    public boolean insertMatchMaking(String name, String date) {
+    public boolean insertMatchMaking(int idPlayer, int idMatch) {
+
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put(PLAYER_COLUMN_NAME, name);
-        contentValues.put(PLAYER_COLUMN_CREATEDAT, date);
+        contentValues.put(MATCHMAKING_COLUMN_PLAYERID, Integer.toString(idPlayer));
+        contentValues.put(MATCHMAKING_COLUMN_MATCHID, Integer.toString(idMatch));
 
-        db.insert(PLAYER_TABLE_NAME, null, contentValues);
+        db.insert(MATCHMAKING_TABLE_NAME, null, contentValues);
         return true;
     }
 
@@ -193,6 +192,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //--------------- various queries methods ---------------//
 
     public Cursor getMatchPlayed(int idPlayer){
+
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor res = db.rawQuery( "SELECT COUNT(*) FROM " + MATCHMAKING_TABLE_NAME + " WHERE " +
@@ -202,6 +202,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public Cursor getMatchWon(int idPlayer){
+
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor res = db.rawQuery( "SELECT COUNT(*) FROM " + MATCHMAKING_TABLE_NAME + " WHERE " +
@@ -214,7 +215,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getMinNumberMoves(int idPlayer){
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor res = db.rawQuery( "SELECT min( FROM " + MATCHMAKING_TABLE_NAME + " WHERE " +
+        Cursor res = db.rawQuery( "SELECT min( " + MATCH_COLUMN_MOVESNUMBER + " )" + " FROM " + MATCHMAKING_TABLE_NAME + " WHERE " +
                 MATCHMAKING_COLUMN_PLAYERID + "=?", new String[] { Integer.toString(idPlayer) } );
         return res;
     }

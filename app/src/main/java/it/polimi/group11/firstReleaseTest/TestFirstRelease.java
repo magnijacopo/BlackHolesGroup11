@@ -32,7 +32,7 @@ public class TestFirstRelease {
     /**
      * {@link Board#verticalBarsPosition}
      */
-    String verticalBarsPosition ;
+    String verticalBarsPosition;
     /**
      * The current positions of the beads
      */
@@ -60,7 +60,7 @@ public class TestFirstRelease {
     boolean checkConfigurationBeads = true;
 
 
-    boolean checkMove=true;
+    boolean checkMove = true;
     /**
      * Indicates the last Configuration of the board , including setting of the bars,
      * position of the beads, and situation of the players before the current move
@@ -82,7 +82,7 @@ public class TestFirstRelease {
      */
     Queue<String> moves = new LinkedList<>();
 
-    public String moveTest(String test){
+    public String moveTest(String test) {
         setPlayersNumber(test);
         setMovingPlayer(test);
         setBarsPosition(test);
@@ -90,57 +90,66 @@ public class TestFirstRelease {
 
         board.prepareGrid();
 
-        if (checkConfigurationPlayers){
-            if (checkConfigurationMovingPlayer){
-                if(checkConfigurationBars){
-                    if(checkConfigurationBeads){
-                            if (checkInputLength(test)) {
-                                int numMoves = ((test.length() - 65) / 3);
-                                enqueueMove(test, numMoves);
-                                String configuration = test.substring(0, 65);
-                                output = finalConfiguration(configuration, moves.remove());
-                            }
-
-                            if (!game.getValidity()) {
-                                output = ("error: " + game.getError());
-                            }
+        if (checkConfigurationPlayers) {
+            if (checkConfigurationMovingPlayer) {
+                if (checkConfigurationBars) {
+                    if (checkConfigurationBeads) {
+                        if (checkInputLength(test)) {
+                            int numMoves = ((test.length() - 65) / 3);
+                            enqueueMove(test, numMoves);
+                            String configuration = test.substring(0, 65);
+                            output = finalConfiguration(configuration, moves.remove());
                         }
-                        else{
-                        output="error : move doesn't work";}
+
+                        if (!game.getValidity()) {
+                            output = ("error: " + game.getError());
+                        }
+                    } else {
+                        output = "error : move doesn't work";
                     }
                 }
             }
+        }
         return output;
     }
 
     /**
-     *
      * @param configuration
      * @param mossa
      * @return
      */
-    private String finalConfiguration(String configuration, String mossa){
+    private String finalConfiguration(String configuration, String mossa) {
 
-        if (moves.size() == 0){
-            game.setMovesFinished(true);}
+        if (moves.size() == 0) {
+            game.setMovesFinished(true);
+        }
 
         movingPlayer = game.currentPlayer(mossa, configuration.substring(16, 65));
-        if (game.getValidity()){
-            setBars();
-            beadsPosition = setBeads(configuration.substring(16, 65));
 
-            StringBuilder stringBuilder = new StringBuilder();
-            playersNumber = game.getPlayers().size();
-            stringBuilder.append(playersNumber).append(movingPlayer);
-            configuration = stringBuilder+horizontalBarsPosition+verticalBarsPosition+beadsPosition;
-            System.out.println("  move "+configuration);
-            if (moves.peek() != null && !(game.getGameOver())){
-                finalConfiguration(configuration, moves.remove());
-            }else{
-                lastConfiguration = configuration;
+        if (movingPlayer.equals(game.getError())) {
+
+            lastConfiguration = "error: the move is not valid";
+
+        } else {
+
+            if (game.getValidity()) {
+                setBars();
+                beadsPosition = setBeads(configuration.substring(16, 65));
+
+                StringBuilder stringBuilder = new StringBuilder();
+                playersNumber = game.getPlayers().size();
+                stringBuilder.append(playersNumber).append(movingPlayer);
+                configuration = stringBuilder + horizontalBarsPosition + verticalBarsPosition + beadsPosition;
+                System.out.println("  move " + configuration);
+                if (moves.peek() != null && !(game.getGameOver())) {
+                    finalConfiguration(configuration, moves.remove());
+                } else {
+                    lastConfiguration = configuration;
+                }
+                return lastConfiguration;
             }
-            return lastConfiguration;
-        }return "";
+        }
+            return "";
     }
 
     /**
