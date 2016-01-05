@@ -15,6 +15,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String PLAYER_TABLE_NAME = "player";
     public static final String PLAYER_COLUMN_ID = "_id";
     public static final String PLAYER_COLUMN_NAME = "name";
+    public static final String PLAYER_COLUMN_IMAGE = "image";
     public static final String PLAYER_COLUMN_CREATEDAT = "date";
 
     //Table MatchMaking
@@ -40,7 +41,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE " + PLAYER_TABLE_NAME + "(" +
                 PLAYER_COLUMN_ID + " INTEGER PRIMARY KEY, " +
-                PLAYER_COLUMN_NAME + " TEXT UNIQUE, " +
+                PLAYER_COLUMN_NAME + " TEXT UNIQUE, " + PLAYER_COLUMN_IMAGE + " TEXT, " +
                 PLAYER_COLUMN_CREATEDAT + " DATETIME DEFAULT CURRENT_TIMESTAMP)");
 
         db.execSQL("CREATE TABLE " + MATCHMAKING_TABLE_NAME + "(" +
@@ -57,9 +58,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
         db.execSQL("DROP TABLE IF EXISTS " + PLAYER_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + MATCHMAKING_TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + MATCH_TABLE_NAME);
+
         onCreate(db);
     }
+
+    public void deleteDatabase(){
+        this.deleteDatabase();
+    }
+
 
     //--------------- "player" table methods ---------------//
 
@@ -68,12 +78,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @param name
      * @return
      */
-    public boolean insertProfile(String name) {
+    public boolean insertProfile(String name, String image) {
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(PLAYER_COLUMN_NAME, name);
+        contentValues.put(PLAYER_COLUMN_IMAGE, image);
 
         db.insert(PLAYER_TABLE_NAME, null, contentValues);
         return true;
@@ -114,22 +125,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
+    /*
+    SERVE DAVVERO ?
     /**
      * Update an existing profile.
      * @param id
      * @param name
-     * @param createdAt
      * @return
-     */
-    public boolean updatePerson(Integer id, String name, String createdAt) {
+
+    public boolean updatePerson(Integer id, String name) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(PLAYER_COLUMN_NAME, name);
-        contentValues.put(PLAYER_COLUMN_CREATEDAT, createdAt);
         db.update(PLAYER_TABLE_NAME, contentValues, PLAYER_COLUMN_ID + " = ? ", new String[] { Integer.toString(id) } );
         return true;
     }
-
+    */
     /**
      * Delete from the DB a profile.
      * @param id
