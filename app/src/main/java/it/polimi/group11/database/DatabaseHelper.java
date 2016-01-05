@@ -226,8 +226,24 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getMinNumberMoves(int idPlayer){
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor res = db.rawQuery( "SELECT min( " + MATCH_COLUMN_MOVESNUMBER + " )" + " FROM " + MATCHMAKING_TABLE_NAME + " WHERE " +
-                MATCHMAKING_COLUMN_PLAYERID + "=?", new String[] { Integer.toString(idPlayer) } );
+        Cursor res = db.rawQuery( "SELECT min( " + MATCH_COLUMN_MOVESNUMBER + " )" + " FROM " + MATCH_TABLE_NAME + " WHERE " +
+                MATCH_COLUMN_ID + "=?", new String[] { Integer.toString(idPlayer) } );
+        return res;
+    }
+
+    public Cursor getShortestMatch(int idPlayer){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor res = db.rawQuery( "SELECT min( " + MATCH_COLUMN_DURATION + " )" + " FROM " + MATCH_TABLE_NAME + " WHERE " +
+                MATCH_COLUMN_ID + "=?", new String[] { Integer.toString(idPlayer) } );
+        return res;
+    }
+
+    public Cursor getLongestMatch(int idPlayer){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor res = db.rawQuery( "SELECT max( " + MATCH_COLUMN_DURATION + " )" + " FROM " + MATCH_TABLE_NAME + " WHERE " +
+                MATCH_COLUMN_ID + "=?", new String[] { Integer.toString(idPlayer) } );
         return res;
     }
 }
