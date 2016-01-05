@@ -11,24 +11,30 @@ import android.view.View;
 public class MainActivity extends AppCompatActivity implements MediaPlayer.OnErrorListener {
     MediaPlayer backgroundMusic;
     int length = 0;
+    private boolean lastBackgroundMusicCheck = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        backgroundMusic = MediaPlayer.create(this, R.raw.somuchlove);
-        backgroundMusic.setOnErrorListener(this);
-        backgroundMusic.setLooping(true);
-        backgroundMusic.setVolume(60, 60);
-        backgroundMusic.start();
+        lastBackgroundMusicCheck = OptionsActivity.backgroundMusicCheck;
+        if(lastBackgroundMusicCheck){
+            backgroundMusic = MediaPlayer.create(this, R.raw.somuchlove);
+            backgroundMusic.setOnErrorListener(this);
+            backgroundMusic.setLooping(true);
+            backgroundMusic.setVolume(60, 60);
+            backgroundMusic.start();
+        }
     }
 
     @Override
     protected void onPause(){
         super.onPause();
-        backgroundMusic.pause();
-        length = backgroundMusic.getCurrentPosition();
+        if(lastBackgroundMusicCheck) {
+            backgroundMusic.pause();
+            length = backgroundMusic.getCurrentPosition();
+        }
+        OptionsActivity.backgroundMusicCheck = true;
     }
 
     @Override
@@ -44,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnErr
         if(backgroundMusic != null){
             try{
                 backgroundMusic.stop();
+                backgroundMusic.release();
             }finally {
                 backgroundMusic = null;
             }
@@ -53,9 +60,11 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnErr
     @Override
     protected void onResume(){
         super.onResume();
-        if(!backgroundMusic.isPlaying()){
-            backgroundMusic.seekTo(length);
-            backgroundMusic.start();
+        if(lastBackgroundMusicCheck) {
+            if (!backgroundMusic.isPlaying()) {
+                backgroundMusic.seekTo(length);
+                backgroundMusic.start();
+            }
         }
     }
 
@@ -73,6 +82,11 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnErr
 
     public void goToSelectPlayers(View view){
         Intent intent = new Intent(this, SelectPlayersActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToOptions(View view){
+        Intent intent = new Intent(this, OptionsActivity.class);
         startActivity(intent);
     }
 }

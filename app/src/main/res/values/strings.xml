@@ -9,4 +9,6 @@
     <string name="title_activity_select_players">Select Players</string>
     <string name="title_activity_options">Options</string>
     <string name="title_activity_play_game">Game</string>
+    <string name="background_music">BACKGROUND MUSIC</string>
+    <string name="options">OPTIONS</string>
 </resources>
