@@ -12,4 +12,13 @@
     tools:context="it.polimi.group11.SelectPlayersActivity"
     tools:showIn="@layout/activity_select_players">
 
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/textViewProva"
+        android:layout_marginTop="114dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+         />
 </RelativeLayout>
