@@ -200,6 +200,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
+    public Cursor getLastFiveMatches(int id){
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor res = db.rawQuery( "SELECT match.* FROM matchMaking JOIN players ON matchMaking.playerId = players._id" +
+                "JOIN match ON matchMaking.matchId = match.id WHERE players.id = ? LIMIT 5", new String[] { Integer.toString(id)});
+        return res;
+    }
+
     //--------------- various queries methods ---------------//
 
     public Cursor getMatchPlayed(int idPlayer){
@@ -226,7 +235,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getMinNumberMoves(int idPlayer){
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor res = db.rawQuery( "SELECT min( " + MATCH_COLUMN_MOVESNUMBER + " )" + " FROM " + MATCH_TABLE_NAME + " WHERE " +
+        Cursor res = db.rawQuery( "SELECT MIN(" + MATCH_COLUMN_MOVESNUMBER + ") FROM " + MATCH_TABLE_NAME + " WHERE " +
                 MATCH_COLUMN_ID + "=?", new String[] { Integer.toString(idPlayer) } );
         return res;
     }
@@ -234,16 +243,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getShortestMatch(int idPlayer){
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor res = db.rawQuery( "SELECT min( " + MATCH_COLUMN_DURATION + " )" + " FROM " + MATCH_TABLE_NAME + " WHERE " +
-                MATCH_COLUMN_ID + "=?", new String[] { Integer.toString(idPlayer) } );
+        Cursor res = db.rawQuery( "SELECT * FROM " + MATCH_TABLE_NAME + " WHERE " +
+                MATCH_COLUMN_DURATION + " = (SELECT MIN(" + MATCH_COLUMN_DURATION + ") FROM " + MATCH_TABLE_NAME + " WHERE "
+                + MATCH_COLUMN_WINNER + "=?" , new String[] { Integer.toString(idPlayer) } );
         return res;
     }
 
     public Cursor getLongestMatch(int idPlayer){
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor res = db.rawQuery( "SELECT max( " + MATCH_COLUMN_DURATION + " )" + " FROM " + MATCH_TABLE_NAME + " WHERE " +
-                MATCH_COLUMN_ID + "=?", new String[] { Integer.toString(idPlayer) } );
+        Cursor res = db.rawQuery( "SELECT * FROM " + MATCH_TABLE_NAME + " WHERE " +
+                MATCH_COLUMN_DURATION + " = (SELECT MAX(" + MATCH_COLUMN_DURATION + ") FROM " + MATCH_TABLE_NAME + " WHERE "
+                + MATCH_COLUMN_WINNER + "=?" , new String[] { Integer.toString(idPlayer) } );
         return res;
     }
 }
