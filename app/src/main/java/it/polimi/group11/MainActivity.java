@@ -1,29 +1,72 @@
 package it.polimi.group11;
 
+import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
+import android.view.View;
 
-
-import it.polimi.group11.firstReleaseTest.TestFirstRelease;
-
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MediaPlayer.OnErrorListener {
+    MediaPlayer backgroundMusic;
+    int length = 0;
+    private boolean lastBackgroundMusicCheck = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        this.Start();
+        lastBackgroundMusicCheck = OptionsActivity.backgroundMusicCheck;
+        if(lastBackgroundMusicCheck){
+            backgroundMusic = MediaPlayer.create(this, R.raw.somuchlove);
+            backgroundMusic.setOnErrorListener(this);
+            backgroundMusic.setLooping(true);
+            backgroundMusic.setVolume(60, 60);
+            backgroundMusic.start();
+        }
     }
 
-    public void Start(){
-        TestFirstRelease testFirstRelease = new TestFirstRelease();
-        String arg = ("22101201022010220201010100000002000000000000000000000200100000000h7o");
-        String result = testFirstRelease.moveTest(arg);
-        System.out.println(result);
+    @Override
+    protected void onPause(){
+        super.onPause();
+        if(lastBackgroundMusicCheck) {
+            backgroundMusic.pause();
+            length = backgroundMusic.getCurrentPosition();
+        }
+        OptionsActivity.backgroundMusicCheck = true;
     }
 
+    @Override
+    public boolean onError(final MediaPlayer backgroundMusic, final int what, final int extra){
+        Log.e(getPackageName(), String.format("Error(%s%s)", what, extra));
+        backgroundMusic.reset();
+        return true;
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        if(backgroundMusic != null){
+            try{
+                backgroundMusic.stop();
+                backgroundMusic.release();
+            }finally {
+                backgroundMusic = null;
+            }
+        }
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        if(lastBackgroundMusicCheck) {
+            if (!backgroundMusic.isPlaying()) {
+                backgroundMusic.seekTo(length);
+                backgroundMusic.start();
+            }
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -32,5 +75,18 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    public void goToCredits(View view){
+        Intent intent = new Intent(this, CreditsActivity.class);
+        startActivity(intent);
+    }
 
+    public void goToSelectPlayers(View view){
+        Intent intent = new Intent(this, SelectPlayersActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToOptions(View view){
+        Intent intent = new Intent(this, OptionsActivity.class);
+        startActivity(intent);
+    }
 }

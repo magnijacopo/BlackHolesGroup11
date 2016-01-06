@@ -13,6 +13,8 @@ public class Game {
 
     private boolean movesFinished=false;
 
+    private String MOVE_NOT_VALID = "error: la mossa non è valida";
+
     private String lastPlayer;
     /**
      * The game is paired with the board instantiated in this game session.
@@ -130,6 +132,12 @@ public class Game {
         this.movesList = moves;
     }
 
+    /**
+     * @return error
+     */
+    public String getMoveNotValid(){
+        return MOVE_NOT_VALID;
+    }
 
     // Methods
 
@@ -366,6 +374,7 @@ public class Game {
      * @return the player who executed the input move or an error if the move is not valid
      */
     public String currentPlayer(String move, String beadsStatus){
+
         if (!gameOver){
             if (currentMovingPlayer.getStatus()){
                 lastPlayer = currentMovingPlayer.getId();}
@@ -397,7 +406,7 @@ public class Game {
                     }
                 }else{
 
-                    return null; //if the move is not valid, the validation method will return the correct error
+                    return MOVE_NOT_VALID; //if the move is not valid, the validation method will return the correct error
                 }
             }else{
                 Move deadMove = new Move("RIP", currentMovingPlayer.getId());

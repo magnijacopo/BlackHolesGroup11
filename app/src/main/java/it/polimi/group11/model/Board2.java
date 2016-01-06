@@ -10,6 +10,11 @@ public class Board2 {
     Cell[][] grid = new Cell[7][7];
     Composition composition;
 
+   public Board2(){
+
+       generateBoard();
+   }
+
     private void setHolesOfBars() {
         for (int i = 0; i < 7; i++) {
             horizontalBar[i].setComposition(composition.getHorizontalComposition(i));
