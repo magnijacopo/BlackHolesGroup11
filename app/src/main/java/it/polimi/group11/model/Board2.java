@@ -65,8 +65,15 @@ public class Board2 {
         return checkGrid;
     }
 
+    public void setIdsCells(){
+        int id;
+        for (int i=0;i<7;i++)
+            for(int j=0;j<7;j++)
+                grid[i][j].setId("cell"+Integer.toString(i*7+j));
+    }
 
     public void generateBoard(){
+        setIdsCells();
         setHolesOfBars();
         setInitialPositions();
         prepareGrid();

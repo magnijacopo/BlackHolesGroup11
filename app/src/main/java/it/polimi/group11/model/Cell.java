@@ -10,6 +10,7 @@ public class Cell {
     private boolean vertical=false;
     private boolean bead=false;
     private String owner="0";
+    private String id="";
 
 
     public void setHorizontal(boolean horizontal) {
@@ -42,4 +43,12 @@ public class Cell {
     public String getOwner(){
         return owner;
     }
+
+    public void setId(String id){
+        this.id=id;
+    }
+    public String getId(){
+        return id;
+    }
+
 }
