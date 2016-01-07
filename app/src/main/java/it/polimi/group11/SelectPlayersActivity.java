@@ -40,6 +40,7 @@ public class SelectPlayersActivity extends AppCompatActivity {
                 } else {
                     Snackbar.make(view, MAX_PLAYER, Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
+                    goToAddProfile();
                 }
             }
         });
@@ -74,5 +75,10 @@ public class SelectPlayersActivity extends AppCompatActivity {
         }else {
             varProva = 100;
         }
+    }
+
+    public void goToAddProfile(){
+        Intent intent = new Intent(this, AddProfileActivity.class);
+        startActivity(intent);
     }
 }

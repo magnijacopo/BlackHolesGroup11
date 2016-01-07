@@ -54,6 +54,60 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="it.polimi.group11.SelectPlayersActivity" />
         </activity>
+        <activity
+            android:name=".chooseOpponentActivity"
+            android:label="@string/title_activity_choose_opponent"
+            android:parentActivityName=".SelectPlayersActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="it.polimi.group11.SelectPlayersActivity" />
+        </activity>
+        <activity
+            android:name=".ChooseOpponentActivity"
+            android:label="@string/title_activity_choose_opponent"
+            android:parentActivityName=".SelectPlayersActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="it.polimi.group11.SelectPlayersActivity" />
+        </activity>
+        <activity
+            android:name=".AddProfileActivity"
+            android:label="@string/title_activity_add_profile"
+            android:parentActivityName=".ChooseOpponentActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="it.polimi.group11.ChooseOpponentActivity" />
+        </activity>
+        <activity
+            android:name=".SelectProfileActivity"
+            android:label="@string/title_activity_select_profile"
+            android:parentActivityName=".ChooseOpponentActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="it.polimi.group11.ChooseOpponentActivity" />
+        </activity>
+        <activity
+            android:name=".ViewProfileListActivity"
+            android:label="@string/title_activity_view_profile_list"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="it.polimi.group11.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ViewProfileStatistics"
+            android:label="@string/title_activity_view_profile_statistics"
+            android:parentActivityName=".ViewProfileListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="it.polimi.group11.ViewProfileListActivity" />
+        </activity>
     </application>
 
 </manifest>

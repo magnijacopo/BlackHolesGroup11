@@ -11,4 +11,9 @@
     <string name="title_activity_play_game">Game</string>
     <string name="background_music">BACKGROUND MUSIC</string>
     <string name="options">OPTIONS</string>
+    <string name="title_activity_choose_opponent">ChooseOpponentActivity</string>
+    <string name="title_activity_add_profile">AddProfileActivity</string>
+    <string name="title_activity_select_profile">SelectProfileActivity</string>
+    <string name="title_activity_view_profile_list">ViewProfileListActivity</string>
+    <string name="title_activity_view_profile_statistics">ViewProfileStatistics</string>
 </resources>
