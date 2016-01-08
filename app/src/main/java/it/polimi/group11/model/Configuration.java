@@ -22,11 +22,10 @@ public class Configuration {
      */
 
 
-
     String movingPlayer;
     /**
      * {@link Board#horizontalBarsPosition}
-    /**
+     * /**
      * Indicates if the number of players is correct.
      * Remains if the number is more thaan one and less than five, if not gives false
      */
@@ -49,7 +48,7 @@ public class Configuration {
     boolean checkConfigurationBeads = true;
 
 
-    boolean checkMove=true;
+    boolean checkMove = true;
     /**
      * Indicates the last Configuration of the board , including setting of the bars,
      * position of the beads, and situation of the players before the current move
@@ -70,33 +69,21 @@ public class Configuration {
      *
      */
 
-    private String firstConfiguration=getNumberOfPlayers()+getFirstPlayer()+getBarStatus()+getBeadsPosition();
+    private String firstConfiguration = getNumberOfPlayers() + getFirstPlayer() + getBarStatus() + getBeadsPosition();
 
-    private String getFirstPlayer(){
+    private String getFirstPlayer() {
         return String.valueOf(game.getPlayer(0));
     }
 
-    private String getNumberOfPlayers(){
+    private String getNumberOfPlayers() {
         return String.valueOf(game.getNumPlayers());
     }
 
-    private String getBarStatus(){
+    private String getBarStatus() {
         return board.getBarStatus();
     }
 
     private String getBeadsPosition() {
-        String grid =board.checkGrid();
-        String beadsPosition =board.getBeadsPosition();
-        String BeadsPosition = "";
-        for (int i=0; i<beadsPosition.length(); i++) {
-            if (grid.charAt(i) == '0') {
-                BeadsPosition = BeadsPosition+"0"; //if the cell checked is a hole, updates there can not be a bead on it
-            } else {
-                BeadsPosition = BeadsPosition+beadsPosition.charAt(i); //if the cell checked is filled by a bar, the old bead position valued is maintained
-            }
-        }
-        return BeadsPosition;
+        return board.getCurrentBeadsPosition();
     }
-
-
 }
