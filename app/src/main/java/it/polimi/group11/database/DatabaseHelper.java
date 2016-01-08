@@ -3,6 +3,7 @@ package it.polimi.group11.database;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteException;
@@ -102,7 +103,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(PLAYER_COLUMN_NAME, name);
         try{
         db.insert(PLAYER_TABLE_NAME, null, contentValues);
-        return true;} catch(SQLiteException e){
+        return true;} catch(SQLiteConstraintException e){
             e.printStackTrace();
             return false;
         }
