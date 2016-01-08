@@ -38,7 +38,7 @@
         android:layout_alignLeft="@+id/credits_button"
         android:layout_alignStart="@+id/credits_button"
         android:layout_marginTop="29dp"
-        android:onClick="goToViewProfileListActivity"/>
+        android:onClick="goToViewProfileList"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -47,7 +47,8 @@
         android:id="@+id/leaderboard_button"
         android:layout_below="@+id/profiles_button"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="28dp" />
+        android:layout_marginTop="28dp"
+        android:onClick="goToLeaderboard"/>
 
     <Button
         android:layout_width="wrap_content"

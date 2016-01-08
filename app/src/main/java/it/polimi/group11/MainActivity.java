@@ -90,8 +90,13 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnErr
         startActivity(intent);
     }
 
-    public void goToViewProfileListActivity(View view){
+    public void goToViewProfileList(View view){
         Intent intent = new Intent(this, ViewProfileListActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToLeaderboard(View view) {
+        Intent intent = new Intent(this, LeaderboardActivity.class);
         startActivity(intent);
     }
 }

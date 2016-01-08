@@ -11,9 +11,15 @@
     <string name="title_activity_play_game">Game</string>
     <string name="background_music">BACKGROUND MUSIC</string>
     <string name="options">OPTIONS</string>
-    <string name="title_activity_choose_opponent">ChooseOpponentActivity</string>
-    <string name="title_activity_add_profile">AddProfileActivity</string>
-    <string name="title_activity_select_profile">SelectProfileActivity</string>
-    <string name="title_activity_view_profile_list">ViewProfileListActivity</string>
-    <string name="title_activity_view_profile_statistics">ViewProfileStatistics</string>
+    <string name="title_activity_add_profile">Add Profile</string>
+    <string name="title_activity_view_profile_list">Profiles List</string>
+    <string name="title_activity_view_profile_statistics">Profile</string>
+    <string name="title_activity_choose_player_type">Choose Player</string>
+    <string name="title_activity_view_profiles_selection">Select your Profile</string>
+    <string name="title_activity_leaderboard">Leaderboard</string>
+    <string name="title_activity_view_profile_leaderboard">Profile</string>
+    <string name="new_profile">NEW PROFILE</string>
+    <string name="existing_profile">EXISTING PROFILES</string>
+    <string name="artificial_intelligence">COMPUTER</string>
+    <string name="commit_changes">almeno faccio accept theirs</string>
 </resources>

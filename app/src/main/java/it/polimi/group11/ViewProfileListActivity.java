@@ -1,5 +1,6 @@
 package it.polimi.group11;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -7,12 +8,15 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
 import it.polimi.group11.database.DatabaseHelper;
 
 public class ViewProfileListActivity extends AppCompatActivity {
+
+    public final static String KEY_EXTRA_CONTACT_ID = "KEY_EXTRA_CONTACT_ID";
 
     DatabaseHelper dbHelper;
     ListView listView;
@@ -40,6 +44,18 @@ public class ViewProfileListActivity extends AppCompatActivity {
                 cursor, columns, widgets, 0);
         listView = (ListView)findViewById(R.id.listView1);
         listView.setAdapter(cursorAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView listView, View view,
+                                    int position, long id) {
+                Cursor itemCursor = (Cursor) ViewProfileListActivity.this.listView.getItemAtPosition(position);
+                int playerID = itemCursor.getInt(itemCursor.getColumnIndex(DatabaseHelper.PLAYER_COLUMN_ID));
+                Intent intent = new Intent(getApplicationContext(), ViewProfileStatistics.class);
+                intent.putExtra(KEY_EXTRA_CONTACT_ID, playerID);
+                startActivity(intent);
+            }
+        });
 
 
 
