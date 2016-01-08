@@ -5,7 +5,7 @@ package it.polimi.group11.model;
  */
 public class Game2 {
 
-    private Board2 board = new Board2();
+    public Board2 board = new Board2();
     private int[] playerOrder;
     int numPlayers;
 
@@ -37,3 +37,7 @@ public class Game2 {
         this.numPlayers = numPlayers;
     }
 }
+
+/*game2 game
+game.get..
+ */

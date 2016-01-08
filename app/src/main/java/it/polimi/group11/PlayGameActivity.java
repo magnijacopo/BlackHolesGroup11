@@ -1,15 +1,27 @@
 package it.polimi.group11;
 
+import android.content.ClipData;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.DragEvent;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+
+import java.util.Objects;
+
+import it.polimi.group11.model.*;
+
 
 public class PlayGameActivity extends AppCompatActivity {
 
-    @Override
+  /*  @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_game);
@@ -26,5 +38,559 @@ public class PlayGameActivity extends AppCompatActivity {
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
+}*/
+
+    /**
+     * Attribute declaration
+     */
+
+    ImageView cells[] = new ImageView[50];
+    ImageView hbars[] = new ImageView[7];
+    ImageView vbars[] = new ImageView[7];
+    ImageView b1;
+    private float a;
+    private float b;
+    private float da;
+    private float db;
+    float centre[] = new float[2];
+    private float startPointA;
+    private float startPointB;
+    private float finalPoint;
+    private float hystoricalPointX;
+    private float hystoricalPointY;
+    private float deltaX;
+    private float deltaY;
+    private boolean moving;
+    private boolean firstH[] = new boolean[7];
+    private boolean firstV[] = new boolean[7];
+    private Game2 game2 = new Game2();
+    private int posH[] = new int[7];
+    private int posV[] = new int[7];
+    private float limitRight;
+    private float limitLeft;
+
+    /**
+     * Constructor
+     */
+    public PlayGameActivity() {
+        setB(0.0f);
+        setA(0.0f);
+        setMoving(false);
+        for(int i=0;i<7;i++) {
+            setFirstH(false, i);
+            setFirstV(false,i);
+        }
+    }
+
+    /**
+     * OnCreate event means inizialization of every graphic element of the layout
+     * and assignment of listeners
+     * @param savedInstanceState
+     */
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_play_game);
+
+
+
+        /**
+         * The following "for" contains initial position of the bars
+         */
+
+        for(int i=0;i<7;i++){
+            int id = getResources().getIdentifier("horizontalbar" + i, "id", getPackageName());
+            hbars[i] = (ImageView) findViewById(id);
+            hbars[i].setOnTouchListener(new MyTouchListener());
+        }
+
+        for (int i=0; i<7; i++) {
+            int id = getResources().getIdentifier("verticalbar" + i, "id", getPackageName());
+            vbars[i] = (ImageView) findViewById(id);
+            vbars[i].setOnTouchListener(new MyTouchListener());
+        }
+
+
+
+        b1 =  (ImageView) findViewById(R.id.bin1);
+        b1.setOnTouchListener(new MyTouchListener());
+
+
+        for (int i=0; i<7; i++) {
+
+            posH[i] = game2.board.horizontalBar[i].getPosition();
+            Log.i("posizione", "orizzontale "+posH[i]);
+            float marginLeftH = hbars[i].getX(); // (40 * hbars[i].getResources().getDisplayMetrics().density);//hbars[i].getX();
+            //int marginTopH = (int) (95 * hbars[i].getResources().getDisplayMetrics().density);
+            //ViewGroup.MarginLayoutParams marginParams = new ViewGroup.MarginLayoutParams(hbars[i].getLayoutParams());
+            //RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(marginParams);
+
+
+            switch (posH[i]) {
+                case 0:
+                    int plusMarginLeft = (int) (marginLeftH + (30 * hbars[i].getResources().getDisplayMetrics().density));
+                    //int plusMarginTop = (int) (marginTopH + ((30 * i * hbars[i].getResources().getDisplayMetrics().density)));
+                    //Log.i("sfasamentoTop", "plusMarginTop" + plusMarginTop);
+                    Log.i("sfasamentoLeft", "plusMarginLeft " + plusMarginLeft);
+                    hbars[i].setX(plusMarginLeft);
+                    //marginParams.setMargins(plusMarginLeft, plusMarginTop, 0, 0);
+                    //hbars[i].setLayoutParams(layoutParams);
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    int subMarginLeft = (int)(marginLeftH - (30 * hbars[i].getResources().getDisplayMetrics().density));
+                    //int subMarginTop = (int) (marginTopH + ((30 * i * hbars[i].getResources().getDisplayMetrics().density)));
+                    //Log.i("sfasamentoTop", "subMarginTop" + subMarginTop);
+                    Log.i("sfasamentoLeft", "subMarginLeft " + subMarginLeft);
+                    hbars[i].setX(subMarginLeft);
+                    //marginParams.setMargins(subMarginLeft, subMarginTop, 0, 0);
+                    //hbars[i].setLayoutParams(layoutParams);
+                    break;
+                default:
+                    break;
+
+            }
+           // hbars[i].setOnTouchListener(new MyTouchListener());
+        }
+
+        for (int i=0; i<49; i++) {
+            int id = getResources().getIdentifier("cell" + i, "id", getPackageName());
+            cells[i] = (ImageView) findViewById(id);
+            cells[i].setOnDragListener(new MyDragListener());
+        }
+
+
+        /*
+
+        for (int i=0; i<7; i++) {
+            int posV;
+            int id = getResources().getIdentifier("verticalbar"+i, "id", getPackageName());
+            vbars[i]= (ImageView) findViewById(id);
+            posV = game2.board.verticalBar[i].getPosition();
+            Log.i("posizione", "verticale "+posV);
+            int marginLeftV = (int) (75 * vbars[i].getResources().getDisplayMetrics().density);
+            int marginTopV = (int) (62 * vbars[i].getResources().getDisplayMetrics().density);
+            ViewGroup.MarginLayoutParams marginParams = new ViewGroup.MarginLayoutParams(vbars[i].getLayoutParams());
+            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(marginParams);
+            switch (posV) {
+                case 0:
+                    int plusMarginTop = (int) (marginTopV + (30 * vbars[i].getResources().getDisplayMetrics().density));
+                    int plusMarginLeft = (int) (marginLeftV + ((30 * i * vbars[i].getResources().getDisplayMetrics().density)));
+                    Log.i("sfasamentoTop", "plusMarginTop"+plusMarginTop);
+                    Log.i("sfasamentoLeft", "plusMarginLeft "+plusMarginLeft);
+                    marginParams.setMargins(plusMarginLeft, plusMarginTop, 0, 0);
+                    vbars[i].setLayoutParams(layoutParams);
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    int subMarginTop = (int) (marginTopV - (30 * vbars[i].getResources().getDisplayMetrics().density));
+                    int subMarginLeft = (int) (marginLeftV + ((30 * i * vbars[i].getResources().getDisplayMetrics().density)));
+                    Log.i("sfasamentoTop", "subMarginTop"+subMarginTop);
+                    Log.i("sfasamentoLeft", "subMarginLeft "+subMarginLeft);
+                    marginParams.setMargins(subMarginLeft, subMarginTop, 0, 0);
+                    vbars[i].setLayoutParams(layoutParams);
+                    break;
+                default:
+                    break;
+
+            }
+            vbars[i].setOnTouchListener(new MyTouchListener());
+        }
+*/
+
+
+
+
+    }
+
+    /**
+     *OnTouchListener: implements the listener on onTouch events
+     */
+
+    private final class MyTouchListener implements View.OnTouchListener {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+
+            switch (event.getAction()) {
+
+                case MotionEvent.ACTION_DOWN:
+
+                    setA(event.getRawX());
+                    setB(event.getRawY());
+                    Log.i("getRaw", "X " + event.getRawX());
+                    setDa(getA() - v.getX());
+                    setDb(getB() - v.getY());
+                    Log.i("get","getX "+v.getX());
+                    Log.i("Da", "Da " + (getA() - v.getX()));
+                    setStartPointA(getA() - getDa());
+                    Log.i("StartPoint", "A " + getStartPointA());
+                    //setStartPointA(event.getRawX());
+                    setStartPointB(getB() - getDb());
+                    //This "for" set the Hystorical Point, that is the start point, of every bars
+                    for(int i=0;i<7;i++){
+                        String barh = "it.polimi.group11:id/horizontalbar"+i;
+                        String barv = "it.polimi.group11:id/verticalbar"+i;
+                        if (barh.equals(v.getResources().getResourceName(v.getId()))){
+                            if(!getFirstH(i)) {
+                                setHystoricalPointX(getA() - getDa());
+                                Log.i("HystoricalPoint","A"+getHystoricalPointX());
+                                setFirstH(true, i);
+                                switch(posH[i]){
+                                    case 0:
+                                        setLimitRight(getHystoricalPointX());
+                                        setLimitLeft(getHystoricalPointX() - (60 * v.getResources().getDisplayMetrics().density));
+                                        break;
+                                    case 1:
+                                        setLimitRight((getHystoricalPointX() + (30 * v.getResources().getDisplayMetrics().density)));
+                                        setLimitLeft((getHystoricalPointX() - (30 * v.getResources().getDisplayMetrics().density)));
+                                        break;
+                                    case 2:
+                                        setLimitRight(getHystoricalPointX() + (60 * v.getResources().getDisplayMetrics().density));
+                                        setLimitLeft(getHystoricalPointX());
+                                        break;
+                                    default:
+                                        break;
+                                }
+                            }
+
+
+                        }
+                        if(barv.equals(v.getResources().getResourceName(v.getId()))) {
+                            if(!getFirstV(i)) {
+                                setHystoricalPointY(getB() - getDb());
+                                setFirstV(true,i);
+                            }
+                        }
+                    }
+
+                    setMoving(true);
+                    break;
+
+                case MotionEvent.ACTION_MOVE:
+                    if (getMoving()) {
+                        //this condition verify that the instructions on the inside are made ​​only by ImageView with description = " horizontal ", that is Horizontal Bars
+                        if (v.getContentDescription().equals("horizontal")) {
+
+                           setDeltaX((event.getRawX() - getDa()) - getStartPointA()) ;
+                            Log.i("Delta","X "+getDeltaX());
+                            //if the bar moves to the right
+                            if ( getDeltaX() > 0 )
+                            {
+                                setFinalPoint((getStartPointA()+ (30 * v.getResources().getDisplayMetrics().density)));
+                                //It prevents the bar to move towards the right, for more than one cell and one cell at a time
+                                if(((event.getRawX() - getDa()) <= getFinalPoint()) && (event.getRawX() - getDa()) < getLimitRight()) {
+                                    setA(event.getRawX() - getDa());
+                                    v.setX(getA());
+                                }
+                            }
+                            //if the bar moves to the left
+                            if( getDeltaX() < 0 )
+                            {
+                                setFinalPoint(((getStartPointA()- (30 * v.getResources().getDisplayMetrics().density))));
+                                //It prevents the bar to move towards the left, for more than one cell and one cell at a time
+                                if(((event.getRawX() - getDa()) >= getFinalPoint())  && (event.getRawX() - getDa()) > getLimitLeft()) {
+                                    setA(event.getRawX() - getDa());
+                                    v.setX(getA());
+                                }
+                            }
+
+
+                        }
+                        else {
+                            //this condition verify that the instructions on the inside are made ​​only by ImageView with description = " vertical ", that is Vertical Bars
+                            if (v.getContentDescription().equals("vertical")) {
+
+                                setDeltaY((event.getRawY() - getDb()) - getStartPointB()) ;
+                                //if the bar moves to the top
+                                if ( getDeltaY() < 0 )
+                                {
+                                    setFinalPoint((getStartPointB() - (30 * v.getResources().getDisplayMetrics().density)));
+                                    //It prevents the bar to move towards the top, for more than one cell and one cell at a time
+                                    if(((event.getRawY() - getDb()) >= getFinalPoint()) && (event.getRawY() - getDb()) > (getHystoricalPointY() - (30 * v.getResources().getDisplayMetrics().density))) {
+                                        setB(event.getRawY() - getDb());
+                                        v.setY(getB());
+                                    }
+                                }
+                                //if the bar moves to the bottom
+                                if( getDeltaY() > 0 )
+                                {
+                                    setFinalPoint(((getStartPointB() + (30 * v.getResources().getDisplayMetrics().density))));
+                                    //It prevents the bar to move towards the bottom, for more than one cell and one cell at a time
+                                    if(((event.getRawY() - getDb()) <= getFinalPoint()) && (event.getRawY() - getDb()) < (getHystoricalPointY() + (30 * v.getResources().getDisplayMetrics().density))) {
+                                        setB(event.getRawY() - getDb());
+                                        v.setY(getB());
+                                    }
+                                }
+
+                            }
+                            else {
+                                ClipData data = ClipData.newPlainText("", "");
+                                View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(v);
+                                v.startDrag(data, shadowBuilder, v, 0);
+                                //v.setVisibility(View.INVISIBLE);
+                            }
+
+                        }
+                    }
+                    break;
+
+                case MotionEvent.ACTION_UP:
+
+                    //These "if" occur that the bar is shifted by a cell if the bar moves more than half of a cell (move to the right)
+                    if(getDeltaX()>0 && ((event.getRawX() - getDa()) > (getStartPointA()+((getFinalPoint()-getStartPointA())/2))) && (event.getRawX() - getDa()) < (getHystoricalPointX() + (30 * v.getResources().getDisplayMetrics().density)))
+                    {
+                        setA(getFinalPoint());
+                        v.setX(getA());
+                       /* int marginLeft = (int) (40 * v.getResources().getDisplayMetrics().density);
+                        int newMArginLeft = (int) (marginLeft + (30 * v.getResources().getDisplayMetrics().density));
+                        ViewGroup.MarginLayoutParams marginParams = new ViewGroup.MarginLayoutParams(v.getLayoutParams());
+                        marginParams.setMargins(newMArginLeft,550,0,0);
+                        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(marginParams);
+                        v.setLayoutParams(layoutParams);*/
+                    }
+                    //These "if" occur that the bar back to the starting position if it moves  less than half of a cell (move to the right)
+                    if(getDeltaX()>0 && ((event.getRawX() - getDa()) < (getStartPointA()+((getFinalPoint()-getStartPointA())/2))) && (event.getRawX() - getDa()) < (getHystoricalPointX() + (30 * v.getResources().getDisplayMetrics().density)))
+                    {
+                        setA(getStartPointA());
+                        v.setX(getA());
+                    }
+                    //These "if" occur that the bar is shifted by a cell if the bar moves more than half of a cell (move to the left)
+                    if(getDeltaX()<0 && ((event.getRawX() - getDa()) < (getFinalPoint()+((getStartPointA()-getFinalPoint())/2))) && (event.getRawX() - getDa()) > (getHystoricalPointX() - (30 * v.getResources().getDisplayMetrics().density)))
+                    {
+                        setA(getFinalPoint());
+                        v.setX(getA());
+                    }
+                    //These "if" occur that the bar back to the starting position if it moves  less than half of a cell (move to the left)
+                    if(getDeltaX()<0 && ((event.getRawX() - getDa()) > (getFinalPoint()+((getStartPointA()-getFinalPoint())/2))) && (event.getRawX() - getDa()) > (getHystoricalPointX() - (30 * v.getResources().getDisplayMetrics().density)))
+                    {
+                        setA(getStartPointA());
+                        v.setX(getA());
+                    }
+
+                    //These "if" occur that the bar is shifted by a cell if the bar moves more than half of a cell (move to the bottom)
+                    if (getDeltaY()>0 && ((event.getRawY() - getDb()) > (getStartPointB()+((getFinalPoint()-getStartPointB())/2))) && (event.getRawY() - getDb()) < (getHystoricalPointY() + (30 * v.getResources().getDisplayMetrics().density)))
+                    {
+                        setB(getFinalPoint());
+                        v.setY(getB());
+                    }
+                    //These "if" occur that the bar back to the starting position if it moves less than half of a cell (move to the bottom)
+                    if (getDeltaY()>0 && ((event.getRawY() - getDb()) < (getStartPointB()+((getFinalPoint()-getStartPointB())/2))) && (event.getRawY() - getDb()) < (getHystoricalPointY() + (30 * v.getResources().getDisplayMetrics().density)))
+                    {
+                        setB(getStartPointB());
+                        v.setY(getB());
+                    }
+                    //These "if" occur that the bar is shifted by a cell if the bar moves more than half of a cell (move to the top)
+                    if (getDeltaY()<0 && ((event.getRawY() - getDb()) < (getFinalPoint()+((getStartPointB()-getFinalPoint())/2)))&& (event.getRawY() - getDb()) > (getHystoricalPointY() - (30 * v.getResources().getDisplayMetrics().density)))
+                    {
+                        setB(getFinalPoint());
+                        v.setY(getB());
+                    }
+                    //These "if" occur that the bar back to the starting position if it moves less than half of a cell (move to the top)
+                    if (getDeltaY()<0 && ((event.getRawY() - getDb()) > (getFinalPoint()+((getStartPointB()-getFinalPoint())/2)))&& (event.getRawY() - getDb()) > (getHystoricalPointY() - (30 * v.getResources().getDisplayMetrics().density)))
+                    {
+                        setB(getStartPointB());
+                        v.setY(getB());
+                    }
+
+                    setDeltaX(0);
+                    setDeltaY(0);
+                    setMoving(false);
+                    break;
+
+
+            }
+
+            return true;
+        }
+    }
+
+    class MyDragListener implements View.OnDragListener {
+
+        @Override
+        public boolean onDrag(View v, DragEvent event) {
+
+            switch (event.getAction()) {
+                case DragEvent.ACTION_DRAG_STARTED:
+
+                    break;
+                case DragEvent.ACTION_DRAG_ENTERED:
+
+                    break;
+                case DragEvent.ACTION_DRAG_EXITED:
+
+                    break;
+                case DragEvent.ACTION_DROP:
+
+                    View view = (View) event.getLocalState();
+                    for(int i=0; i<49;i++) {
+                        for(int j=0; j<49;j++) {
+                            if (game2.board.getCell(i, j).getId().equals(v.getResources().getResourceName(v.getId()))) {
+                                game2.board.getCell(i, j).setCentre(v, view.getWidth(), view.getHeight());
+                                centre = game2.board.getCell(i, j).getCentre();
+                            }
+                        }
+                    }
+                    view.setX(centre[0]);
+                    view.setY(centre[1]);
+                    view.setVisibility(View.VISIBLE);
+
+                    break;
+                case DragEvent.ACTION_DRAG_ENDED:
+
+                    View viewF = (View) event.getLocalState();
+                    if(!event.getResult())
+                    {
+                        viewF.setX(48);
+                        viewF.setY(48);
+                        viewF.setVisibility(View.VISIBLE);
+
+                    }
+                    else
+                    {
+                        viewF.setOnTouchListener(null);
+                    }
+                    break;
+                default:
+                    break;
+            }
+            return true;
+        }
+
+    }
+
+    public float getLimitLeft() {
+        return limitLeft;
+    }
+
+    public void setLimitLeft(float limitLeft) {
+        this.limitLeft = limitLeft;
+    }
+
+    public float getLimitRight() {
+        return limitRight;
+    }
+
+    public void setLimitRight(float limitRight) {
+        this.limitRight = limitRight;
+    }
+
+    public boolean getFirstV(int position) {
+        return firstV[position];
+    }
+
+    public void setFirstV(boolean firstV,int position) {
+        this.firstV[position] = firstV;
+    }
+
+    public boolean getFirstH(int position) {
+        return firstH[position];
+    }
+
+    public void setFirstH(boolean firstH,int position) {
+        this.firstH[position] = firstH;
+    }
+
+    public float getStartPointB() {
+        return startPointB;
+    }
+
+    public void setStartPointB(float startPointB) {
+        this.startPointB = startPointB;
+    }
+
+    public float getDeltaY() {
+        return deltaY;
+    }
+
+    public void setDeltaY(float deltaY) {
+        this.deltaY = deltaY;
+    }
+
+    public float getHystoricalPointY() {
+        return hystoricalPointY;
+    }
+
+    public void setHystoricalPointY(float hystoricalPointY) {
+        this.hystoricalPointY = hystoricalPointY;
+    }
+
+    public float getHystoricalPointX() {
+        return hystoricalPointX;
+    }
+
+    public void setHystoricalPointX(float hystoricalPointX) {
+        this.hystoricalPointX = hystoricalPointX;
+    }
+
+    public float getFinalPoint() {
+        return finalPoint;
+    }
+
+    public void setFinalPoint(float finalPoint) {
+        this.finalPoint = finalPoint;
+    }
+
+    public float getDeltaX() {
+        return deltaX;
+    }
+
+    public void setDeltaX(float deltaX) {
+        this.deltaX = deltaX;
+    }
+
+    public float getStartPointA() {
+        return startPointA;
+    }
+
+    public void setStartPointA(float startPoint) {
+        this.startPointA = startPoint;
+    }
+
+
+    public boolean getMoving() {
+        return moving;
+    }
+
+    public void setMoving(boolean moving) {
+        this.moving = moving;
+    }
+
+    public float getDb() {
+        return db;
+    }
+
+    public void setDb(float db) {
+        this.db = db;
+    }
+
+    public float getDa() {
+        return da;
+    }
+
+    public void setDa(float da) {
+        this.da = da;
+    }
+
+    public float getA() {
+        return a;
+    }
+
+    public void setA(float a) {
+        this.a = a;
+    }
+
+    public float getB() {
+        return b;
+    }
+
+    public void setB(float b) {
+        this.b = b;
+    }
+
+
 
 }

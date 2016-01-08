@@ -1,17 +1,25 @@
 package it.polimi.group11.model;
 
+import android.util.Log;
+
+
 /**
  * Created by Lale on 29/12/2015.
  */
 public class Board2 {
 
-    Bar[] horizontalBar = new Bar[7];
-    Bar[] verticalBar = new Bar[7];
-    Cell[][] grid = new Cell[7][7];
-    Composition composition;
+    public Bar[] horizontalBar = new Bar[7];
+    public Bar[] verticalBar = new Bar[7];
+    private Cell[][] grid = new Cell[7][7];
+    Composition composition = new Composition();
 
    public Board2(){
-
+       for(int i=0;i<7;i++) {
+           horizontalBar[i] = new Bar();
+           verticalBar[i] = new Bar();
+           for (int j = 0; j < 7; j++)
+               grid[i][j] = new Cell();
+       }
        generateBoard();
    }
 
@@ -24,10 +32,25 @@ public class Board2 {
 
     private void setInitialPositions() {
         for (int i = 0; i < 7; i++) {
-            horizontalBar[i].setPosition((int) (Math.random() * 3 - 1));
-            verticalBar[i].setPosition((int) (Math.random() * 3 - 1));
+            horizontalBar[i].setPosition(getRandomNumber());
+            verticalBar[i].setPosition(getRandomNumber());
         }
     }
+
+    private int getRandomNumber() {
+        int number;
+        do{
+            number = (int) (Math.random() * 10);
+
+            if (number <= 3)
+                return 0;
+            if (number <= 6)
+                return 1;
+            if (number <= 9)
+                return 2;
+
+        }while (number == 10);
+    return 0;}
 
     public void setRow(int row){
         for (int i=0;i<7;i++)
@@ -72,8 +95,24 @@ public class Board2 {
                 grid[i][j].setId("cell"+Integer.toString(i*7+j));
     }
 
+    public void setIdsHorizontalBars(){
+
+        for (int i=0;i<7;i++)
+                horizontalBar[i].setId("horizontalbar"+i);
+    }
+
+    public void setIdsVerticalBars(){
+
+        for (int i=0;i<7;i++)
+            horizontalBar[i].setId("verticalbar"+i);
+    }
+
+
     public void generateBoard(){
+
         setIdsCells();
+        setIdsHorizontalBars();
+        setIdsVerticalBars();
         setHolesOfBars();
         setInitialPositions();
         prepareGrid();
@@ -184,4 +223,12 @@ public class Board2 {
         for(int i=0;i<7;i++)
             barStatus=barStatus+String.valueOf(verticalBar[i].getPosition());
         return barStatus;}
+
+    public Cell getCell(int i, int j) {
+        return grid[i][j];
+    }
+
+    public void setCell(Cell grid, int i, int j) {
+        this.grid[i][j] = grid;
+    }
 }

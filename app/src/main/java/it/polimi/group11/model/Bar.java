@@ -6,6 +6,7 @@ package it.polimi.group11.model;
 public class Bar {
     private int position;
     private boolean[] composition=new boolean[9];
+    private String id="";
 
     public void setPosition(int position){
         this.position=position;
@@ -21,5 +22,13 @@ public class Bar {
 
     public boolean getValue(int i){
         return composition[i];
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
