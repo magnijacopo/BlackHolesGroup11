@@ -69,7 +69,7 @@ public class Board2 {
         }
     }
 
-    public String checkGrid() {
+    public String getCheckGrid() {
         String checkGrid = "";
         String temp="";
         for (int i=0; i<7; i++) {
@@ -203,7 +203,7 @@ public class Board2 {
         }
     }
 
-    public String getBeadsPosition(){
+    private String getBeadsPosition(){
         String beadsPosition="";
         for(int i=0; i < 7;i++) {
             for (int j=0; j < 7; j++) {
@@ -223,6 +223,20 @@ public class Board2 {
         for(int i=0;i<7;i++)
             barStatus=barStatus+String.valueOf(verticalBar[i].getPosition());
         return barStatus;}
+
+    public String getCurrentBeadsPosition() {
+        String checkGrid=getCheckGrid();
+        String beadsPosition=getBeadsPosition();
+        String currentBeadsPosition = "";
+        for (int i=0; i<beadsPosition.length(); i++) {
+            if (checkGrid.charAt(i) == '0') {
+                currentBeadsPosition = currentBeadsPosition+"0"; //if the cell checked is a hole, updates there can not be a bead on it
+            } else {
+                currentBeadsPosition = currentBeadsPosition+beadsPosition.charAt(i); //if the cell checked is filled by a bar, the old bead position valued is maintained
+            }
+        }
+        return currentBeadsPosition;
+    }
 
     public Cell getCell(int i, int j) {
         return grid[i][j];

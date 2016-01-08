@@ -31,6 +31,8 @@ public class Player {
 
     private Board board;
 
+    private Board2 board2=new Board2();
+
     /**
      * The players can choose the colour of their beads
      */
@@ -220,25 +222,27 @@ public class Player {
         board.moveBar(move);
     }*/
 
-    /*private boolean checkPlace(int rowPosition, int columnPosition){
-        if ((board.grid[rowPosition][columnPosition].getHorizontal())||(board.grid[rowPosition][columnPosition].getVertical()))
+    private boolean checkPlace(int rowPosition, int columnPosition){
+        if ((board2.getCell(rowPosition,columnPosition).getHorizontal())||(board2.getCell(rowPosition,columnPosition).getVertical()))
             return true;
         else
             return false;
-    }*/
+    }
 
-    /*public void placeBead(String owner, int rowPosition, int columnPosition){
+    public boolean placeBead(String owner, int rowPosition, int columnPosition){
         if (beadsInBoard<5){
-            if ((!board.grid[rowPosition][columnPosition].getBead()) &&(checkPlace(rowPosition,columnPosition)))
+            if ((!board2.getCell(rowPosition,columnPosition).getBead()) &&(checkPlace(rowPosition,columnPosition)))
             {
-                board.grid[rowPosition][columnPosition].setBead(true);
-                board.grid[rowPosition][columnPosition].setOwner(id);
+                board2.getCell(rowPosition,columnPosition).setBead(true);
+                board2.getCell(rowPosition,columnPosition).setOwner(id);
                 bead[beadsInBoard].setColumnPosition(columnPosition);
                 bead[beadsInBoard].setRowPosition(rowPosition);
                 bead[beadsInBoard].setOwner(owner);
                 bead[beadsInBoard].setLife(true);
                 beadsInBoard++;
+                return true;
             }
         }
-    }*/
+        return false;
+    }
 }
