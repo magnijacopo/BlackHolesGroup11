@@ -16,4 +16,11 @@
     <string name="title_activity_select_profile">SelectProfileActivity</string>
     <string name="title_activity_view_profile_list">ViewProfileListActivity</string>
     <string name="title_activity_view_profile_statistics">ViewProfileStatistics</string>
+    <string name="title_activity_choose_player_type">ChoosePlayerTypeActivity</string>
+    <string name="title_activity_view_profiles_selection">ViewProfilesSelectionActivity</string>
+    <string name="title_activity_leaderboard">LeaderboardActivity</string>
+    <string name="title_activity_view_profile_leaderboard">ViewProfileLeaderboardActivity</string>
+    <string name="new_profile">NEW PROFILE</string>
+    <string name="existing_profile">EXISTING PROFILES</string>
+    <string name="artificial_intelligence">COMPUTER</string>
 </resources>

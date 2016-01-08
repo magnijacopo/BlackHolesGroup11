@@ -55,40 +55,13 @@
                 android:value="it.polimi.group11.SelectPlayersActivity" />
         </activity>
         <activity
-            android:name=".chooseOpponentActivity"
-            android:label="@string/title_activity_choose_opponent"
-            android:parentActivityName=".SelectPlayersActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="it.polimi.group11.SelectPlayersActivity" />
-        </activity>
-        <activity
-            android:name=".ChooseOpponentActivity"
-            android:label="@string/title_activity_choose_opponent"
-            android:parentActivityName=".SelectPlayersActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="it.polimi.group11.SelectPlayersActivity" />
-        </activity>
-        <activity
             android:name=".AddProfileActivity"
             android:label="@string/title_activity_add_profile"
-            android:parentActivityName=".ChooseOpponentActivity"
+            android:parentActivityName=".ChoosePlayerTypeActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="it.polimi.group11.ChooseOpponentActivity" />
-        </activity>
-        <activity
-            android:name=".SelectProfileActivity"
-            android:label="@string/title_activity_select_profile"
-            android:parentActivityName=".ChooseOpponentActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="it.polimi.group11.ChooseOpponentActivity" />
+                android:value="it.polimi.group11.ChoosePlayerTypeActivity" />
         </activity>
         <activity
             android:name=".ViewProfileListActivity"
@@ -107,6 +80,42 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="it.polimi.group11.ViewProfileListActivity" />
+        </activity>
+        <activity
+            android:name=".ChoosePlayerTypeActivity"
+            android:label="@string/title_activity_choose_player_type"
+            android:parentActivityName=".SelectPlayersActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="it.polimi.group11.SelectPlayersActivity" />
+        </activity>
+        <activity
+            android:name=".ViewProfilesSelectionActivity"
+            android:label="@string/title_activity_view_profiles_selection"
+            android:parentActivityName=".ChoosePlayerTypeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="it.polimi.group11.ChoosePlayerTypeActivity" />
+        </activity>
+        <activity
+            android:name=".LeaderboardActivity"
+            android:label="@string/title_activity_leaderboard"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="it.polimi.group11.MainActivity" />
+        </activity>
+        <activity
+            android:name=".ViewProfileLeaderboardActivity"
+            android:label="@string/title_activity_view_profile_leaderboard"
+            android:parentActivityName=".LeaderboardActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="it.polimi.group11.LeaderboardActivity" />
         </activity>
     </application>
 
