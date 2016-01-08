@@ -89,4 +89,9 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnErr
         Intent intent = new Intent(this, OptionsActivity.class);
         startActivity(intent);
     }
+
+    public void goToViewProfileListActivity(View view){
+        Intent intent = new Intent(this, ViewProfileListActivity.class);
+        startActivity(intent);
+    }
 }

@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
+
     //Database name and version
     public static final String DATABASE_NAME = "Database.db";
     private static final int DATABASE_VERSION = 1;
@@ -35,6 +36,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
+
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -86,6 +88,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         contentValues.put(PLAYER_COLUMN_NAME, name);
         contentValues.put(PLAYER_COLUMN_IMAGE, image);
+
+        db.insert(PLAYER_TABLE_NAME, null, contentValues);
+        return true;
+    }
+
+    public boolean insertProfile(String name) {
+        SQLiteDatabase db = getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(PLAYER_COLUMN_NAME, name);
 
         db.insert(PLAYER_TABLE_NAME, null, contentValues);
         return true;

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -11,5 +11,21 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="it.polimi.group11.ViewProfileListActivity"
     tools:showIn="@layout/activity_view_profile_list">
+
+    <ListView
+        android:id="@+id/listView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
+        //android:layout_above="@+id/addNew">
+    </ListView>
+
+    <TextView
+        android:id="@+id/playerID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/activity_vertical_margin"
+        android:textSize="@dimen/text_size"/>
 
 </RelativeLayout>
