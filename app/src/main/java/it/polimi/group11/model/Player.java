@@ -234,12 +234,13 @@ public class Player {
             if ((!board2.getCell(rowPosition,columnPosition).getBead()) &&(checkPlace(rowPosition,columnPosition)))
             {
                 board2.getCell(rowPosition,columnPosition).setBead(true);
-                board2.getCell(rowPosition,columnPosition).setOwner(id);
+                board2.getCell(rowPosition,columnPosition).setOwner(owner);
                 bead[beadsInBoard].setColumnPosition(columnPosition);
                 bead[beadsInBoard].setRowPosition(rowPosition);
                 bead[beadsInBoard].setOwner(owner);
                 bead[beadsInBoard].setLife(true);
                 beadsInBoard++;
+                bead[beadsInBoard].setNumber(beadsInBoard);
                 return true;
             }
         }
