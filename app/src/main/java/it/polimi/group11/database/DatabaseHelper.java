@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteException;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -43,7 +44,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE " + PLAYER_TABLE_NAME + "(" +
                 PLAYER_COLUMN_ID + " INTEGER PRIMARY KEY, " +
-                PLAYER_COLUMN_NAME + " TEXT UNIQUE, " + PLAYER_COLUMN_IMAGE + " TEXT, " +
+                PLAYER_COLUMN_NAME + " TEXT UNIQUE NOT NULL, " + PLAYER_COLUMN_IMAGE + " TEXT, " +
                 PLAYER_COLUMN_CREATEDAT + " DATETIME DEFAULT CURRENT_TIMESTAMP)");
 
         db.execSQL("CREATE TABLE " + MATCHMAKING_TABLE_NAME + "(" +
@@ -99,9 +100,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(PLAYER_COLUMN_NAME, name);
-
+        try{
         db.insert(PLAYER_TABLE_NAME, null, contentValues);
-        return true;
+        return true;} catch(SQLiteException e){
+            e.printStackTrace();
+            return false;
+        }
     }
 
     /**

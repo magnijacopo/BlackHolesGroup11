@@ -36,7 +36,7 @@ public class ChoosePlayerTypeActivity extends AppCompatActivity {
     }
 
     public void goToViewProfilesSelection(View view) {
-        Intent intent = new Intent(this, AddProfileActivity.class);
+        Intent intent = new Intent(this, ViewProfilesSelectionActivity.class);
         startActivity(intent);
     }
 
