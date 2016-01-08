@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true">
-        //android:layout_above="@+id/addNew">
+        android:layout_above="@+id/playerID">
     </ListView>
 
     <TextView
@@ -27,5 +27,10 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/activity_vertical_margin"
         android:textSize="@dimen/text_size"/>
+
+    <ImageView
+        android:id="@+id/playerImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>
