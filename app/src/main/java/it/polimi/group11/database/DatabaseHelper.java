@@ -102,8 +102,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         contentValues.put(PLAYER_COLUMN_NAME, name);
         try{
-        db.insert(PLAYER_TABLE_NAME, null, contentValues);
-        return true;} catch(SQLiteConstraintException e){
+        db.insertOrThrow(PLAYER_TABLE_NAME, null, contentValues);
+        return true;} catch(SQLiteException e){
             e.printStackTrace();
             return false;
         }
