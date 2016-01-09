@@ -8,6 +8,7 @@ public class Bead {
     private String owner;
     private int rowPosition;
     private int columnPosition;
+    private int number;
 
     public void setLife(boolean life) {
         this.life = life;
@@ -33,9 +34,18 @@ public class Bead {
         return rowPosition;
     }
 
+    public void setNumber(int number){
+        this.number=number;
+    }
+
+    public int getNumber(){
+        return number;
+    }
+
     public void setColumnPosition(int columnPosition){
         this.columnPosition=columnPosition;
     }
+
     public int getColumnPosition(){
         return columnPosition;
     }
