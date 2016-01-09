@@ -34,10 +34,12 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:inputType="textPersonName"
-        android:text="Profile Name"
         android:ems="10"
         android:id="@+id/editTextProfileName"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:editable="true" />
+        android:editable="false"
+        android:visibility="visible"
+        android:textIsSelectable="false"
+        android:hint="Profile Name" />
 </RelativeLayout>

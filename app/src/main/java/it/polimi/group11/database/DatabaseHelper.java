@@ -96,7 +96,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;} catch(SQLiteException e){
             e.printStackTrace();
             return false;}
-
     }
 
     public boolean insertProfile(String name) {
