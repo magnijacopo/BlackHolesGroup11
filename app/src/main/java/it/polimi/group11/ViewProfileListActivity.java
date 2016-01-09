@@ -33,10 +33,12 @@ public class ViewProfileListActivity extends AppCompatActivity {
 
         final Cursor cursor = dbHelper.getAllProfiles();
         String [] columns = new String[] {
-                DatabaseHelper.PLAYER_COLUMN_NAME
+                DatabaseHelper.PLAYER_COLUMN_NAME,
+                DatabaseHelper.PLAYER_COLUMN_IMAGE
         };
         int [] widgets = new int[] {
-                R.id.playerName
+                R.id.playerName,
+                R.id.playerImage
         };
 
 

@@ -1,9 +1,12 @@
 package it.polimi.group11;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +27,7 @@ public class AddProfileActivity extends AppCompatActivity {
     public DatabaseHelper db;
     private Uri imageUri;
     private String imageUriString;
+    private String uri;
 
     ImageView imageViewInsertPropic;
     Button buttonSaveProfile;
@@ -73,7 +77,7 @@ public class AddProfileActivity extends AppCompatActivity {
 
         Log.i("ciao","S0no dentro persistPerson");
 
-        boolean success = db.insertProfile(editTextProfileName.getText().toString());
+        boolean success = db.insertProfile(editTextProfileName.getText().toString(), uri);
 
         if(success){
                 Toast.makeText(getApplicationContext(), "Person Inserted", Toast.LENGTH_SHORT).show();
@@ -92,11 +96,29 @@ public class AddProfileActivity extends AppCompatActivity {
     public void onActivityResult(int reqCode, int resCode, Intent data){
         if (resCode == RESULT_OK){
             if (reqCode == 1){
+
+                Uri selectedImageUri = data.getData();
+                imageViewInsertPropic.setImageURI(selectedImageUri);
+
+                Cursor cursor = MediaStore.Images.Thumbnails.queryMiniThumbnails(getContentResolver(),
+                        selectedImageUri, MediaStore.Images.Thumbnails.MICRO_KIND, null);
+
+                if(cursor != null && cursor.getCount() > 0) {
+                    cursor.moveToFirst();
+                    uri = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Thumbnails.DATA));
+                }
+
+
+                /*
                 imageViewInsertPropic.setImageURI(data.getData());
                 imageUri = data.getData();
                 imageUriString = imageUri.toString();
+                 */
+
             }
         }
+
+
     }
 }
 
