@@ -12,4 +12,32 @@
     tools:context="it.polimi.group11.ViewProfileStatistics"
     tools:showIn="@layout/activity_view_profile_statistics">
 
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/imageViewPropic"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/no_user_logo" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/delete_profile_button"
+        android:id="@+id/buttonDeleteProfile"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="69dp" />
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:id="@+id/TextViewProfileName"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="visible"
+        android:textIsSelectable="false" />
+
 </RelativeLayout>

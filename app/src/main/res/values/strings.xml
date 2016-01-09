@@ -22,4 +22,5 @@
     <string name="existing_profile">EXISTING PROFILES</string>
     <string name="artificial_intelligence">COMPUTER</string>
     <string name="commit_changes">almeno faccio accept theirs</string>
+    <string name="delete_profile_button">DELETE</string>
 </resources>

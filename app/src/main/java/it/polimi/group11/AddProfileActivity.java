@@ -99,7 +99,11 @@ public class AddProfileActivity extends AppCompatActivity {
 
                 Uri selectedImageUri = data.getData();
                 imageViewInsertPropic.setImageURI(selectedImageUri);
+                imageViewInsertPropic.setImageURI(data.getData());
+                imageUri = data.getData();
+                imageUriString = imageUri.toString();
 
+                /*
                 Cursor cursor = MediaStore.Images.Thumbnails.queryMiniThumbnails(getContentResolver(),
                         selectedImageUri, MediaStore.Images.Thumbnails.MICRO_KIND, null);
 
@@ -107,13 +111,7 @@ public class AddProfileActivity extends AppCompatActivity {
                     cursor.moveToFirst();
                     uri = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Thumbnails.DATA));
                 }
-
-
-                /*
-                imageViewInsertPropic.setImageURI(data.getData());
-                imageUri = data.getData();
-                imageUriString = imageUri.toString();
-                 */
+                */
 
             }
         }
