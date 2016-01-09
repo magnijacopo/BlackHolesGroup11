@@ -1,4 +1,4 @@
-package it.polimi.group11.database;
+package it.polimi.group11.helper;
 
 import android.content.ContentValues;
 import android.content.Context;

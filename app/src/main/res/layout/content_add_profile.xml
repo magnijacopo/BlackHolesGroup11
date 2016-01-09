@@ -24,7 +24,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save"
+        android:text="@string/save"
         android:id="@+id/buttonSaveProfile"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
@@ -34,12 +34,9 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:inputType="textPersonName"
+        android:hint="@string/profile_name"
         android:ems="10"
         android:id="@+id/editTextProfileName"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:editable="false"
-        android:visibility="visible"
-        android:textIsSelectable="false"
-        android:hint="Profile Name" />
+        android:layout_centerHorizontal="true"/>
 </RelativeLayout>

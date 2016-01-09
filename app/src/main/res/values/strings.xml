@@ -22,4 +22,7 @@
     <string name="existing_profile">EXISTING PROFILES</string>
     <string name="artificial_intelligence">COMPUTER</string>
     <string name="commit_changes">almeno faccio accept theirs</string>
+    <string name="horizontal">horizontal</string>
+    <string name="save">Save</string>
+    <string name="profile_name">Profile Name</string>
 </resources>

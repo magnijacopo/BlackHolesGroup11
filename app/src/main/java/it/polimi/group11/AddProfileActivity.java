@@ -2,13 +2,9 @@ package it.polimi.group11;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -19,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 
-import it.polimi.group11.database.DatabaseHelper;
+import it.polimi.group11.helper.DatabaseHelper;
 
 public class AddProfileActivity extends AppCompatActivity {
 
