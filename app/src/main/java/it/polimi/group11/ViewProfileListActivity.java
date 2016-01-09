@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
@@ -18,6 +19,7 @@ public class ViewProfileListActivity extends AppCompatActivity {
 
     DatabaseHelper dbHelper;
     ListView listView;
+    ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,7 @@ public class ViewProfileListActivity extends AppCompatActivity {
         dbHelper = new DatabaseHelper(this);
 
         final Cursor cursor = dbHelper.getAllProfiles();
+
         String [] columns = new String[] {
                 DatabaseHelper.PLAYER_COLUMN_NAME,
                 DatabaseHelper.PLAYER_COLUMN_IMAGE
@@ -38,6 +41,7 @@ public class ViewProfileListActivity extends AppCompatActivity {
                 R.id.playerName,
                 R.id.playerImage
         };
+
 
 
         SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(this, R.layout.player_info,
@@ -51,7 +55,7 @@ public class ViewProfileListActivity extends AppCompatActivity {
                                     int position, long id) {
                 Cursor itemCursor = (Cursor) ViewProfileListActivity.this.listView.getItemAtPosition(position);
                 int playerID = itemCursor.getInt(itemCursor.getColumnIndex(DatabaseHelper.PLAYER_COLUMN_ID));
-                Intent intent = new Intent(getApplicationContext(), ViewProfileStatistics.class);
+                Intent intent = new Intent(ViewProfileListActivity.this, ViewProfileStatistics.class);
                 intent.putExtra(KEY_EXTRA_CONTACT_ID, playerID);
                 startActivity(intent);
             }

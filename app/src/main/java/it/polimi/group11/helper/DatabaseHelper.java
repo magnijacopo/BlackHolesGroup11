@@ -122,6 +122,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         Cursor res = db.rawQuery( "SELECT * FROM " + PLAYER_TABLE_NAME + " WHERE " +
                 PLAYER_COLUMN_ID + "=?", new String[] { Integer.toString(id) } );
+
         return res;
     }
 
