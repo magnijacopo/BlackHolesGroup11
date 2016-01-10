@@ -8,10 +8,15 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <service
+            android:name=".service.BackgroundMusicService"
+            android:enabled="true">
+        </service>
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,7 +27,8 @@
             android:name=".CreditsActivity"
             android:label="@string/title_activity_credits"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="it.polimi.group11.MainActivity" />
@@ -31,7 +37,8 @@
             android:name=".SelectPlayersActivity"
             android:label="@string/title_activity_select_players"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="it.polimi.group11.MainActivity" />
@@ -40,7 +47,8 @@
             android:name=".OptionsActivity"
             android:label="@string/title_activity_options"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="it.polimi.group11.MainActivity" />
@@ -49,7 +57,8 @@
             android:name=".PlayGameActivity"
             android:label="@string/title_activity_play_game"
             android:parentActivityName=".SelectPlayersActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="it.polimi.group11.SelectPlayersActivity" />
@@ -58,7 +67,8 @@
             android:name=".AddProfileActivity"
             android:label="@string/title_activity_add_profile"
             android:parentActivityName=".ChoosePlayerTypeActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="it.polimi.group11.ChoosePlayerTypeActivity" />
@@ -67,7 +77,8 @@
             android:name=".ViewProfileListActivity"
             android:label="@string/title_activity_view_profile_list"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="it.polimi.group11.MainActivity" />
@@ -76,7 +87,8 @@
             android:name=".ViewProfileStatistics"
             android:label="@string/title_activity_view_profile_statistics"
             android:parentActivityName=".ViewProfileListActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="it.polimi.group11.ViewProfileListActivity" />
@@ -85,7 +97,8 @@
             android:name=".ChoosePlayerTypeActivity"
             android:label="@string/title_activity_choose_player_type"
             android:parentActivityName=".SelectPlayersActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="it.polimi.group11.SelectPlayersActivity" />
@@ -94,7 +107,8 @@
             android:name=".ViewProfilesSelectionActivity"
             android:label="@string/title_activity_view_profiles_selection"
             android:parentActivityName=".ChoosePlayerTypeActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="it.polimi.group11.ChoosePlayerTypeActivity" />
@@ -103,7 +117,8 @@
             android:name=".LeaderboardActivity"
             android:label="@string/title_activity_leaderboard"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="it.polimi.group11.MainActivity" />
@@ -112,7 +127,8 @@
             android:name=".ViewProfileLeaderboardActivity"
             android:label="@string/title_activity_view_profile_leaderboard"
             android:parentActivityName=".LeaderboardActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="it.polimi.group11.LeaderboardActivity" />

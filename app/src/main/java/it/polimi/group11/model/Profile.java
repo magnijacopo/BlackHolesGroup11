@@ -1,6 +1,8 @@
 package it.polimi.group11.model;
 
 
+import android.net.Uri;
+
 /**
  *  User profile.
  *
@@ -16,20 +18,27 @@ public class Profile {
     /**
      *
      */
-    private Statistics playerStatistics;
+    private Uri imageUri;
 
-    public Profile(String name){
+    public Profile(String name, Uri imageUri){
+        this.name = name;
+        this.imageUri = imageUri;
+    }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
         this.name = name;
     }
 
-    /**
-     *
-     * @param nameToCheK
-     * @return
-     */
-    public void chceckNameExistance(String nameToCheK){
-
-        //metodo che verifica che il nome inserito dal nuovo utente non sia già utilizzato da un diverso utente.
+    public Uri getImageUri() {
+        return imageUri;
     }
 
+    public void setImageUri(Uri imageUri) {
+        this.imageUri = imageUri;
+    }
 }

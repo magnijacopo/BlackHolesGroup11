@@ -3,16 +3,15 @@ package it.polimi.group11;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 
-import it.polimi.group11.database.DatabaseHelper;
+import it.polimi.group11.helper.DatabaseHelper;
 
 public class ViewProfileListActivity extends AppCompatActivity {
 
@@ -20,6 +19,7 @@ public class ViewProfileListActivity extends AppCompatActivity {
 
     DatabaseHelper dbHelper;
     ListView listView;
+    ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +32,16 @@ public class ViewProfileListActivity extends AppCompatActivity {
         dbHelper = new DatabaseHelper(this);
 
         final Cursor cursor = dbHelper.getAllProfiles();
+
         String [] columns = new String[] {
-                DatabaseHelper.PLAYER_COLUMN_NAME
+                DatabaseHelper.PLAYER_COLUMN_NAME,
+                DatabaseHelper.PLAYER_COLUMN_IMAGE
         };
         int [] widgets = new int[] {
-                R.id.playerName
+                R.id.playerName,
+                R.id.playerImage
         };
+
 
 
         SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(this, R.layout.player_info,
@@ -51,14 +55,11 @@ public class ViewProfileListActivity extends AppCompatActivity {
                                     int position, long id) {
                 Cursor itemCursor = (Cursor) ViewProfileListActivity.this.listView.getItemAtPosition(position);
                 int playerID = itemCursor.getInt(itemCursor.getColumnIndex(DatabaseHelper.PLAYER_COLUMN_ID));
-                Intent intent = new Intent(getApplicationContext(), ViewProfileStatistics.class);
+                Intent intent = new Intent(ViewProfileListActivity.this, ViewProfileStatistics.class);
                 intent.putExtra(KEY_EXTRA_CONTACT_ID, playerID);
                 startActivity(intent);
             }
         });
-
-
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

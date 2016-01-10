@@ -1,4 +1,4 @@
-package it.polimi.group11.database;
+package it.polimi.group11.helper;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -91,8 +91,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(PLAYER_COLUMN_NAME, name);
         contentValues.put(PLAYER_COLUMN_IMAGE, image);
 
-        db.insert(PLAYER_TABLE_NAME, null, contentValues);
-        return true;
+        try{
+            db.insertOrThrow(PLAYER_TABLE_NAME, null, contentValues);
+            return true;} catch(SQLiteException e){
+            e.printStackTrace();
+            return false;}
     }
 
     public boolean insertProfile(String name) {
@@ -119,6 +122,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         Cursor res = db.rawQuery( "SELECT * FROM " + PLAYER_TABLE_NAME + " WHERE " +
                 PLAYER_COLUMN_ID + "=?", new String[] { Integer.toString(id) } );
+
         return res;
     }
 
