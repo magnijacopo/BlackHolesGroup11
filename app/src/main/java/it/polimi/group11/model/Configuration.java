@@ -69,7 +69,7 @@ public class Configuration {
      *
      */
 
-    private String firstConfiguration = getNumberOfPlayers() + getFirstPlayer() + getBarStatus() + getBeadsPosition();
+    private String configuration ="";
 
     private String getFirstPlayer() {
         return String.valueOf(game.getFirstPlayer());
@@ -85,5 +85,25 @@ public class Configuration {
 
     private String getBeadsPosition() {
         return board.getCurrentBeadsPosition();
+    }
+
+    public void setFirstConfiguration(){
+        configuration=getNumberOfPlayers() + getFirstPlayer() + getBarStatus() + getBeadsPosition();
+    }
+
+    public String getConfiguration(){
+        return configuration;
+    }
+
+    private String configuration(String configuration, String move){
+        movingPlayer = game.currentPlayer(move);
+        if(movingPlayer.equals(game.getError()))
+            return "error: the move is not valid";
+        if (game.getValidity()){
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append(playersNumber).append(movingPlayer);
+            configuration = stringBuilder+getBarStatus()+getBeadsPosition();
+        }
+        return configuration;
     }
 }

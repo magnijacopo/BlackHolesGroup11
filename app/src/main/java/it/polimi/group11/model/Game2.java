@@ -45,6 +45,13 @@ public class Game2 {
         return firstPlayer;
     }
 
+    public String getError(){
+        return error;
+    }
+    public boolean getValidity(){
+        return validity;
+    }
+
 
   public Game2(int playerNum){
       alivePlayers = playerNum;
@@ -193,7 +200,7 @@ public class Game2 {
         return currentMovingPlayer.getId();
     }
 
-    public String currentPlayer(String move, String beadsStatus){
+    public String currentPlayer(String move){
 
         if (!gameOver){
             if (currentMovingPlayer.getStatus()){
@@ -231,7 +238,7 @@ public class Game2 {
             }else{
                 Move deadMove = new Move("RIP", currentMovingPlayer.getId());
                 movesList.add(deadMove); //if the player iterated is dead it inserts a mock move in the moves list
-                return currentPlayer(move, beadsStatus); //and reiterates itself
+                return currentPlayer(move); //and reiterates itself
             }
         }else{
             iteratorNext(); //if the game is ended, the "moving player" set in the final configuration is the one who won

@@ -223,7 +223,7 @@ public class Player {
     }*/
 
     private boolean checkPlace(int rowPosition, int columnPosition){
-        if ((board2.getCell(rowPosition,columnPosition).getHorizontal())||(board2.getCell(rowPosition,columnPosition).getVertical()))
+        if (((board2.getCell(rowPosition,columnPosition).getHorizontal())||(board2.getCell(rowPosition,columnPosition).getVertical()))&&(!board2.getCell(rowPosition,columnPosition).getBead()))
             return true;
         else
             return false;
