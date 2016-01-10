@@ -231,7 +231,7 @@ public class Player {
 
     public boolean placeBead(String owner, int rowPosition, int columnPosition){
         if (beadsInBoard<5){
-            if ((!board2.getCell(rowPosition,columnPosition).getBead()) &&(checkPlace(rowPosition,columnPosition)))
+            if (checkPlace(rowPosition,columnPosition))
             {
                 board2.getCell(rowPosition,columnPosition).setBead(true);
                 board2.getCell(rowPosition,columnPosition).setOwner(owner);
