@@ -8,7 +8,7 @@ public class Configuration {
     /**
      * {@link Board}
      */
-    private Board2 board;
+    public Board2 board;
     /**
      * {@link Game}
      */
