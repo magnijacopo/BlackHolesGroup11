@@ -15,6 +15,7 @@ public class Game2 {
     private Player currentMovingPlayer;
     private ListIterator<Player> iterator;
     private List<Player> players = new ArrayList<>();
+    private int firstPlayer=0;
     private boolean gameOver;
     private String lastPlayer;
     private boolean validity;
@@ -40,8 +41,11 @@ public class Game2 {
         }
     }*/
 
+    public void setFirstPlayer(){
+        firstPlayer = (int) Math.floor((Math.random() * playerNumber) + 1);
+        }
+
     public int getFirstPlayer(){
-        int firstPlayer = (int) Math.floor((Math.random() * playerNumber) + 1);
         return firstPlayer;
     }
 
