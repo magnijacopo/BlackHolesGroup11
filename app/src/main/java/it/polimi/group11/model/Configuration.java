@@ -60,4 +60,5 @@ public class Configuration {
             configuration = getNumberOfPlayers()+movingPlayer+getBarStatus()+getBeadsPosition();
         return configuration;
     }
+
 }

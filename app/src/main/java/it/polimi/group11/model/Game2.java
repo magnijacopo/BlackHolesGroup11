@@ -11,7 +11,7 @@ public class Game2 {
 
     public Board2 board = new Board2();
     int alivePlayers;
-    int playerNumber;
+    int playersNumber;
     private Player currentMovingPlayer;
     private ListIterator<Player> iterator;
     private List<Player> players = new ArrayList<>();
@@ -23,7 +23,7 @@ public class Game2 {
     private ArrayList<Move> movesList = new ArrayList<>();
     private String error="";
     private String MOVE_NOT_VALID = "error: la mossa non è valida";
-
+    private String movingPlayer;
     /*public void randomizePlayerOrder(){
         playerOrder = new int[numPlayers];
         playerOrder[0]=(int) (Math.random()*numPlayers);
@@ -41,8 +41,9 @@ public class Game2 {
         }
     }*/
 
-    public void setFirstPlayer(){
-        firstPlayer = (int) Math.floor((Math.random() * playerNumber) + 1);
+    public void randomFirstPlayer(){
+        firstPlayer = (int) Math.floor((Math.random() * playersNumber) + 1);
+        setFirstPlayer(String.valueOf(firstPlayer));
         }
 
     public int getFirstPlayer(){
@@ -59,12 +60,12 @@ public class Game2 {
 
   public Game2(int playerNum){
       alivePlayers = playerNum;
-      playerNumber=playerNum;
-      definePlayers(playerNumber);
+      playersNumber=playerNum;
+      definePlayers(playersNumber);
   }
 
     public int getPlayerNum(){
-       return playerNumber;
+       return playersNumber;
    }
 
     private void iteratorNext(){
@@ -81,7 +82,7 @@ public class Game2 {
     }
 
     private void checkLives(String newBeadsPosition) {
-        for (int i=0;i<playerNumber;i++){
+        for (int i=0;i<playersNumber;i++){
             checkLife(newBeadsPosition, currentMovingPlayer.getId());
             iteratorNext();
         }
@@ -250,8 +251,12 @@ public class Game2 {
         }
     }
 
-
+    public String getCurrentPlayer(){
+        return currentMovingPlayer.getId();
+    }
 }
+
+
 /*game2 game
 game.get..
  */
