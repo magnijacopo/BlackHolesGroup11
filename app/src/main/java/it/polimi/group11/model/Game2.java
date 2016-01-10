@@ -23,7 +23,7 @@ public class Game2 {
     private String error="";
     private String MOVE_NOT_VALID = "error: la mossa non è valida";
 
-  /*  public void randomizePlayerOrder(){
+    /*public void randomizePlayerOrder(){
         playerOrder = new int[numPlayers];
         playerOrder[0]=(int) (Math.random()*numPlayers);
         int playersOrdered=1;
@@ -39,11 +39,22 @@ public class Game2 {
             }
         }
     }*/
+
+    public int getFirstPlayer(){
+        int firstPlayer = (int) Math.floor((Math.random() * playerNumber) + 1);
+        return firstPlayer;
+    }
+
+
   public Game2(int playerNum){
       alivePlayers = playerNum;
       playerNumber=playerNum;
       definePlayers(playerNumber);
   }
+
+    public int getPlayerNum(){
+       return playerNumber;
+   }
 
     private void iteratorNext(){
         if(!iterator.hasNext())

@@ -72,11 +72,11 @@ public class Configuration {
     private String firstConfiguration = getNumberOfPlayers() + getFirstPlayer() + getBarStatus() + getBeadsPosition();
 
     private String getFirstPlayer() {
-        return String.valueOf(game.getPlayer(0));
+        return String.valueOf(game.getFirstPlayer());
     }
 
     private String getNumberOfPlayers() {
-        return String.valueOf(game.getNumPlayers());
+        return String.valueOf(game.getPlayerNum());
     }
 
     private String getBarStatus() {
