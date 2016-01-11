@@ -7,56 +7,74 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_main" tools:context=".MainActivity">
+    tools:showIn="@layout/activity_main" tools:context=".MainActivity"
+    android:background="@mipmap/home_xhdpi" >
+
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/play"
         android:id="@+id/play_button"
-        android:layout_alignParentTop="true"
+        android:onClick="goToSelectPlayers"
+        android:layout_below="@+id/leaderboard_button"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="39dp"
-        android:onClick="goToSelectPlayers"/>
+        android:textSize="25dp"
+        android:textColor="#ffffff"
+        android:background="#00ffffff"
+        style="?android:attr/borderlessButtonStyle"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/credits"
         android:id="@+id/credits_button"
-        android:layout_below="@+id/play_button"
+        android:onClick="goToCredits"
+        android:layout_marginTop="177dp"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="29dp"
-        android:onClick="goToCredits"/>
+        android:textSize="25dp"
+        android:textColor="#ffffff"
+        android:background="#00ffffff"
+        style="?android:attr/borderlessButtonStyle"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/profiles"
         android:id="@+id/profiles_button"
-        android:layout_below="@+id/credits_button"
-        android:layout_alignLeft="@+id/credits_button"
-        android:layout_alignStart="@+id/credits_button"
-        android:layout_marginTop="29dp"
-        android:onClick="goToViewProfileList"/>
+        android:onClick="goToViewProfileList"
+        android:layout_below="@+id/options_button"
+        android:layout_centerHorizontal="true"
+        android:textSize="25dp"
+        android:textColor="#ffffff"
+        android:background="#00ffffff"
+        style="?android:attr/borderlessButtonStyle"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/leaderboard"
         android:id="@+id/leaderboard_button"
-        android:layout_below="@+id/profiles_button"
+        android:onClick="goToLeaderboard"
+        android:layout_below="@+id/credits_button"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="28dp"
-        android:onClick="goToLeaderboard"/>
+        android:textSize="25dp"
+        android:textColor="#ffffff"
+        android:background="#00ffffff"
+        style="?android:attr/borderlessButtonStyle"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/options"
         android:id="@+id/options_button"
-        android:layout_below="@+id/leaderboard_button"
+        android:onClick="goToOptions"
+        android:layout_below="@+id/play_button"
         android:layout_centerHorizontal="true"
-        android:onClick="goToOptions"/>
+        android:textSize="25dp"
+        android:textColor="#ffffff"
+        android:background="#00ffffff"
+        style="?android:attr/borderlessButtonStyle"/>
 
 </RelativeLayout>
