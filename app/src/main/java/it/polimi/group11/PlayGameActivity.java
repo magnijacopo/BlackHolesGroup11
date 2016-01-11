@@ -53,6 +53,7 @@ public class PlayGameActivity extends AppCompatActivity {
     private float limitLeft;
     private float limitTop;
     private float limitBottom;
+    private ImageView beads[][];
 
 
 
@@ -89,7 +90,7 @@ public class PlayGameActivity extends AppCompatActivity {
 
         RelativeLayout mainLayout = (RelativeLayout) findViewById(R.id.parent);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(mainLayout.getLayoutParams());
-        ImageView beads[][] = new ImageView[game2.getPlayerNum()][5];
+        beads = new ImageView[game2.getPlayerNum()][5];
 
         game2.randomFirstPlayer();
 
@@ -343,9 +344,21 @@ public class PlayGameActivity extends AppCompatActivity {
                         mov.append(Integer.toString(num));
                         mov.append("i");
                         if(game2.board.checkBoundsValidity(mov.toString())) {
-                            game2.board.moveBar(mov.toString());
+                            game2.getCurrentMovingPlayer().makeMove(mov.toString());
+                            game2.checkRowBeadsLife(num);
                             setA(getFinalPoint());
                             v.setX(getA());
+                            for(int i=0; i<game2.getPlayerNum(); i++) {
+                                for (int j = 0; j < 5; j++) {
+                                    Log.i("ciao","il bead è"+game2.getCurrentMovingPlayer().getBead(j).getLife());
+                                    if (!game2.getCurrentMovingPlayer().getBead(j).getLife()) {
+                                        Log.i("ciao","sono morto");
+                                        Log.i("ciao","beads "+beads[i][j].getContentDescription());
+                                        beads[i][j].setVisibility(View.GONE);
+                                    }
+                                }
+                                game2.iteratorNext();
+                            }
                         }
 
                        /* int marginLeft = (int) (40 * v.getResources().getDisplayMetrics().density);
@@ -370,9 +383,16 @@ public class PlayGameActivity extends AppCompatActivity {
                         mov.append(Integer.toString(num));
                         mov.append("o");
                         if(game2.board.checkBoundsValidity(mov.toString())) {
-                            game2.board.moveBar(mov.toString());
+                            game2.getCurrentMovingPlayer().makeMove(mov.toString());
+                            game2.checkRowBeadsLife(num);
                             setA(getFinalPoint());
                             v.setX(getA());
+                            for(int i=0; i<game2.getPlayerNum(); i++) {
+                                for (int j = 0; j < 5; j++)
+                                    if (!game2.getCurrentMovingPlayer().getBead(j).getLife())
+                                        beads[i][j].setVisibility(View.INVISIBLE);
+                                game2.iteratorNext();
+                            }
                         }
                     }
                     //These "if" occur that the bar back to the starting position if it moves  less than half of a cell (move to the left)
@@ -391,9 +411,16 @@ public class PlayGameActivity extends AppCompatActivity {
                         mov.append(Integer.toString(num));
                         mov.append("i");
                         if(game2.board.checkBoundsValidity(mov.toString())) {
-                            game2.board.moveBar(mov.toString());
+                            game2.getCurrentMovingPlayer().makeMove(mov.toString());
+                            game2.checkColumnBeadsLife(num);
                             setB(getFinalPoint());
                             v.setY(getB());
+                            for(int i=0; i<game2.getPlayerNum(); i++) {
+                                for (int j = 0; j < 5; j++)
+                                    if (!game2.getCurrentMovingPlayer().getBead(j).getLife())
+                                        beads[i][j].setVisibility(View.INVISIBLE);
+                                game2.iteratorNext();
+                            }
                         }
 
                     }
@@ -412,9 +439,16 @@ public class PlayGameActivity extends AppCompatActivity {
                         mov.append(Integer.toString(num));
                         mov.append("o");
                         if(game2.board.checkBoundsValidity(mov.toString())) {
-                            game2.board.moveBar(mov.toString());
+                            game2.getCurrentMovingPlayer().makeMove(mov.toString());
+                            game2.checkColumnBeadsLife(num);
                             setB(getFinalPoint());
                             v.setY(getB());
+                            for(int i=0; i<game2.getPlayerNum(); i++) {
+                                for (int j = 0; j < 5; j++)
+                                    if (!game2.getCurrentMovingPlayer().getBead(j).getLife())
+                                        beads[i][j].setVisibility(View.INVISIBLE);
+                                game2.iteratorNext();
+                            }
                         }
                     }
                     //These "if" occur that the bar back to the starting position if it moves less than half of a cell (move to the top)
@@ -460,15 +494,13 @@ public class PlayGameActivity extends AppCompatActivity {
                                 if (game2.board.getCell(i, j).getId().equals(v.getResources().getResourceName(v.getId()).substring(21,(v.getResources().getResourceName(v.getId()).length())))) {
                                     game2.board.getCell(i, j).setCentre(v, view.getWidth(), view.getHeight());
                                     centre = game2.board.getCell(i, j).getCentre();
-                                    int now = Integer.parseInt(game2.getCurrentPlayer());
 
-                                    if (game2.getCurrentMovingPlayer().placeBead(game2.getCurrentPlayer(),i,j) == true){
+                                    if (game2.getCurrentMovingPlayer().placeBead(game2.getCurrentPlayer(),i, j) == true){
                                         view.setX(centre[0]);
                                         view.setY(centre[1]);
                                         view.setVisibility(View.VISIBLE);
                                         view.setOnTouchListener(null);
                                         game2.setTotalBeadsInBoard(game2.getTotalBeadsInBoard()+1);
-                                        Log.i("ciao","sta posizionando i bead il giocatore "+game2.getCurrentPlayer());
                                         game2.iteratorNext();
                                     }
                                     else{
