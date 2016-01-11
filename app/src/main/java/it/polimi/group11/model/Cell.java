@@ -22,7 +22,7 @@ public class Cell {
     private float centre[]= new float[2];
 
     /**
-     * This metod find the centre of the cell
+     * This metod find the centre of the cell on the screen
      * @param cell
      * @param x
      * @param y

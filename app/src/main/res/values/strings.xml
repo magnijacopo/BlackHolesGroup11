@@ -21,11 +21,8 @@
     <string name="new_profile">NEW PROFILE</string>
     <string name="existing_profile">EXISTING PROFILES</string>
     <string name="artificial_intelligence">COMPUTER</string>
-    <string name="save">save</string>
     <string name="commit_changes">almeno faccio accept theirs</string>
-    <string name="profile_name">Profile Name</string>
-    <string name="horizontal">horizontal</string>
-    <string name="delete_profile_button">DELETE PROFILE</string>
-
-
+    <string name="save">save</string>
+    <string name="profile_name">Mario</string>
+    <string name="delete_profile_button">delete</string>
 </resources>

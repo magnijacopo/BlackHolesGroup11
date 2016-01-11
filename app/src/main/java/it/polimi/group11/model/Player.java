@@ -1,5 +1,6 @@
 package it.polimi.group11.model;
 
+import it.polimi.group11.PlayGameActivity;
 import it.polimi.group11.enumeration.PlayerID;
 
 
@@ -16,7 +17,7 @@ public class Player {
 
     private int beadsInBoard=0;
 
-    private Bead[] bead=new Bead[5];
+    private Bead[] bead=new Bead[5];    //LI ISTANZI DA QUALCHE PARTE ? IO L' HO FATTO IN GAME2 CON DEFINEBEAD
 
     /**
      * Player identifier variable inside a single game
@@ -29,9 +30,9 @@ public class Player {
      */
     private boolean status;
 
-    private Board board;
+    private Game2 game2;
 
-    private Board2 board2=new Board2();
+    private Board2 board;   //OCCHIO FANTE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
     /**
      * The players can choose the colour of their beads
@@ -223,7 +224,7 @@ public class Player {
     }*/
 
     private boolean checkPlace(int rowPosition, int columnPosition){
-        if (((board2.getCell(rowPosition,columnPosition).getHorizontal())||(board2.getCell(rowPosition,columnPosition).getVertical()))&&(!board2.getCell(rowPosition,columnPosition).getBead()))
+        if (((board.getCell(rowPosition, columnPosition).getHorizontal())||(board.getCell(rowPosition,columnPosition).getVertical()))&&(!board.getCell(rowPosition,columnPosition).getBead()))
             return true;
         else
             return false;
@@ -233,8 +234,8 @@ public class Player {
         if (beadsInBoard<5){
             if (checkPlace(rowPosition,columnPosition))
             {
-                board2.getCell(rowPosition,columnPosition).setBead(true);
-                board2.getCell(rowPosition,columnPosition).setOwner(owner);
+                board.getCell(rowPosition,columnPosition).setBead(true);
+                board.getCell(rowPosition,columnPosition).setOwner(owner);
                 bead[beadsInBoard].setColumnPosition(columnPosition);
                 bead[beadsInBoard].setRowPosition(rowPosition);
                 bead[beadsInBoard].setOwner(owner);
@@ -245,5 +246,21 @@ public class Player {
             }
         }
         return false;
+    }
+
+    public Bead getBead(int i) {
+        return this.bead[i];
+    }
+
+    public void setBead(int i) {
+        this.bead[i] = new Bead();
+    }
+
+    public void setBoard(Board2 board) {
+        this.board = board;
+    }
+
+    public void setGame2(Game2 game2) {
+        this.game2 = game2;
     }
 }

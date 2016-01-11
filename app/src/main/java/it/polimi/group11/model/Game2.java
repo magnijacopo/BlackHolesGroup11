@@ -1,5 +1,7 @@
 package it.polimi.group11.model;
 
+import android.widget.ImageView;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
@@ -11,10 +13,10 @@ public class Game2 {
 
     public Board2 board = new Board2();
     int alivePlayers;
-    int playersNumber;
+    private int playersNumber;
     private Player currentMovingPlayer;
     private ListIterator<Player> iterator;
-    private List<Player> players = new ArrayList<>();
+    public List<Player> players = new ArrayList<>();
     private int firstPlayer=0;
     private boolean gameOver;
     private String lastPlayer;
@@ -62,11 +64,18 @@ public class Game2 {
       alivePlayers = playerNum;
       playersNumber=playerNum;
       definePlayers(playersNumber);
+      defineBeads();
+      for(int i=0;i<playerNum;i++) {
+          players.get(i).setGame2(this);
+          players.get(i).setBoard(board);
+      }
   }
 
     public int getPlayerNum(){
        return playersNumber;
    }
+
+
 
     private void iteratorNext(){
         if(!iterator.hasNext())
@@ -253,6 +262,12 @@ public class Game2 {
 
     public String getCurrentPlayer(){
         return currentMovingPlayer.getId();
+    }
+
+    public void defineBeads() {
+        for(int i=0; i<getPlayerNum();i++)
+            for(int j=0; j<5;j++)
+                this.players.get(i).setBead(j);
     }
 }
 

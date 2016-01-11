@@ -1,16 +1,19 @@
 package it.polimi.group11;
 
 import android.content.ClipData;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import java.util.Objects;
@@ -18,12 +21,12 @@ import java.util.Objects;
 import it.polimi.group11.model.*;
 
 
-public class PlayGameActivity extends AppCompatActivity implements MediaPlayer.OnErrorListener {
+public class PlayGameActivity extends AppCompatActivity {
 
     /**
      * Attribute declaration
      */
-    private Game2 game2 = new Game2(3);
+    private Game2 game2 = new Game2();
 
     ImageView cells[] = new ImageView[50];
     ImageView hbars[] = new ImageView[7];
@@ -49,11 +52,6 @@ public class PlayGameActivity extends AppCompatActivity implements MediaPlayer.O
     private float limitLeft;
     private float limitTop;
     private float limitBottom;
-
-    MediaPlayer backgroundMusic;
-    int length = 0;
-
-    private boolean musicCheck;
 
 
     /**
@@ -83,9 +81,10 @@ public class PlayGameActivity extends AppCompatActivity implements MediaPlayer.O
 
         RelativeLayout mainLayout = (RelativeLayout) findViewById(R.id.parent);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(mainLayout.getLayoutParams());
-        ImageView beads[][] = new ImageView[game2.getPlayerNum()][5];
+        game2.setNumPlayers(1);
+        ImageView beads[][] = new ImageView[game2.getNumPlayers()][5];
 
-        for(int j=0; j<game2.getPlayerNum(); j++) {
+        for(int j=0; j<game2.getNumPlayers(); j++) {
             for (int i = 0; i < 5; i++) {
                 beads[j][i] = new ImageView(this);
                 mainLayout.addView(beads[j][i], params);
@@ -124,6 +123,8 @@ public class PlayGameActivity extends AppCompatActivity implements MediaPlayer.O
             }
         }
 
+
+
 //Initial position of the vertical bars
         for (int i=0; i<7; i++) {
             int id = getResources().getIdentifier("verticalbar" + i, "id", getPackageName());
@@ -148,48 +149,22 @@ public class PlayGameActivity extends AppCompatActivity implements MediaPlayer.O
             }
         }
 
+
         for (int i=0; i<49; i++) {
             int id = getResources().getIdentifier("cell" + i, "id", getPackageName());
             cells[i] = (ImageView) findViewById(id);
             cells[i].setOnDragListener(new MyDragListener());
         }
 
-        musicCheck = OptionsActivity.backgroundMusicCheck;
-        if(musicCheck) {
-            backgroundMusic = MediaPlayer.create(this, R.raw.somuchlove);
-            backgroundMusic.setOnErrorListener(this);
-            backgroundMusic.setLooping(true);
-            backgroundMusic.setVolume(60, 60);
-        }
-    }
 
-    @Override
-    protected void onPause(){
-        super.onPause();
-        if(musicCheck)
-            pauseMusic();
-        OptionsActivity.backgroundMusicCheck = false;
-    }
 
-    @Override
-    protected void onResume(){
-        super.onResume();
-        if(musicCheck)
-            resumeMusic();
-    }
 
-    @Override
-    protected void onDestroy(){
-        super.onDestroy();
-        if(backgroundMusic != null){
-            stopMusic();
-        }
-        OptionsActivity.backgroundMusicCheck = false;
     }
 
     /**
      *OnTouchListener: implements the listener on onTouch events
      */
+
     private final class MyTouchListener implements View.OnTouchListener {
         @Override
         public boolean onTouch(View v, MotionEvent event) {
@@ -425,7 +400,10 @@ public class PlayGameActivity extends AppCompatActivity implements MediaPlayer.O
                     setDeltaY(0);
                     setMoving(false);
                     break;
+
+
             }
+
             return true;
         }
     }
@@ -631,31 +609,6 @@ public class PlayGameActivity extends AppCompatActivity implements MediaPlayer.O
         this.b = b;
     }
 
-    @Override
-    public boolean onError(final MediaPlayer backgroundMusic, final int what, final int extra){
-        Log.e(getPackageName(), String.format("Error(%s%s)", what, extra));
-        backgroundMusic.reset();
-        return true;
-    }
 
-    public void pauseMusic(){
-        if(backgroundMusic.isPlaying()){
-            backgroundMusic.pause();
-            length=backgroundMusic.getCurrentPosition();
 
-        }
-    }
-
-    public void resumeMusic(){
-        if(!backgroundMusic.isPlaying()){
-            backgroundMusic.seekTo(length);
-            backgroundMusic.start();
-        }
-    }
-
-    public void stopMusic(){
-        backgroundMusic.stop();
-        backgroundMusic.release();
-        backgroundMusic = null;
-    }
 }
