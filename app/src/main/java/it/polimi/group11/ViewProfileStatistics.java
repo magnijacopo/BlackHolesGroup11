@@ -37,22 +37,24 @@ public class ViewProfileStatistics extends AppCompatActivity {
         imageViewPropic = (ImageView) findViewById(R.id.imageViewPropic);
         buttonDelete = (Button) findViewById(R.id.buttonDeleteProfile);
 
+        Intent intent = getIntent();
+
+        Bundle extras = intent.getExtras();
+
+        int playerID = extras.getInt("KEY_EXTRA_CONTACT_ID");
+
+        final Cursor cursor = dbHelper.getProfile(playerID);
+
         textViewProfileName.setText(getNamePlayerFromCursor(cursor));
-        imageViewPropic.setImageURI(getImagePlayerFromCursor(cursor));
+        //imageViewPropic.setImageURI(getImagePlayerFromCursor(cursor));
+
+
 
         dbHelper = new DatabaseHelper(getApplicationContext());
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
 
-
-    Intent intent = getIntent();
-
-    Bundle extras = intent.getExtras();
-
-    int playerID = extras.getInt("KEY_EXTRA_CONTACT_ID");
-
-    final Cursor cursor = dbHelper.getProfile(playerID);
+}
 
 
     /*

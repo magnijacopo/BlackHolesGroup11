@@ -10,17 +10,55 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="it.polimi.group11.OptionsActivity"
-    tools:showIn="@layout/activity_options">
+    tools:showIn="@layout/activity_options"
+    android:background="@mipmap/option_xhdpi">
 
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/background_music"
         android:id="@+id/background_music_checkbox"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:checked="true"
-        android:onClick="backgroundMusic"/>
+        android:onClick="backgroundMusic"
+        android:layout_marginBottom="34dp"
+        android:layout_above="@+id/fxSoundsCheckbox"
+        android:layout_alignStart="@+id/fxSoundsCheckbox"
+        android:textColor="#ffffff"
+        android:textStyle="italic" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DISABLE FX SOUNDS"
+        android:id="@+id/fxSoundsCheckbox"
+        android:checked="false"
+        android:layout_above="@+id/buttonReturnHome"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="176dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DELETE ALL DB"
+        android:id="@+id/buttonDeleteDatabase"
+        android:background="#00ffffff"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_marginTop="47dp"
+        android:layout_alignTop="@+id/fxSoundsCheckbox"
+        android:layout_centerHorizontal="true"
+        android:textStyle="italic" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="HOME"
+        android:id="@+id/buttonReturnHome"
+        android:onClick="goToMainActivity"
+        android:layout_marginBottom="36dp"
+        android:background="#00ffffff"
+        android:textStyle="bold|italic"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
