@@ -18,6 +18,8 @@
     <string name="title_activity_view_profiles_selection">Select your Profile</string>
     <string name="title_activity_leaderboard">Leaderboard</string>
     <string name="title_activity_view_profile_leaderboard">Profile</string>
+    <string name="title_activity_create_match">CreateMatch</string>
+    <string name="title_activity_view_match_statistics">Match Statistics</string>
     <string name="new_profile">NEW PROFILE</string>
     <string name="existing_profile">EXISTING PROFILES</string>
     <string name="artificial_intelligence">COMPUTER</string>
