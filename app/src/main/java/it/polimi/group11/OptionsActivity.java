@@ -3,13 +3,16 @@ package it.polimi.group11;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Toast;
+
+import it.polimi.group11.helper.DatabaseHelper;
 
 public class OptionsActivity extends AppCompatActivity {
 
@@ -19,14 +22,24 @@ public class OptionsActivity extends AppCompatActivity {
     public static boolean fxSoundsCheck;
     CheckBox fxSoundsCheckbox;
 
+    Button buttonDeleteData;
+
+
+    DatabaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_options);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        Typeface myTypeface = Typeface.createFromAsset(getAssets(), "fonts/SignPainter-HouseScript.ttf");
+
+        backgroundMusicCheckbox = (CheckBox) findViewById(R.id.background_music_checkbox);
+        backgroundMusicCheckbox.setTypeface(myTypeface);
+        fxSoundsCheckbox = (CheckBox) findViewById(R.id.fx_sounds_checkbox);
+        fxSoundsCheckbox.setTypeface(myTypeface);
+        buttonDeleteData = (Button) findViewById(R.id.button_delete_data);
+        buttonDeleteData.setTypeface(myTypeface);
 
         backgroundMusicCheckbox = (CheckBox) findViewById(R.id.background_music_checkbox);
         backgroundMusicCheck = load();
@@ -71,7 +84,7 @@ public class OptionsActivity extends AppCompatActivity {
     }
 
     public void checkedChanged(){
-        fxSoundsCheckbox = (CheckBox) findViewById(R.id.fxSoundsCheckbox);
+        fxSoundsCheckbox = (CheckBox) findViewById(R.id.fx_sounds_checkbox);
         fxSoundsCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -87,12 +100,18 @@ public class OptionsActivity extends AppCompatActivity {
     }
 
     public void setCheck(){
-        fxSoundsCheckbox = (CheckBox) findViewById(R.id.fxSoundsCheckbox);
+        fxSoundsCheckbox = (CheckBox) findViewById(R.id.fx_sounds_checkbox);
         if(!fxSoundsCheck){
             fxSoundsCheckbox.setChecked(true);
         } else {
             fxSoundsCheckbox.setChecked(false);
         }
+    }
+
+    public void deleteDatabase(View view){
+        getApplicationContext().deleteDatabase(DatabaseHelper.DATABASE_NAME);
+        Toast.makeText(getApplicationContext(), "All data deleted", Toast.LENGTH_SHORT).show();
+
     }
 
     public void goToMainActivity(View view){
