@@ -4,13 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
-
 /**
  * A game session
  */
 
 public class Game {
-
     private boolean movesFinished=false;
 
     private String MOVE_NOT_VALID = "error: la mossa non è valida";
@@ -176,7 +174,7 @@ public class Game {
             }
             if (i == beadsStatus.length()-1 && !beadsStatus.substring(i, i+1).equals(id)){
                 currentMovingPlayer.setStatus(false);
-                System.out.println("player "+id+" is dead");
+                System.out.println("player " + id + " is dead");
                 alivePlayers--;
                 checkVictory();
             }

@@ -4,85 +4,9 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import it.polimi.group11.firstReleaseTest.TestFirstRelease;
 
-/**
- * Created by aless on 03/12/2015.
- */
 public class InputTest {
     @Test
-    public void test1_15_1() throws Exception{ //player 2 si suicida e finisce il gioco, l'ultimo status deve avere player 2 !Risolto!
-        String arg1_15_1="22101201022010220201010100000002000000000000000000000200100000000h7oh1oh7iv3oh1ih7oh6iv5ov6iv3iv4ov1iv7ih4iv2i";
-        String result1_15_1 = new TestFirstRelease().moveTest(arg1_15_1);
-        assertEquals("22101100111021110000000100000000000000000000000000000000100000000",result1_15_1);
-    }
-
-    @Test
-    public void test5_1_1() throws Exception
-    {
-        String arg5_1_1 = "21120110011220200010000000000000000000100000000000000000000002002v3o";
-        String result5_1_1 = new TestFirstRelease().moveTest(arg5_1_1);
-        assertTrue(result5_1_1.startsWith("error"));
-    }
-
-    @Test
-    public void test1_2_1() throws Exception {
-        String arg1_2_1 = "22101201022010220201010100000002000000000000000000000200100000000h7oh1o";
-        String result1_2_1 = new TestFirstRelease().moveTest(arg1_2_1);
-        assertEquals("22201201122010220000000100000002000000000000000000000200100000000", result1_2_1);
-    }
-
-    @Test
-    public void test2_107_2() throws Exception { //player 2 si suicida e finisce il gioco, l'ultimo status deve avere player 2 !Risolto!
-        String arg2_107_2="42202221211112000000010004102200300030002000031000030000000001020v2oh6ov5ih4ih1ih7iv3oh3iv1iv4oh6ih7iv2ih4ov1ov2ov5ov1ov3ih5ih7oh1ov2ih5oh3ov2ov5ih2oh1ih7iv5ih2ih6ih1ih4ih1oh4ov3oh2oh1oh4iv7oh6oh7oh4iv2iv7iv2ih2oh6ov3ih3iv5oh2iv3ov4iv2ov5oh5iv1iv4ih1ih3iv7oh4oh1iv2oh7oh5oh3ov4ov5ih4ih5ih7ih6iv1ov4oh3iv1iv5ih4oh1oh3oh5oh1iv7ih5iv7oh6ov1ov2ih4ov7iv5ov7ov5iv3ih7ov6ov7oh7iv5ov3ih7iv5oh2i";
-        String result2_107_2 = new TestFirstRelease().moveTest(arg2_107_2);
-        assertEquals("42001212021022120000010000000000000000000000000000000000000000000",result2_107_2);
-    }
-    @Test
-    public void test3_50_1() throws Exception {//Risolto!
-        String arg3_50_1="32212000000121000000300001000000220000000300202010030000100010001v6oh6oh3ih4ov3ih1iv6ih3ih4oh7oh6iv1oh2ih1ih6ov2oh5oh6oh4iv1oh3oh6iv5ov2oh6ov4ih3iv1iv4ih5iv6oh3ov7ov1iv7iv6iv1oh3ov3oh5ov1oh3ih4ov6ov3oh7ih6iv3iv2ih1o";
-        String result3_50_1 = new TestFirstRelease().moveTest(arg3_50_1);
-        assertEquals("31101211021102100000000000000000000000000000000000000000000000001",result3_50_1);
-    }
-    @Test
-    public void test4_46_3() throws Exception {
-        String arg4_46_3="33220112200020200220000000100310000000000000020000021000100000020v1oh2ih5oh6ih2iv6iv7oh4ov3ov4iv6ih4ih1iv3ov5ov1iv7ov5ih7iv1ov2ov3iv1ov2ih4iv5ov3ov6oh2ov6ov7ih2oh6iv1ih6ov1iv7ih6ov4ih7oh1iv2ov5iv3iv2ih3o";
-        String result4_46_3 = new TestFirstRelease().moveTest(arg4_46_3);
-        assertEquals("31021022200100200000000000000000000000000000020000000000000000000",result4_46_3);
-    }
-    @Test
-    public void test5_16_1() throws Exception {
-        String arg5_16_1="21120110011220200010000000000000000000100000000000000000000002002v5ov2oh2iv2iv7ov1iv7ih1ov5oh4oh5ih3oh7oh5oh6ov4i";
-        String result5_16_1 = new TestFirstRelease().moveTest(arg5_16_1);
-        assertEquals("22211211101212200010000000000000000000100000000000000000000000000",result5_16_1);
-    }
-    @Test
-    public void test6_54_1() throws Exception { //Risolto player 1 elimina player 2, l'ultimo status deve avere player 1. player 2 sembra non morire
-        String arg6_54_1="22221221102212110000011000020000000002020000000000000100000000000v1ov2ih6ih7iv7ih3iv7ov2oh4iv6iv4ov6oh3oh4oh3oh6ov4ih1iv3iv6oh7ov6ih5iv4iv3ov6iv7oh5oh3iv2iv7iv1oh4ih3ov1ih6iv6oh1ih2ih4iv6ih3ih7oh5ih3oh4ov7oh5iv6oh1oh5ov2oh5iv3i";
-        String result6_54_1 = new TestFirstRelease().moveTest(arg6_54_1);
-        assertEquals("21112100212102120000010000000000000000000000000000000000000000000",result6_54_1);
-    }
-    @Test
-    public void test7_10_1() throws Exception { //player 2 con v7i uccide player 3 ma player 3 rimane vivo
-        String arg7_10_1="32202102211100221000100000000300300000000000020200100000000001002h6ih7iv5ov1ih6ih4ov4oh3ih2ov7i";
-        String result7_10_1 = new TestFirstRelease().moveTest(arg7_10_1);
-        assertEquals("31211200101111211000100000000000000000000000020000000000000000002",result7_10_1);
-    }
-    @Test
-    public void test7_11_1() throws Exception {
-        String arg7_11_1="32202102211100221000100000000300300000000000020200100000000001002h6ih7iv5ov1ih6ih4ov4oh3ih2ov7iv5i";
-        String result7_11_1 = new TestFirstRelease().moveTest(arg7_11_1);
-        assertEquals("32211200101110211000100000000000000000000000020000000000000000002",result7_11_1);
-    }
-    @Test
-    public void test7_12_2() throws Exception {
-        String arg7_12_2="32202102211100221000100000000300300000000000020200100000000001002h6ih7iv5ov1ih6ih4ov4oh3ih2ov7iv5iv2i";
-        String result7_12_2 = new TestFirstRelease().moveTest(arg7_12_2);
-        assertEquals("31211200100110211000100000000000000000000000020000000000000000002",result7_12_2);
-    }
-
-
-    @Test
     public void testYolo() throws Exception {
-
         String arg1_1_1="22101201022010220201010100000002000000000000000000000200100000000v1o";
         String result1_1_1 = new TestFirstRelease().moveTest(arg1_1_1);
         assertTrue(result1_1_1.startsWith("error"));

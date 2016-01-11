@@ -14,8 +14,8 @@
         card_view:cardCornerRadius="3dp"
         card_view:cardElevation="5dp"
         android:layout_margin="5dp"
-        android:clickable="true"
-        android:foreground="?android:attr/selectableItemBackground">
+        android:foreground="?android:attr/selectableItemBackground"
+        android:onClick="goToChoosePlayerType">
 
         <LinearLayout
             android:layout_width="match_parent"

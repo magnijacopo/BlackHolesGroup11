@@ -28,9 +28,7 @@ public class ViewProfileListActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         dbHelper = new DatabaseHelper(this);
-
         final Cursor cursor = dbHelper.getAllProfiles();
 
         String [] columns = new String[] {

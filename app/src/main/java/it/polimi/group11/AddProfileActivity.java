@@ -1,13 +1,10 @@
 package it.polimi.group11;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,8 +15,6 @@ import android.widget.Toast;
 import it.polimi.group11.helper.DatabaseHelper;
 
 public class AddProfileActivity extends AppCompatActivity {
-
-
     public DatabaseHelper db;
     private Uri imageUri;
     private String imageUriString;
@@ -28,8 +23,6 @@ public class AddProfileActivity extends AppCompatActivity {
     ImageView imageViewInsertPropic;
     Button buttonSaveProfile;
     EditText editTextProfileName;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,26 +53,19 @@ public class AddProfileActivity extends AppCompatActivity {
 
         });
 
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    /**
-     *
-     */
     public void persistPerson() {
-
         db = new DatabaseHelper(getApplicationContext());
-
-        Log.i("ciao","S0no dentro persistPerson");
-
         boolean success = db.insertProfile(editTextProfileName.getText().toString(), uri);
 
         if(success){
-                Toast.makeText(getApplicationContext(), "Person Inserted", Toast.LENGTH_SHORT).show();
-        }
-        else{
-                Toast.makeText(getApplicationContext(), "Could not Insert person", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Person Inserted", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, SelectPlayersActivity.class);
+            startActivity(intent);
+        }else{
+            Toast.makeText(getApplicationContext(), "Could not Insert person", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -111,8 +97,6 @@ public class AddProfileActivity extends AppCompatActivity {
 
             }
         }
-
-
     }
 }
 

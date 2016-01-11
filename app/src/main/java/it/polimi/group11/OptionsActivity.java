@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.CheckBox;
 
 public class OptionsActivity extends AppCompatActivity {
-    public static boolean backgroundMusicCheck = false;
+    public static boolean backgroundMusicCheck = true;
     CheckBox backgroundMusicCheckbox;
 
     @Override
@@ -20,6 +20,7 @@ public class OptionsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         backgroundMusicCheckbox = (CheckBox) findViewById(R.id.background_music_checkbox);
+        backgroundMusicCheck = load();
     }
 
     @Override
@@ -53,7 +54,7 @@ public class OptionsActivity extends AppCompatActivity {
 
     private boolean load() {
         SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
-        return sharedPreferences.getBoolean("check", false);
+        return sharedPreferences.getBoolean("check", true);
     }
 
 }
