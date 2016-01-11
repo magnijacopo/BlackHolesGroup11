@@ -26,6 +26,8 @@
     <string name="profile_name">Profile Name</string>
     <string name="horizontal">horizontal</string>
     <string name="delete_profile_button">DELETE PROFILE</string>
+    <string name="title_activity_create_match">CreateMatchActivity</string>
+    <string name="title_activity_view_match_statistics">ViewMatchStatisticsActivity</string>
 
 
 </resources>

@@ -26,9 +26,9 @@
         android:layout_height="wrap_content"
         android:text="@string/save"
         android:id="@+id/buttonSaveProfile"
+        android:layout_marginBottom="61dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="69dp" />
+        android:layout_alignEnd="@+id/editTextProfileName" />
 
     <EditText
         android:layout_width="300dp"
@@ -39,4 +39,13 @@
         android:id="@+id/editTextProfileName"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MatchCreate"
+        android:id="@+id/buttonGoToCreateMatch"
+        android:layout_alignTop="@+id/buttonSaveProfile"
+        android:layout_alignStart="@+id/editTextProfileName"
+        android:onClick="goToCreateMatch" />
 </RelativeLayout>

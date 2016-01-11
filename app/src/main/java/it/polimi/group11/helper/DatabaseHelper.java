@@ -3,10 +3,9 @@ package it.polimi.group11.helper;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteException;
+import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -22,18 +21,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String PLAYER_COLUMN_CREATEDAT = "date";
 
     //Table MatchMaking
-    private static final String MATCHMAKING_TABLE_NAME = "matchmaking";
-    private static final String MATCHMAKING_COLUMN_ID = "_id";
-    private static final String MATCHMAKING_COLUMN_PLAYERID = "playerId";
-    private static final String MATCHMAKING_COLUMN_MATCHID = "matchId";
+    public static final String MATCHMAKING_TABLE_NAME = "matchmaking";
+    public static final String MATCHMAKING_COLUMN_ID = "_id";
+    public static final String MATCHMAKING_COLUMN_PLAYERID = "playerId";
+    public static final String MATCHMAKING_COLUMN_MATCHID = "matchId";
 
     //Table Match
-    private static final String MATCH_TABLE_NAME = "match";
-    private static final String MATCH_COLUMN_ID = "_id";
-    private static final String MATCH_COLUMN_DATE = "date";
-    private static final String MATCH_COLUMN_DURATION = "duration";
-    private static final String MATCH_COLUMN_WINNER = "winnerId";
-    private static final String MATCH_COLUMN_MOVESNUMBER = "numberOfMoves";
+    public static final String MATCH_TABLE_NAME = "match";
+    public static final String MATCH_COLUMN_ID = "_id";
+    public static final String MATCH_COLUMN_DATE = "date";
+    public static final String MATCH_COLUMN_DURATION = "duration";
+    public static final String MATCH_COLUMN_WINNER = "winnerId";
+    public static final String MATCH_COLUMN_MOVESNUMBER = "numberOfMoves";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -203,13 +202,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //--------------- "match" table methods ---------------//
 
-    public boolean insertMatch(String name, String date) {
+    public boolean insertMatch(int idWinner, int moves) {
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put(PLAYER_COLUMN_NAME, name);
-        contentValues.put(PLAYER_COLUMN_CREATEDAT, date);
+        contentValues.put(MATCH_COLUMN_WINNER, idWinner);
+        contentValues.put(MATCH_COLUMN_MOVESNUMBER, moves);
 
         db.insert(PLAYER_TABLE_NAME, null, contentValues);
         return true;

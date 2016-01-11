@@ -98,5 +98,10 @@ public class AddProfileActivity extends AppCompatActivity {
             }
         }
     }
+
+    public void goToCreateMatch(View view){
+        Intent intent = new Intent(this, CreateMatchActivity.class);
+        startActivity(intent);
+    }
 }
 
