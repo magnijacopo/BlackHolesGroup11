@@ -26,6 +26,7 @@ public class Game2 {
     private String error="";
     private String MOVE_NOT_VALID = "error: la mossa non è valida";
     private String movingPlayer;
+    private int totalBeadsInBoard;
     /*public void randomizePlayerOrder(){
         playerOrder = new int[numPlayers];
         playerOrder[0]=(int) (Math.random()*numPlayers);
@@ -46,7 +47,7 @@ public class Game2 {
     public void randomFirstPlayer(){
         firstPlayer = (int) Math.floor((Math.random() * playersNumber) + 1);
         setFirstPlayer(String.valueOf(firstPlayer));
-        }
+    }
 
     public int getFirstPlayer(){
         return firstPlayer;
@@ -60,24 +61,25 @@ public class Game2 {
     }
 
 
-  public Game2(int playerNum){
-      alivePlayers = playerNum;
-      playersNumber=playerNum;
-      definePlayers(playersNumber);
-      defineBeads();
-      for(int i=0;i<playerNum;i++) {
-          players.get(i).setGame2(this);
-          players.get(i).setBoard(board);
-      }
-  }
+    public Game2(int playerNum){
+        alivePlayers = playerNum;
+        playersNumber=playerNum;
+        definePlayers(playersNumber);
+        for(int i=0;i<playerNum;i++) {
+            this.getCurrentMovingPlayer().setGame2(this);
+            this.getCurrentMovingPlayer().setBoard(board);
+            iteratorNext();
+        }
+        totalBeadsInBoard = 0;
+    }
 
     public int getPlayerNum(){
-       return playersNumber;
-   }
+        return playersNumber;
+    }
 
 
 
-    private void iteratorNext(){
+    public void iteratorNext(){
         if(!iterator.hasNext())
             iterator = players.listIterator();
         currentMovingPlayer = iterator.next();
@@ -88,6 +90,7 @@ public class Game2 {
             players.add(new Player(i));
         }
         iterator = players.listIterator();
+        currentMovingPlayer = iterator.next();
     }
 
     private void checkLives(String newBeadsPosition) {
@@ -203,7 +206,8 @@ public class Game2 {
         if (firstPlayer.equals("4")){
             iteratorNext();
             iteratorNext();
-            iteratorNext();}
+            iteratorNext();
+        }
     }
 
     public String getNextPlayer(){
@@ -264,14 +268,18 @@ public class Game2 {
         return currentMovingPlayer.getId();
     }
 
-    public void defineBeads() {
-        for(int i=0; i<getPlayerNum();i++)
-            for(int j=0; j<5;j++)
-                this.players.get(i).setBead(j);
+
+
+    public Player getCurrentMovingPlayer() {
+        return currentMovingPlayer;
     }
+
+
+    public int getTotalBeadsInBoard(){
+        return totalBeadsInBoard;
+    }
+    public void setTotalBeadsInBoard(int totalBeadsInBoard){
+        this.totalBeadsInBoard=totalBeadsInBoard;
+    }
+
 }
-
-
-/*game2 game
-game.get..
- */

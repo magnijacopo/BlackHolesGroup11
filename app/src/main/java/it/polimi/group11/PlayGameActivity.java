@@ -1,6 +1,7 @@
 package it.polimi.group11;
 
 import android.content.ClipData;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -26,9 +27,9 @@ public class PlayGameActivity extends AppCompatActivity {
     /**
      * Attribute declaration
      */
-    private Game2 game2 = new Game2();
+    private Game2 game2 ;
 
-    ImageView cells[] = new ImageView[50];
+    ImageView cells[] = new ImageView[49];
     ImageView hbars[] = new ImageView[7];
     ImageView vbars[] = new ImageView[7];
     private float a;
@@ -52,6 +53,7 @@ public class PlayGameActivity extends AppCompatActivity {
     private float limitLeft;
     private float limitTop;
     private float limitBottom;
+
 
 
     /**
@@ -78,21 +80,49 @@ public class PlayGameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_game);
+        Intent intent= getIntent();
+        Bundle bundle = intent.getExtras();
+        if(bundle != null) {
+            int j = bundle.getInt("PLAYER_NUMBER");
+            game2 = new Game2(j);
+        }
 
         RelativeLayout mainLayout = (RelativeLayout) findViewById(R.id.parent);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(mainLayout.getLayoutParams());
-        game2.setNumPlayers(1);
-        ImageView beads[][] = new ImageView[game2.getNumPlayers()][5];
+        ImageView beads[][] = new ImageView[game2.getPlayerNum()][5];
 
-        for(int j=0; j<game2.getNumPlayers(); j++) {
-            for (int i = 0; i < 5; i++) {
-                beads[j][i] = new ImageView(this);
-                mainLayout.addView(beads[j][i], params);
-                String id = "bead"+Integer.toString(j)+Integer.toString(i);
-                beads[j][i].setImageResource(R.mipmap.bin);
-                beads[j][i].setLayoutParams(new RelativeLayout.LayoutParams((int) (20 * beads[j][i].getResources().getDisplayMetrics().density), (int) (20 * beads[j][i].getResources().getDisplayMetrics().density)));
-                beads[j][i].setContentDescription(id);
-                beads[j][i].setOnTouchListener(new MyTouchListener());
+        game2.randomFirstPlayer();
+
+
+        for (int j = 0; j < 5; j++) {
+            for (int i = 0; i < game2.getPlayerNum(); i++) {
+                beads[i][j] = new ImageView(this);
+                mainLayout.addView(beads[i][j], params);
+                String id = "bead" + Integer.toString(i) + Integer.toString(j);
+                switch(Integer.parseInt(game2.getCurrentPlayer())) {
+                    case 1:
+                        beads[i][j].setImageResource(R.mipmap.bead1);
+                        break;
+                    case 2:
+                        beads[i][j].setImageResource(R.mipmap.bead2);
+                        break;
+                    case 3:
+                        beads[i][j].setImageResource(R.mipmap.bead3);
+                        break;
+                    case 4:
+                        beads[i][j].setImageResource(R.mipmap.bead4);
+                        break;
+                    default:
+                        break;
+                }
+                game2.iteratorNext();
+                //ViewGroup.MarginLayoutParams marginParams = new ViewGroup.MarginLayoutParams(beads[j][i].getLayoutParams());
+                //marginParams.setMargins(0, 0, (int) (10 * beads[j][i].getResources().getDisplayMetrics().density), (int) (10 * beads[j][i].getResources().getDisplayMetrics().density));
+                //RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(marginParams);
+                //beads[j][i].setLayoutParams(layoutParams);
+                beads[i][j].setLayoutParams(new RelativeLayout.LayoutParams((int) (20 * beads[i][j].getResources().getDisplayMetrics().density), (int) (20 * beads[i][j].getResources().getDisplayMetrics().density)));
+                beads[i][j].setContentDescription(id);
+                beads[i][j].setOnTouchListener(new MyTouchListener());
             }
         }
 
@@ -103,7 +133,6 @@ public class PlayGameActivity extends AppCompatActivity {
         for (int i=0; i<7; i++) {
             int id = getResources().getIdentifier("horizontalbar" + i, "id", getPackageName());
             hbars[i] = (ImageView) findViewById(id);
-            hbars[i].setOnTouchListener(new MyTouchListener());
             posH = game2.board.horizontalBar[i].getPosition();
             float marginLeftH = hbars[i].getX();
             switch (posH) {
@@ -129,7 +158,6 @@ public class PlayGameActivity extends AppCompatActivity {
         for (int i=0; i<7; i++) {
             int id = getResources().getIdentifier("verticalbar" + i, "id", getPackageName());
             vbars[i] = (ImageView) findViewById(id);
-            vbars[i].setOnTouchListener(new MyTouchListener());
             posV = game2.board.verticalBar[i].getPosition();
             float marginTopV = vbars[i].getY();
             switch (posV) {
@@ -432,13 +460,34 @@ public class PlayGameActivity extends AppCompatActivity {
                                 if (game2.board.getCell(i, j).getId().equals(v.getResources().getResourceName(v.getId()).substring(21,(v.getResources().getResourceName(v.getId()).length())))) {
                                     game2.board.getCell(i, j).setCentre(v, view.getWidth(), view.getHeight());
                                     centre = game2.board.getCell(i, j).getCentre();
-                               }
+                                    int now = Integer.parseInt(game2.getCurrentPlayer());
+
+                                    if (game2.getCurrentMovingPlayer().placeBead(game2.getCurrentPlayer(),i,j) == true){
+                                        view.setX(centre[0]);
+                                        view.setY(centre[1]);
+                                        view.setVisibility(View.VISIBLE);
+                                        view.setOnTouchListener(null);
+                                        game2.setTotalBeadsInBoard(game2.getTotalBeadsInBoard()+1);
+                                        Log.i("ciao","sta posizionando i bead il giocatore "+game2.getCurrentPlayer());
+                                        game2.iteratorNext();
+                                    }
+                                    else{
+                                        view.setX(35);
+                                        view.setY(35);
+                                        view.setVisibility(View.VISIBLE);
+                                    }
+                                }
                             }
                         }
                     }
-                    view.setX(centre[0]);
-                    view.setY(centre[1]);
-                    view.setVisibility(View.VISIBLE);
+
+
+                    if(game2.getTotalBeadsInBoard() == (5*game2.getPlayerNum())) {
+                        for(int i=0;i <7;i++) {
+                            hbars[i].setOnTouchListener(new MyTouchListener());
+                            vbars[i].setOnTouchListener(new MyTouchListener());
+                        }
+                    }
 
                     break;
                 case DragEvent.ACTION_DRAG_ENDED:
@@ -446,16 +495,12 @@ public class PlayGameActivity extends AppCompatActivity {
                     View viewF = (View) event.getLocalState();
                     if(!event.getResult())
                     {
-                        viewF.setX(48);
-                        viewF.setY(48);
+                        viewF.setX(35);
+                        viewF.setY(35);
                         viewF.setVisibility(View.VISIBLE);
 
                     }
-                    else
-                    {
-                        viewF.setOnTouchListener(null);
-                    }
-                    break;
+
                 default:
                     break;
             }

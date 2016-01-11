@@ -38,19 +38,8 @@ public class Board2 {
     }
 
     private int getRandomNumber() {
-        int number;
-        do{
-            number = (int) (Math.random() * 10);
-
-            if (number <= 3)
-                return 0;
-            if (number <= 6)
-                return 1;
-            if (number <= 9)
-                return 2;
-
-        }while (number == 10);
-    return 0;}
+            return (int)(Math.random()*3);
+        }
 
     public void setRow(int row){
         for (int i=0;i<7;i++)
