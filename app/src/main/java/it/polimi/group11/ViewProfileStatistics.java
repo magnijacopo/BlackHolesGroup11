@@ -68,7 +68,7 @@ public class ViewProfileStatistics extends AppCompatActivity {
 
         SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(this, R.layout.player_info,
                 cursorMatches, columns, widgets, 0);
-        listViewMatches = (ListView)findViewById(R.id.listView1);
+        listViewMatches = (ListView)findViewById(R.id.listViewMatches);
         listViewMatches.setAdapter(cursorAdapter);
         listViewMatches.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
