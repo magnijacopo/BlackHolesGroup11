@@ -95,7 +95,7 @@ public class PlayGameActivity extends AppCompatActivity {
         game2.randomFirstPlayer();
 
 
-        for (int j = 0; j < 5; j++) {
+        for (int j = 4; j >=0; j--) {
             for (int i = 0; i < game2.getPlayerNum(); i++) {
                 beads[i][j] = new ImageView(this);
                 mainLayout.addView(beads[i][j], params);
@@ -348,15 +348,12 @@ public class PlayGameActivity extends AppCompatActivity {
                             game2.checkRowBeadsLife(num);
                             setA(getFinalPoint());
                             v.setX(getA());
-                            for(int i=0; i<game2.getPlayerNum(); i++) {
-                                for (int j = 0; j < 5; j++) {
-                                    Log.i("ciao","il bead è"+game2.getCurrentMovingPlayer().getBead(j).getLife());
-                                    if (!game2.getCurrentMovingPlayer().getBead(j).getLife()) {
-                                        Log.i("ciao","sono morto");
-                                        Log.i("ciao","beads "+beads[i][j].getContentDescription());
-                                        beads[i][j].setVisibility(View.GONE);
+                                for (int i = 0; i < game2.getPlayerNum(); i++) {
+                                    for (int j = 0; j <5; j++) {
+                                        if (!game2.getCurrentMovingPlayer().getBead(j).getLife()) {
+                                            beads[(Integer.parseInt(game2.getCurrentMovingPlayer().getId()))-1][j].setVisibility(View.GONE);
+                                        }
                                     }
-                                }
                                 game2.iteratorNext();
                             }
                         }
@@ -388,9 +385,10 @@ public class PlayGameActivity extends AppCompatActivity {
                             setA(getFinalPoint());
                             v.setX(getA());
                             for(int i=0; i<game2.getPlayerNum(); i++) {
-                                for (int j = 0; j < 5; j++)
+                                for (int j = 0; j < 5; j++) {
                                     if (!game2.getCurrentMovingPlayer().getBead(j).getLife())
-                                        beads[i][j].setVisibility(View.INVISIBLE);
+                                        beads[(Integer.parseInt(game2.getCurrentMovingPlayer().getId())) - 1][j].setVisibility(View.INVISIBLE);
+                                }
                                 game2.iteratorNext();
                             }
                         }
@@ -416,9 +414,10 @@ public class PlayGameActivity extends AppCompatActivity {
                             setB(getFinalPoint());
                             v.setY(getB());
                             for(int i=0; i<game2.getPlayerNum(); i++) {
-                                for (int j = 0; j < 5; j++)
+                                for (int j = 0; j < 5; j++) {
                                     if (!game2.getCurrentMovingPlayer().getBead(j).getLife())
-                                        beads[i][j].setVisibility(View.INVISIBLE);
+                                        beads[(Integer.parseInt(game2.getCurrentMovingPlayer().getId())) - 1][j].setVisibility(View.INVISIBLE);
+                                }
                                 game2.iteratorNext();
                             }
                         }
@@ -444,9 +443,10 @@ public class PlayGameActivity extends AppCompatActivity {
                             setB(getFinalPoint());
                             v.setY(getB());
                             for(int i=0; i<game2.getPlayerNum(); i++) {
-                                for (int j = 0; j < 5; j++)
+                                for (int j = 0; j < 5; j++){
                                     if (!game2.getCurrentMovingPlayer().getBead(j).getLife())
-                                        beads[i][j].setVisibility(View.INVISIBLE);
+                                        beads[(Integer.parseInt(game2.getCurrentMovingPlayer().getId())) - 1][j].setVisibility(View.INVISIBLE);
+                                 }
                                 game2.iteratorNext();
                             }
                         }

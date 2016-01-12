@@ -1,5 +1,6 @@
 package it.polimi.group11.model;
 
+import android.util.Log;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
@@ -87,6 +88,7 @@ public class Game2 {
                             for (int k=0;k<7;k++){      //per tutte le celle di quella riga
                                 if(!board.getCell(row,k).getBead()&&currentMovingPlayer.getBead(j).getColumnPosition()==k){  //verifica se la cella è bucata e ha su un bead
                                     currentMovingPlayer.getBead(j).setLife(false); //se è così, lo uccidi.
+
                                 }
                             }
                         }
@@ -95,6 +97,7 @@ public class Game2 {
             }
             iteratorNext();
         }
+
     }
 
     public void checkColumnBeadsLife(int column) {

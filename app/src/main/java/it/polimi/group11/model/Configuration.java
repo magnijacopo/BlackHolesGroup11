@@ -22,7 +22,7 @@ public class Configuration {
      * {@link Board#horizontalBarsPosition}
      * /**
      * Indicates if the number of players is correct.
-     * Remains if the number is more thaan one and less than five, if not gives false
+     * Remains if the number is more than one and less than five, if not gives false
      */
 
 

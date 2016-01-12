@@ -253,8 +253,10 @@ public class Player {
     }
 
     public void defineBeads() {
-            for (int j = 0; j < 5; j++)
+            for (int j = 0; j < 5; j++) {
                 this.setBead(j);
+                this.getBead(j).setLife(true);
+            }
     }
 
     public Bead getBead(int i) {
