@@ -9,10 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 
 import it.polimi.group11.helper.Guest;
@@ -66,25 +62,12 @@ public class SelectPlayersActivity extends AppCompatActivity implements PlayersN
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_select_players, menu);
-        return true;
+    public void goToPlayGame(View view){
+        Intent intent = new Intent(this, PlayGameActivity.class);
+        intent.putExtra("PLAYER_NUMBER", adapter.mItems.size());
+        startActivity(intent);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(item.getItemId() == R.id.action_play){
-            Intent intent = new Intent(this, PlayGameActivity.class);
-            intent.putExtra("PLAYER_NUMBER", adapter.mItems.size());
-            Log.d("Players number: ", Integer.toString(adapter.mItems.size()));
-            startActivity(intent);
-            return true;
-        }else{
-            return super.onOptionsItemSelected(item);
-        }
-    }
 
     public void goToChoosePlayerType() {
         Intent intent = new Intent(this, ChoosePlayerTypeActivity.class);

@@ -28,4 +28,14 @@
         android:onClick="goToMainActivity"
         android:textColor="#ffffff"
         android:background="#00ffffff" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/button5"
+        android:layout_alignBottom="@+id/recycler_view"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="121dp"
+        android:onClick="goToPlayGame" />
 </RelativeLayout>
