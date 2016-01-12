@@ -6,9 +6,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 import it.polimi.group11.helper.DatabaseHelper;
 
@@ -18,7 +18,7 @@ public class ViewProfileListActivity extends AppCompatActivity {
 
     DatabaseHelper dbHelper;
     ListView listView;
-    ImageView imageView;
+    TextView textViewPlayerName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,17 +30,23 @@ public class ViewProfileListActivity extends AppCompatActivity {
 
         String [] columns = new String[] {
                 DatabaseHelper.PLAYER_COLUMN_NAME,
-                DatabaseHelper.PLAYER_COLUMN_IMAGE
         };
         int [] widgets = new int[] {
-                R.id.playerName,
-                R.id.playerImage
+                R.id.player_name,
         };
 
         SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(this, R.layout.player_info,
                 cursor, columns, widgets, 0);
         listView = (ListView)findViewById(R.id.listView1);
         listView.setAdapter(cursorAdapter);
+
+        /*
+        Typeface myTypeface = Typeface.createFromAsset(getAssets(), "fonts/SignPainter-HouseScript.ttf");
+
+        textViewPlayerName = (TextView) findViewById(R.id.player_name);
+        textViewPlayerName.setTypeface(myTypeface);
+        */
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -57,4 +63,8 @@ public class ViewProfileListActivity extends AppCompatActivity {
 
     }
 
+    public void goToMainActivity(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 }

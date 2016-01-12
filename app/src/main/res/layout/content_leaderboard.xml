@@ -10,6 +10,17 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="it.polimi.group11.LeaderboardActivity"
-    tools:showIn="@layout/activity_leaderboard">
+    tools:showIn="@layout/activity_leaderboard"
+    android:background="@mipmap/mini_rocket_mini_planet">
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BACK"
+        android:id="@+id/button2"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:background="#00ffffff"
+        android:textColor="#ffffff"
+        android:onClick="goToMainActivity" />
 </RelativeLayout>

@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@mipmap/astronaut"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="it.polimi.group11.ViewProfileListActivity"
     tools:showIn="@layout/activity_view_profile_list">
@@ -17,19 +18,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true">
+        android:textAlignment="center"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentStart="false"
+        android:layout_marginTop="175dp"
+        android:layout_marginBottom="25dp">
     </ListView>
 
-    <TextView
-        android:id="@+id/playerID"
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="@dimen/activity_vertical_margin"
-        android:textSize="@dimen/text_size"/>
-
-    <ImageView
-        android:id="@+id/playerImage"
-        android:layout_width="100dp"
-        android:layout_height="100dp" />
+        android:text="BACK"
+        android:id="@+id/button4"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:onClick="goToMainActivity"
+        android:textColor="#ffffff"
+        android:background="#00ffffff" />
 
 </RelativeLayout>

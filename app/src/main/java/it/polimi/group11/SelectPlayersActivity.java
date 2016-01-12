@@ -8,7 +8,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.Menu;
@@ -36,8 +35,6 @@ public class SelectPlayersActivity extends AppCompatActivity implements PlayersN
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_players);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         adapter = new RecyclerListAdapter();
 
@@ -67,7 +64,6 @@ public class SelectPlayersActivity extends AppCompatActivity implements PlayersN
         playersManager.registerListener(this);
         playersManager.change(adapter.mItems.size());
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override
@@ -121,5 +117,10 @@ public class SelectPlayersActivity extends AppCompatActivity implements PlayersN
         }else{
             fab.setVisibility(View.VISIBLE);
         }
+    }
+
+    public void goToMainActivity(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }
