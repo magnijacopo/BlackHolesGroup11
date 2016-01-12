@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    // Buttons.
     Button play_button;
     Button credits_button;
     Button profiles_button;
@@ -21,8 +21,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Import of the font.
         Typeface myTypeface = Typeface.createFromAsset(getAssets(), "fonts/SignPainter-HouseScript.ttf");
 
+        //Setting the fonts on the buttons.
         play_button = (Button) findViewById(R.id.play_button);
         play_button.setTypeface(myTypeface);
         credits_button = (Button) findViewById(R.id.credits_button);
@@ -35,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         options_button.setTypeface(myTypeface);
 
     }
+
+    // Methods for moving to other Activities.
 
     public void goToCredits(View view){
         Intent intent = new Intent(this, CreditsActivity.class);

@@ -19,11 +19,12 @@ public class ViewMatchStatisticsActivity extends AppCompatActivity {
     DatabaseHelper dbHelper;
 
     int prova;
-
+    int playerID;
     int idMatch;
     int numberMoves;
     int idWinner;
     String date;
+    String namePlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,18 +37,17 @@ public class ViewMatchStatisticsActivity extends AppCompatActivity {
 
         Bundle extras = intent.getExtras();
 
-        prova = extras.getInt("Prova");
+        playerID = extras.getInt("KEY_EXTRA_CONTACT_ID");
 
+        dbHelper = new DatabaseHelper(getApplicationContext());
+        final Cursor cursor = dbHelper.getProfile(playerID);
 
         textViewId = (TextView) findViewById(R.id.TextViewId);
         textViewDate = (TextView) findViewById(R.id.TextViewDate);
         textViewWinner = (TextView) findViewById(R.id.TextViewWinner);
         textViewMoves = (TextView) findViewById(R.id.TextViewMoves);
 
-        dbHelper = new DatabaseHelper(getApplicationContext());
-        final Cursor cursor = dbHelper.getMatch(prova);
-
-        textViewId.setText(getIdMatchFromCursor(cursor));
+        textViewId.setText(getNamePlayerFromCursor(cursor));
 
     }
 
@@ -80,5 +80,14 @@ public class ViewMatchStatisticsActivity extends AppCompatActivity {
         return namePlayer;
     }
     */
+
+    // Only for tests
+
+    public String getNamePlayerFromCursor(Cursor cursor){
+        if(cursor.moveToFirst()){
+            namePlayer = cursor.getString(cursor.getColumnIndex(dbHelper.PLAYER_COLUMN_NAME));
+        }
+        return namePlayer;
+    }
 
 }
