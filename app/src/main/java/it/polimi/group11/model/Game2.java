@@ -323,4 +323,9 @@ public class Game2 {
         this.totalBeadsInBoard=totalBeadsInBoard;
     }
 
+    public void iteratorPrevious(int numPlayers){
+        for (int i=0;i<numPlayers-1;i++)
+            iteratorNext();
+    }
+
 }
