@@ -61,4 +61,11 @@ public class Configuration {
         return configuration;
     }
 
+    public void setBoard(Board2 board) {
+        this.board = board;
+    }
+
+    public void setGame2(Game2 game2) {
+        this.game = game2;
+    }
 }
