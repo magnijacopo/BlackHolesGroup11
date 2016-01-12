@@ -29,7 +29,7 @@ public class Configuration {
     private String configuration ="";
 
     private String getFirstPlayer() {
-        return String.valueOf(game.getFirstPlayer());
+        return (game.getFirstPlayer());
     }
 
     private String getNumberOfPlayers() {
@@ -52,12 +52,14 @@ public class Configuration {
         return configuration;
     }
 
-    private String nextConfiguration(String move){
+    public String nextConfiguration(String move){
         movingPlayer = game.currentPlayer(move);
-        if(movingPlayer.equals(game.getError()))
-            return "error: the move is not valid";
+        if(movingPlayer.equals(game.getError())) {
+            configuration = "error: the move is not valid";
+            return configuration;
+        }
         if (game.getValidity())
-            configuration = getNumberOfPlayers()+movingPlayer+getBarStatus()+getBeadsPosition();
+            configuration = getNumberOfPlayers() + movingPlayer + getBarStatus() + getBeadsPosition();
         return configuration;
     }
 

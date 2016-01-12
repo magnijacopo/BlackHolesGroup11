@@ -1,5 +1,7 @@
 package it.polimi.group11.model;
 
+import android.util.Log;
+
 import it.polimi.group11.PlayGameActivity;
 import it.polimi.group11.enumeration.PlayerID;
 
@@ -19,7 +21,7 @@ public class Player {
 
 
 
-    private Bead[] bead = new Bead[5];    //LI ISTANZI DA QUALCHE PARTE ? IO L' HO FATTO IN GAME2 CON DEFINEBEAD
+    private Bead[] bead = new Bead[5];
 
     /**
      * Player identifier variable inside a single game
@@ -34,7 +36,9 @@ public class Player {
 
     private Game2 game2;
 
-    private Board2 board;   //OCCHIO FANTE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    private Board2 board;
+
+    private Configuration config;
 
     /**
      * The players can choose the colour of their beads
@@ -224,7 +228,8 @@ public class Player {
     }*/
 
     public void makeMove(String move) {
-        board.moveBar(move);
+        String A = config.nextConfiguration(move);
+        Log.i("ciao", "A " + A);
     }
 
     public boolean checkPlace(int rowPosition, int columnPosition){
@@ -273,6 +278,10 @@ public class Player {
 
     public void setGame2(Game2 game2) {
         this.game2 = game2;
+    }
+
+    public void setConfiguration(Configuration config) {
+        this.config = config;
     }
 
     public int getBeadsInBoard() {

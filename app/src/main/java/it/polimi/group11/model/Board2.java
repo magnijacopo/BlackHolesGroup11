@@ -195,7 +195,7 @@ public class Board2 {
         }
     }
 
-    private String getBeadsPosition(){
+    public String getBeadsPosition(){
         String beadsPosition="";
         for(int i=0; i < 7;i++) {
             for (int j=0; j < 7; j++) {
@@ -260,7 +260,7 @@ public class Board2 {
                     grid[i][j].setBead(false);
                     grid[i][j].setOwner("0");
                 } else {
-                    currentBeadsPosition = currentBeadsPosition + beadsPosition.charAt(i); //if the cell checked is filled by a bar, the old bead position valued is maintained
+                    currentBeadsPosition = currentBeadsPosition + beadsPosition.charAt(i*7+j); //if the cell checked is filled by a bar, the old bead position valued is maintained
                 }
             }
         }

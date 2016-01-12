@@ -16,9 +16,13 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.Objects;
+
+import android.media.AudioManager;
+import android.media.SoundPool;
+
 
 import it.polimi.group11.model.*;
 
@@ -29,7 +33,8 @@ public class PlayGameActivity extends AppCompatActivity {
      * Attribute declaration
      */
     private Game2 game2 ;
-    private Configuration config;
+    public Configuration config;
+    private TextView turno;
     ImageView cells[] = new ImageView[49];
     ImageView hbars[] = new ImageView[7];
     ImageView vbars[] = new ImageView[7];
@@ -55,6 +60,9 @@ public class PlayGameActivity extends AppCompatActivity {
     private float limitTop;
     private float limitBottom;
     private ImageView beads[][];
+    private SoundPool sounds;
+    private int sound1;
+    private boolean fxOn;
 
 
 
@@ -88,7 +96,17 @@ public class PlayGameActivity extends AppCompatActivity {
             int j = bundle.getInt("PLAYER_NUMBER");
             game2 = new Game2(j);
             config = new Configuration();
+            for(int i=0;i<game2.getPlayerNum();i++) {
+                game2.getCurrentMovingPlayer().setConfiguration(config);
+                game2.iteratorNext();
+            }
         }
+
+        sounds = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
+        sound1 = sounds.load(getApplicationContext(), R.raw.bead_destroyed_fx, 1);
+        fxOn = OptionsActivity.fxSoundsCheck;
+
+        turno = (TextView) findViewById(R.id.turnbox);
 
         RelativeLayout mainLayout = (RelativeLayout) findViewById(R.id.parent);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(mainLayout.getLayoutParams());
@@ -128,6 +146,9 @@ public class PlayGameActivity extends AppCompatActivity {
                 beads[i][j].setOnTouchListener(new MyTouchListener());
             }
         }
+
+        turno.setText("Turno giocatore "+game2.getCurrentPlayer());
+
         /**
          * The following "for" contains initial position of the bars
          */
@@ -185,6 +206,10 @@ public class PlayGameActivity extends AppCompatActivity {
             cells[i] = (ImageView) findViewById(id);
             cells[i].setOnDragListener(new MyDragListener());
         }
+
+
+
+
     }
 
     /**
@@ -348,12 +373,15 @@ public class PlayGameActivity extends AppCompatActivity {
                                 for (int i = 0; i < game2.getPlayerNum(); i++) {
                                     for (int j = 0; j <5; j++) {
                                         if (!game2.getCurrentMovingPlayer().getBead(j).getLife()) {
-                                            beads[(Integer.parseInt(game2.getCurrentMovingPlayer().getId()))-1][j].setVisibility(View.GONE);
+                                            beads[(Integer.parseInt(game2.getCurrentMovingPlayer().getId()))-1][j].setVisibility(View.INVISIBLE);
+                                           // playSoundBead();
                                         }
                                     }
-                                game2.iteratorNext();
+                                    game2.getNextPlayer();
                             }
+                            turno.setText("Turno giocatore "+game2.getCurrentPlayer());
                         }
+                        Log.i("ciao", "config " + config.getConfiguration().substring(0,2)+" "+config.getConfiguration().substring(2,16)+" "+config.getConfiguration().substring(16,65));
                     }
                     //These "if" occur that the bar back to the starting position if it moves  less than half of a cell (move to the right)
                     if(getDeltaX()>0 && ((event.getRawX() - getDa()) < (getStartPointA()+((getFinalPoint()-getStartPointA())/2))) && (event.getRawX() - getDa()) < getLimitRight())
@@ -378,10 +406,13 @@ public class PlayGameActivity extends AppCompatActivity {
                                 for (int j = 0; j < 5; j++) {
                                     if (!game2.getCurrentMovingPlayer().getBead(j).getLife())
                                         beads[(Integer.parseInt(game2.getCurrentMovingPlayer().getId())) - 1][j].setVisibility(View.INVISIBLE);
+                                       // playSoundBead();
                                 }
-                                game2.iteratorNext();
+                                game2.getNextPlayer();
                             }
+                            turno.setText("Turno giocatore "+game2.getCurrentPlayer());
                         }
+                        Log.i("ciao", "config " + config.getConfiguration().substring(0,2)+" "+config.getConfiguration().substring(2,16)+" "+config.getConfiguration().substring(16,65));
                     }
                     //These "if" occur that the bar back to the starting position if it moves  less than half of a cell (move to the left)
                     if(getDeltaX()<0 && ((event.getRawX() - getDa()) > (getFinalPoint()+((getStartPointA()-getFinalPoint())/2))) && (event.getRawX() - getDa()) > getLimitLeft())
@@ -407,11 +438,13 @@ public class PlayGameActivity extends AppCompatActivity {
                                 for (int j = 0; j < 5; j++) {
                                     if (!game2.getCurrentMovingPlayer().getBead(j).getLife())
                                         beads[(Integer.parseInt(game2.getCurrentMovingPlayer().getId())) - 1][j].setVisibility(View.INVISIBLE);
+                                        //playSoundBead();
                                 }
-                                game2.iteratorNext();
+                                game2.getNextPlayer();
                             }
+                            turno.setText("Turno giocatore "+game2.getCurrentPlayer());
                         }
-
+                        Log.i("ciao", "config " + config.getConfiguration().substring(0,2)+" "+config.getConfiguration().substring(2,16)+" "+config.getConfiguration().substring(16,65));
                     }
                     //These "if" occur that the bar back to the starting position if it moves less than half of a cell (move to the bottom)
                     if (getDeltaY()>0 && ((event.getRawY() - getDb()) < (getStartPointB()+((getFinalPoint()-getStartPointB())/2))) && (event.getRawY() - getDb()) < getLimitBottom())
@@ -436,10 +469,13 @@ public class PlayGameActivity extends AppCompatActivity {
                                 for (int j = 0; j < 5; j++){
                                     if (!game2.getCurrentMovingPlayer().getBead(j).getLife())
                                         beads[(Integer.parseInt(game2.getCurrentMovingPlayer().getId())) - 1][j].setVisibility(View.INVISIBLE);
+                                        //playSoundBead();
                                  }
-                                game2.iteratorNext();
+                                game2.getNextPlayer();
                             }
+                            turno.setText("Turno giocatore "+game2.getCurrentPlayer());
                         }
+                        Log.i("ciao", "config " + config.getConfiguration().substring(0,2)+" "+config.getConfiguration().substring(2,16)+" "+config.getConfiguration().substring(16,65));
                     }
                     //These "if" occur that the bar back to the starting position if it moves less than half of a cell (move to the top)
                     if (getDeltaY()<0 && ((event.getRawY() - getDb()) > (getFinalPoint()+((getStartPointB()-getFinalPoint())/2)))&& (event.getRawY() - getDb()) > getLimitTop())
@@ -484,19 +520,14 @@ public class PlayGameActivity extends AppCompatActivity {
                                 if (game2.board.getCell(i, j).getId().equals(v.getResources().getResourceName(v.getId()).substring(21,(v.getResources().getResourceName(v.getId()).length())))) {
                                     game2.board.getCell(i, j).setCentre(v, view.getWidth(), view.getHeight());
                                     centre = game2.board.getCell(i, j).getCentre();
-                                    //Log.i("ciao","supera la cella del model è quella della view");
-                                    //Log.i("ciao","riga "+i);
-                                    //Log.i("ciao","colonna "+j);
                                     if (game2.getCurrentMovingPlayer().placeBead(game2.getCurrentPlayer(),i, j) == true){
-                                       // Log.i("ciao","supera placeBead");
-                                       // Log.i("ciao","riga "+i);
-                                       // Log.i("ciao","colonna "+j);
                                         view.setX(centre[0]);
                                         view.setY(centre[1]);
                                         view.setVisibility(View.VISIBLE);
                                         view.setOnTouchListener(null);
-                                        game2.setTotalBeadsInBoard(game2.getTotalBeadsInBoard()+1);
+                                        game2.setTotalBeadsInBoard(game2.getTotalBeadsInBoard() + 1);
                                         game2.iteratorNext();
+                                        turno.setText("Turno giocatore " + game2.getCurrentPlayer());
                                     }
                                     else{
                                         view.setX(35);
@@ -510,12 +541,13 @@ public class PlayGameActivity extends AppCompatActivity {
 
 
                     if(game2.getTotalBeadsInBoard() == (5*game2.getPlayerNum())) {
-
+                        Log.i("ciao","checkGrid "+game2.board.getCheckGrid());
+                        Log.i("ciao","beadsPosition "+game2.board.getBeadsPosition());
+                        config.setGame2(game2);
+                        config.setBoard(game2.board);
+                        config.setFirstConfiguration();
+                        Log.i("ciao", "config " + config.getConfiguration().substring(0, 2) + " " + config.getConfiguration().substring(2, 16) + " " + config.getConfiguration().substring(16, 65));
                         for(int i=0;i <7;i++) {
-                            //config.setGame2(game2);
-                            //config.setBoard(game2.board);
-                            //config.setFirstConfiguration();
-                            //Log.i("ciao","config "+config.getConfiguration());
                             hbars[i].setOnTouchListener(new MyTouchListener());
                             vbars[i].setOnTouchListener(new MyTouchListener());
                         }
@@ -685,4 +717,11 @@ public class PlayGameActivity extends AppCompatActivity {
     public void setB(float b) {
         this.b = b;
     }
+
+    public void playSoundBead(){
+        if(fxOn) {
+            sounds.play(sound1, 1.0f, 1.0f, 0, 0, 1.5f);
+        }
+    }
+
 }

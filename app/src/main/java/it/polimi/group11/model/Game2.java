@@ -21,7 +21,7 @@ public class Game2 {
     private int firstPlayer=0;
     private boolean gameOver;
     private String lastPlayer;
-    private boolean validity;
+    private boolean validity=true;
     private boolean movesFinished=false;
     private ArrayList<Move> movesList = new ArrayList<>();
     private String error="";
@@ -50,8 +50,8 @@ public class Game2 {
         setFirstPlayer(String.valueOf(firstPlayer));
     }
 
-    public int getFirstPlayer(){
-        return firstPlayer;
+    public String getFirstPlayer(){
+        return getCurrentPlayer();
     }
 
     public String getError(){
@@ -261,8 +261,7 @@ public class Game2 {
 
     public String currentPlayer(String move){
 
-        if (!gameOver){
-            iteratorNext(); //goes to the player who has to move
+        if (!gameOver){ //goes to the player who has to move
             if(currentMovingPlayer.getStatus()){ //if he is alive
                 Move moveToCheck = new Move(move, currentMovingPlayer.getId());
                 // the validity of the input move is checked
@@ -273,7 +272,7 @@ public class Game2 {
                     currentMovingPlayer.setMovesNumber(currentMovingPlayer.getMovesNumber() + 1); //increases the number of moves made by him
                     checkLives(board.getCurrentBeadsPosition()); //checks the life status of the other player
                     movesList.add(moveToCheck); //adds the move to the list of completed moves
-
+                    iteratorNext();
                     if (movesFinished && !gameOver){
                         return getNextPlayer();
                     }

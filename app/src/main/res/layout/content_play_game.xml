@@ -595,6 +595,14 @@ tools:showIn="@layout/activity_play_game"
     </TableRow>
 </TableLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="362dp"
+        android:layout_marginLeft="170dp"
+        android:text="turno giocatore"
+        android:id ="@+id/turnbox"/>
+
 </RelativeLayout>
 
 

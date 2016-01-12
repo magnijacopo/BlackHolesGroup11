@@ -24,7 +24,7 @@ public class OptionsActivity extends AppCompatActivity implements ConfirmDeletio
     public static boolean backgroundMusicCheck = true;
     CheckBox backgroundMusicCheckbox;
 
-    public static boolean fxSoundsCheck;
+    public static boolean fxSoundsCheck = true;
     CheckBox fxSoundsCheckbox;
 
     Button buttonDeleteData;
@@ -90,11 +90,9 @@ public class OptionsActivity extends AppCompatActivity implements ConfirmDeletio
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (fxSoundsCheckbox.isChecked()) {
-                    fxSoundsCheck = false;
-                    Toast.makeText(getApplicationContext(), "FX Disabled", Toast.LENGTH_SHORT).show();
-                } else {
                     fxSoundsCheck = true;
-                    Toast.makeText(getApplicationContext(), "FX Enabled", Toast.LENGTH_SHORT).show();
+                } else {
+                    fxSoundsCheck = false;
                 }
             }
         });
