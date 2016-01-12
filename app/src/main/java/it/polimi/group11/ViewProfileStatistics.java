@@ -6,11 +6,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import it.polimi.group11.helper.DatabaseHelper;
@@ -62,6 +60,7 @@ public class ViewProfileStatistics extends AppCompatActivity {
                 R.id.player_name
         };
 
+        /*
         listViewMatches = (ListView) findViewById(R.id.listViewMatches);
 
         SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(this, R.layout.player_info,
@@ -79,6 +78,7 @@ public class ViewProfileStatistics extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        */
 }
 
 
