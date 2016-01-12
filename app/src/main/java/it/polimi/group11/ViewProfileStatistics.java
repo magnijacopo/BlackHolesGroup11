@@ -30,7 +30,7 @@ public class ViewProfileStatistics extends AppCompatActivity {
 
     ListView listViewMatches;
 
-    public final String KEY_EXTRA_CONTACT_ID = "Prova";
+    public final String KEY_EXTRA_PROVA = "Prova";
 
 
     @Override
@@ -52,8 +52,6 @@ public class ViewProfileStatistics extends AppCompatActivity {
 
         textViewProfileName.setText(getNamePlayerFromCursor(cursor));
         //imageViewPropic.setImageURI(getImagePlayerFromCursor(cursor));
-
-
 
         final Cursor cursorMatches = dbHelper.getAllProfiles();
 
@@ -79,7 +77,7 @@ public class ViewProfileStatistics extends AppCompatActivity {
                 Cursor itemCursor = (Cursor) ViewProfileStatistics.this.listViewMatches.getItemAtPosition(position);
                 int playerID = itemCursor.getInt(itemCursor.getColumnIndex(DatabaseHelper.PLAYER_COLUMN_ID));
                 Intent intent = new Intent(ViewProfileStatistics.this, ViewMatchStatisticsActivity.class);
-                intent.putExtra(KEY_EXTRA_CONTACT_ID, playerID);
+                intent.putExtra(KEY_EXTRA_PROVA, playerID);
                 startActivity(intent);
             }
         });
