@@ -77,7 +77,45 @@ public class Game2 {
         return playersNumber;
     }
 
+    public void checkRowBeadsLife(int row) {
+        row=row-1;
+        for (int i = 0; i < playersNumber; i++) {   //per tutti i giocatori
+            if (currentMovingPlayer.getStatus()) {          //se è vivo il giocatore
+                for (int j = 0; j < 5; j++) {                   // per tutti i bead del giocatore
+                    if (currentMovingPlayer.getBead(j).getLife()) {             //e il bead e vivo
+                        if (currentMovingPlayer.getBead(j).getRowPosition() == row) {    //guarda se il bead è nella barra mossa
+                            for (int k=0;k<7;k++){      //per tutte le celle di quella riga
+                                if(!board.getCell(row,k).getBead()&&currentMovingPlayer.getBead(j).getColumnPosition()==k){  //verifica se la cella è bucata e ha su un bead
+                                    currentMovingPlayer.getBead(j).setLife(false); //se è così, lo uccidi.
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            iteratorNext();
+        }
+    }
 
+    public void checkColumnBeadsLife(int column) {
+        column=column-1;
+        for (int i = 0; i < playersNumber; i++) {   //per tutti i giocatori
+            if (currentMovingPlayer.getStatus()) {          //se è vivo il giocatore
+                for (int j = 0; j < 5; j++) {                   // per tutti i bead del giocatore
+                    if (currentMovingPlayer.getBead(j).getLife()) {             //e il bead e vivo
+                        if (currentMovingPlayer.getBead(j).getColumnPosition() == column) {    //guarda se il bead è nella barra mossa
+                            for (int k=0;k<7;k++){      //per tutte le celle di quella riga
+                                if(!board.getCell(k,column).getBead()&&currentMovingPlayer.getBead(j).getRowPosition()==k){  //verifica se la cella è bucata e ha su un bead
+                                    currentMovingPlayer.getBead(j).setLife(false); //se è così, lo uccidi.
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            iteratorNext();
+        }
+    }
 
     public void iteratorNext(){
         if(!iterator.hasNext())

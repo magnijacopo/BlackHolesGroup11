@@ -381,7 +381,7 @@ public class Game {
                 Move moveToCheck = new Move(move, currentMovingPlayer.getId());
                 // the validity of the input move is checked
                 if(generalMoveCheck(moveToCheck)){ //if the move is valid
-                    currentMovingPlayer.makeMove(moveToCheck.getMoveId(), board);
+                    currentMovingPlayer.makeMove(moveToCheck.getMoveId());
                     System.out.println("the move > " + move + " < is valid");//the player makes the move
                     System.out.println("giocatore che muove " + currentMovingPlayer.getId());
                     currentMovingPlayer.setMovesNumber(currentMovingPlayer.getMovesNumber() + 1); //increases the number of moves made by him

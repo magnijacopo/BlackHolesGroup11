@@ -44,11 +44,13 @@ public class Board2 {
     public void setRow(int row){
         for (int i=0;i<7;i++)
             grid[row][i].setHorizontal(horizontalBar[row].getValue(i + horizontalBar[row].getPosition()));
+        updateRowBeadInCellStatus(row);
     }
 
     public void setColumn(int column){
         for (int i=0;i<7;i++)
             grid[i][column].setVertical(verticalBar[column].getValue(i + verticalBar[column].getPosition()));
+        updateColumnBeadInCellStatus(column);
     }
 
     private void prepareGrid(){
@@ -106,6 +108,7 @@ public class Board2 {
         setInitialPositions();
         prepareGrid();
     }
+
 
     public boolean checkBoundsValidity (String move) {
 
@@ -213,7 +216,40 @@ public class Board2 {
             barStatus=barStatus+String.valueOf(verticalBar[i].getPosition());
         return barStatus;}
 
-    public String getCurrentBeadsPosition() {
+
+    public void updateBeadsCellStatus(){
+        String checkGrid=getCheckGrid();
+        String beadsPosition=getBeadsPosition();
+
+        for (int i=0;i<7;i++) {
+            for (int j = 0; i < 7; j++) {
+                if (checkGrid.charAt(i * 7 + j) == '0') {
+                    grid[i][j].setBead(false);
+                    grid[i][j].setOwner("0");
+                }
+            }
+        }
+    }
+
+    public void updateRowBeadInCellStatus(int row){
+        for (int i=0;i<7;i++){
+            if (!grid[row][i].getHorizontal()&&!grid[row][i].getVertical()&&grid[row][i].getBead()) {
+                grid[row][i].setBead(false);
+                grid[row][i].setOwner("0");
+            }
+        }
+    }
+
+    public void updateColumnBeadInCellStatus(int column){
+        for (int i=0;i<7;i++){
+            if (!grid[i][column].getHorizontal()&&!grid[i][column].getVertical()&&grid[i][ column].getBead()) {
+                grid[i][column].setBead(false);
+                grid[i][column].setOwner("0");
+            }
+        }
+    }
+
+    public String getCurrentBeadsPosition(){
         String checkGrid=getCheckGrid();
         String beadsPosition=getBeadsPosition();
         String currentBeadsPosition = "";

@@ -17,6 +17,8 @@ public class Player {
 
     private int beadsInBoard=0;
 
+
+
     private Bead[] bead = new Bead[5];    //LI ISTANZI DA QUALCHE PARTE ? IO L' HO FATTO IN GAME2 CON DEFINEBEAD
 
     /**
@@ -187,9 +189,9 @@ public class Player {
      * It checks the input and rearrange the position of the bars.
      *
      * @param /input the String that represents the move. {@link Move#moveId}
-     * @param board
+     * @param "board"
      */
-     void makeMove(String input, Board board) {
+     /*void makeMove(String input, Board board) {
         //the input move is sliced in three parts:
         char orientation = input.charAt(0); //vertical or horizontal bar
         int number = Character.getNumericValue(input.charAt(1))-1; //number of the bar
@@ -219,11 +221,11 @@ public class Player {
         }else{
             System.out.println("wrong input");
         }
-    }
-
-    /*public void makeMove2(String move, Board board){
-        board.moveBar(move);
     }*/
+
+    public void makeMove(String move) {
+        board.moveBar(move);
+    }
 
     public boolean checkPlace(int rowPosition, int columnPosition){
         if (((board.getCell(rowPosition, columnPosition).getHorizontal())||(board.getCell(rowPosition,columnPosition).getVertical()))&&(!board.getCell(rowPosition,columnPosition).getBead()))
@@ -242,8 +244,8 @@ public class Player {
                 bead[beadsInBoard].setRowPosition(rowPosition);
                 bead[beadsInBoard].setOwner(owner);
                 bead[beadsInBoard].setLife(true);
-                bead[beadsInBoard].setNumber(beadsInBoard);
                 beadsInBoard++;
+                bead[beadsInBoard-1].setNumber(beadsInBoard);
                 return true;
             }
         }
