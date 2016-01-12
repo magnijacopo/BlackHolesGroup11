@@ -262,8 +262,6 @@ public class Game2 {
     public String currentPlayer(String move){
 
         if (!gameOver){
-            if (currentMovingPlayer.getStatus()){
-                lastPlayer = currentMovingPlayer.getId();}
             iteratorNext(); //goes to the player who has to move
             if(currentMovingPlayer.getStatus()){ //if he is alive
                 Move moveToCheck = new Move(move, currentMovingPlayer.getId());

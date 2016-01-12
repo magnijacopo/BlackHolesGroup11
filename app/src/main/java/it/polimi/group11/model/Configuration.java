@@ -52,7 +52,7 @@ public class Configuration {
         return configuration;
     }
 
-    private String configuration(String move){
+    private String nextConfiguration(String move){
         movingPlayer = game.currentPlayer(move);
         if(movingPlayer.equals(game.getError()))
             return "error: the move is not valid";
