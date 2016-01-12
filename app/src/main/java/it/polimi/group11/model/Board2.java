@@ -254,7 +254,7 @@ public class Board2 {
         String beadsPosition=getBeadsPosition();
         String currentBeadsPosition = "";
         for (int i=0;i<7;i++) {
-            for (int j = 0; i < 7;j++) {
+            for (int j = 0; j < 7;j++) {
                 if (checkGrid.charAt(i*7+j) == '0') {
                     currentBeadsPosition = currentBeadsPosition + "0"; //if the cell checked is a hole, updates there can not be a bead on it
                     grid[i][j].setBead(false);

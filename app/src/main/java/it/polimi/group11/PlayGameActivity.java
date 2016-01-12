@@ -16,6 +16,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import java.util.Objects;
 
@@ -28,7 +29,7 @@ public class PlayGameActivity extends AppCompatActivity {
      * Attribute declaration
      */
     private Game2 game2 ;
-
+    private Configuration config;
     ImageView cells[] = new ImageView[49];
     ImageView hbars[] = new ImageView[7];
     ImageView vbars[] = new ImageView[7];
@@ -86,21 +87,23 @@ public class PlayGameActivity extends AppCompatActivity {
         if(bundle != null) {
             int j = bundle.getInt("PLAYER_NUMBER");
             game2 = new Game2(j);
+            config = new Configuration();
         }
 
         RelativeLayout mainLayout = (RelativeLayout) findViewById(R.id.parent);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(mainLayout.getLayoutParams());
         beads = new ImageView[game2.getPlayerNum()][5];
 
-        game2.randomFirstPlayer();
+        //game2.randomFirstPlayer();
 
 
         for (int j = 4; j >=0; j--) {
-            for (int i = 0; i < game2.getPlayerNum(); i++) {
+            for (int i = (game2.getPlayerNum()-1); i >=0 ; i--) {
                 beads[i][j] = new ImageView(this);
                 mainLayout.addView(beads[i][j], params);
                 String id = "bead" + Integer.toString(i) + Integer.toString(j);
-               /* switch(Integer.parseInt(game2.getCurrentPlayer())) {
+                game2.iteratorPrevious(game2.getPlayerNum());
+                switch(Integer.parseInt(game2.getCurrentPlayer())) {
                     case 1:
                         beads[i][j].setImageResource(R.mipmap.bead1);
                         break;
@@ -115,8 +118,7 @@ public class PlayGameActivity extends AppCompatActivity {
                         break;
                     default:
                         break;
-                }*/
-                game2.iteratorNext();
+                }
                 //ViewGroup.MarginLayoutParams marginParams = new ViewGroup.MarginLayoutParams(beads[j][i].getLayoutParams());
                 //marginParams.setMargins(0, 0, (int) (10 * beads[j][i].getResources().getDisplayMetrics().density), (int) (10 * beads[j][i].getResources().getDisplayMetrics().density));
                 //RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(marginParams);
@@ -126,7 +128,6 @@ public class PlayGameActivity extends AppCompatActivity {
                 beads[i][j].setOnTouchListener(new MyTouchListener());
             }
         }
-
         /**
          * The following "for" contains initial position of the bars
          */
@@ -357,13 +358,6 @@ public class PlayGameActivity extends AppCompatActivity {
                                 game2.iteratorNext();
                             }
                         }
-
-                       /* int marginLeft = (int) (40 * v.getResources().getDisplayMetrics().density);
-                        int newMArginLeft = (int) (marginLeft + (30 * v.getResources().getDisplayMetrics().density));
-                        ViewGroup.MarginLayoutParams marginParams = new ViewGroup.MarginLayoutParams(v.getLayoutParams());
-                        marginParams.setMargins(newMArginLeft,550,0,0);
-                        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(marginParams);
-                        v.setLayoutParams(layoutParams);*/
                     }
                     //These "if" occur that the bar back to the starting position if it moves  less than half of a cell (move to the right)
                     if(getDeltaX()>0 && ((event.getRawX() - getDa()) < (getStartPointA()+((getFinalPoint()-getStartPointA())/2))) && (event.getRawX() - getDa()) < getLimitRight())
@@ -494,8 +488,13 @@ public class PlayGameActivity extends AppCompatActivity {
                                 if (game2.board.getCell(i, j).getId().equals(v.getResources().getResourceName(v.getId()).substring(21,(v.getResources().getResourceName(v.getId()).length())))) {
                                     game2.board.getCell(i, j).setCentre(v, view.getWidth(), view.getHeight());
                                     centre = game2.board.getCell(i, j).getCentre();
-
+                                    //Log.i("ciao","supera la cella del model è quella della view");
+                                    //Log.i("ciao","riga "+i);
+                                    //Log.i("ciao","colonna "+j);
                                     if (game2.getCurrentMovingPlayer().placeBead(game2.getCurrentPlayer(),i, j) == true){
+                                       // Log.i("ciao","supera placeBead");
+                                       // Log.i("ciao","riga "+i);
+                                       // Log.i("ciao","colonna "+j);
                                         view.setX(centre[0]);
                                         view.setY(centre[1]);
                                         view.setVisibility(View.VISIBLE);
@@ -515,7 +514,12 @@ public class PlayGameActivity extends AppCompatActivity {
 
 
                     if(game2.getTotalBeadsInBoard() == (5*game2.getPlayerNum())) {
+
                         for(int i=0;i <7;i++) {
+                            //config.setGame2(game2);
+                            //config.setBoard(game2.board);
+                            //config.setFirstConfiguration();
+                            //Log.i("ciao","config "+config.getConfiguration());
                             hbars[i].setOnTouchListener(new MyTouchListener());
                             vbars[i].setOnTouchListener(new MyTouchListener());
                         }
