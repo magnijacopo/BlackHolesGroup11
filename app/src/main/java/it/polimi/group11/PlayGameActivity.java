@@ -100,7 +100,7 @@ public class PlayGameActivity extends AppCompatActivity {
                 beads[i][j] = new ImageView(this);
                 mainLayout.addView(beads[i][j], params);
                 String id = "bead" + Integer.toString(i) + Integer.toString(j);
-                switch(Integer.parseInt(game2.getCurrentPlayer())) {
+               /* switch(Integer.parseInt(game2.getCurrentPlayer())) {
                     case 1:
                         beads[i][j].setImageResource(R.mipmap.bead1);
                         break;
@@ -115,7 +115,7 @@ public class PlayGameActivity extends AppCompatActivity {
                         break;
                     default:
                         break;
-                }
+                }*/
                 game2.iteratorNext();
                 //ViewGroup.MarginLayoutParams marginParams = new ViewGroup.MarginLayoutParams(beads[j][i].getLayoutParams());
                 //marginParams.setMargins(0, 0, (int) (10 * beads[j][i].getResources().getDisplayMetrics().density), (int) (10 * beads[j][i].getResources().getDisplayMetrics().density));

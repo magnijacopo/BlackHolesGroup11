@@ -37,8 +37,6 @@ public class ViewProfileListActivity extends AppCompatActivity {
                 R.id.playerImage
         };
 
-
-
         SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(this, R.layout.player_info,
                 cursor, columns, widgets, 0);
         listView = (ListView)findViewById(R.id.listView1);
@@ -50,6 +48,7 @@ public class ViewProfileListActivity extends AppCompatActivity {
                                     int position, long id) {
                 Cursor itemCursor = (Cursor) ViewProfileListActivity.this.listView.getItemAtPosition(position);
                 int playerID = itemCursor.getInt(itemCursor.getColumnIndex(DatabaseHelper.PLAYER_COLUMN_ID));
+                finish();
                 Intent intent = new Intent(ViewProfileListActivity.this, ViewProfileStatistics.class);
                 intent.putExtra(KEY_EXTRA_CONTACT_ID, playerID);
                 startActivity(intent);

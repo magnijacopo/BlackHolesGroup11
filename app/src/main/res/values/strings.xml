@@ -27,4 +27,7 @@
     <string name="save">save</string>
     <string name="profile_name">Mario</string>
     <string name="delete_profile_button">delete</string>
+    <string name="dialog_confirm_delete">Are you sure?</string>
+    <string name="cancel">Cancel</string>
+    <string name="OK">OK</string>
 </resources>

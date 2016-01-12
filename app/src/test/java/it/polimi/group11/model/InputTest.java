@@ -4,7 +4,289 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import it.polimi.group11.firstReleaseTest.TestFirstRelease;
 
+/**
+ * Created by aless on 03/12/2015.
+ */
 public class InputTest {
+    @Test
+    public void test1_15_1() throws Exception{ //player 2 si suicida e finisce il gioco, l'ultimo status deve avere player 2 !Risolto!
+        String arg1_15_1="22101201022010220201010100000002000000000000000000000200100000000h7oh1oh7iv3oh1ih7oh6iv5ov6iv3iv4ov1iv7ih4iv2i";
+        String result1_15_1 = new TestFirstRelease().moveTest(arg1_15_1);
+        assertEquals("22101100111021110000000100000000000000000000000000000000100000000",result1_15_1);
+    }
+
+    @Test
+    public void test5_1_1() throws Exception
+    {
+        String arg5_1_1 = "21120110011220200010000000000000000000100000000000000000000002002v3o";
+        String result5_1_1 = new TestFirstRelease().moveTest(arg5_1_1);
+        assertTrue(result5_1_1.startsWith("error"));
+    }
+
+    @Test
+    public void test9_1_1() throws Exception {
+        String arg9_1_1="21210022222012210000000000000000010000100000000000000200200000000h4o";
+        String result9_1_1 = new TestFirstRelease().moveTest(arg9_1_1);
+        assertEquals("22210122222012210000000000000000010000100000000000000200200000000",result9_1_1);
+    }
+
+    @Test
+    public void test2_107_2() throws Exception { //player 2 si suicida e finisce il gioco, l'ultimo status deve avere player 2 !Risolto!
+        String arg2_107_2="42202221211112000000010004102200300030002000031000030000000001020v2oh6ov5ih4ih1ih7iv3oh3iv1iv4oh6ih7iv2ih4ov1ov2ov5ov1ov3ih5ih7oh1ov2ih5oh3ov2ov5ih2oh1ih7iv5ih2ih6ih1ih4ih1oh4ov3oh2oh1oh4iv7oh6oh7oh4iv2iv7iv2ih2oh6ov3ih3iv5oh2iv3ov4iv2ov5oh5iv1iv4ih1ih3iv7oh4oh1iv2oh7oh5oh3ov4ov5ih4ih5ih7ih6iv1ov4oh3iv1iv5ih4oh1oh3oh5oh1iv7ih5iv7oh6ov1ov2ih4ov7iv5ov7ov5iv3ih7ov6ov7oh7iv5ov3ih7iv5oh2i";
+        String result2_107_2 = new TestFirstRelease().moveTest(arg2_107_2);
+        assertEquals("42001212021022120000010000000000000000000000000000000000000000000",result2_107_2);
+    }
+    @Test
+    public void test3_50_1() throws Exception {//Risolto!
+        String arg3_50_1="32212000000121000000300001000000220000000300202010030000100010001v6oh6oh3ih4ov3ih1iv6ih3ih4oh7oh6iv1oh2ih1ih6ov2oh5oh6oh4iv1oh3oh6iv5ov2oh6ov4ih3iv1iv4ih5iv6oh3ov7ov1iv7iv6iv1oh3ov3oh5ov1oh3ih4ov6ov3oh7ih6iv3iv2ih1o";
+        String result3_50_1 = new TestFirstRelease().moveTest(arg3_50_1);
+        assertEquals("31101211021102100000000000000000000000000000000000000000000000001",result3_50_1);
+    }
+    @Test
+    public void test4_46_3() throws Exception {
+        String arg4_46_3="33220112200020200220000000100310000000000000020000021000100000020v1oh2ih5oh6ih2iv6iv7oh4ov3ov4iv6ih4ih1iv3ov5ov1iv7ov5ih7iv1ov2ov3iv1ov2ih4iv5ov3ov6oh2ov6ov7ih2oh6iv1ih6ov1iv7ih6ov4ih7oh1iv2ov5iv3iv2ih3o";
+        String result4_46_3 = new TestFirstRelease().moveTest(arg4_46_3);
+        assertEquals("31021022200100200000000000000000000000000000020000000000000000000",result4_46_3);
+    }
+    @Test
+    public void test5_16_1() throws Exception {
+        String arg5_16_1="21120110011220200010000000000000000000100000000000000000000002002v5ov2oh2iv2iv7ov1iv7ih1ov5oh4oh5ih3oh7oh5oh6ov4i";
+        String result5_16_1 = new TestFirstRelease().moveTest(arg5_16_1);
+        assertEquals("22211211101212200010000000000000000000100000000000000000000000000",result5_16_1);
+    }
+    @Test
+    public void test9() throws Exception { //Risolto player 1 elimina player 2, l'ultimo status deve avere player 1. player 2 sembra non morire
+        String arg9_1_1="21210022222012210000000000000000010000100000000000000200200000000h4o";
+        String result9_1_1 = new TestFirstRelease().moveTest(arg9_1_1);
+        assertEquals("22210122222012210000000000000000010000100000000000000200200000000",result9_1_1);
+        String arg9_2_1="21210022222012210000000000000000010000100000000000000200200000000h4oh3i";
+        String result9_2_1 = new TestFirstRelease().moveTest(arg9_2_1);
+        assertTrue(result9_2_1.startsWith("error"));
+        String arg9_2_2="21210022222012210000000000000000010000100000000000000200200000000h4ov5o";
+        String result9_2_2 = new TestFirstRelease().moveTest(arg9_2_2);
+        assertTrue(result9_2_2.startsWith("error"));
+        String arg9_2_3="21210022222012210000000000000000010000100000000000000200200000000h4oh5i";
+        String result9_2_3 = new TestFirstRelease().moveTest(arg9_2_3);
+        assertEquals("21210112222012210000000000000000010000100000000000000200200000000",result9_2_3);
+        String arg9_3_1="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7i";
+        String result9_3_1 = new TestFirstRelease().moveTest(arg9_3_1);
+        assertEquals("22210112222012200000000000000000010000100000000000000200200000000",result9_3_1);
+        String arg9_4_1="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7ih1o";
+        String result9_4_1 = new TestFirstRelease().moveTest(arg9_4_1);
+        assertTrue(result9_4_1.startsWith("error"));
+        String arg9_4_2="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4i";
+        String result9_4_2 = new TestFirstRelease().moveTest(arg9_4_2);
+        assertEquals("21210112222002200000000000000000000000100000000000000200200000000",result9_4_2);
+        String arg9_5_1="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2i";
+        String result9_5_1 = new TestFirstRelease().moveTest(arg9_5_1);
+        assertEquals("22200112222002200000000000000000000000100000000000000200200000000",result9_5_1);
+        String arg9_6_1="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2ih6o";
+        String result9_6_1 = new TestFirstRelease().moveTest(arg9_6_1);
+        assertTrue(result9_6_1.startsWith("error"));
+        String arg9_6_2="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv5o";
+        String result9_6_2 = new TestFirstRelease().moveTest(arg9_6_2);
+        assertTrue(result9_6_2.startsWith("error"));
+        String arg9_6_3="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2ih1o";
+        String result9_6_3 = new TestFirstRelease().moveTest(arg9_6_3);
+        assertTrue(result9_6_3.startsWith("error"));
+        String arg9_6_4="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv6o";
+        String result9_6_4 = new TestFirstRelease().moveTest(arg9_6_4);
+        assertTrue(result9_6_4.startsWith("error"));
+        String arg9_6_5="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv5o";
+        String result9_6_5 = new TestFirstRelease().moveTest(arg9_6_5);
+        assertTrue(result9_6_5.startsWith("error"));
+        String arg9_6_6="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7o";
+        String result9_6_6 = new TestFirstRelease().moveTest(arg9_6_6);
+        assertEquals("21200112222002210000000000000000000000100000000000000200200000000",result9_6_6);
+        String arg9_7_1="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5i";
+        String result9_7_1 = new TestFirstRelease().moveTest(arg9_7_1);
+        assertEquals("22200112222001210000000000000000000000100000000000000200200000000",result9_7_1);
+        String arg9_8_1="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5iv4i";
+        String result9_8_1 = new TestFirstRelease().moveTest(arg9_8_1);
+        assertTrue(result9_8_1.startsWith("error"));
+        String arg9_8_2="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih2i";
+        String result9_8_2 = new TestFirstRelease().moveTest(arg9_8_2);
+        assertTrue(result9_8_2.startsWith("error"));
+        String arg9_8_3="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih3i";
+        String result9_8_3 = new TestFirstRelease().moveTest(arg9_8_3);
+        assertTrue(result9_8_3.startsWith("error"));
+        String arg9_8_4="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5iv4i";
+        String result9_8_4 = new TestFirstRelease().moveTest(arg9_8_4);
+        assertTrue(result9_8_4.startsWith("error"));
+        String arg9_8_5="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1i";
+        String result9_8_5 = new TestFirstRelease().moveTest(arg9_8_5);
+        assertEquals("21100112222001210000000000000000000000100000000000000200200000000",result9_8_5);
+        String arg9_9_1="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4i";
+        String result9_9_1 = new TestFirstRelease().moveTest(arg9_9_1);
+        assertEquals("22100012222001210000000000000000000000100000000000000200200000000",result9_9_1);
+        String arg9_10_1="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih7o";
+        String result9_10_1 = new TestFirstRelease().moveTest(arg9_10_1);
+        assertTrue(result9_10_1.startsWith("error"));
+        String arg9_10_2="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2o";
+        String result9_10_2 = new TestFirstRelease().moveTest(arg9_10_2);
+        assertEquals("21110012222001210000000000000000000000100000000000000200200000000",result9_10_2);
+        String arg9_11_1="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2ov2o";
+        String result9_11_1 = new TestFirstRelease().moveTest(arg9_11_1);
+        assertTrue(result9_11_1.startsWith("error"));
+        String arg9_11_2="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4o";
+        String result9_11_2 = new TestFirstRelease().moveTest(arg9_11_2);
+        assertEquals("22110112222001210000000000000000000000100000000000000200200000000",result9_11_2);
+        String arg9_12_1="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2i";
+        String result9_12_1 = new TestFirstRelease().moveTest(arg9_12_1);
+        assertEquals("21100112222001210000000000000000000000100000000000000200200000000",result9_12_1);
+        String arg9_13_1="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3o";
+        String result9_13_1 = new TestFirstRelease().moveTest(arg9_13_1);
+        assertEquals("22100112222101210000000000000000000000100000000000000000200000000",result9_13_1);
+        String arg9_14_1="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3ov2o";
+        String result9_14_1 = new TestFirstRelease().moveTest(arg9_14_1);
+        assertTrue(result9_14_1.startsWith("error"));
+        String arg9_14_2="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh2i";
+        String result9_14_2 = new TestFirstRelease().moveTest(arg9_14_2);
+        assertTrue(result9_14_2.startsWith("error"));
+        String arg9_14_3="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3ov3i";
+        String result9_14_3 = new TestFirstRelease().moveTest(arg9_14_3);
+        assertTrue(result9_14_3.startsWith("error"));
+        String arg9_14_4="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3o";
+        String result9_14_4 = new TestFirstRelease().moveTest(arg9_14_4);
+        assertEquals("21101112222101210000000000000000000000100000000000000000200000000",result9_14_4);
+        String arg9_15_1="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3ov5o";
+        String result9_15_1 = new TestFirstRelease().moveTest(arg9_15_1);
+        assertEquals("22101112222102210000000000000000000000100000000000000000200000000",result9_15_1);
+        String arg9_16_1="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3ov5oh2i";
+        String result9_16_1 = new TestFirstRelease().moveTest(arg9_16_1);
+        assertTrue(result9_16_1.startsWith("error"));
+        String arg9_16_2="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3ov5oh4i";
+        String result9_16_2 = new TestFirstRelease().moveTest(arg9_16_2);
+        assertEquals("21101012222102210000000000000000000000100000000000000000200000000",result9_16_2);
+        String arg9_17_1="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3ov5oh4iv1o";
+        String result9_17_1 = new TestFirstRelease().moveTest(arg9_17_1);
+        assertTrue(result9_17_1.startsWith("error"));
+        String arg9_17_2="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3ov5oh4iv6o";
+        String result9_17_2 = new TestFirstRelease().moveTest(arg9_17_2);
+        assertTrue(result9_17_2.startsWith("error"));
+        String arg9_17_3="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3ov5oh4ih2i";
+        String result9_17_3 = new TestFirstRelease().moveTest(arg9_17_3);
+        assertTrue(result9_17_3.startsWith("error"));
+        String arg9_17_4="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3ov5oh4ih7o";
+        String result9_17_4 = new TestFirstRelease().moveTest(arg9_17_4);
+        assertTrue(result9_17_4.startsWith("error"));
+        String arg9_17_5="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3ov5oh4ih3i";
+        String result9_17_5 = new TestFirstRelease().moveTest(arg9_17_5);
+        assertEquals("22100012222102210000000000000000000000100000000000000000200000000",result9_17_5);
+        String arg9_18_1="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3ov5oh4ih3ih2i";
+        String result9_18_1 = new TestFirstRelease().moveTest(arg9_18_1);
+        assertTrue(result9_18_1.startsWith("error"));
+        String arg9_18_2="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3ov5oh4ih3iv6o";
+        String result9_18_2 = new TestFirstRelease().moveTest(arg9_18_2);
+        assertTrue(result9_18_2.startsWith("error"));
+        String arg9_18_3="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3ov5oh4ih3iv2i";
+        String result9_18_3 = new TestFirstRelease().moveTest(arg9_18_3);
+        assertEquals("21100012221102210000000000000000000000100000000000000000200000000",result9_18_3);
+        String arg9_19_1="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3ov5oh4ih3iv2ih3i";
+        String result9_19_1 = new TestFirstRelease().moveTest(arg9_19_1);
+        assertTrue(result9_19_1.startsWith("error"));
+        String arg9_19_2="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3ov5oh4ih3iv2ih5i";
+        String result9_19_2 = new TestFirstRelease().moveTest(arg9_19_2);
+        assertEquals("22100002221102210000000000000000000000100000000000000000200000000",result9_19_2);
+        String arg9_20_1="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3ov5oh4ih3iv2ih5ih6o";
+        String result9_20_1 = new TestFirstRelease().moveTest(arg9_20_1);
+        assertTrue(result9_20_1.startsWith("error"));
+        String arg9_20_2="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3ov5oh4ih3iv2ih5iv7o";
+        String result9_20_2 = new TestFirstRelease().moveTest(arg9_20_2);
+        assertEquals("21100002221102220000000000000000000000100000000000000000200000000",result9_20_2);
+        String arg9_21_1="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3ov5oh4ih3iv2ih5iv7oh5o";
+        String result9_21_1 = new TestFirstRelease().moveTest(arg9_21_1);
+        assertEquals("22100012221102220000000000000000000000100000000000000000200000000",result9_21_1);
+        String arg9_22_1="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3ov5oh4ih3iv2ih5iv7oh5ov5o";
+        String result9_22_1 = new TestFirstRelease().moveTest(arg9_22_1);
+        assertTrue(result9_22_1.startsWith("error"));
+        String arg9_22_2="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3ov5oh4ih3iv2ih5iv7oh5oh3o";
+        String result9_22_2 = new TestFirstRelease().moveTest(arg9_22_2);
+        assertEquals("21101012221102220000000000000000000000100000000000000000200000000",result9_22_2);
+        String arg9_23_1="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3ov5oh4ih3iv2ih5iv7oh5oh3ov4i";
+        String result9_23_1 = new TestFirstRelease().moveTest(arg9_23_1);
+        assertTrue(result9_23_1.startsWith("error"));
+        String arg9_23_2="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3ov5oh4ih3iv2ih5iv7oh5oh3ov1o";
+        String result9_23_2 = new TestFirstRelease().moveTest(arg9_23_2);
+        assertTrue(result9_23_2.startsWith("error"));
+        String arg9_23_3="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3ov5oh4ih3iv2ih5iv7oh5oh3ov4i";
+        String result9_23_3 = new TestFirstRelease().moveTest(arg9_23_3);
+        assertTrue(result9_23_3.startsWith("error"));
+        String arg9_23_4="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3ov5oh4ih3iv2ih5iv7oh5oh3ov6i";
+        String result9_23_4 = new TestFirstRelease().moveTest(arg9_23_4);
+        assertEquals("22101012221102120000000000000000000000100000000000000000200000000",result9_23_4);
+        String arg9_24_1="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3ov5oh4ih3iv2ih5iv7oh5oh3ov6iv4o";
+        String result9_24_1 = new TestFirstRelease().moveTest(arg9_24_1);
+        assertEquals("21101012221112120000000000000000000000100000000000000000200000000",result9_24_1);
+        String arg9_25_1="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3ov5oh4ih3iv2ih5iv7oh5oh3ov6iv4oh7i";
+        String result9_25_1 = new TestFirstRelease().moveTest(arg9_25_1);
+        assertEquals("22101012121112120000000000000000000000100000000000000000200000000",result9_25_1);
+        String arg9_26_1="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3ov5oh4ih3iv2ih5iv7oh5oh3ov6iv4oh7iv3o";
+        String result9_26_1 = new TestFirstRelease().moveTest(arg9_26_1);
+        assertEquals("21101012121212120000000000000000000000100000000000000000200000000",result9_26_1);
+        String arg9_27_1="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3ov5oh4ih3iv2ih5iv7oh5oh3ov6iv4oh7iv3ov4o";
+        String result9_27_1 = new TestFirstRelease().moveTest(arg9_27_1);
+        assertEquals("22101012121222120000000000000000000000100000000000000000200000000",result9_27_1);
+        String arg9_28_1="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3ov5oh4ih3iv2ih5iv7oh5oh3ov6iv4oh7iv3ov4ov1o";
+        String result9_28_1 = new TestFirstRelease().moveTest(arg9_28_1);
+        assertTrue(result9_28_1.startsWith("error"));
+        String arg9_28_2="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3ov5oh4ih3iv2ih5iv7oh5oh3ov6iv4oh7iv3ov4ov4o";
+        String result9_28_2 = new TestFirstRelease().moveTest(arg9_28_2);
+        assertTrue(result9_28_2.startsWith("error"));
+        String arg9_28_3="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3ov5oh4ih3iv2ih5iv7oh5oh3ov6iv4oh7iv3ov4oh7o";
+        String result9_28_3 = new TestFirstRelease().moveTest(arg9_28_3);
+        assertEquals("21101012221222120000000000000000000000100000000000000000200000000",result9_28_3);
+        String arg9_29_1="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3ov5oh4ih3iv2ih5iv7oh5oh3ov6iv4oh7iv3ov4oh7ov4o";
+        String result9_29_1 = new TestFirstRelease().moveTest(arg9_29_1);
+        assertTrue(result9_29_1.startsWith("error"));
+        String arg9_29_2="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3ov5oh4ih3iv2ih5iv7oh5oh3ov6iv4oh7iv3ov4oh7oh6o";
+        String result9_29_2 = new TestFirstRelease().moveTest(arg9_29_2);
+        assertTrue(result9_29_2.startsWith("error"));
+        String arg9_29_3="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3ov5oh4ih3iv2ih5iv7oh5oh3ov6iv4oh7iv3ov4oh7ov4o";
+        String result9_29_3 = new TestFirstRelease().moveTest(arg9_29_3);
+        assertTrue(result9_29_3.startsWith("error"));
+        String arg9_29_4="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3ov5oh4ih3iv2ih5iv7oh5oh3ov6iv4oh7iv3ov4oh7oh5i";
+        String result9_29_4 = new TestFirstRelease().moveTest(arg9_29_4);
+        assertEquals("22101002221222120000000000000000000000100000000000000000200000000",result9_29_4);
+        String arg9_30_1="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3ov5oh4ih3iv2ih5iv7oh5oh3ov6iv4oh7iv3ov4oh7oh5iv6i";
+        String result9_30_1 = new TestFirstRelease().moveTest(arg9_30_1);
+        assertEquals("21101002221222020000000000000000000000100000000000000000200000000",result9_30_1);
+        String arg9_31_1="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3ov5oh4ih3iv2ih5iv7oh5oh3ov6iv4oh7iv3ov4oh7oh5iv6ih4i";
+        String result9_31_1 = new TestFirstRelease().moveTest(arg9_31_1);
+        assertTrue(result9_31_1.startsWith("error"));
+        String arg9_31_2="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3ov5oh4ih3iv2ih5iv7oh5oh3ov6iv4oh7iv3ov4oh7oh5iv6iv4o";
+        String result9_31_2 = new TestFirstRelease().moveTest(arg9_31_2);
+        assertTrue(result9_31_2.startsWith("error"));
+        String arg9_31_3="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3ov5oh4ih3iv2ih5iv7oh5oh3ov6iv4oh7iv3ov4oh7oh5iv6ih3i";
+        String result9_31_3 = new TestFirstRelease().moveTest(arg9_31_3);
+        assertEquals("22100002221222020000000000000000000000100000000000000000200000000",result9_31_3);
+        String arg9_32_1="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3ov5oh4ih3iv2ih5iv7oh5oh3ov6iv4oh7iv3ov4oh7oh5iv6ih3iv4o";
+        String result9_32_1 = new TestFirstRelease().moveTest(arg9_32_1);
+        assertTrue(result9_32_1.startsWith("error"));
+        String arg9_32_2="21210022222012210000000000000000010000100000000000000200200000000h4oh5iv7iv4ih2iv7ov5ih1ih4ih2oh4oh2iv3oh3ov5oh4ih3iv2ih5iv7oh5oh3ov6iv4oh7iv3ov4oh7oh5iv6ih3ih6i";
+        String result9_32_2 = new TestFirstRelease().moveTest(arg9_32_2);
+        assertEquals("22100001221222020000000000000000000000100000000000000000000000000",result9_32_2);
+    }
+    @Test
+    public void test7_10_1() throws Exception { //player 2 con v7i uccide player 3 ma player 3 rimane vivo
+        String arg7_10_1="32202102211100221000100000000300300000000000020200100000000001002h6ih7iv5ov1ih6ih4ov4oh3ih2ov7i";
+        String result7_10_1 = new TestFirstRelease().moveTest(arg7_10_1);
+        assertEquals("31211200101111211000100000000000000000000000020000000000000000002",result7_10_1);
+    }
+    @Test
+    public void test7_11_1() throws Exception {
+        String arg7_11_1="32202102211100221000100000000300300000000000020200100000000001002h6ih7iv5ov1ih6ih4ov4oh3ih2ov7iv5i";
+        String result7_11_1 = new TestFirstRelease().moveTest(arg7_11_1);
+        assertEquals("32211200101110211000100000000000000000000000020000000000000000002",result7_11_1);
+    }
+    @Test
+    public void test7_12_2() throws Exception {
+        String arg7_12_2="32202102211100221000100000000300300000000000020200100000000001002h6ih7iv5ov1ih6ih4ov4oh3ih2ov7iv5iv2i";
+        String result7_12_2 = new TestFirstRelease().moveTest(arg7_12_2);
+        assertEquals("31211200100110211000100000000000000000000000020000000000000000002",result7_12_2);
+    }
+
+
     @Test
     public void testYolo() throws Exception {
         String arg1_1_1="22101201022010220201010100000002000000000000000000000200100000000v1o";

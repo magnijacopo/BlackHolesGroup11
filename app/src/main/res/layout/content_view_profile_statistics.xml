@@ -25,9 +25,9 @@
         android:layout_height="wrap_content"
         android:text="@string/delete_profile_button"
         android:id="@+id/buttonDeleteProfile"
-        android:onClick="deleteProfile"
-        android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/TextViewProfileName" />
+        android:onClick="showAlert"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="300dp"
@@ -44,26 +44,10 @@
         android:layout_height="wrap_content"
         android:text="MatchStatistics"
         android:id="@+id/buttonMatch"
-        android:onClick="goToMatchStatistics"
-        android:layout_alignBottom="@+id/imageViewPropic"
-        android:layout_alignStart="@+id/TextViewProfileName" />
-
-    <ScrollView
-        android:layout_width="300dp"
-        android:layout_height="100dp"
-        android:id="@+id/scrollView"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true">
-
-    <ListView
-        android:id="@+id/listViewMatches"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonDeleteProfile"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true">
-    </ListView>
-
-    </ScrollView>
+        android:layout_marginTop="87dp"
+        android:onClick="goToMatchStatistics" />
 
 
 </RelativeLayout>

@@ -1,21 +1,19 @@
 package it.polimi.group11;
 
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import it.polimi.group11.helper.DatabaseHelper;
 
-public class ViewProfileStatistics extends AppCompatActivity {
+public class ViewProfileStatistics extends AppCompatActivity implements ConfirmDeletionDialog.DialogListener {
 
     TextView textViewProfileName;
     ImageView imageViewPropic;
@@ -27,10 +25,6 @@ public class ViewProfileStatistics extends AppCompatActivity {
 
     DatabaseHelper dbHelper;
     int playerID;
-
-    ListView listViewMatches;
-
-    public final String KEY_EXTRA_PROVA = "Prova";
 
 
     @Override
@@ -53,34 +47,6 @@ public class ViewProfileStatistics extends AppCompatActivity {
         textViewProfileName.setText(getNamePlayerFromCursor(cursor));
         //imageViewPropic.setImageURI(getImagePlayerFromCursor(cursor));
 
-        final Cursor cursorMatches = dbHelper.getAllProfiles();
-
-        String [] columns = new String[] {
-                DatabaseHelper.PLAYER_COLUMN_NAME,
-                DatabaseHelper.PLAYER_COLUMN_IMAGE
-        };
-        int [] widgets = new int[] {
-                R.id.playerName,
-                R.id.playerImage
-        };
-
-        listViewMatches = (ListView) findViewById(R.id.listViewMatches);
-
-        SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(this, R.layout.player_info,
-                cursorMatches, columns, widgets, 0);
-        listViewMatches = (ListView)findViewById(R.id.listViewMatches);
-        listViewMatches.setAdapter(cursorAdapter);
-        listViewMatches.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView listView, View view,
-                                    int position, long id) {
-                Cursor itemCursor = (Cursor) ViewProfileStatistics.this.listViewMatches.getItemAtPosition(position);
-                int playerID = itemCursor.getInt(itemCursor.getColumnIndex(DatabaseHelper.PLAYER_COLUMN_ID));
-                Intent intent = new Intent(ViewProfileStatistics.this, ViewMatchStatisticsActivity.class);
-                intent.putExtra(KEY_EXTRA_PROVA, playerID);
-                startActivity(intent);
-            }
-        });
 }
 
 
@@ -119,10 +85,33 @@ public class ViewProfileStatistics extends AppCompatActivity {
     */
 
 
-    public void deleteProfile(View view){
+    public void deleteProfile(){
         dbHelper.deleteProfile(playerID);
+        finish();
         Intent intent = new Intent(getApplicationContext(), ViewProfileListActivity.class);
         startActivity(intent);
     }
+
+    public void goToMatchStatistics(View view){
+        Intent intent = new Intent(ViewProfileStatistics.this, ViewMatchStatisticsActivity.class);
+        intent.putExtra("Prova", 0);
+        startActivity(intent);
+    }
+
+    public void showAlert(View view){
+        DialogFragment dialog = new ConfirmDeletionDialog();
+        Bundle args = new Bundle();
+        args.putString("title", "Alert");
+        args.putString("message", "Delete profile?");
+        dialog.setArguments(args);
+        dialog.show(getFragmentManager(), "tag");
+    }
+
+    public void onOkClicked(){
+        deleteProfile();
+    }
+
+
+
 
 }
