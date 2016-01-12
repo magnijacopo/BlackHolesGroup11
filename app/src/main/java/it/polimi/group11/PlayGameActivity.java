@@ -185,10 +185,6 @@ public class PlayGameActivity extends AppCompatActivity {
             cells[i] = (ImageView) findViewById(id);
             cells[i].setOnDragListener(new MyDragListener());
         }
-
-
-
-
     }
 
     /**
@@ -689,7 +685,4 @@ public class PlayGameActivity extends AppCompatActivity {
     public void setB(float b) {
         this.b = b;
     }
-
-
-
 }
