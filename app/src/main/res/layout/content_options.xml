@@ -1,65 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:paddingBottom="32dp"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:layout_gravity="center"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="it.polimi.group11.OptionsActivity"
     tools:showIn="@layout/activity_options"
-    android:background="@mipmap/option_xhdpi"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:baselineAligned="false"
-    android:clickable="false">
+    android:clickable="false"
+    android:background="@mipmap/options_background">
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/background_music"
-        android:id="@+id/background_music_checkbox"
-        android:checked="true"
-        android:onClick="backgroundMusic"
-        android:layout_marginBottom="8dp"
-        android:textColor="#ffffff"
-        android:textStyle="italic"
-        android:buttonTint="#155056"
-        android:textSize="18sp"
-        android:layout_above="@+id/fx_sounds_checkbox"
-        android:layout_alignStart="@+id/fx_sounds_checkbox"
-        android:layout_gravity="center_horizontal"
-        android:paddingRight="30dp" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:paddingBottom="32dp"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_gravity="center"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="FX SOUNDS"
-        android:id="@+id/fx_sounds_checkbox"
-        android:checked="false"
-        android:textColor="#ffffff"
-        android:buttonTint="#155056"
-        android:layout_marginBottom="8dp"
-        android:textSize="18sp"
-        android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/button_delete_data"
-        android:layout_gravity="center_horizontal"
-        android:paddingRight="30dp" />
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/background_music"
+            android:id="@+id/background_music_checkbox"
+            android:checked="true"
+            android:onClick="backgroundMusic"
+            android:layout_marginBottom="8dp"
+            android:textColor="#ffffff"
+            android:textStyle="italic"
+            android:buttonTint="#155056"
+            android:textSize="18sp"
+            android:layout_above="@+id/fx_sounds_checkbox"
+            android:layout_alignStart="@+id/fx_sounds_checkbox"
+            android:layout_gravity="center_horizontal"
+            android:paddingRight="30dp" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FX SOUNDS"
+            android:id="@+id/fx_sounds_checkbox"
+            android:checked="false"
+            android:textColor="#ffffff"
+            android:buttonTint="#155056"
+            android:layout_marginBottom="8dp"
+            android:textSize="18sp"
+            android:layout_centerVertical="true"
+            android:layout_alignStart="@+id/button_delete_data"
+            android:layout_gravity="center_horizontal"
+            android:paddingRight="30dp" />
+
+        <Button
+            android:layout_width="204dp"
+            android:layout_height="wrap_content"
+            android:text="WIPE PROFILES DATA"
+            android:id="@+id/button_delete_data"
+            android:background="#86ffffff"
+            android:layout_alignTop="@+id/fx_sounds_checkbox"
+            android:layout_centerHorizontal="true"
+            android:textColor="#ffffff"
+            android:onClick="showAlert"
+            android:textSize="18sp"
+            android:backgroundTint="#155056"
+            style="?android:attr/borderlessButtonStyle"/>
+
+    </LinearLayout>
 
     <Button
-        android:layout_width="204dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="WIPE PROFILES DATA"
-        android:id="@+id/button_delete_data"
-        android:background="#86ffffff"
-        android:layout_alignTop="@+id/fx_sounds_checkbox"
-        android:layout_centerHorizontal="true"
-        android:textColor="#ffffff"
-        android:onClick="showAlert"
-        android:textSize="18sp"
-        android:backgroundTint="#155056" />
+        android:id="@+id/button_back_home"
+        android:background="#00ffffff"
+        android:layout_marginTop="7dp"
+        android:onClick="goToMainActivity" />
 
-</LinearLayout>
+
+</RelativeLayout>
