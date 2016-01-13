@@ -2,14 +2,11 @@ package it.polimi.group11;
 
 import android.app.DialogFragment;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -34,16 +31,16 @@ public class OptionsActivity extends AppCompatActivity implements ConfirmDeletio
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_options);
 
+        //Import of the font.
         Typeface myTypeface = Typeface.createFromAsset(getAssets(), "fonts/SignPainter-HouseScript.ttf");
 
+        //Setting the fonts on the buttons.
         backgroundMusicCheckbox = (CheckBox) findViewById(R.id.background_music_checkbox);
         backgroundMusicCheckbox.setTypeface(myTypeface);
         fxSoundsCheckbox = (CheckBox) findViewById(R.id.fx_sounds_checkbox);
         fxSoundsCheckbox.setTypeface(myTypeface);
         buttonDeleteData = (Button) findViewById(R.id.button_delete_data);
         buttonDeleteData.setTypeface(myTypeface);
-
-        backgroundMusicCheckbox = (CheckBox) findViewById(R.id.background_music_checkbox);
 
         setCheck();
         checkedChanged();
@@ -129,4 +126,5 @@ public class OptionsActivity extends AppCompatActivity implements ConfirmDeletio
     public void onOkClicked(){
         deleteDatabase();
     }
+
 }

@@ -24,7 +24,7 @@ public class ChooseMatchTypeActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void goToMakeYourBars(View view) {
-        Intent intent = new Intent(this, MakeYourBarsActivity.class);
+        Intent intent = new Intent(this, SetYourBarsActivity.class);
         startActivity(intent);
     }
 }

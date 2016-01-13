@@ -142,7 +142,7 @@
             android:label="@string/title_activity_choose_match_type"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".MakeYourBarsActivity"
+            android:name=".SetYourBarsActivity"
             android:label="@string/title_activity_make_your_bars"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

@@ -3,7 +3,7 @@ package it.polimi.group11;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-public class MakeYourBarsActivity extends AppCompatActivity {
+public class SetYourBarsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
