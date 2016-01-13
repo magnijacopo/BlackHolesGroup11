@@ -20,6 +20,7 @@ public class ViewProfileListActivity extends AppCompatActivity {
     ListView listView;
     TextView textViewPlayerName;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
