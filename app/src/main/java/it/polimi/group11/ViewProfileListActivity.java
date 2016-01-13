@@ -35,6 +35,7 @@ public class ViewProfileListActivity extends AppCompatActivity {
                 R.id.player_name,
         };
 
+
         SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(this, R.layout.player_info,
                 cursor, columns, widgets, 0);
         listView = (ListView)findViewById(R.id.listView1);
