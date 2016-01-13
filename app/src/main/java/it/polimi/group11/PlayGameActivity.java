@@ -3,22 +3,14 @@ package it.polimi.group11;
 import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-import java.util.Objects;
 
 import android.media.AudioManager;
 import android.media.SoundPool;
@@ -63,6 +55,7 @@ public class PlayGameActivity extends AppCompatActivity {
     private SoundPool sounds;
     private int sound1;
     private boolean fxOn;
+    public final static String EXTRA_MESSAGE = "it.polimi.group11.MESSAGE";
 
     /**
      * Constructor
@@ -351,6 +344,10 @@ public class PlayGameActivity extends AppCompatActivity {
                             v.setX(getA());
                             if(game2.getGameOver()){
                                 Log.i("ciao ","vince "+game2.getNextPlayer());
+                                Intent intent = new Intent(PlayGameActivity.this, PopUpActivity.class);
+                                String message = game2.getNextPlayer();
+                                intent.putExtra(EXTRA_MESSAGE, message);
+                                startActivity(intent);
                                 //Popup vittoria
                             }
                             else {
@@ -399,7 +396,11 @@ public class PlayGameActivity extends AppCompatActivity {
                             setA(getFinalPoint());
                             v.setX(getA());
                             if(game2.getGameOver()){
-                                Log.i("ciao ","vince "+game2.getNextPlayer());
+                                Log.i("ciao ", "vince " + game2.getNextPlayer());
+                                Intent intent = new Intent(PlayGameActivity.this, PopUpActivity.class);
+                                String message = game2.getNextPlayer();
+                                intent.putExtra(EXTRA_MESSAGE, message);
+                                startActivity(intent);
                                 //Popup vittoria
                             }
                             else {
@@ -448,6 +449,10 @@ public class PlayGameActivity extends AppCompatActivity {
                             v.setY(getB());
                             if(game2.getGameOver()){
                                 Log.i("ciao ","vince "+game2.getNextPlayer());
+                                Intent intent = new Intent(PlayGameActivity.this, PopUpActivity.class);
+                                String message = game2.getNextPlayer();
+                                intent.putExtra(EXTRA_MESSAGE, message);
+                                startActivity(intent);
                                 //Popup vittoria
                             }
                             else {
@@ -495,6 +500,10 @@ public class PlayGameActivity extends AppCompatActivity {
                             v.setY(getB());
                             if(game2.getGameOver()){
                                 Log.i("ciao ","vince "+game2.getNextPlayer());
+                                Intent intent = new Intent(PlayGameActivity.this, PopUpActivity.class);
+                                String message = game2.getNextPlayer();
+                                intent.putExtra(EXTRA_MESSAGE, message);
+                                startActivity(intent);
                                 //Popup vittoria
                             }
                             else{

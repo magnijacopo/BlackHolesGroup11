@@ -23,21 +23,10 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CREDITS TO"
-        android:id="@+id/textView"
-        android:layout_marginTop="120dp"
-        android:textSize="30sp"
-        android:textColor="#ffffff"
-        android:layout_below="@+id/button_back_home"
-        android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:text="NOI"
-        android:id="@+id/textView2"
+        android:id="@+id/textViewCredits"
         android:textSize="23sp"
         android:textColor="#ffffff"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginTop="230dp"
+        android:layout_marginLeft="120dp" />
 </RelativeLayout>
