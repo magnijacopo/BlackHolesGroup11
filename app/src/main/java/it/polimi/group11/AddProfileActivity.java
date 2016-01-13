@@ -1,16 +1,15 @@
 package it.polimi.group11;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 
 import it.polimi.group11.helper.DatabaseHelper;
 
@@ -28,12 +27,14 @@ public class AddProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_profile);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
+        Typeface myTypeface = Typeface.createFromAsset(getAssets(), "fonts/SignPainter-HouseScript.ttf");
 
         imageViewInsertPropic = (ImageView) findViewById(R.id.imageViewInsertPropic);
         buttonSaveProfile = (Button) findViewById(R.id.buttonSaveProfile);
+        buttonSaveProfile.setTypeface(myTypeface);
         editTextProfileName = (EditText) findViewById(R.id.editTextProfileName);
+        editTextProfileName.setTypeface(myTypeface);
 
         imageViewInsertPropic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,8 +54,9 @@ public class AddProfileActivity extends AppCompatActivity {
 
         });
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
+
+
 
     public void persistPerson() {
         db = new DatabaseHelper(getApplicationContext());
@@ -68,6 +70,8 @@ public class AddProfileActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "Could not Insert person", Toast.LENGTH_SHORT).show();
         }
     }
+
+
 
     /**
      *
@@ -99,8 +103,14 @@ public class AddProfileActivity extends AppCompatActivity {
         }
     }
 
+
     public void goToCreateMatch(View view){
         Intent intent = new Intent(this, CreateMatchActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToMainActivity(View view) {
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 }

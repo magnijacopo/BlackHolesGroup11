@@ -10,15 +10,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="it.polimi.group11.ViewProfileStatistics"
-    tools:showIn="@layout/activity_view_profile_statistics">
-
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/imageViewPropic"
-        android:src="@drawable/no_user_logo"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true" />
+    tools:showIn="@layout/activity_view_profile_statistics"
+    android:background="@mipmap/profile_statistics_background">
 
     <Button
         android:layout_width="wrap_content"
@@ -26,7 +19,7 @@
         android:text="@string/delete_profile_button"
         android:id="@+id/buttonDeleteProfile"
         android:onClick="showAlert"
-        android:layout_centerVertical="true"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -36,18 +29,49 @@
         android:id="@+id/TextViewProfileName"
         android:visibility="visible"
         android:textIsSelectable="false"
-        android:layout_below="@+id/imageViewPropic"
-        android:layout_centerHorizontal="true" />
+        android:textColor="#ffffff"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="164dp" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_below="@+id/TextViewProfileName"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/buttonDeleteProfile">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PROVA "
+            android:id="@+id/textViewMatchPlayed"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PROVA "
+            android:id="@+id/textViewMatchWon"
+            android:textColor="#ffffff" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PROVA "
+            android:id="@+id/textViewMinNumberMoves"
+            android:textColor="#ffffff" />
+    </LinearLayout>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="MatchStatistics"
         android:id="@+id/buttonMatch"
-        android:layout_below="@+id/buttonDeleteProfile"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="87dp"
-        android:onClick="goToMatchStatistics" />
+        android:onClick="goToMatchStatistics"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/buttonDeleteProfile" />
 
 
 </RelativeLayout>

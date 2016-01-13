@@ -10,7 +10,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="it.polimi.group11.ViewProfileListActivity"
-    tools:showIn="@layout/activity_view_profile_list">
+    tools:showIn="@layout/activity_view_profile_list"
+    android:background="@mipmap/profiles_background">
 
     <ListView
         android:id="@+id/listView1"
@@ -27,8 +28,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="BACK"
-        android:id="@+id/button4"
+        android:id="@+id/button_back_home"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:onClick="goToMainActivity"

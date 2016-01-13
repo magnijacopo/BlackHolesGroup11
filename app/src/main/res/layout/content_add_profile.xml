@@ -10,7 +10,15 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="it.polimi.group11.AddProfileActivity"
-    tools:showIn="@layout/activity_add_profile">
+    tools:showIn="@layout/activity_add_profile"
+    android:background="@mipmap/new_profile_background">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_back_home"
+        android:background="#00ffffff"
+        android:onClick="goToMainActivity" />
 
     <ImageView
         android:layout_width="100dp"
@@ -18,17 +26,19 @@
         android:id="@+id/imageViewInsertPropic"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
-        android:src="@drawable/no_user_logo" />
+        android:layout_marginTop="60dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="save"
+        android:text="Save"
         android:id="@+id/buttonSaveProfile"
-        android:layout_marginBottom="61dp"
+        android:background="#00ffffff"
+        android:textColor="#ffffff"
+        android:textSize="25sp"
         android:layout_alignParentBottom="true"
-        android:layout_alignEnd="@+id/editTextProfileName" />
+        android:layout_alignStart="@+id/imageViewInsertPropic"
+        android:layout_marginBottom="43dp" />
 
     <EditText
         android:layout_width="300dp"
@@ -37,15 +47,18 @@
         android:hint="Profile name"
         android:ems="10"
         android:id="@+id/editTextProfileName"
+        android:textColor="#ffffff"
+        android:textColorHint="#ffffff"
+        android:textSize="25sp"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="MatchCreate"
         android:id="@+id/buttonGoToCreateMatch"
-        android:layout_alignTop="@+id/buttonSaveProfile"
-        android:layout_alignStart="@+id/editTextProfileName"
-        android:onClick="goToCreateMatch" />
+        android:onClick="goToCreateMatch"
+        android:layout_alignParentTop="true"
+        android:layout_toEndOf="@+id/imageViewInsertPropic" />
 </RelativeLayout>

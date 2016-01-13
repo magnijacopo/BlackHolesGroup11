@@ -2,6 +2,7 @@ package it.polimi.group11;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,9 @@ import it.polimi.group11.helper.DatabaseHelper;
 public class ViewProfileStatistics extends AppCompatActivity {
 
     TextView textViewProfileName;
+    TextView textViewMatchPlayed;
+    TextView textViewMatchWon;
+    TextView tectViewMinNumberMoves;
     ImageView imageViewPropic;
     Button buttonDelete;
 
@@ -36,7 +40,12 @@ public class ViewProfileStatistics extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_profile_statistics);
 
+        Typeface myTypeface = Typeface.createFromAsset(getAssets(), "fonts/SignPainter-HouseScript.ttf");
+
         textViewProfileName = (TextView) findViewById(R.id.TextViewProfileName);
+        textViewMatchPlayed = (TextView) findViewById(R.id.textViewMatchPlayed);
+        textViewMatchWon = (TextView) findViewById(R.id.textViewMatchWon);
+        tectViewMinNumberMoves = (TextView) findViewById(R.id.textViewMinNumberMoves);
         imageViewPropic = (ImageView) findViewById(R.id.imageViewPropic);
         buttonDelete = (Button) findViewById(R.id.buttonDeleteProfile);
 
@@ -49,7 +58,7 @@ public class ViewProfileStatistics extends AppCompatActivity {
         final Cursor cursor = dbHelper.getProfile(playerID);
 
         textViewProfileName.setText(getNamePlayerFromCursor(cursor));
-        //imageViewPropic.setImageURI(getImagePlayerFromCursor(cursor));
+        textViewProfileName.setTypeface(myTypeface);
 
         final Cursor cursorMatches = dbHelper.getAllProfiles();
 
