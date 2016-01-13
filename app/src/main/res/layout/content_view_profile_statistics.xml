@@ -20,7 +20,9 @@
         android:id="@+id/buttonDeleteProfile"
         android:onClick="showAlert"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffffff"
+        android:background="#00ffffff" />
 
     <TextView
         android:layout_width="300dp"
@@ -30,17 +32,30 @@
         android:visibility="visible"
         android:textIsSelectable="false"
         android:textColor="#ffffff"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="164dp" />
+        android:textSize="25sp"
+        android:layout_below="@+id/buttonMatch"
+        android:layout_centerHorizontal="true" />
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_below="@+id/TextViewProfileName"
-        android:layout_alignParentEnd="true"
-        android:layout_above="@+id/buttonDeleteProfile">
+        android:layout_alignParentEnd="false"
+        android:id="@+id/linearLayout"
+        android:layout_marginTop="200dp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            android:id="@+id/scrollView"
+            android:layout_above="@+id/linearLayout"
+            android:layout_centerHorizontal="true" >
+
+            <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/listViewMatches" />
+        </ScrollView>
 
         <TextView
             android:layout_width="wrap_content"
@@ -72,6 +87,14 @@
         android:onClick="goToMatchStatistics"
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/buttonDeleteProfile" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_back_home"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:background="#00ffffff" />
 
 
 </RelativeLayout>

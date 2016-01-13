@@ -14,22 +14,27 @@ import android.widget.Toast;
 import it.polimi.group11.helper.DatabaseHelper;
 
 public class AddProfileActivity extends AppCompatActivity {
+
+    // Variable for the View.
+    ImageView imageViewInsertPropic;
+    Button buttonSaveProfile;
+    EditText editTextProfileName;
+
+    // Variable for the Database.
     public DatabaseHelper db;
     private Uri imageUri;
     private String imageUriString;
     private String uri;
-
-    ImageView imageViewInsertPropic;
-    Button buttonSaveProfile;
-    EditText editTextProfileName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_profile);
 
+        //Import of the font.
         Typeface myTypeface = Typeface.createFromAsset(getAssets(), "fonts/SignPainter-HouseScript.ttf");
 
+        //Setting the fonts on the text in the view.
         imageViewInsertPropic = (ImageView) findViewById(R.id.imageViewInsertPropic);
         buttonSaveProfile = (Button) findViewById(R.id.buttonSaveProfile);
         buttonSaveProfile.setTypeface(myTypeface);
