@@ -175,14 +175,16 @@ public class Board2 {
         if (checkBoundsValidity((move))){
 
             char orientation = move.charAt(0); // Orientation of the bar: vertical (v) or horizontal (h)
-            int number = Character.getNumericValue(move.charAt(1))-1; //Number of the bar
+            int number = Character.getNumericValue(move.charAt(1)-1); //Number of the bar
             char movement = move.charAt(2); //Slide movement of the bar: inward (i) or outward (o)
 
             if(orientation=='h'){ //muovo orizzontale
                 if(movement=='o')
                     horizontalBar[number].setPosition(horizontalBar[number].getPosition()+1);
-                else
-                    horizontalBar[number].setPosition(horizontalBar[number].getPosition()-1);
+                else {
+                    horizontalBar[number].setPosition((horizontalBar[number].getPosition()) - 1);
+                    Log.i("Board2", "la nuova posizione della barra sarà " + Integer.toString((horizontalBar[number].getPosition())));
+                }
                 setRow(number);
             }
             else{  //muovo verticale

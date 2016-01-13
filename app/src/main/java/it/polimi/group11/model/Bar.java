@@ -1,5 +1,7 @@
 package it.polimi.group11.model;
 
+import android.util.Log;
+
 /**
  * Created by Lale on 29/12/2015.
  */
@@ -10,6 +12,7 @@ public class Bar {
 
     public void setPosition(int position){
         this.position=position;
+        Log.i("Bar ", "STO SETTANDO LA BARRA");
     }
 
     public int getPosition() {

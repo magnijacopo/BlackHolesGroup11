@@ -47,7 +47,7 @@ public class ViewProfileStatistics extends AppCompatActivity implements ConfirmD
         textViewMatchPlayed = (TextView) findViewById(R.id.textViewMatchPlayed);
         textViewMatchWon = (TextView) findViewById(R.id.textViewMatchWon);
         tectViewMinNumberMoves = (TextView) findViewById(R.id.textViewMinNumberMoves);
-        imageViewPropic = (ImageView) findViewById(R.id.imageViewPropic);
+        //imageViewPropic = (ImageView) findViewById(R.id.imageViewPropic);
         buttonDelete = (Button) findViewById(R.id.buttonDeleteProfile);
 
         Intent intent = getIntent();

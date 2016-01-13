@@ -228,8 +228,7 @@ public class Player {
     }*/
 
     public void makeMove(String move) {
-        String A = config.nextConfiguration(move);
-        Log.i("ciao", "A " + A);
+        board.moveBar(move);
     }
 
     public boolean checkPlace(int rowPosition, int columnPosition){
@@ -287,5 +286,7 @@ public class Player {
     public int getBeadsInBoard() {
         return beadsInBoard;
     }
+
+    public void setBeadsInBoard(int beadsInBoard) {this.beadsInBoard=beadsInBoard;}
 
 }

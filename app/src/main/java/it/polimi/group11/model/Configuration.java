@@ -28,8 +28,8 @@ public class Configuration {
 
     private String configuration ="";
 
-    private String getFirstPlayer() {
-        return (game.getFirstPlayer());
+    private String getCurrentPlayer() {
+        return (game.getCurrentPlayer());
     }
 
     private String getNumberOfPlayers() {
@@ -44,24 +44,12 @@ public class Configuration {
         return board.getCurrentBeadsPosition();
     }
 
-    public void setFirstConfiguration(){
-        configuration=getNumberOfPlayers() + getFirstPlayer() + getBarStatus() + getBeadsPosition();
-    }
 
     public String getConfiguration(){
+        configuration=getNumberOfPlayers() + getCurrentPlayer() + " "+ getBarStatus() +" "+getBeadsPosition();
         return configuration;
     }
 
-    public String nextConfiguration(String move){
-        movingPlayer = game.currentPlayer(move);
-        if(movingPlayer.equals(game.getError())) {
-            configuration = "error: the move is not valid";
-            return configuration;
-        }
-        if (game.getValidity())
-            configuration = getNumberOfPlayers() + movingPlayer + getBarStatus() + getBeadsPosition();
-        return configuration;
-    }
 
     public void setBoard(Board2 board) {
         this.board = board;

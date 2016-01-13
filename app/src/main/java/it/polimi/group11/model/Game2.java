@@ -19,7 +19,7 @@ public class Game2 {
     private ListIterator<Player> iterator;
     public List<Player> players = new ArrayList<>();
     private int firstPlayer=0;
-    private boolean gameOver;
+    private boolean gameOver=false;
     private String lastPlayer;
     private boolean validity=true;
     private boolean movesFinished=false;
@@ -79,16 +79,56 @@ public class Game2 {
     }
 
     public void checkRowBeadsLife(int row) {
+        iteratorNext();
         row=row-1;
-        for (int i = 0; i < playersNumber; i++) {   //per tutti i giocatori
-            if (currentMovingPlayer.getStatus()) {          //se è vivo il giocatore
-                for (int j = 0; j < 5; j++) {                   // per tutti i bead del giocatore
-                    if (currentMovingPlayer.getBead(j).getLife()) {             //e il bead e vivo
-                        if (currentMovingPlayer.getBead(j).getRowPosition() == row) {    //guarda se il bead è nella barra mossa
-                            for (int k=0;k<7;k++){      //per tutte le celle di quella riga
-                                if(!board.getCell(row,k).getBead()&&currentMovingPlayer.getBead(j).getColumnPosition()==k){  //verifica se la cella è bucata e ha su un bead
-                                    currentMovingPlayer.getBead(j).setLife(false); //se è così, lo uccidi.
+        for (int i = 0; i < playersNumber; i++) {//per tutti i giocatori
+           if(alivePlayers>1) {//se c'è più di un giocatore vivo (partita non finita)
+               if (currentMovingPlayer.getStatus()) {          //se è vivo il giocatore
+                   for (int j = 0; j < 5; j++) {                   // per tutti i bead del giocatore
+                       if (currentMovingPlayer.getBead(j).getLife()) {             //e il bead e vivo
+                           if (currentMovingPlayer.getBead(j).getRowPosition() == row) {    //guarda se il bead è nella barra mossa
+                               for (int k = 0; k < 7; k++) {      //per tutte le celle di quella riga
+                                   if (!board.getCell(row, k).getBead() && currentMovingPlayer.getBead(j).getColumnPosition() == k) {  //verifica se la cella è bucata e ha su un bead
+                                       currentMovingPlayer.getBead(j).setLife(false); //se è così, lo uccidi.
+                                       currentMovingPlayer.setBeadsInBoard(currentMovingPlayer.getBeadsInBoard() - 1);//decremento num bead del player
+                                       if (currentMovingPlayer.getBeadsInBoard() == 0) {
+                                           currentMovingPlayer.setStatus(false);
+                                           alivePlayers--;
+                                       }
+                                   }
+                               }
+                           }
+                       }
+                   }
+               }
+           }
+            iteratorNext();
+        }
+        iteratorPrevious(playersNumber);
+        if (alivePlayers==1){
+            gameOver=true;
+        }
 
+    }
+
+    public void checkColumnBeadsLife(int column) {
+        iteratorNext();
+        column=column-1;
+        for (int i = 0; i < playersNumber; i++) {   //per tutti i giocatori
+            if(alivePlayers>1) {
+                if (currentMovingPlayer.getStatus()) {          //se è vivo il giocatore
+                    for (int j = 0; j < 5; j++) {                   // per tutti i bead del giocatore
+                        if (currentMovingPlayer.getBead(j).getLife()) {             //e il bead e vivo
+                            if (currentMovingPlayer.getBead(j).getColumnPosition() == column) {    //guarda se il bead è nella barra mossa
+                                for (int k = 0; k < 7; k++) {      //per tutte le celle di quella riga
+                                    if (!board.getCell(k, column).getBead() && currentMovingPlayer.getBead(j).getRowPosition() == k) {  //verifica se la cella è bucata e ha su un bead
+                                        currentMovingPlayer.getBead(j).setLife(false); //se è così, lo uccidi.
+                                        currentMovingPlayer.setBeadsInBoard(currentMovingPlayer.getBeadsInBoard() - 1);
+                                        if (currentMovingPlayer.getBeadsInBoard() == 0) {
+                                            currentMovingPlayer.setStatus(false);
+                                            alivePlayers--;
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -97,26 +137,9 @@ public class Game2 {
             }
             iteratorNext();
         }
-
-    }
-
-    public void checkColumnBeadsLife(int column) {
-        column=column-1;
-        for (int i = 0; i < playersNumber; i++) {   //per tutti i giocatori
-            if (currentMovingPlayer.getStatus()) {          //se è vivo il giocatore
-                for (int j = 0; j < 5; j++) {                   // per tutti i bead del giocatore
-                    if (currentMovingPlayer.getBead(j).getLife()) {             //e il bead e vivo
-                        if (currentMovingPlayer.getBead(j).getColumnPosition() == column) {    //guarda se il bead è nella barra mossa
-                            for (int k=0;k<7;k++){      //per tutte le celle di quella riga
-                                if(!board.getCell(k,column).getBead()&&currentMovingPlayer.getBead(j).getRowPosition()==k){  //verifica se la cella è bucata e ha su un bead
-                                    currentMovingPlayer.getBead(j).setLife(false); //se è così, lo uccidi.
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            iteratorNext();
+        iteratorPrevious(playersNumber);
+        if (alivePlayers==1){
+            gameOver=true;
         }
     }
 
@@ -185,7 +208,9 @@ public class Game2 {
              */
             }else{
                 for(int i=0; i<movesList.size(); i++){
+                    Log.i("Game2","for");
                     if (movesList.get(i).getMoveId().substring(0, 2).equals(moveToCheck.getMoveId().substring(0, 2))){
+                        Log.i("Game2","if");
                         return validity = false;
                     }
                 }
@@ -323,6 +348,22 @@ public class Game2 {
     public void iteratorPrevious(int numPlayers){
         for (int i=0;i<numPlayers-1;i++)
             iteratorNext();
+    }
+
+    public void setValidity(boolean validity) {
+        this.validity = validity;
+    }
+
+    public ArrayList<Move> getMovesList() {
+        return movesList;
+    }
+
+    public boolean getGameOver() {
+        return gameOver;
+    }
+
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
     }
 
 }
