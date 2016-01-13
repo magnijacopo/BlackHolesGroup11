@@ -39,13 +39,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Methods for moving to other Activities.
-
     public void goToCredits(View view){
         Intent intent = new Intent(this, CreditsActivity.class);
         startActivity(intent);
     }
 
-    public void goToSelectPlayers(View view){
+    public void goToChooseMatchType(View view){
         Intent intent = new Intent(this, SelectPlayersActivity.class);
         startActivity(intent);
     }

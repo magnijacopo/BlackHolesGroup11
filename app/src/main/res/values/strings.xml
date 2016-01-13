@@ -30,4 +30,6 @@
     <string name="dialog_confirm_delete">Are you sure?</string>
     <string name="cancel">Cancel</string>
     <string name="OK">OK</string>
+    <string name="title_activity_choose_match_type">ChooseMatchType</string>
+    <string name="title_activity_make_your_bars">MakeYourBarsActivity</string>
 </resources>

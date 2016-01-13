@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:text="@string/play"
         android:id="@+id/play_button"
-        android:onClick="goToSelectPlayers"
+        android:onClick="goToChooseMatchType"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="177dp"
         android:textSize="25dp"

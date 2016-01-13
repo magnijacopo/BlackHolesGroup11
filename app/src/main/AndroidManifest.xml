@@ -136,6 +136,14 @@
         <activity
             android:name=".ViewMatchStatisticsActivity"
             android:label="@string/title_activity_view_match_statistics"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ChooseMatchTypeActivity"
+            android:label="@string/title_activity_choose_match_type"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MakeYourBarsActivity"
+            android:label="@string/title_activity_make_your_bars"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".ChooseMatchTypeActivity"
+    tools:showIn="@layout/activity_choose_match_type"
+    android:orientation="vertical"
+    android:background="@mipmap/home_hdpi">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/button_back_home"
+        android:background="#ffffff"
+        android:onClick="goToMainActivity" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="QUICK GAME"
+        android:id="@+id/button_quick_game"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="225dp"
+        android:textSize="25sp"
+        android:textColor="#ffffff"
+        android:background="#00ffffff"
+        android:onClick="goToSelectPlayers" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CUSTOMIZED GAME"
+        android:id="@+id/button_customized_game"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:textSize="25sp"
+        android:textColor="#ffffff"
+        android:background="#00ffffff"
+        android:onClick="goToMakeYourBars" />
+</LinearLayout>
