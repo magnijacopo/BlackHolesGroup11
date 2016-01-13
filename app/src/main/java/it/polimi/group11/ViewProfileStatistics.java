@@ -1,5 +1,6 @@
 package it.polimi.group11;
 
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Typeface;
@@ -14,7 +15,7 @@ import android.widget.TextView;
 
 import it.polimi.group11.helper.DatabaseHelper;
 
-public class ViewProfileStatistics extends AppCompatActivity {
+public class ViewProfileStatistics extends AppCompatActivity implements ConfirmDeletionDialog.DialogListener {
 
     TextView textViewProfileName;
     TextView textViewMatchPlayed;
@@ -125,8 +126,21 @@ public class ViewProfileStatistics extends AppCompatActivity {
     }
     */
 
+    public void showAlert(View view){
+        DialogFragment dialog = new ConfirmDeletionDialog();
+        Bundle args = new Bundle();
+        args.putString("title", "Alert");
+        args.putString("message", "Delete profile?");
+        dialog.setArguments(args);
+        dialog.show(getFragmentManager(), "tag");
+    }
 
-    public void deleteProfile(View view){
+    public void onOkClicked(){
+        deleteProfile();
+    }
+
+
+    public void deleteProfile(){
         dbHelper.deleteProfile(playerID);
         Intent intent = new Intent(getApplicationContext(), ViewProfileListActivity.class);
         startActivity(intent);
