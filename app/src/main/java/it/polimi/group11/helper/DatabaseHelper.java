@@ -147,22 +147,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
-    /*
-    SERVE DAVVERO ?
-    /**
-     * Update an existing profile.
-     * @param id
-     * @param name
-     * @return
-
-    public boolean updatePerson(Integer id, String name) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(PLAYER_COLUMN_NAME, name);
-        db.update(PLAYER_TABLE_NAME, contentValues, PLAYER_COLUMN_ID + " = ? ", new String[] { Integer.toString(id) } );
-        return true;
-    }
-    */
     /**
      * Delete from the DB a profile.
      * @param id
@@ -227,7 +211,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor res = db.rawQuery( "SELECT match.* FROM matchMaking JOIN players ON matchMaking.playerId = players._id" +
-                "JOIN match ON matchMaking.matchId = match.id WHERE players.id = ? LIMIT 5", new String[] { Integer.toString(id)});
+                "JOIN match ON matchMaking.matchId = match.id WHERE players.id = ? ORDER BY date LIMIT 5", new String[] { Integer.toString(id)});
         return res;
     }
 
