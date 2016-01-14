@@ -10,7 +10,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".ViewMatchStatisticsActivity"
-    tools:showIn="@layout/activity_view_match_statistics">
+    tools:showIn="@layout/activity_view_match_statistics"
+    android:background="@drawable/profile_statistics_background">
 
     <TextView
         android:layout_width="300dp"
@@ -19,9 +20,11 @@
         android:id="@+id/TextViewId"
         android:visibility="visible"
         android:textIsSelectable="false"
-        android:layout_above="@+id/TextViewMoves"
+        android:hint="id"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:hint="id" />
+        android:textColor="#ffffff"
+        android:textColorHint="#ffffff" />
 
     <TextView
         android:layout_width="300dp"
@@ -32,7 +35,9 @@
         android:textIsSelectable="false"
         android:hint="date"
         android:layout_below="@+id/TextViewWinner"
-        android:layout_alignStart="@+id/TextViewWinner" />
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffffff"
+        android:textColorHint="#ffffff" />
 
     <TextView
         android:layout_width="300dp"
@@ -41,9 +46,11 @@
         android:id="@+id/TextViewWinner"
         android:visibility="visible"
         android:textIsSelectable="false"
-        android:layout_centerVertical="true"
-        android:layout_alignStart="@+id/TextViewMoves"
-        android:hint="winner" />
+        android:hint="winner"
+        android:layout_below="@+id/TextViewMoves"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffffff"
+        android:textColorHint="#ffffff" />
 
     <TextView
         android:layout_width="300dp"
@@ -53,7 +60,17 @@
         android:visibility="visible"
         android:textIsSelectable="false"
         android:hint="moves"
-        android:layout_above="@+id/TextViewWinner"
-        android:layout_alignStart="@+id/TextViewId" />
+        android:layout_below="@+id/TextViewId"
+        android:layout_centerHorizontal="true"
+        android:textColor="#ffffff"
+        android:textColorHint="#ffffff" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_back"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/TextViewId"
+        android:background="#00ffffff" />
 
 </RelativeLayout>

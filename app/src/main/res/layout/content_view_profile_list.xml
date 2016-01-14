@@ -11,7 +11,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="it.polimi.group11.ViewProfileListActivity"
     tools:showIn="@layout/activity_view_profile_list"
-    android:background="@mipmap/profiles_background">
+    android:background="@drawable/profiles_background">
 
     <ListView
         android:id="@+id/listView1"
