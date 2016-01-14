@@ -98,9 +98,9 @@ public class OptionsActivity extends AppCompatActivity implements ConfirmDeletio
     public void setCheck(){
         fxSoundsCheckbox = (CheckBox) findViewById(R.id.fx_sounds_checkbox);
         if(!fxSoundsCheck){
-            fxSoundsCheckbox.setChecked(true);
-        } else {
             fxSoundsCheckbox.setChecked(false);
+        } else {
+            fxSoundsCheckbox.setChecked(true);
         }
     }
 
