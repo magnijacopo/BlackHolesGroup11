@@ -1,609 +1,862 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:paddingLeft="@dimen/activity_horizontal_margin"
-android:paddingRight="@dimen/activity_horizontal_margin"
-android:paddingTop="@dimen/activity_vertical_margin"
-android:paddingBottom="@dimen/activity_vertical_margin"
-    android:id="@+id/parent"
-app:layout_behavior="@string/appbar_scrolling_view_behavior"
-tools:context="it.polimi.group11.PlayGameActivity"
-tools:showIn="@layout/activity_play_game"
->
-
-
-<ImageView
-    android:id="@+id/horizontalbar0"
-    android:layout_width="280dp"
-    android:layout_height="30dp"
-    android:src="@mipmap/barrah1"
-    android:layout_marginTop="95dp"
-    android:layout_marginLeft="40dp"
-    android:contentDescription="horizontal" />
-
-<ImageView
-    android:id="@+id/horizontalbar1"
-    android:layout_width="280dp"
-    android:layout_height="30dp"
-    android:src="@mipmap/barrah2"
-    android:layout_marginTop="125dp"
-    android:layout_marginLeft="40dp"
-    android:contentDescription="horizontal" />
-
-<ImageView
-    android:id="@+id/horizontalbar2"
-    android:layout_width="280dp"
-    android:layout_height="30dp"
-    android:src="@mipmap/barrah3"
-    android:layout_marginTop="155dp"
-    android:layout_marginLeft="40dp"
-    android:contentDescription="horizontal" />
-
-<ImageView
-    android:id="@+id/horizontalbar3"
-    android:layout_width="280dp"
-    android:layout_height="30dp"
-    android:src="@mipmap/barrah4"
-    android:layout_marginTop="185dp"
-    android:layout_marginStart="40dp"
-    android:contentDescription="horizontal" />
-
-<ImageView
-    android:id="@+id/horizontalbar4"
-    android:layout_width="280dp"
-    android:layout_height="30dp"
-    android:src="@mipmap/barrah5"
-    android:layout_marginTop="215dp"
-    android:layout_marginLeft="40dp"
-    android:contentDescription="horizontal" />
-
-<ImageView
-    android:id="@+id/horizontalbar5"
-    android:layout_width="280dp"
-    android:layout_height="30dp"
-    android:src="@mipmap/barrah6"
-    android:layout_marginTop="245dp"
-    android:layout_marginLeft="40dp"
-    android:contentDescription="horizontal" />
-
-<ImageView
-    android:id="@+id/horizontalbar6"
-    android:layout_width="280dp"
-    android:layout_height="30dp"
-    android:src="@mipmap/barrah7"
-    android:layout_marginTop="275dp"
-    android:layout_marginLeft="40dp"
-    android:contentDescription="horizontal" />
-
-<ImageView
-    android:id="@+id/verticalbar0"
-    android:layout_width="30dp"
-    android:layout_height="280dp"
-    android:src="@mipmap/barrav1"
-    android:layout_marginLeft="75dp"
-    android:layout_marginTop="62dp"
-    android:contentDescription="vertical" />
-
-<ImageView
-    android:id="@+id/verticalbar1"
-    android:layout_width="30dp"
-    android:layout_height="280dp"
-    android:src="@mipmap/barrav2"
-    android:layout_marginLeft="105dp"
-    android:layout_marginTop="62dp"
-    android:contentDescription="vertical" />
-
-<ImageView
-    android:id="@+id/verticalbar2"
-    android:layout_width="30dp"
-    android:layout_height="280dp"
-    android:src="@mipmap/barrav3"
-    android:layout_marginLeft="135dp"
-    android:layout_marginTop="62dp"
-    android:contentDescription="vertical" />
-
-<ImageView
-    android:id="@+id/verticalbar3"
-    android:layout_width="30dp"
-    android:layout_height="280dp"
-    android:src="@mipmap/barrav4"
-    android:layout_marginLeft="165dp"
-    android:layout_marginTop="62dp"
-    android:contentDescription="vertical" />
-
-<ImageView
-    android:id="@+id/verticalbar4"
-    android:layout_width="30dp"
-    android:layout_height="280dp"
-    android:src="@mipmap/barrav5"
-    android:layout_marginLeft="195dp"
-    android:layout_marginTop="62dp"
-    android:contentDescription="vertical" />
-
-<ImageView
-    android:id="@+id/verticalbar5"
-    android:layout_width="30dp"
-    android:layout_height="280dp"
-    android:src="@mipmap/barrav6"
-    android:layout_marginLeft="225dp"
-    android:layout_marginTop="62dp"
-    android:contentDescription="vertical" />
-
-<ImageView
-    android:id="@+id/verticalbar6"
-    android:layout_width="30dp"
-    android:layout_height="280dp"
-    android:src="@mipmap/barrav7"
-    android:layout_marginLeft="255dp"
-    android:layout_marginTop="62dp"
-    android:contentDescription="vertical" />
-
-
-
-<TableLayout
-    android:id="@+id/table"
-    android:layout_width="210dp"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_alignTop="@+id/horizontalbar0"
-    android:layout_alignLeft="@id/verticalbar0"
-    android:layout_alignRight="@+id/verticalbar6"
-    android:layout_alignBottom="@+id/horizontalbar6">
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="it.polimi.group11.PlayGameActivity"
+    tools:showIn="@layout/activity_play_game"
+    android:background="@drawable/bg">
 
-    <TableRow
-        android:layout_width="210dp"
-        android:layout_height="30dp">
-
-        <ImageView
-            android:id="@+id/cell0"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
-
-        <ImageView
-            android:id="@+id/cell1"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
-
-        <ImageView
-            android:id="@+id/cell2"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
+    <!--Primo linear layout
+        4 imageView per le quattro icone dei player
+        4 textview per il numero dei bead rimasti
+     -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="false"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/linearLayout"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentBottom="false">
 
         <ImageView
-            android:id="@+id/cell3"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/imageViewPlayer1"
+            android:background="@drawable/blue_planet_icon"
+            android:layout_marginLeft="0dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewPlayer1"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:textIsSelectable="false"
+            android:layout_marginTop="15dp"
+            android:paddingLeft="5dp" />
 
         <ImageView
-            android:id="@+id/cell4"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/imageViewPlayer2"
+            android:background="@drawable/green_astronaut_icon"
+            android:layout_marginLeft="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/textViewPlayer2"
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:textIsSelectable="false"
+            android:layout_marginTop="15dp"
+            android:paddingLeft="5dp" />
 
         <ImageView
-            android:id="@+id/cell5"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/imageViewPlayer3"
+            android:background="@drawable/orange_rocket_icon"
+            android:layout_marginLeft="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/textViewPlayer3"
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:textIsSelectable="false"
+            android:layout_marginTop="15dp"
+            android:paddingLeft="5dp" />
 
         <ImageView
-            android:id="@+id/cell6"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:id="@+id/imageViewPlayer4"
+            android:background="@drawable/pink_comet_icon"
+            android:layout_marginLeft="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:id="@+id/textViewPlayer4"
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:textIsSelectable="false"
+            android:layout_marginTop="15dp"
+            android:paddingLeft="5dp" />
+    </LinearLayout>
+
+    <!-- ================================================= -->
+
+    <!-- Secondo linear layout
+         1 button per il tasto pausa
+         1 textview per il numero del turno
+     -->
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_below="@+id/linearLayout"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/linearLayout2"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentBottom="false">
+
+        <Button
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
+            android:id="@+id/buttonPause"
+            android:background="@drawable/pausa"
+            android:layout_marginTop="5dp" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Turno Numero 1"
+            android:id="@+id/textViewTurnNumber"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:textColor="#ffffff" />
 
-    </TableRow>
+        <Chronometer
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/chronometer"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:textColor="#ffffff" />
+    </LinearLayout>
 
-    <TableRow
-        android:layout_width="210dp"
-        android:layout_height="30dp">
+    <!-- ================================================= -->
+
+    <!-- Table layout.
+     Layout per la board del gioco.
+    -->
+    <RelativeLayout
+        android:layout_width="378dp"
+        android:layout_height="350dp"
+        android:layout_below="@+id/linearLayout2"
+        android:id="@+id/relative"
+        android:layout_gravity="center">
+
+        <!-- imageView per barre -->
+
+        <!-- Barre orizzontali -->
+        <ImageView
+            android:layout_width="225dp"
+            android:layout_height="225dp"
+            android:id="@+id/imageView"
+            android:background="@drawable/board_back"
+            android:layout_alignParentTop="false"
+            android:layout_alignWithParentIfMissing="false"
+            android:layout_marginLeft="76.5dp"
+            android:layout_marginTop="62.5dp" />
 
         <ImageView
-            android:id="@+id/cell7"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
+            android:id="@+id/horizontalbar0"
+            android:layout_width="285dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="65dp"
+            android:layout_marginLeft="25dp"
+            android:contentDescription="horizontal"
+            android:background="@drawable/bar_red_1"
+            android:layout_centerHorizontal="true" />
 
         <ImageView
-            android:id="@+id/cell8"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
+            android:id="@+id/horizontalbar1"
+            android:layout_width="285dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="33dp"
+            android:layout_marginLeft="25dp"
+            android:contentDescription="horizontal"
+            android:layout_alignTop="@+id/horizontalbar0"
+            android:background="@drawable/bar_red_2"
+            android:layout_centerHorizontal="true" />
 
         <ImageView
-            android:id="@+id/cell9"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
+            android:id="@+id/horizontalbar2"
+            android:layout_width="285dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginLeft="25dp"
+            android:contentDescription="horizontal"
+            android:layout_alignTop="@+id/horizontalbar1"
+            android:background="@drawable/bar_red_3"
+            android:layout_centerHorizontal="true" />
 
         <ImageView
-            android:id="@+id/cell10"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
+            android:id="@+id/horizontalbar3"
+            android:layout_width="285dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="33dp"
+            android:contentDescription="horizontal"
+            android:layout_marginLeft="25dp"
+            android:layout_alignTop="@+id/horizontalbar2"
+            android:background="@drawable/bar_red_4"
+            android:layout_centerHorizontal="true" />
 
         <ImageView
-            android:id="@+id/cell11"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
+            android:id="@+id/horizontalbar4"
+            android:layout_width="285dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="33dp"
+            android:layout_marginLeft="25dp"
+            android:contentDescription="horizontal"
+            android:layout_alignTop="@+id/horizontalbar3"
+            android:background="@drawable/bar_red_5"
+            android:layout_centerHorizontal="true" />
 
         <ImageView
-            android:id="@+id/cell12"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
+            android:id="@+id/horizontalbar5"
+            android:layout_width="285dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginLeft="25dp"
+            android:contentDescription="horizontal"
+            android:layout_alignTop="@+id/horizontalbar4"
+            android:background="@drawable/bar_red_6"
+            android:layout_centerHorizontal="true" />
 
         <ImageView
-            android:id="@+id/cell13"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
+            android:id="@+id/horizontalbar6"
+            android:layout_width="285dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="33dp"
+            android:layout_marginLeft="25dp"
+            android:contentDescription="horizontal"
+            android:layout_alignTop="@+id/horizontalbar5"
+            android:background="@drawable/bar_red_7"
+            android:layout_centerHorizontal="true" />
 
-
-    </TableRow>
-
-    <TableRow
-        android:layout_width="210dp"
-        android:layout_height="30dp">
+        <!-- Barre verticali -->
 
         <ImageView
-            android:id="@+id/cell14"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
+            android:id="@+id/verticalbar0"
+            android:layout_width="24dp"
+            android:layout_height="285dp"
+            android:layout_marginTop="53.5dp"
+            android:contentDescription="vertical"
+            android:layout_alignParentStart="false"
+            android:layout_alignParentEnd="false"
+            android:adjustViewBounds="false"
+            android:layout_marginLeft="80dp"
+            android:background="@drawable/bar_blue_1"
+            android:baselineAlignBottom="false"
+            android:layout_centerVertical="true" />
 
         <ImageView
-            android:id="@+id/cell15"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
+            android:id="@+id/verticalbar1"
+            android:layout_width="24dp"
+            android:layout_height="285dp"
+            android:layout_marginLeft="32dp"
+            android:contentDescription="vertical"
+            android:layout_alignParentStart="false"
+            android:layout_alignParentEnd="false"
+            android:adjustViewBounds="false"
+            android:layout_alignLeft="@+id/verticalbar0"
+            android:background="@drawable/bar_blue_2"
+            android:layout_centerVertical="true" />
 
         <ImageView
-            android:id="@+id/cell16"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
+            android:id="@+id/verticalbar2"
+            android:layout_width="24dp"
+            android:layout_height="285dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="53.5dp"
+            android:contentDescription="vertical"
+            android:adjustViewBounds="false"
+            android:layout_alignLeft="@+id/verticalbar1"
+            android:background="@drawable/bar_blue_3"
+            android:layout_centerVertical="true" />
 
         <ImageView
-            android:id="@+id/cell17"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
+            android:id="@+id/verticalbar3"
+            android:layout_width="24dp"
+            android:layout_height="285dp"
+            android:layout_marginLeft="33dp"
+            android:layout_marginTop="53.5dp"
+            android:contentDescription="vertical"
+            android:adjustViewBounds="false"
+            android:layout_alignLeft="@+id/verticalbar2"
+            android:background="@drawable/bar_blue_4"
+            android:layout_centerVertical="true" />
 
         <ImageView
-            android:id="@+id/cell18"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
+            android:id="@+id/verticalbar4"
+            android:layout_width="24dp"
+            android:layout_height="285dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="53.5dp"
+            android:contentDescription="vertical"
+            android:adjustViewBounds="false"
+            android:layout_alignLeft="@+id/verticalbar3"
+            android:background="@drawable/bar_blue_5"
+            android:layout_centerVertical="true" />
 
         <ImageView
-            android:id="@+id/cell19"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
+            android:id="@+id/verticalbar5"
+            android:layout_width="24dp"
+            android:layout_height="285dp"
+            android:layout_marginLeft="33dp"
+            android:layout_marginTop="53.5dp"
+            android:contentDescription="vertical"
+            android:layout_alignParentStart="false"
+            android:layout_alignParentEnd="false"
+            android:adjustViewBounds="false"
+            android:layout_alignLeft="@+id/verticalbar4"
+            android:background="@drawable/bar_blue_6"
+            android:layout_centerVertical="true" />
 
         <ImageView
-            android:id="@+id/cell20"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
+            android:id="@+id/verticalbar6"
+            android:layout_width="24dp"
+            android:layout_height="285dp"
+            android:layout_marginTop="53.5dp"
+            android:contentDescription="vertical"
+            android:layout_alignParentStart="false"
+            android:adjustViewBounds="false"
+            android:layout_marginLeft="32dp"
+            android:layout_alignLeft="@+id/verticalbar5"
+            android:background="@drawable/bar_blue_7"
+            android:layout_centerVertical="true" />
+
+        <!-- Table layout.
+             Layout per la board del gioco.
+        -->
+
+        <TableLayout
+            android:layout_width="175dp"
+            android:layout_height="175dp"
+            android:orientation="horizontal"
+            android:id="@+id/tableLayout"
+            android:layout_alignTop="@+id/horizontalbar0"
+            android:layout_alignStart="@+id/verticalbar0"
+            android:layout_alignEnd="@+id/verticalbar6"
+            android:layout_alignBottom="@+id/horizontalbar6">
+
+            <TableRow
+                android:layout_width="175dp"
+                android:layout_height="25dp"
+                >
+
+                <ImageView
+                    android:id="@+id/cell0"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="0dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell1"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="4dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell2"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="5dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell3"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="5dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell4"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="5dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell5"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="6dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell6"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5.5dp"
+                    android:background="@android:color/transparent" />
 
 
-    </TableRow>
+            </TableRow>
 
-    <TableRow
-        android:layout_width="210dp"
-        android:layout_height="30dp">
+            <TableRow
+                android:layout_width="175dp"
+                android:layout_height="25dp">
+
+                <ImageView
+                    android:id="@+id/cell7"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell8"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell9"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell10"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell11"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell12"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell13"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5.5dp"
+                    android:layout_marginTop="0dp"
+                    android:background="@android:color/transparent" />
+
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="175dp"
+                android:layout_height="25dp">
+
+                <ImageView
+                    android:id="@+id/cell14"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="0dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell15"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="4dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell16"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="5dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell17"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="5dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell18"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="5dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell19"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="6dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell20"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5.5dp"
+                    android:background="@android:color/transparent" />
+
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="175dp"
+                android:layout_height="25dp">
+
+                <ImageView
+                    android:id="@+id/cell21"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="0dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell22"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="4dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell23"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="5dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell24"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="5dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell25"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="5dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell26"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="6dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell27"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5.5dp"
+                    android:background="@android:color/transparent" />
+
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="175dp"
+                android:layout_height="25dp">
+
+                <ImageView
+                    android:id="@+id/cell28"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="0dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell29"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="4dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell30"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="5dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell31"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="5dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell32"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="5dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell33"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="6dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell34"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5.5dp" />
+
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="175dp"
+                android:layout_height="25dp">
+
+                <ImageView
+                    android:id="@+id/cell35"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="0dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell36"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="4dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell37"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="5dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell38"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="5dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell39"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="5dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell40"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="6dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell41"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5.5dp"
+                    android:background="@android:color/transparent" />
+
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="175dp"
+                android:layout_height="25dp">
+
+                <ImageView
+                    android:id="@+id/cell42"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="0dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell43"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="4dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell44"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="5dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell45"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="5dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell46"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="5dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell47"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="6dp"
+                    android:background="@android:color/transparent" />
+
+                <ImageView
+                    android:id="@+id/cell48"
+                    android:layout_width="27dp"
+                    android:layout_height="27dp"
+                    android:contentDescription="cella"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5.5dp"
+                    android:background="@android:color/transparent" />
+
+
+
+            </TableRow>
+        </TableLayout>
+
+    </RelativeLayout>
+
+    <!-- ================================================= -->
+
+    <!-- Relative layout
+         1 imageView per sfondo del player che sta muovendo
+         2 textView, una per il nome e una per la mossa
+         ? 1 imageView per l'icona ?
+    -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="18dp"
+        android:id="@+id/bottomrelative">
 
         <ImageView
-            android:id="@+id/cell21"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageViewBackgroundPlayer"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true" />
 
-        <ImageView
-            android:id="@+id/cell22"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Player Two"
+            android:id="@+id/textViewPlayerName"
+            android:textColor="#ffffff"
+            android:layout_marginLeft="125dp"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp" />
 
-        <ImageView
-            android:id="@+id/cell23"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Medium Text"
+            android:id="@+id/textViewActionToDo"
+            android:layout_alignParentBottom="false"
+            android:layout_alignEnd="@+id/textViewPlayerName"
+            android:textSize="16sp"
+            android:layout_marginTop="45dp"
+            android:textColor="#ffffff" />
+    </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/cell24"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
-
-        <ImageView
-            android:id="@+id/cell25"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
-
-        <ImageView
-            android:id="@+id/cell26"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
-
-        <ImageView
-            android:id="@+id/cell27"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
-
-
-    </TableRow>
-
-    <TableRow
-        android:layout_width="210dp"
-        android:layout_height="30dp">
-
-        <ImageView
-            android:id="@+id/cell28"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
-
-        <ImageView
-            android:id="@+id/cell29"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
-
-        <ImageView
-            android:id="@+id/cell30"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
-
-        <ImageView
-            android:id="@+id/cell31"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
-
-        <ImageView
-            android:id="@+id/cell32"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
-
-        <ImageView
-            android:id="@+id/cell33"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
-
-        <ImageView
-            android:id="@+id/cell34"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
-
-
-    </TableRow>
-
-    <TableRow
-        android:layout_width="210dp"
-        android:layout_height="30dp">
-
-        <ImageView
-            android:id="@+id/cell35"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
-
-        <ImageView
-            android:id="@+id/cell36"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
-
-        <ImageView
-            android:id="@+id/cell37"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
-
-        <ImageView
-            android:id="@+id/cell38"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
-
-        <ImageView
-            android:id="@+id/cell39"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
-
-        <ImageView
-            android:id="@+id/cell40"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
-
-        <ImageView
-            android:id="@+id/cell41"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
-
-
-    </TableRow>
-
-    <TableRow
-        android:layout_width="210dp"
-        android:layout_height="30dp">
-
-        <ImageView
-            android:id="@+id/cell42"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
-
-        <ImageView
-            android:id="@+id/cell43"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
-
-        <ImageView
-            android:id="@+id/cell44"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
-
-        <ImageView
-            android:id="@+id/cell45"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
-
-        <ImageView
-            android:id="@+id/cell46"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
-
-        <ImageView
-            android:id="@+id/cell47"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
-
-        <ImageView
-            android:id="@+id/cell48"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:src="@mipmap/cella"
-            android:contentDescription="cella"
-            />
-
-
-
-    </TableRow>
-</TableLayout>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="362dp"
-        android:layout_marginLeft="170dp"
-        android:text="turno giocatore"
-        android:id ="@+id/turnbox"/>
-
-</RelativeLayout>
-
-
-
+</LinearLayout>

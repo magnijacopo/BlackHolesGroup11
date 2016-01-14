@@ -11,13 +11,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import android.media.AudioManager;
 import android.media.SoundPool;
-
-
 import it.polimi.group11.model.*;
-
+import android.widget.Chronometer;
 
 public class PlayGameActivity extends AppCompatActivity {
 
@@ -26,15 +23,26 @@ public class PlayGameActivity extends AppCompatActivity {
      */
     private Game2 game2 ;
     public Configuration config;
-    private TextView turno;
-    ImageView cells[] = new ImageView[49];
-    ImageView hbars[] = new ImageView[7];
-    ImageView vbars[] = new ImageView[7];
+    private TextView turn;
+    private ImageView nowPlay;
+    private TextView instruction;
+    private TextView contBeadNum1;
+    private TextView contBeadNum2;
+    private TextView contBeadNum3;
+    private TextView contBeadNum4;
+    private ImageView playerIcon1;
+    private ImageView playerIcon2;
+    private ImageView playerIcon3;
+    private ImageView playerIcon4;
+    private Chronometer matchTime;
+    private ImageView cells[] = new ImageView[49];
+    private ImageView hbars[] = new ImageView[7];
+    private ImageView vbars[] = new ImageView[7];
     private float a;
     private float b;
     private float da;
     private float db;
-    float centre[] = new float[2];
+    private float centre[] = new float[2];
     private float startPointA;
     private float startPointB;
     private float finalPoint;
@@ -79,13 +87,14 @@ public class PlayGameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_game);
+        int k=0;
 
         //Get intents from previous activity
         Intent intent= getIntent();
         Bundle bundle = intent.getExtras();
         if(bundle != null) {
-            int j = bundle.getInt("PLAYER_NUMBER");
-            game2 = new Game2(j);
+            k = bundle.getInt("PLAYER_NUMBER");
+            game2 = new Game2(k);
             config = new Configuration();
             for(int i=0;i<game2.getPlayerNum();i++) {
                 game2.getCurrentMovingPlayer().setConfiguration(config);
@@ -98,12 +107,15 @@ public class PlayGameActivity extends AppCompatActivity {
         sound1 = sounds.load(getApplicationContext(), R.raw.bead_destroyed_fx, 1);
         fxOn = OptionsActivity.fxSoundsCheck;
 
-        turno = (TextView) findViewById(R.id.turnbox);
+        //Declaration of initial situation of the Play Game Activity
+        setStartViewSituation(k);
 
-        //beads initialization
-        RelativeLayout mainLayout = (RelativeLayout) findViewById(R.id.parent);
+        //Beads initialization
+        RelativeLayout mainLayout = (RelativeLayout) findViewById(R.id.relative);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(mainLayout.getLayoutParams());
+        params.setMargins(100,900,0,0);
         beads = new ImageView[game2.getPlayerNum()][5];
+
         for (int j = 4; j >=0; j--) {
             for (int i = (game2.getPlayerNum()-1); i >=0 ; i--) {
                 beads[i][j] = new ImageView(this);
@@ -112,27 +124,29 @@ public class PlayGameActivity extends AppCompatActivity {
                 game2.iteratorPrevious(game2.getPlayerNum());
                 switch(Integer.parseInt(game2.getCurrentPlayer())) {
                     case 1:
-                        beads[i][j].setImageResource(R.mipmap.bead1);
+                        beads[i][j].setImageResource(R.drawable.bead1);
                         break;
                     case 2:
-                        beads[i][j].setImageResource(R.mipmap.bead2);
+                        beads[i][j].setImageResource(R.drawable.bead2);
                         break;
                     case 3:
-                        beads[i][j].setImageResource(R.mipmap.bead3);
+                        beads[i][j].setImageResource(R.drawable.bead3);
                         break;
                     case 4:
-                        beads[i][j].setImageResource(R.mipmap.bead4);
+                        beads[i][j].setImageResource(R.drawable.bead4);
                         break;
                     default:
                         break;
                 }
-                beads[i][j].setLayoutParams(new RelativeLayout.LayoutParams((int) (20 * beads[i][j].getResources().getDisplayMetrics().density), (int) (20 * beads[i][j].getResources().getDisplayMetrics().density)));
+                beads[i][j].setLayoutParams(params);
+                beads[i][j].getLayoutParams().height =(int) (30 * beads[i][j].getResources().getDisplayMetrics().density);
+                beads[i][j].getLayoutParams().width =(int) (30 * beads[i][j].getResources().getDisplayMetrics().density);
                 beads[i][j].setContentDescription(id);
                 beads[i][j].setOnTouchListener(new MyTouchListener());
             }
         }
 
-        turno.setText("Turno giocatore "+game2.getCurrentPlayer());
+        displayTurn();
 
         //The following "for" contains initial position of the bars
 
@@ -144,19 +158,20 @@ public class PlayGameActivity extends AppCompatActivity {
             float marginLeftH = hbars[i].getX();
             switch (posH) {
                 case 0:
-                    int plusMarginLeft = (int) (marginLeftH + (30 * hbars[i].getResources().getDisplayMetrics().density));
+                    int plusMarginLeft = (int) (marginLeftH + (32 * hbars[i].getResources().getDisplayMetrics().density));
                     hbars[i].setX(plusMarginLeft);
                     break;
                 case 1:
                     break;
                 case 2:
-                    int subMarginLeft = (int)(marginLeftH - (30 * hbars[i].getResources().getDisplayMetrics().density));
+                    int subMarginLeft = (int)(marginLeftH - (32 * hbars[i].getResources().getDisplayMetrics().density));
                     hbars[i].setX(subMarginLeft);
                     break;
                 default:
                     break;
 
             }
+
         }
 
         //Initial position of the vertical bars
@@ -167,19 +182,20 @@ public class PlayGameActivity extends AppCompatActivity {
             float marginTopV = vbars[i].getY();
             switch (posV) {
                 case 0:
-                    int plusMarginTop = (int) (marginTopV + (30 * vbars[i].getResources().getDisplayMetrics().density));
+                    int plusMarginTop = (int) (marginTopV + (32 * vbars[i].getResources().getDisplayMetrics().density));
                     vbars[i].setY(plusMarginTop);
                     break;
                 case 1:
                     break;
                 case 2:
-                    int subMarginTop = (int) (marginTopV - (30 * vbars[i].getResources().getDisplayMetrics().density));
+                    int subMarginTop = (int) (marginTopV - (32 * vbars[i].getResources().getDisplayMetrics().density));
                     vbars[i].setY(subMarginTop);
                     break;
                 default:
                     break;
 
             }
+
         }
 
         //Initialization of the cells
@@ -189,6 +205,7 @@ public class PlayGameActivity extends AppCompatActivity {
             cells[i].setOnDragListener(new MyDragListener());
         }
     }
+
 
     /**
      *OnTouchListener: implements the listener on onTouch events
@@ -220,14 +237,14 @@ public class PlayGameActivity extends AppCompatActivity {
                                     switch (game2.board.horizontalBar[i].getPosition()) {
                                         case 0:
                                             setLimitRight(getHystoricalPointX());
-                                            setLimitLeft(getHystoricalPointX() - (60 * v.getResources().getDisplayMetrics().density));
+                                            setLimitLeft(getHystoricalPointX() - (64 * v.getResources().getDisplayMetrics().density));
                                             break;
                                         case 1:
-                                            setLimitRight((getHystoricalPointX() + (30 * v.getResources().getDisplayMetrics().density)));
-                                            setLimitLeft((getHystoricalPointX() - (30 * v.getResources().getDisplayMetrics().density)));
+                                            setLimitRight((getHystoricalPointX() + (32 * v.getResources().getDisplayMetrics().density)));
+                                            setLimitLeft((getHystoricalPointX() - (32 * v.getResources().getDisplayMetrics().density)));
                                             break;
                                         case 2:
-                                            setLimitRight(getHystoricalPointX() + (60 * v.getResources().getDisplayMetrics().density));
+                                            setLimitRight(getHystoricalPointX() + (64 * v.getResources().getDisplayMetrics().density));
                                             setLimitLeft(getHystoricalPointX());
                                             break;
                                         default:
@@ -244,14 +261,14 @@ public class PlayGameActivity extends AppCompatActivity {
                                     switch (game2.board.verticalBar[i].getPosition()) {
                                         case 0:
                                             setLimitBottom(getHystoricalPointY());
-                                            setLimitTop(getHystoricalPointY() - (60 * v.getResources().getDisplayMetrics().density));
+                                            setLimitTop(getHystoricalPointY() - (64 * v.getResources().getDisplayMetrics().density));
                                             break;
                                         case 1:
-                                            setLimitBottom((getHystoricalPointY() + (30 * v.getResources().getDisplayMetrics().density)));
-                                            setLimitTop((getHystoricalPointY() - (30 * v.getResources().getDisplayMetrics().density)));
+                                            setLimitBottom((getHystoricalPointY() + (32 * v.getResources().getDisplayMetrics().density)));
+                                            setLimitTop((getHystoricalPointY() - (32 * v.getResources().getDisplayMetrics().density)));
                                             break;
                                         case 2:
-                                            setLimitBottom(getHystoricalPointY() + (60 * v.getResources().getDisplayMetrics().density));
+                                            setLimitBottom(getHystoricalPointY() + (64 * v.getResources().getDisplayMetrics().density));
                                             setLimitTop(getHystoricalPointY());
                                             break;
                                         default:
@@ -272,7 +289,7 @@ public class PlayGameActivity extends AppCompatActivity {
                             //if the bar moves to the right
                             if ( getDeltaX() > 0 )
                             {
-                                setFinalPoint((getStartPointA()+ (30 * v.getResources().getDisplayMetrics().density)));
+                                setFinalPoint((getStartPointA() + (32 * v.getResources().getDisplayMetrics().density)));
                                 //It prevents the bar to move towards the right, for more than one cell and one cell at a time
                                 if(((event.getRawX() - getDa()) <= getFinalPoint()) && (event.getRawX() - getDa()) < getLimitRight()) {
                                     setA(event.getRawX() - getDa());
@@ -282,7 +299,7 @@ public class PlayGameActivity extends AppCompatActivity {
                             //if the bar moves to the left
                             if( getDeltaX() < 0 )
                             {
-                                setFinalPoint(((getStartPointA()- (30 * v.getResources().getDisplayMetrics().density))));
+                                setFinalPoint(((getStartPointA()- (32 * v.getResources().getDisplayMetrics().density))));
                                 //It prevents the bar to move towards the left, for more than one cell and one cell at a time
                                 if(((event.getRawX() - getDa()) >= getFinalPoint())  && (event.getRawX() - getDa()) > getLimitLeft()) {
                                     setA(event.getRawX() - getDa());
@@ -299,7 +316,7 @@ public class PlayGameActivity extends AppCompatActivity {
                                 //if the bar moves to the top
                                 if ( getDeltaY() < 0 )
                                 {
-                                    setFinalPoint((getStartPointB() - (30 * v.getResources().getDisplayMetrics().density)));
+                                    setFinalPoint((getStartPointB() - (32 * v.getResources().getDisplayMetrics().density)));
                                     //It prevents the bar to move towards the top, for more than one cell and one cell at a time
                                     if(((event.getRawY() - getDb()) >= getFinalPoint()) && (event.getRawY() - getDb()) > getLimitTop()) {
                                         setB(event.getRawY() - getDb());
@@ -309,7 +326,7 @@ public class PlayGameActivity extends AppCompatActivity {
                                 //if the bar moves to the bottom
                                 if( getDeltaY() > 0 )
                                 {
-                                    setFinalPoint(((getStartPointB() + (30 * v.getResources().getDisplayMetrics().density))));
+                                    setFinalPoint(((getStartPointB() + (32 * v.getResources().getDisplayMetrics().density))));
                                     //It prevents the bar to move towards the bottom, for more than one cell and one cell at a time
                                     if(((event.getRawY() - getDb()) <= getFinalPoint()) && (event.getRawY() - getDb()) < getLimitBottom()) {
                                         setB(event.getRawY() - getDb());
@@ -347,8 +364,12 @@ public class PlayGameActivity extends AppCompatActivity {
                                 Intent intent = new Intent(PlayGameActivity.this, PopUpActivity.class);
                                 String message = game2.getNextPlayer();
                                 intent.putExtra(EXTRA_MESSAGE, message);
+                                for(int i=0;i <7;i++) {
+                                    hbars[i].setOnTouchListener(null);
+                                    vbars[i].setOnTouchListener(null);
+                                }
+                                matchTime.stop();
                                 startActivity(intent);
-                                //Popup vittoria
                             }
                             else {
                                 game2.getCurrentMovingPlayer().setMovesNumber(game2.getCurrentMovingPlayer().getMovesNumber() + 1);
@@ -363,7 +384,7 @@ public class PlayGameActivity extends AppCompatActivity {
                                     game2.iteratorNext();
                                 }
                                 game2.getNextPlayer();
-                                turno.setText("Turno giocatore " + game2.getCurrentPlayer());
+                                displayTurn();
                             }
                         }
                         else{
@@ -400,8 +421,12 @@ public class PlayGameActivity extends AppCompatActivity {
                                 Intent intent = new Intent(PlayGameActivity.this, PopUpActivity.class);
                                 String message = game2.getNextPlayer();
                                 intent.putExtra(EXTRA_MESSAGE, message);
+                                for(int i=0;i <7;i++) {
+                                    hbars[i].setOnTouchListener(null);
+                                    vbars[i].setOnTouchListener(null);
+                                }
+                                matchTime.stop();
                                 startActivity(intent);
-                                //Popup vittoria
                             }
                             else {
                                 game2.getCurrentMovingPlayer().setMovesNumber(game2.getCurrentMovingPlayer().getMovesNumber() + 1);
@@ -415,7 +440,7 @@ public class PlayGameActivity extends AppCompatActivity {
                                     game2.iteratorNext();
                                 }
                                 game2.getNextPlayer();
-                                turno.setText("Turno giocatore " + game2.getCurrentPlayer());
+                                displayTurn();
                             }
                         }
                         else{
@@ -452,8 +477,12 @@ public class PlayGameActivity extends AppCompatActivity {
                                 Intent intent = new Intent(PlayGameActivity.this, PopUpActivity.class);
                                 String message = game2.getNextPlayer();
                                 intent.putExtra(EXTRA_MESSAGE, message);
+                                for(int i=0;i <7;i++) {
+                                    hbars[i].setOnTouchListener(null);
+                                    vbars[i].setOnTouchListener(null);
+                                }
+                                matchTime.stop();
                                 startActivity(intent);
-                                //Popup vittoria
                             }
                             else {
                                 game2.getCurrentMovingPlayer().setMovesNumber(game2.getCurrentMovingPlayer().getMovesNumber() + 1);
@@ -467,7 +496,7 @@ public class PlayGameActivity extends AppCompatActivity {
                                     game2.iteratorNext();
                                 }
                                 game2.getNextPlayer();
-                                turno.setText("Turno giocatore " + game2.getCurrentPlayer());
+                                displayTurn();
                             }
                         }
                         else{
@@ -503,8 +532,12 @@ public class PlayGameActivity extends AppCompatActivity {
                                 Intent intent = new Intent(PlayGameActivity.this, PopUpActivity.class);
                                 String message = game2.getNextPlayer();
                                 intent.putExtra(EXTRA_MESSAGE, message);
+                                for(int i=0;i <7;i++) {
+                                    hbars[i].setOnTouchListener(null);
+                                    vbars[i].setOnTouchListener(null);
+                                }
+                                matchTime.stop();
                                 startActivity(intent);
-                                //Popup vittoria
                             }
                             else{
                                 game2.getCurrentMovingPlayer().setMovesNumber(game2.getCurrentMovingPlayer().getMovesNumber() + 1);
@@ -518,7 +551,7 @@ public class PlayGameActivity extends AppCompatActivity {
                                     game2.iteratorNext();
                                 }
                                 game2.getNextPlayer();
-                                turno.setText("Turno giocatore "+game2.getCurrentPlayer());
+                                displayTurn();
                             }
                         }
                         else{
@@ -578,11 +611,11 @@ public class PlayGameActivity extends AppCompatActivity {
                                         view.setOnTouchListener(null);
                                         game2.setTotalBeadsInBoard(game2.getTotalBeadsInBoard() + 1);
                                         game2.iteratorNext();
-                                        turno.setText("Turno giocatore " + game2.getCurrentPlayer());
+                                        displayTurn();
                                     }
                                     else{
-                                        view.setX(35);
-                                        view.setY(35);
+                                        view.setX(100);
+                                        view.setY(900);
                                         view.setVisibility(View.VISIBLE);
                                     }
                                 }
@@ -596,6 +629,7 @@ public class PlayGameActivity extends AppCompatActivity {
                         //Log.i("ciao","beadsPosition "+game2.board.getBeadsPosition());
                         config.setGame2(game2);
                         config.setBoard(game2.board);
+                        instruction.setText("Move Bars");
                         Log.i("PlayGame", "config " + config.getConfiguration());
                         Log.i("PlayGame","CheckGrid "+game2.board.getCheckGrid());
                         for(int i=0;i <7;i++) {
@@ -610,8 +644,8 @@ public class PlayGameActivity extends AppCompatActivity {
                     View viewF = (View) event.getLocalState();
                     if(!event.getResult())
                     {
-                        viewF.setX(35);
-                        viewF.setY(35);
+                        viewF.setX(100);
+                        viewF.setY(900);
                         viewF.setVisibility(View.VISIBLE);
 
                     }
@@ -623,6 +657,8 @@ public class PlayGameActivity extends AppCompatActivity {
         }
 
     }
+
+
 
     public float getLimitBottom() {
         return limitBottom;
@@ -775,4 +811,55 @@ public class PlayGameActivity extends AppCompatActivity {
         }
     }
 
+    void updateAlpha(View v)
+    {
+
+        v.setAlpha(0.1f);
+    }
+
+    public void setStartViewSituation(int numPlayer){
+        turn = (TextView) findViewById(R.id.textViewPlayerName);
+        matchTime = (Chronometer) findViewById(R.id.chronometer);
+        nowPlay = (ImageView) findViewById(R.id.imageViewBackgroundPlayer);
+        instruction = (TextView) findViewById(R.id.textViewActionToDo);
+        contBeadNum1 = (TextView) findViewById(R.id.textViewPlayer1);
+        contBeadNum2 = (TextView) findViewById(R.id.textViewPlayer2);
+        contBeadNum3 = (TextView) findViewById(R.id.textViewPlayer3);
+        contBeadNum4 = (TextView) findViewById(R.id.textViewPlayer4);
+        playerIcon1 = (ImageView) findViewById(R.id.imageViewPlayer1);
+        playerIcon2 = (ImageView) findViewById(R.id.imageViewPlayer2);
+        playerIcon3 = (ImageView) findViewById(R.id.imageViewPlayer3);
+        playerIcon4 = (ImageView) findViewById(R.id.imageViewPlayer4);
+        instruction.setText("Place Bead");
+        matchTime.start();
+        switch(numPlayer){
+            case 2:
+                contBeadNum1.setText("5");
+                contBeadNum2.setText("5");
+                contBeadNum3.setText("X");
+                contBeadNum4.setText("X");
+                updateAlpha(playerIcon3);
+                updateAlpha(playerIcon4);
+                break;
+            case 3:
+                contBeadNum1.setText("5");
+                contBeadNum2.setText("5");
+                contBeadNum3.setText("5");
+                contBeadNum4.setText("X");
+                updateAlpha(playerIcon4);
+                break;
+            case 4:
+                contBeadNum1.setText("5");
+                contBeadNum2.setText("5");
+                contBeadNum3.setText("5");
+                contBeadNum4.setText("5");
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void displayTurn(){
+        turn.setText("Turn of "+ game2.getCurrentPlayer());
+    }
 }

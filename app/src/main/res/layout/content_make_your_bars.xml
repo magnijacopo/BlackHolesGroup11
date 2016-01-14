@@ -10,6 +10,198 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".SetYourBarsActivity"
-    tools:showIn="@layout/activity_make_your_bars">
+    tools:showIn="@layout/activity_make_your_bars"
+    android:background="@drawable/bg">
+
+        <!-- imageView per barre -->
+
+        <!-- Barre orizzontali -->
+        <ImageView
+            android:layout_width="225dp"
+            android:layout_height="225dp"
+            android:id="@+id/imageView"
+            android:background="@drawable/board_back"
+            android:layout_alignParentTop="false"
+            android:layout_alignWithParentIfMissing="false"
+            android:layout_marginLeft="64dp"
+            android:layout_marginTop="155dp" />
+
+        <ImageView
+            android:id="@+id/horizontalbar0"
+            android:layout_width="285dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="157dp"
+            android:layout_marginLeft="25dp"
+            android:contentDescription="horizontal"
+            android:background="@drawable/bar_red_1"
+            android:layout_centerHorizontal="true" />
+
+        <ImageView
+            android:id="@+id/horizontalbar1"
+            android:layout_width="285dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="33dp"
+            android:layout_marginLeft="25dp"
+            android:contentDescription="horizontal"
+            android:layout_alignTop="@+id/horizontalbar0"
+            android:background="@drawable/bar_red_2"
+            android:layout_centerHorizontal="true" />
+
+        <ImageView
+            android:id="@+id/horizontalbar2"
+            android:layout_width="285dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginLeft="25dp"
+            android:contentDescription="horizontal"
+            android:layout_alignTop="@+id/horizontalbar1"
+            android:background="@drawable/bar_red_3"
+            android:layout_centerHorizontal="true" />
+
+        <ImageView
+            android:id="@+id/horizontalbar3"
+            android:layout_width="285dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="33dp"
+            android:contentDescription="horizontal"
+            android:layout_marginLeft="25dp"
+            android:layout_alignTop="@+id/horizontalbar2"
+            android:background="@drawable/bar_red_4"
+            android:layout_centerHorizontal="true" />
+
+        <ImageView
+            android:id="@+id/horizontalbar4"
+            android:layout_width="285dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="33dp"
+            android:layout_marginLeft="25dp"
+            android:contentDescription="horizontal"
+            android:layout_alignTop="@+id/horizontalbar3"
+            android:background="@drawable/bar_red_5"
+            android:layout_centerHorizontal="true" />
+
+        <ImageView
+            android:id="@+id/horizontalbar5"
+            android:layout_width="285dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginLeft="25dp"
+            android:contentDescription="horizontal"
+            android:layout_alignTop="@+id/horizontalbar4"
+            android:background="@drawable/bar_red_6"
+            android:layout_centerHorizontal="true" />
+
+        <ImageView
+            android:id="@+id/horizontalbar6"
+            android:layout_width="285dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="33dp"
+            android:layout_marginLeft="25dp"
+            android:contentDescription="horizontal"
+            android:layout_alignTop="@+id/horizontalbar5"
+            android:background="@drawable/bar_red_7"
+            android:layout_centerHorizontal="true" />
+
+        <!-- Barre verticali -->
+
+        <ImageView
+            android:id="@+id/verticalbar0"
+            android:layout_width="24dp"
+            android:layout_height="285dp"
+            android:layout_marginTop="52dp"
+            android:contentDescription="vertical"
+            android:layout_alignParentStart="false"
+            android:layout_alignParentEnd="false"
+            android:adjustViewBounds="false"
+            android:layout_marginLeft="67dp"
+            android:background="@drawable/bar_blue_1"
+            android:baselineAlignBottom="false"
+            android:layout_centerVertical="true" />
+
+        <ImageView
+            android:id="@+id/verticalbar1"
+            android:layout_width="24dp"
+            android:layout_height="285dp"
+            android:layout_marginLeft="32dp"
+            android:contentDescription="vertical"
+            android:layout_alignParentStart="false"
+            android:layout_alignParentEnd="false"
+            android:adjustViewBounds="false"
+            android:layout_alignLeft="@+id/verticalbar0"
+            android:background="@drawable/bar_blue_2"
+            android:layout_centerVertical="true" />
+
+        <ImageView
+            android:id="@+id/verticalbar2"
+            android:layout_width="24dp"
+            android:layout_height="285dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="53.5dp"
+            android:contentDescription="vertical"
+            android:adjustViewBounds="false"
+            android:layout_alignLeft="@+id/verticalbar1"
+            android:background="@drawable/bar_blue_3"
+            android:layout_centerVertical="true" />
+
+        <ImageView
+            android:id="@+id/verticalbar3"
+            android:layout_width="24dp"
+            android:layout_height="285dp"
+            android:layout_marginLeft="33dp"
+            android:layout_marginTop="53.5dp"
+            android:contentDescription="vertical"
+            android:adjustViewBounds="false"
+            android:layout_alignLeft="@+id/verticalbar2"
+            android:background="@drawable/bar_blue_4"
+            android:layout_centerVertical="true" />
+
+        <ImageView
+            android:id="@+id/verticalbar4"
+            android:layout_width="24dp"
+            android:layout_height="285dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginTop="53.5dp"
+            android:contentDescription="vertical"
+            android:adjustViewBounds="false"
+            android:layout_alignLeft="@+id/verticalbar3"
+            android:background="@drawable/bar_blue_5"
+            android:layout_centerVertical="true" />
+
+        <ImageView
+            android:id="@+id/verticalbar5"
+            android:layout_width="24dp"
+            android:layout_height="285dp"
+            android:layout_marginLeft="33dp"
+            android:layout_marginTop="53.5dp"
+            android:contentDescription="vertical"
+            android:layout_alignParentStart="false"
+            android:layout_alignParentEnd="false"
+            android:adjustViewBounds="false"
+            android:layout_alignLeft="@+id/verticalbar4"
+            android:background="@drawable/bar_blue_6"
+            android:layout_centerVertical="true" />
+
+        <ImageView
+            android:id="@+id/verticalbar6"
+            android:layout_width="24dp"
+            android:layout_height="285dp"
+            android:layout_marginTop="53.5dp"
+            android:contentDescription="vertical"
+            android:layout_alignParentStart="false"
+            android:adjustViewBounds="false"
+            android:layout_marginLeft="32dp"
+            android:layout_alignLeft="@+id/verticalbar5"
+            android:background="@drawable/bar_blue_7"
+            android:layout_centerVertical="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start"
+        android:id="@+id/button6"
+        android:layout_below="@+id/verticalbar0"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp" />
+
 
 </RelativeLayout>
