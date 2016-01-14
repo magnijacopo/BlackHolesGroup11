@@ -124,16 +124,16 @@ public class PlayGameActivity extends AppCompatActivity {
                 game2.iteratorPrevious(game2.getPlayerNum());
                 switch(Integer.parseInt(game2.getCurrentPlayer())) {
                     case 1:
-                        beads[i][j].setImageResource(R.drawable.bead1);
-                        break;
-                    case 2:
-                        beads[i][j].setImageResource(R.drawable.bead2);
-                        break;
-                    case 3:
                         beads[i][j].setImageResource(R.drawable.bead3);
                         break;
-                    case 4:
+                    case 2:
+                        beads[i][j].setImageResource(R.drawable.bead1);
+                        break;
+                    case 3:
                         beads[i][j].setImageResource(R.drawable.bead4);
+                        break;
+                    case 4:
+                        beads[i][j].setImageResource(R.drawable.bead2);
                         break;
                     default:
                         break;
