@@ -144,11 +144,14 @@
         <activity
             android:name=".SetYourBarsActivity"
             android:label="@string/title_activity_make_your_bars"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".PopUpActivity"
-            android:theme="@style/AppTheme.CustomTheme">
-            </activity>
+            android:theme="@style/AppTheme.CustomTheme"></activity>
+        <activity
+            android:name=".InstructionsActivity"
+            android:label="@string/title_activity_instructions"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
