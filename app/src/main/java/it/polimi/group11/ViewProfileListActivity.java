@@ -36,18 +36,17 @@ public class ViewProfileListActivity extends AppCompatActivity {
                 R.id.player_name,
         };
 
+        /*
+        Typeface myTypeface = Typeface.createFromAsset(getAssets(), "fonts/SignPainter-HouseScript.ttf");
+        textViewPlayerName.setTypeface(myTypeface);
+        textViewPlayerName = (TextView) findViewById(R.id.player_name);
+        */
 
         SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(this, R.layout.player_info,
                 cursor, columns, widgets, 0);
         listView = (ListView)findViewById(R.id.listView1);
         listView.setAdapter(cursorAdapter);
 
-        /*
-        Typeface myTypeface = Typeface.createFromAsset(getAssets(), "fonts/SignPainter-HouseScript.ttf");
-
-        textViewPlayerName = (TextView) findViewById(R.id.player_name);
-        textViewPlayerName.setTypeface(myTypeface);
-        */
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 

@@ -58,7 +58,7 @@ public class ViewProfileStatistics extends AppCompatActivity implements ConfirmD
         final Cursor cursorMatches = dbHelper.getAllProfiles();
 
         //Setting the data from the db (and the font)
-        textViewProfileName.setText(getNamePlayerFromCursor(cursor));
+        textViewProfileName.setText(dbHelper.getNamePlayerFromCursor(cursor));
         textViewProfileName.setTypeface(myTypeface);
 
 
@@ -109,17 +109,7 @@ public class ViewProfileStatistics extends AppCompatActivity implements ConfirmD
     listView.setAdapter(cursorAdapter);
     */
 
-    /**
-     * From the cursor it gets the name of the profile.
-     * @param cursor that has done the query.
-     * @return the name of the player.
-     */
-    public String getNamePlayerFromCursor(Cursor cursor){
-        if(cursor.moveToFirst()){
-            namePlayer = cursor.getString(cursor.getColumnIndex(dbHelper.PLAYER_COLUMN_NAME));
-        }
-        return namePlayer;
-    }
+
 
     /*
     public Uri getImagePlayerFromCursor(Cursor cursor) {

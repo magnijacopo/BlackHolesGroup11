@@ -57,6 +57,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 MATCH_COLUMN_DATE + " DATETIME DEFAULT CURRENT_TIMESTAMP, " + MATCH_COLUMN_DURATION + " TEXT, " +
                 MATCH_COLUMN_WINNER + " INTEGER, " +
                 MATCH_COLUMN_MOVESNUMBER + " INTEGER)");
+
+        ContentValues guest1 = new ContentValues();
+        guest1.put(PLAYER_COLUMN_NAME, "guest1");
+        db.insert(PLAYER_TABLE_NAME, null, guest1);
+
+        ContentValues guest2 = new ContentValues();
+        guest2.put(PLAYER_COLUMN_NAME, "guest2");
+        db.insert(PLAYER_TABLE_NAME, null, guest2);
+
+        ContentValues guest3 = new ContentValues();
+        guest3.put(PLAYER_COLUMN_NAME, "guest3");
+        db.insert(PLAYER_TABLE_NAME, null, guest3);
+
+        ContentValues guest4 = new ContentValues();
+        guest4.put(PLAYER_COLUMN_NAME, "guest4");
+        db.insert(PLAYER_TABLE_NAME, null, guest4);
+
+        ContentValues cpu1 = new ContentValues();
+        cpu1.put(PLAYER_COLUMN_NAME, "cpu1");
+        db.insert(PLAYER_TABLE_NAME, null, cpu1);
+
+        ContentValues cpu2 = new ContentValues();
+        cpu2.put(PLAYER_COLUMN_NAME, "cpu2");
+        db.insert(PLAYER_TABLE_NAME, null, cpu2);
+
+        ContentValues cpu3 = new ContentValues();
+        cpu3.put(PLAYER_COLUMN_NAME, "cpu3");
+        db.insert(PLAYER_TABLE_NAME, null, cpu3);
+
     }
 
     @Override
@@ -143,7 +172,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      */
     public Cursor getAllProfiles() {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery( "SELECT * FROM " + PLAYER_TABLE_NAME, null );
+        String guest1 = "guest1";
+        String guest2 = "guest2";
+        String guest3 = "guest3";
+        String guest4 = "guest4";
+        String cpu1 = "cpu1";
+        String cpu2 = "cpu2";
+        String cpu3 = "cpu3";
+
+        Cursor res = db.rawQuery( "SELECT * FROM " + PLAYER_TABLE_NAME + " WHERE NOT " + PLAYER_COLUMN_NAME + "=?" +
+                " AND NOT " + PLAYER_COLUMN_NAME + "=?" + " AND NOT " + PLAYER_COLUMN_NAME + "=?" +
+                " AND NOT " + PLAYER_COLUMN_NAME + "=?" + " AND NOT " + PLAYER_COLUMN_NAME + "=?" +
+                " AND NOT " + PLAYER_COLUMN_NAME + "=?" + " AND NOT " + PLAYER_COLUMN_NAME + "=?" ,
+                new String[] { guest1, guest2, guest3, guest4, cpu1, cpu2, cpu3  }, null );
         return res;
     }
 
@@ -263,4 +304,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + MATCH_COLUMN_WINNER + "=?" , new String[] { Integer.toString(idPlayer) } );
         return res;
     }
+
+    /**
+     * From the cursor it gets the name of the profile.
+     * @param cursor that has done the query.
+     * @return the name of the player.
+     */
+    public String getNamePlayerFromCursor(Cursor cursor){
+        String namePlayer = null;
+        if(cursor.moveToFirst()){
+            namePlayer = cursor.getString(cursor.getColumnIndex(PLAYER_COLUMN_NAME));
+        }
+        return namePlayer;
+    }
+
 }

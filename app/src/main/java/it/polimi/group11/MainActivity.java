@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import it.polimi.group11.helper.DatabaseHelper;
+
 public class MainActivity extends AppCompatActivity {
 
     // Buttons.
@@ -23,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private SoundPool sounds;
     private int sound1;
     private boolean fxOn;
+
+    DatabaseHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +53,13 @@ public class MainActivity extends AppCompatActivity {
         sounds = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
         sound1 = sounds.load(getApplicationContext(), R.raw.button_click_fx, 1);
         fxOn = OptionsActivity.fxSoundsCheck;
+
+        /*
+        db = new DatabaseHelper(getApplicationContext());
+        db.insertProfile("Guest1");
+        db.insertProfile("Guest2");
+        */
+
     }
 
     // Methods for moving to other Activities.
