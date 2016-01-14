@@ -44,42 +44,53 @@ public class OptionsActivity extends AppCompatActivity implements ConfirmDeletio
 
         setCheck();
         checkedChanged();
-
     }
 
     @Override
     public void onPause(){
         super.onPause();
-        save(backgroundMusicCheckbox.isChecked());
+        save(backgroundMusicCheckbox.isChecked(), fxSoundsCheckbox.isChecked());
     }
 
     @Override
     public void onResume(){
         super.onResume();
-        backgroundMusicCheckbox.setChecked(load());
+        backgroundMusicCheckbox.setChecked(loadMusic());
+        fxSoundsCheckbox.setChecked(loadFx());
     }
 
     @Override
     public void onRestart() {
         super.onRestart();
-        backgroundMusicCheckbox.setChecked(load());
+        backgroundMusicCheckbox.setChecked(loadMusic());
+        fxSoundsCheckbox.setChecked(loadFx());
     }
 
     public void backgroundMusic(View view) {
         backgroundMusicCheck = ((CheckBox) view).isChecked();
     }
 
-    private void save(final boolean isChecked) {
+    private void save(final boolean musicIsChecked, final boolean fxIsChecked) {
         SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putBoolean("check", isChecked);
+        editor.putBoolean("checkMusic", musicIsChecked);
+        editor.apply();
+        editor.putBoolean("checkFx", fxIsChecked);
         editor.apply();
     }
 
-    private boolean load() {
+    private boolean loadMusic() {
         SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
-        return sharedPreferences.getBoolean("check", true);
+        return sharedPreferences.getBoolean("checkMusic", true);
     }
+
+    private boolean loadFx() {
+        SharedPreferences sharedPreferences = getPreferences(Context.MODE_PRIVATE);
+        return sharedPreferences.getBoolean("checkFx", true);
+
+    }
+
+
 
     public void checkedChanged(){
         fxSoundsCheckbox = (CheckBox) findViewById(R.id.fx_sounds_checkbox);
