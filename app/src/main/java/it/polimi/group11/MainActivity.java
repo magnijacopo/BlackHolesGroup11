@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     Button profiles_button;
     Button leaderboard_button;
     Button options_button;
+    Button instructions_button;
 
     // Variable for the sounds.
     private SoundPool sounds;
@@ -42,7 +43,8 @@ public class MainActivity extends AppCompatActivity {
         leaderboard_button.setTypeface(myTypeface);
         options_button = (Button) findViewById(R.id.options_button);
         options_button.setTypeface(myTypeface);
-
+        instructions_button = (Button) findViewById(R.id.instructions_button);
+        instructions_button.setTypeface(myTypeface);
         //Declaration variable for sound effects
         sounds = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
         sound1 = sounds.load(getApplicationContext(), R.raw.button_click_fx, 1);
@@ -77,6 +79,12 @@ public class MainActivity extends AppCompatActivity {
     public void goToLeaderboard(View view) {
         playSoundButton();
         Intent intent = new Intent(this, LeaderboardActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToInstuctions(View view){
+        playSoundButton();
+        Intent intent = new Intent(this, InstructionsActivity.class);
         startActivity(intent);
     }
 

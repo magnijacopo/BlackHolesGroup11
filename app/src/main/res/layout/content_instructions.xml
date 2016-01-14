@@ -16,10 +16,20 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
+        android:text="ITA"
+        android:id="@+id/button3"
+        android:layout_alignBottom="@+id/button2"
+        android:layout_alignParentEnd="true"
+        android:onClick="changeLanguage" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="back"
         android:id="@+id/button2"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="goToMainActivity" />
 
     <ScrollView
         android:layout_width="match_parent"
