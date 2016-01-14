@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="it.polimi.group11.PopUpActivity"
+    tools:showIn="@layout/activity_popwindow"
+    android:background="@mipmap/background_win"
+    android:id="@+id/popuprel">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/popup_bg"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/popup" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/popup"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:autoText="false" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"
+        android:layout_marginLeft="90dp"
+        android:layout_marginRight="90dp"
+        android:onClick="goToMainActivity"
+        android:background="@mipmap/buttonpopup"
+        android:layout_alignTop="@+id/popup" />
+
+
+
+</RelativeLayout>
