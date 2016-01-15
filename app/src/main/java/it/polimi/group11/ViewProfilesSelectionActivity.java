@@ -75,4 +75,9 @@ public class ViewProfilesSelectionActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ChoosePlayerTypeActivity.class);
         startActivity(intent);
     }
+
+    public void goToChoosePlayerType(View view) {
+        Intent intent = new Intent(this, ChoosePlayerTypeActivity.class);
+        startActivity(intent);
+    }
 }
