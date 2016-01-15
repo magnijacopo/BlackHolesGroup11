@@ -48,10 +48,10 @@
         android:layout_height="30dp"
         android:id="@+id/button_eng"
         android:onClick="changeLanguage"
-        android:background="@drawable/uk"
         android:textColor="#ffffff"
         android:layout_alignTop="@+id/button_ita"
         android:layout_toStartOf="@+id/button_ita"
-        android:layout_marginRight="15dp" />
+        android:layout_marginRight="15dp"
+        android:background="@drawable/uk" />
 
 </RelativeLayout>
