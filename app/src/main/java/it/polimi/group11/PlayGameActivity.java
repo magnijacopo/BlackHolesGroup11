@@ -708,6 +708,7 @@ public class PlayGameActivity extends AppCompatActivity {
         }
     }
 
+
     public void finishGame(){
         Log.i("ciao ", "vince " + game2.getNextPlayer());
         Intent intent = new Intent(PlayGameActivity.this, PopUpActivity.class);
