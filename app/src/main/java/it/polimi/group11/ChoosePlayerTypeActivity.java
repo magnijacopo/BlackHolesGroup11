@@ -67,5 +67,4 @@ public class ChoosePlayerTypeActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SelectPlayersActivity.class);
         startActivity(intent);
     }
-
 }

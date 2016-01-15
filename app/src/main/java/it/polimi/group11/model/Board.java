@@ -1,8 +1,5 @@
 package it.polimi.group11.model;
 
-import android.util.Log;
-
-
 /**
  * Created by Lale on 29/12/2015.
  */
@@ -13,6 +10,9 @@ public class Board {
     private Cell[][] grid = new Cell[7][7];
     Composition composition = new Composition();
 
+    /**
+     * Constructor of the board that creates bars and cells.
+     */
    public Board(){
        for(int i=0;i<7;i++) {
            horizontalBar[i] = new Bar();
@@ -23,6 +23,9 @@ public class Board {
        generateBoard();
    }
 
+    /**
+     * Create the holes in bars.
+     */
     private void setHolesOfBars() {
         for (int i = 0; i < 7; i++) {
             horizontalBar[i].setComposition(composition.getHorizontalComposition(i));
@@ -30,6 +33,9 @@ public class Board {
         }
     }
 
+    /**
+     * Set the initial random position of the bars.
+     */
     private void setInitialPositions() {
         for (int i = 0; i < 7; i++) {
             horizontalBar[i].setPosition(getRandomNumber());
@@ -41,18 +47,29 @@ public class Board {
             return (int)(Math.random()*3);
         }
 
+    /**
+     * It sets the updated values of the cells in the rows after a movement.
+     * @param row
+     */
     public void setRow(int row){
         for (int i=0;i<7;i++)
             grid[row][i].setHorizontal(horizontalBar[row].getValue(i + horizontalBar[row].getPosition()));
         updateRowBeadInCellStatus(row);
     }
 
+    /**
+     * It sets the updated values of the cells in the columns after a movement.
+     * @param column
+     */
     public void setColumn(int column){
         for (int i=0;i<7;i++)
             grid[i][column].setVertical(verticalBar[column].getValue(i + verticalBar[column].getPosition()));
         updateColumnBeadInCellStatus(column);
     }
 
+    /**
+     * It sets all the cells using {Board#setRow} and {Board#setColumn}
+     */
     public void prepareGrid(){
         for (int i=0;i<7;i++) {
         setRow(i);
@@ -60,6 +77,10 @@ public class Board {
         }
     }
 
+    /**
+     * Update the status of the {@link Configuration}.
+     * @return
+     */
     public String getCheckGrid() {
         String checkGrid = "";
         String temp="";
@@ -98,7 +119,18 @@ public class Board {
             horizontalBar[i].setId("verticalbar"+i);
     }
 
-
+    /**
+     * It creates the bars and give them a name.
+     * Sets the values of the cells.
+     * Make the holes on the bars and position them.
+     * After this each cell receives the value for check if there is an hole.
+     * {@link Board#setIdsCells()}
+     * {@link Board#setIdsHorizontalBars()}
+     * {@link Board#setIdsVerticalBars()}
+     * {@link Board#setHolesOfBars()}
+     * {@link Board#setInitialPositions()}
+     * {@link Board#prepareGrid()}
+     */
     public void generateBoard(){
 
         setIdsCells();
@@ -109,7 +141,12 @@ public class Board {
         prepareGrid();
     }
 
-
+    /**
+     * It checks if the bars go outside the bounds,
+     * i.e. they are not moved outside the board.
+     * @param move
+     * @return
+     */
     public boolean checkBoundsValidity (String move) {
 
         char orientation = move.charAt(0); // Orientation of the bar: vertical (v) or horizontal (h)
@@ -171,6 +208,10 @@ public class Board {
     }
 
 
+    /**
+     * The methods that allow to a bar the movement.
+     * @param move
+     */
     public void moveBar(String move){
         if (checkBoundsValidity((move))){
 
@@ -183,7 +224,6 @@ public class Board {
                     horizontalBar[number].setPosition(horizontalBar[number].getPosition()+1);
                 else {
                     horizontalBar[number].setPosition((horizontalBar[number].getPosition()) - 1);
-                    Log.i("Board", "la nuova posizione della barra sarà " + Integer.toString((horizontalBar[number].getPosition())));
                 }
                 setRow(number);
             }
@@ -197,6 +237,9 @@ public class Board {
         }
     }
 
+    /**
+     * it's a method to get the configuration of the beads that are still alive on the board;
+     */
     public String getBeadsPosition(){
         String beadsPosition="";
         for(int i=0; i < 7;i++) {
@@ -210,6 +253,10 @@ public class Board {
         return beadsPosition;
     }
 
+    /**
+     * it's a method to get the configuration of the bars
+     */
+
     public String getBarStatus(){
         String barStatus="";
         for(int i=0;i<7;i++)
@@ -218,6 +265,9 @@ public class Board {
             barStatus=barStatus+String.valueOf(verticalBar[i].getPosition());
         return barStatus;}
 
+    /**
+     * this method update the cell status if a bead fall down;
+     */
 
     public void updateBeadsCellStatus(){
         String checkGrid=getCheckGrid();
@@ -233,6 +283,11 @@ public class Board {
         }
     }
 
+    /**
+     * this method update the cell status if a bead fall down in a row;
+     */
+
+
     public void updateRowBeadInCellStatus(int row){
         for (int i=0;i<7;i++){
             if (!grid[row][i].getHorizontal()&&!grid[row][i].getVertical()&&grid[row][i].getBead()) {
@@ -242,6 +297,11 @@ public class Board {
         }
     }
 
+
+    /**
+     * this method update the cell status if a bead fall down in a column;
+     */
+
     public void updateColumnBeadInCellStatus(int column){
         for (int i=0;i<7;i++){
             if (!grid[i][column].getHorizontal()&&!grid[i][column].getVertical()&&grid[i][ column].getBead()) {
@@ -250,6 +310,11 @@ public class Board {
             }
         }
     }
+
+
+    /**
+     * this method update the life of bead status
+     */
 
     public String getCurrentBeadsPosition(){
         String checkGrid=getCheckGrid();
@@ -277,6 +342,9 @@ public class Board {
         this.grid[i][j] = grid;
     }
 
+    /**
+     * Setting the bars position with given values;
+     */
     public void setBarsPosition(int[] horiz, int[] vert){
         for (int i = 0; i < 7; i++) {
             horizontalBar[i].setPosition(horiz[i]);
