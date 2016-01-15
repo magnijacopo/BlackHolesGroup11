@@ -46,7 +46,7 @@ public class PopUpActivity extends AppCompatActivity {
         int height = dm.heightPixels;
 
 //questo setta le dimensioni del popup all' 70% della larghezza dello schermo e al 50% dell' altezza dello schermo
-        getWindow().setLayout((int)(width*.70),(int)(height*.50));
+       // getWindow().setLayout((int)(width*.70),(int)(height*.50));
     }
     public void goToMainActivity(View view){
         Intent intent = new Intent(this, MainActivity.class);

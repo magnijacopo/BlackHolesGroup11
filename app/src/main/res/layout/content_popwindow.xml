@@ -7,7 +7,7 @@
     android:fitsSystemWindows="true"
     tools:context="it.polimi.group11.PopUpActivity"
     tools:showIn="@layout/activity_popwindow"
-    android:background="@drawable/background_win"
+    android:background="@android:color/transparent"
     android:id="@+id/popuprel">
 
     <ImageView
