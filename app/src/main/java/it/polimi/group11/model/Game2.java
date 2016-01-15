@@ -28,22 +28,7 @@ public class Game2 {
     private String MOVE_NOT_VALID = "error: la mossa non è valida";
     private String movingPlayer;
     private int totalBeadsInBoard;
-    /*public void randomizePlayerOrder(){
-        playerOrder = new int[numPlayers];
-        playerOrder[0]=(int) (Math.random()*numPlayers);
-        int playersOrdered=1;
-        while (playersOrdered<numPlayers){
-            int temp=(int) (Math.random()*numPlayers);
-            boolean check=true;
-            for (int i=0;i<playersOrdered;i++)
-                if (playerOrder[i]==temp)
-                    check=false;
-            if (check) {
-                playerOrder[playersOrdered] = temp;
-                playersOrdered++;
-            }
-        }
-    }*/
+    private int numTotalMoves;
 
     public void randomFirstPlayer(){
         firstPlayer = (int) Math.floor((Math.random() * playersNumber) + 1);
@@ -71,6 +56,7 @@ public class Game2 {
             this.getCurrentMovingPlayer().setBoard(board);
             iteratorNext();
         }
+        setNumMovesTotal(0);
         totalBeadsInBoard = 0;
     }
 
@@ -364,6 +350,14 @@ public class Game2 {
 
     public void setGameOver(boolean gameOver) {
         this.gameOver = gameOver;
+    }
+
+    public int getNumMovesTotal() {
+        return numTotalMoves;
+    }
+
+    public void setNumMovesTotal(int numMovesTotal) {
+        this.numTotalMoves = numMovesTotal;
     }
 
 }

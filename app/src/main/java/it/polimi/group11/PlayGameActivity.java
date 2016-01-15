@@ -1,8 +1,10 @@
 package it.polimi.group11;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.ClipData;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,11 +14,16 @@ import android.util.Log;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.media.AudioManager;
 import android.media.SoundPool;
+
+import it.polimi.group11.helper.DatabaseHelper;
+import it.polimi.group11.helper.GuestData;
 import it.polimi.group11.model.*;
 import android.widget.Chronometer;
 
@@ -39,6 +46,7 @@ public class PlayGameActivity extends AppCompatActivity {
     private ImageView playerIcon3;
     private ImageView playerIcon4;
     private Chronometer matchTime;
+    private TextView numTurn;
     private ImageView cells[] = new ImageView[49];
     private ImageView hbars[] = new ImageView[7];
     private ImageView vbars[] = new ImageView[7];
@@ -69,6 +77,9 @@ public class PlayGameActivity extends AppCompatActivity {
     private boolean fxOn;
     public final static String EXTRA_MESSAGE = "it.polimi.group11.MESSAGE";
     private long lastPause;
+    DatabaseHelper dbHelper;
+
+
 
     /**
      * Constructor
@@ -94,13 +105,15 @@ public class PlayGameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_game);
         int k = 0;
-
+        dbHelper = new DatabaseHelper(getApplicationContext());
         //Get intents from previous activity
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         if (bundle != null) {
             k = bundle.getInt("PLAYER_NUMBER");
             game2 = new Game2(k);
+
+            /*
             game2.iteratorNext();
             game2.getCurrentMovingPlayer().setHuman(false);
             game2.iteratorNext();
@@ -108,6 +121,7 @@ public class PlayGameActivity extends AppCompatActivity {
             game2.iteratorNext();
             game2.getCurrentMovingPlayer().setHuman(false);
             game2.iteratorNext();
+            */
             if (SetYourBarsActivity.customModeOn) {
                 game2.board.setBarsPosition(SetYourBarsActivity.getHbarsPoisiton(), SetYourBarsActivity.getVbarsPosition());
                 game2.board.prepareGrid();
@@ -259,25 +273,7 @@ public class PlayGameActivity extends AppCompatActivity {
                                         game2.iteratorNext();
                                         displayTurn();
                                         changeIconPlayerTurn();
-                                        do {
-                                            if (!game2.getCurrentMovingPlayer().isHuman()) {
-                                                int pos[] = new int[2];
-                                                pos = game2.getCurrentMovingPlayer().getRandomPlace(game2.getCurrentPlayer());
-                                                int suca = ((pos[0] * 7) + pos[1]);
-                                                int player = (Integer.parseInt(game2.getCurrentPlayer())) - 1;
-                                                int num = (game2.getCurrentMovingPlayer().getBeadsInBoard()) - 1;
-                                                game2.board.getCell(pos[0], pos[1]).setCentre(cells[suca], beads[player][num].getWidth(), beads[player][num].getHeight());
-                                                centre = game2.board.getCell(pos[0], pos[1]).getCentre();
-                                                beads[player][num].setX(centre[0]);
-                                                beads[player][num].setY(centre[1]);
-                                                beads[player][num].setVisibility(View.VISIBLE);
-                                                beads[player][num].setOnTouchListener(null);
-                                                game2.setTotalBeadsInBoard(game2.getTotalBeadsInBoard() + 1);
-                                                game2.iteratorNext();
-                                                displayTurn();
-                                                changeIconPlayerTurn();
-                                            }
-                                        }while(!game2.getCurrentMovingPlayer().isHuman());
+
                                     } else {
                                         view.setX(100);
                                         view.setY(900);
@@ -290,13 +286,9 @@ public class PlayGameActivity extends AppCompatActivity {
 
 
                     if (game2.getTotalBeadsInBoard() == (5 * game2.getPlayerNum())) {
-                        //Log.i("ciao","checkGrid "+game2.board.getCheckGrid());
-                        //Log.i("ciao","beadsPosition "+game2.board.getBeadsPosition());
                         config.setGame2(game2);
                         config.setBoard(game2.board);
                         instruction.setText("Move Bars");
-                        Log.i("PlayGame", "config " + config.getConfiguration());
-                        Log.i("PlayGame", "CheckGrid " + game2.board.getCheckGrid());
                         for (int i = 0; i < 7; i++) {
                             hbars[i].setOnTouchListener(new MyTouchListener());
                             vbars[i].setOnTouchListener(new MyTouchListener());
@@ -467,6 +459,14 @@ public class PlayGameActivity extends AppCompatActivity {
         this.b = b;
     }
 
+    public TextView getNumTurn() {
+        return numTurn;
+    }
+
+    public void setNumTurn(TextView numTurn) {
+        this.numTurn = numTurn;
+    }
+
     public void playSoundBead() {
         if (fxOn) {
             sounds.play(sound1, 1.0f, 1.0f, 0, 0, 1.5f);
@@ -491,6 +491,7 @@ public class PlayGameActivity extends AppCompatActivity {
         playerIcon2 = (ImageView) findViewById(R.id.imageViewPlayer2);
         playerIcon3 = (ImageView) findViewById(R.id.imageViewPlayer3);
         playerIcon4 = (ImageView) findViewById(R.id.imageViewPlayer4);
+        numTurn = (TextView) findViewById(R.id.textViewTurnNumber);
         instruction.setText("Place Bead");
         matchTime.setBase(SystemClock.elapsedRealtime());
         matchTime.start();
@@ -522,7 +523,8 @@ public class PlayGameActivity extends AppCompatActivity {
     }
 
     public void displayTurn() {
-        turn.setText("Turn of " + game2.getCurrentPlayer());
+
+        turn.setText(GuestData.nameArray[Integer.parseInt(game2.getCurrentPlayer())-1]);
     }
 
     public void createBeadView() {
@@ -777,22 +779,24 @@ public class PlayGameActivity extends AppCompatActivity {
             Log.i("PlayGame", "la mossa è " + game2.generalMoveCheck(moveToCheck));
             if ((game2.generalMoveCheck(moveToCheck))) {
                 game2.getCurrentMovingPlayer().makeMove(mov.toString());
+                game2.setNumMovesTotal(game2.getNumMovesTotal() + 1);
+                numTurn.setText("Turno " + Integer.toString(game2.getNumMovesTotal()));
                 game2.checkRowBeadsLife(num);
                 setA(getFinalPoint());
                 v.setX(getA());
                 if (game2.getGameOver()) {
+                    int idForDatabase = dbHelper.getIdPlayerFromCursor(dbHelper.getProfile(GuestData.nameArray[Integer.parseInt(game2.getCurrentPlayer())-1]));
+                    dbHelper.insertMatch(idForDatabase,game2.getNumMovesTotal());
                     finishGame();
                 } else {
                     killBead(moveToCheck);
                 }
-                computerMove();
-        } else {
-            setA(getStartPointA());
+            } else {
+                setA(getStartPointA());
                 v.setX(getA());
 
             }
             game2.setValidity(true);
-            Log.i("PlayGame", "config " + config.getConfiguration());
         }
     }
 
@@ -807,21 +811,23 @@ public class PlayGameActivity extends AppCompatActivity {
             Log.i("PlayGame", "la mossa è " + game2.generalMoveCheck(moveToCheck));
             if (game2.generalMoveCheck(moveToCheck)) {
                 game2.getCurrentMovingPlayer().makeMove(mov.toString());
+                game2.setNumMovesTotal(game2.getNumMovesTotal() + 1);
+                numTurn.setText("Turno " + Integer.toString(game2.getNumMovesTotal()));
                 game2.checkRowBeadsLife(num);
                 setA(getFinalPoint());
                 v.setX(getA());
                 if (game2.getGameOver()) {
+                    int idForDatabase = dbHelper.getIdPlayerFromCursor(dbHelper.getProfile(GuestData.nameArray[Integer.parseInt(game2.getCurrentPlayer())-1]));
+                    dbHelper.insertMatch(idForDatabase,game2.getNumMovesTotal());
                     finishGame();
                 } else {
                     killBead(moveToCheck);
                 }
-                computerMove();
             } else {
                 setA(getStartPointA());
                 v.setX(getA());
             }
             game2.setValidity(true);
-            Log.i("PlayGame", "config " + config.getConfiguration());
         }
     }
 
@@ -833,24 +839,25 @@ public class PlayGameActivity extends AppCompatActivity {
             mov.append(Integer.toString(num));
             mov.append("i");
             Move moveToCheck = new Move(mov.toString(), game2.getCurrentMovingPlayer().getId());
-            Log.i("PlayGame", "la mossa è " + game2.generalMoveCheck(moveToCheck));
             if ((game2.generalMoveCheck(moveToCheck))) {
                 game2.getCurrentMovingPlayer().makeMove(mov.toString());
+                game2.setNumMovesTotal(game2.getNumMovesTotal() + 1);
+                numTurn.setText("Turno " + Integer.toString(game2.getNumMovesTotal()));
                 game2.checkColumnBeadsLife(num);
                 setB(getFinalPoint());
                 v.setY(getB());
                 if (game2.getGameOver()) {
+                    int idForDatabase = dbHelper.getIdPlayerFromCursor(dbHelper.getProfile(GuestData.nameArray[Integer.parseInt(game2.getCurrentPlayer())-1]));
+                    dbHelper.insertMatch(idForDatabase,game2.getNumMovesTotal());
                     finishGame();
                 } else {
                     killBead(moveToCheck);
                 }
-                computerMove();
             } else {
                 setB(getStartPointB());
                 v.setY(getB());
             }
             game2.setValidity(true);
-            Log.i("PlayGame", "config " + config.getConfiguration());
         }
     }
 
@@ -862,30 +869,32 @@ public class PlayGameActivity extends AppCompatActivity {
             mov.append(Integer.toString(num));
             mov.append("o");
             Move moveToCheck = new Move(mov.toString(), game2.getCurrentMovingPlayer().getId());
-            Log.i("PlayGame", "la mossa è " + game2.generalMoveCheck(moveToCheck));
             if ((game2.generalMoveCheck(moveToCheck))) {
                 game2.getCurrentMovingPlayer().makeMove(mov.toString());
+                game2.setNumMovesTotal(game2.getNumMovesTotal() + 1);
+                numTurn.setText("Turno " + Integer.toString(game2.getNumMovesTotal()));
                 game2.checkColumnBeadsLife(num);
                 setB(getFinalPoint());
                 v.setY(getB());
                 if (game2.getGameOver()) {
+                    int idForDatabase = dbHelper.getIdPlayerFromCursor(dbHelper.getProfile(GuestData.nameArray[Integer.parseInt(game2.getCurrentPlayer())-1]));
+                    dbHelper.insertMatch(idForDatabase,game2.getNumMovesTotal());
                     finishGame();
                 } else {
                     killBead(moveToCheck);
                 }
-                computerMove();
             } else {
                 setB(getStartPointB());
                 v.setY(getB());
             }
             game2.setValidity(true);
-            Log.i("PlayGame", "config " + config.getConfiguration());
         }
     }
 
     public void showAlert(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Pause");
+        builder.setIcon(R.color.colorPrimary);
         builder.setPositiveButton("Resume Game", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -905,6 +914,9 @@ public class PlayGameActivity extends AppCompatActivity {
         lastPause = SystemClock.elapsedRealtime();
         matchTime.stop();
     }
+
+
+
 
     public void goToMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
@@ -961,54 +973,7 @@ public class PlayGameActivity extends AppCompatActivity {
         }
     }
 
-    public String getRandomMove(String idPlayer) {
-        String randomMove = "";
-        Move move = new Move(randomMove, idPlayer);
-        do {
-            if (Math.random() <= 0.5)
-                randomMove = "h";
-            else
-                randomMove = "v";
-            randomMove = randomMove + (int) Math.floor(Math.random() * 7+1);
-            if (Math.random() <= 0.5)
-                randomMove = randomMove + "i";
-            else
-                randomMove = randomMove + "o";
-            move = new Move(randomMove, idPlayer);
-        } while (!game2.generalMoveCheck(move));
-        game2.getMovesList().add(move);
-        return randomMove;
-    }
-
-
-public void computerMove(){
-    do {
-        if (!game2.getCurrentMovingPlayer().isHuman()) {
-            String randomMove = getRandomMove(game2.getCurrentPlayer());
-            char orientation = randomMove.charAt(0);
-            int num = Character.getNumericValue(randomMove.charAt(1))-1;
-            char movement = randomMove.charAt(2);
-            Log.i("ciao","mossa Robot"+randomMove);
-
-            if(orientation == 'h'){
-                if(movement == 'o'){
-                    hbars[num].setX(hbars[num].getX() - (32 * hbars[num].getResources().getDisplayMetrics().density));
-                }
-                else{
-                    hbars[num].setX(hbars[num].getX() + (32 * hbars[num].getResources().getDisplayMetrics().density));
-                }
-            }
-            else{
-                if(movement == 'i'){
-                    vbars[num].setY(vbars[num].getY() - (32 * vbars[num].getResources().getDisplayMetrics().density));
-                }
-                else{
-                    vbars[num].setY(vbars[num].getY() + (32 * vbars[num].getResources().getDisplayMetrics().density));
-                }
-            }
-        }
-        game2.iteratorNext();
-    }while(!game2.getCurrentMovingPlayer().isHuman());
 }
 
-}
+
+
