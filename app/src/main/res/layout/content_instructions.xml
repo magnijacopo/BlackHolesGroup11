@@ -19,7 +19,7 @@
         android:id="@+id/button_ita"
         android:layout_alignBottom="@+id/button_back_home"
         android:layout_alignParentEnd="true"
-        android:onClick="changeLanguage"
+        android:onClick="changeLanguageIta"
         android:background="@drawable/italian" />
 
     <Button
@@ -47,7 +47,7 @@
         android:layout_width="45dp"
         android:layout_height="30dp"
         android:id="@+id/button_eng"
-        android:onClick="changeLanguage"
+        android:onClick="changeLanguageEng"
         android:textColor="#ffffff"
         android:layout_alignTop="@+id/button_ita"
         android:layout_toStartOf="@+id/button_ita"

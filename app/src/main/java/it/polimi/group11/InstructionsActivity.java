@@ -12,64 +12,48 @@ public class InstructionsActivity extends AppCompatActivity {
 
     TextView textViewInstructions;
 
-    String eng = "textViewInstructions.setText(Html.fromHtml(\"<html>\\n\"" +
-            "                \"<body>\\n\"" +
-            "                \"<html>\\n\"" +
-            "                \"<body>\\n\"" +
-            "                \"<h2>How To Play:</h2>\\n\"" +
-            "                \"<h4> Beads setting: </h4>\\n\"" +
-            "                \"<p> In his turn a player places his bead, this turn are repeated five times, one for each bead of the player. </p>\\n\"" +
-            "                \"<h4> Game: </h4>\\n\" " +
-            "                \"<p> The goal is to drop all the opponents beads into the black hole. To do so the players can move the bars. Each bar can be moved\\n\"" +
-            "                \"    only one position, for example if the bar is completely to the right can be moved only to the center and not completely to the left.\\n\"" +
-            "                \"    The players can not move the bar that are previously moved by the opponents in the same turn. If there are only two players, one player can\\n\"" +
-            "                \"    not move the same bar for more than two consecutive times. </p>\\n\"" +
-            "                \"<h4> Win: </h4>\\n\" " +
-            "                \"<p> The game ends when only one player has beads on the board. </p>\\n\"" +
-            "                \"</body>\\n\" " +
-            "                \"</html>\" ";
-
-    String ita = "\"<html>\\n\" " +
-            "                <body>\\n\" +\n" +
-            "                \"<html>\\n\" " +
-            "                \"<body>\\n\" " +
-            "                \"<h2>Come giocare:</h2>\\n\" " +
-            "                \"<h4> Posizionare i bead: </h4>\\n\" " +
-            "                \"<p> In questo turno ogni giocatore piazza i propri bead, l'azione si ripete cinque volte perchè il player piazza un solo bead per volta.</p>\\n\" " +
-            "                \"<h4> Gioco: </h4>\\n\" " +
-            "                \"<p> L'obiettio del gioco è far cadere tutti i bead avversari nei 'Black Holes'. Per farli cadere i giocatori possono muovere le barre, ogni barra può essere mossa solo di una posizione alla volta.\\n\" +\n" +
-            "                \"    Se per esempio la barra è completamente a destra non potrà essere spostata completamente a sinistra con una sola mossa.\\n\"" +
-            "                \"    I giocatori non possono muovere le barre già mosse da giocatori avversari durante lo stesso giro. Nel caso ci siano due giocatori c'è una regola aggiuntiva,\\n\"" +
-            "                \"    un giocatore non può muovere la stessa barra per più di due turni consecutivi. </p>\\n\"" +
-            "                \"<h4> Vittoria: </h4>\\n\" " +
-            "                \"<p> Il vincitore è il giocatore che riesce a far cadere tutti i bead avversari facendo sopravvivere i suoi. </p>\\n\"" +
-            "                \"</body>\\n\" " +
-            "                \"</html>\" ";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_instructions);
 
         textViewInstructions = (TextView) findViewById(R.id.textViewInstructions);
-        //Import of the font.
         Typeface myTypeface = Typeface.createFromAsset(getAssets(), "fonts/SignPainter-HouseScript.ttf");
-
-        //Setting the fonts on the buttons.
         textViewInstructions.setTypeface(myTypeface);
         textViewInstructions.setText(Html.fromHtml("<html>\n" +
-                "<body>\n" +
-                "<h2>How To Play:</h2>\n" +
-                "<h4> Beads setting: </h4>\n" +
-                "<p> In his turn a player places his bead, this turn are repeated five times, one for each bead of the player. </p>\n" +
-                "<h4> Game: </h4>\n" +
-                "<p> The goal is to drop all the opponents beads into the black hole. To do so the players can move the bars. Each bar can be moved\n" +
-                "    only one position, for example if the bar is completely to the right can be moved only to the center and not completely to the left.\n" +
-                "    The players can not move the bar that are previously moved by the opponents in the same turn. If there are only two players, one player can\n" +
-                "    not move the same bar for more than two consecutive times. </p>\n" +
-                "<h4> Win: </h4>\n" +
-                "<p> The game ends when only one player has beads on the board. </p>\n" +
-                "</body>\n" +
+                "    <body>\n" +
+                "        <h2>\n" +
+                "            How to play:\n" +
+                "        </h2>\n" +
+                "        <h4>\n" +
+                "            Game setup:\n" +
+                "        </h4>\n" +
+                "        <p>\n" +
+                "            At the start of a game each player has to place 5 beads on the board in a round robin fashion.\n" +
+                "            A bead can be set only over a blue or red bar.\n" +
+                "        </p>\n" +
+                "         <h4>\n" +
+                "            Gameplay:\n" +
+                "        </h4>\n" +
+                "        <p>\n" +
+                "            The goal of the game is to drop the opponents' beads into the black holes.<br>\n" +
+                "            On each turn a player can move a bar by one position to the left or to the right if the board's bounds are respected.<br>\n" +
+                "            A player is out of the game when he loses all of his beads.\n" +
+                "        </p>\n" +
+                "        <h4>\n" +
+                "            Bar rules:\n" +
+                "        </h4>\n" +
+                "        <p>\n" +
+                "            Sliding a bar that was slid in the previous by one other opponent is forbidden.<br>\n" +
+                "            When only two players are on the board, a player cannot slide the same bar for more than two consecutive turns.\n" +
+                "        </p>\n" +
+                "        <h4>\n" +
+                "            Win condition:\n" +
+                "        </h4>\n" +
+                "        <p>\n" +
+                "            The game ends when only one player has beads remaining on the board.\n" +
+                "        </p>\n" +
+                "    </body>\n" +
                 "</html>"));
     }
 
@@ -77,14 +61,82 @@ public class InstructionsActivity extends AppCompatActivity {
         textViewInstructions = (TextView) findViewById(R.id.textViewInstructions);
         Typeface myTypeface = Typeface.createFromAsset(getAssets(), "fonts/SignPainter-HouseScript.ttf");
         textViewInstructions.setTypeface(myTypeface);
-        textViewInstructions.setText(Html.fromHtml(ita));
+        textViewInstructions.setText(Html.fromHtml("<html>\n" +
+                "    <body>\n" +
+                "        <h2>\n" +
+                "            Come giocare:\n" +
+                "        </h2>\n" +
+                "        <h4>\n" +
+                "            Inizializzazione:\n" +
+                "        </h4>\n" +
+                "        <p>\n" +
+                "            All'inizio di una partita ogni giocatore posiziona, a turno, 5 biglie sulla tavola di gioco.\n" +
+                "            Una biglia può essere posizionata solo su una barra blu o una barra rossa.\n" +
+                "        </p>\n" +
+                "\n" +
+                "         <h4>\n" +
+                "            Gameplay:\n" +
+                "        </h4>\n" +
+                "        <p>\n" +
+                "            Lo scopo del gioco consiste nel far cadere le biglie degli avversari nei buchi neri.<br>\n" +
+                "            Ad ogni turno un giocatore può muovere una barra di una posizione a destra o a sinistra se i limiti della plancia sono      rispettati.\n" +
+                "            \n" +
+                "        </p>\n" +
+                "        <h4>\n" +
+                "            Regole delle barre:\n" +
+                "        </h4>\n" +
+                "        <p>\n" +
+                "            Muovere una barra mossa da un altro giocatore nel turno precedente è vietato.<br>\n" +
+                "            Quando solo i beads di due giocatori sono presenti sulla tavola di gioco, un giocatore non può muovere la stessa barra per più di due turni consecutivi.\n" +
+                "        </p>\n" +
+                "        <h4>\n" +
+                "            Condizioni di vittoria:\n" +
+                "        </h4>\n" +
+                "            Il gioco finisce quando solo un giocatore ha biglie rimanenti sulla tavola di gioco.\n" +
+                "        </p>\n" +
+                "    </body>\n" +
+                "</html>"));
     }
 
     public void changeLanguageEng(View view){
         textViewInstructions = (TextView) findViewById(R.id.textViewInstructions);
         Typeface myTypeface = Typeface.createFromAsset(getAssets(), "fonts/SignPainter-HouseScript.ttf");
         textViewInstructions.setTypeface(myTypeface);
-        textViewInstructions.setText(Html.fromHtml(eng));
+        textViewInstructions.setText(Html.fromHtml("<html>\n" +
+                "    <body>\n" +
+                "        <h2>\n" +
+                "            How to play:\n" +
+                "        </h2>\n" +
+                "        <h4>\n" +
+                "            Game setup:\n" +
+                "        </h4>\n" +
+                "        <p>\n" +
+                "            At the start of a game each player has to place 5 beads on the board in a round robin fashion.\n" +
+                "            A bead can be set only over a blue or red bar.\n" +
+                "        </p>\n" +
+                "         <h4>\n" +
+                "            Gameplay:\n" +
+                "        </h4>\n" +
+                "        <p>\n" +
+                "            The goal of the game is to drop the opponents' beads into the black holes.<br>\n" +
+                "            On each turn a player can move a bar by one position to the left or to the right if the board's bounds are respected.<br>\n" +
+                "            A player is out of the game when he loses all of his beads.\n" +
+                "        </p>\n" +
+                "        <h4>\n" +
+                "            Bar rules:\n" +
+                "        </h4>\n" +
+                "        <p>\n" +
+                "            Sliding a bar that was slid in the previous by one other opponent is forbidden.<br>\n" +
+                "            When only two players are on the board, a player cannot slide the same bar for more than two consecutive turns.\n" +
+                "        </p>\n" +
+                "        <h4>\n" +
+                "            Win condition:\n" +
+                "        </h4>\n" +
+                "        <p>\n" +
+                "            The game ends when only one player has beads remaining on the board.\n" +
+                "        </p>\n" +
+                "    </body>\n" +
+                "</html>"));
     }
 
     @Override
