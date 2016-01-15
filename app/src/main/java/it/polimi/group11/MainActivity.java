@@ -53,20 +53,13 @@ public class MainActivity extends AppCompatActivity {
         sounds = new SoundPool(10, AudioManager.STREAM_MUSIC, 0);
         sound1 = sounds.load(getApplicationContext(), R.raw.button_click_fx, 1);
         fxOn = OptionsActivity.fxSoundsCheck;
-
-        /*
-        db = new DatabaseHelper(getApplicationContext());
-        db.insertProfile("Guest1");
-        db.insertProfile("Guest2");
-        */
-
     }
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        moveTaskToBack(true);
     }
+
 
     // Methods for moving to other Activities.
     public void goToCredits(View view){
