@@ -40,4 +40,10 @@ public class ChooseMatchTypeActivity extends AppCompatActivity {
         Intent intent = new Intent(this, SetYourBarsActivity.class);
         startActivity(intent);
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 }

@@ -4,13 +4,10 @@ import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-
-import it.polimi.group11.model.Move;
 
 public class SetYourBarsActivity extends AppCompatActivity {
 
@@ -439,4 +436,9 @@ public class SetYourBarsActivity extends AppCompatActivity {
         return vbarsPosition;
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 }
