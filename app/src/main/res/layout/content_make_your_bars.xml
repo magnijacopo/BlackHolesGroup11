@@ -198,7 +198,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Start"
-        android:id="@+id/button6"
+        android:id="@+id/buttonsaveconfig"
         android:layout_below="@+id/verticalbar0"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="60dp" />

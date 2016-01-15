@@ -404,7 +404,6 @@ public class PlayGameActivity extends AppCompatActivity {
         this.startPointA = startPoint;
     }
 
-
     public boolean getMoving() {
         return moving;
     }
