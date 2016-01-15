@@ -34,6 +34,8 @@ public class Player {
      */
     private boolean status;
 
+    private boolean human;
+
     private Game2 game2;
 
     private Board2 board;
@@ -69,6 +71,7 @@ public class Player {
         this.setName(Integer.toString(id));
         this.setId(Integer.toString(id));
         this.defineBeads();
+        this.setHuman(true);
         this.setStatus(true); //the player is alive when created
     }
 
@@ -227,6 +230,15 @@ public class Player {
         }
     }*/
 
+    public int[] getRandomPlace(String owner) {
+        int randomPlace[] = new int[2];
+        do {
+            randomPlace[0] = (int) Math.floor(Math.random() * 7);
+            randomPlace[1] = (int) Math.floor(Math.random() * 7);
+        } while (!game2.getCurrentMovingPlayer().placeBead(owner, randomPlace[0], randomPlace[1]));
+        return randomPlace;
+    }
+
     public void makeMove(String move) {
         board.moveBar(move);
     }
@@ -288,5 +300,13 @@ public class Player {
     }
 
     public void setBeadsInBoard(int beadsInBoard) {this.beadsInBoard=beadsInBoard;}
+
+    public boolean isHuman() {
+        return human;
+    }
+
+    public void setHuman(boolean human) {
+        this.human = human;
+    }
 
 }

@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void goToChooseMatchType(View view){
         playSoundButton();
-        Intent intent = new Intent(this, SelectPlayersActivity.class);
+        Intent intent = new Intent(this, ChooseMatchTypeActivity.class);
         startActivity(intent);
     }
 

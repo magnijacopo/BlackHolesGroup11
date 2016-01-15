@@ -12,14 +12,14 @@
     tools:context=".ChooseMatchTypeActivity"
     tools:showIn="@layout/activity_choose_match_type"
     android:orientation="vertical"
+    android:background="@drawable/background_game"
     >
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
         android:id="@+id/button_back_home"
-        android:background="#ffffff"
+        android:background="#00ffffff"
         android:onClick="goToMainActivity" />
 
     <Button
@@ -27,22 +27,29 @@
         android:layout_height="wrap_content"
         android:text="QUICK GAME"
         android:id="@+id/button_quick_game"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="225dp"
+        android:layout_marginTop="50dp"
         android:textSize="25sp"
         android:textColor="#ffffff"
-        android:background="#00ffffff"
-        android:onClick="goToSelectPlayers" />
+        android:background="#86ffffff"
+        android:backgroundTint="#155056"
+        android:onClick="goToSelectPlayers"
+        android:layout_gravity="center_horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_marginBottom="220dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CUSTOMIZED GAME"
+        android:text="SELECT BARS POSITION"
         android:id="@+id/button_customized_game"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
         android:textSize="25sp"
         android:textColor="#ffffff"
-        android:background="#00ffffff"
-        android:onClick="goToMakeYourBars" />
+        android:background="#86ffffff"
+        android:backgroundTint="#155056"
+        android:onClick="goToMakeYourBars"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" />
 </LinearLayout>

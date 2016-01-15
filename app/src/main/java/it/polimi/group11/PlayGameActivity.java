@@ -25,7 +25,7 @@ public class PlayGameActivity extends AppCompatActivity {
     /**
      * Attribute declaration
      */
-    private Game2 game2 ;
+    private Game2 game2;
     public Configuration config;
     private TextView turn;
     private ImageView nowPlay;
@@ -77,31 +77,44 @@ public class PlayGameActivity extends AppCompatActivity {
         setB(0.0f);
         setA(0.0f);
         setMoving(false);
-        for(int i=0;i<7;i++) {
+        for (int i = 0; i < 7; i++) {
             setFirstH(false, i);
-            setFirstV(false,i);
+            setFirstV(false, i);
         }
     }
 
     /**
      * OnCreate event means inizialization of every graphic element of the layout
      * and assignment of listeners
+     *
      * @param savedInstanceState
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_game);
-        int k=0;
+        int k = 0;
 
         //Get intents from previous activity
-        Intent intent= getIntent();
+        Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        if(bundle != null) {
+        if (bundle != null) {
             k = bundle.getInt("PLAYER_NUMBER");
             game2 = new Game2(k);
+            game2.iteratorNext();
+            game2.getCurrentMovingPlayer().setHuman(false);
+            game2.iteratorNext();
+            game2.getCurrentMovingPlayer().setHuman(false);
+            game2.iteratorNext();
+            game2.getCurrentMovingPlayer().setHuman(false);
+            game2.iteratorNext();
+            if (SetYourBarsActivity.customModeOn) {
+                game2.board.setBarsPosition(SetYourBarsActivity.getHbarsPoisiton(), SetYourBarsActivity.getVbarsPosition());
+                game2.board.prepareGrid();
+            }
+            SetYourBarsActivity.customModeOn = false;
             config = new Configuration();
-            for(int i=0;i<game2.getPlayerNum();i++) {
+            for (int i = 0; i < game2.getPlayerNum(); i++) {
                 game2.getCurrentMovingPlayer().setConfiguration(config);
                 game2.iteratorNext();
             }
@@ -132,7 +145,7 @@ public class PlayGameActivity extends AppCompatActivity {
 
 
     /**
-     *OnTouchListener: implements the listener on onTouch events
+     * OnTouchListener: implements the listener on onTouch events
      */
     private final class MyTouchListener implements View.OnTouchListener {
         @Override
@@ -157,15 +170,13 @@ public class PlayGameActivity extends AppCompatActivity {
                         //this condition verify that the instructions on the inside are made ​​only by ImageView with description = " horizontal ", that is Horizontal Bars
 
                         if (v.getContentDescription().equals("horizontal")) {
-                            moveHorizontalBar(v,event);
-                        }
-                        else {
+                            moveHorizontalBar(v, event);
+                        } else {
                             //this condition verify that the instructions on the inside are made ​​only by ImageView with description = " vertical ", that is Vertical Bars
 
                             if (v.getContentDescription().equals("vertical")) {
-                                moveVerticalBar(v,event);
-                            }
-                            else {
+                                moveVerticalBar(v, event);
+                            } else {
                                 //this condition verify that the instructions on the inside are made ​​only by ImageView with description != "vertical" or "horizontal", that is Beads
                                 ClipData data = ClipData.newPlainText("", "");
                                 View.DragShadowBuilder shadowBuilder = new View.DragShadowBuilder(v);
@@ -177,35 +188,31 @@ public class PlayGameActivity extends AppCompatActivity {
 
                 case MotionEvent.ACTION_UP:
                     //These "if" occur that the bar is shifted by a cell if the bar moves more than half of a cell (move to the right)
-                    moveToRight(v,event);
+                    moveToRight(v, event);
                     //These "if" occur that the bar back to the starting position if it moves  less than half of a cell (move to the right)
-                    if(getDeltaX()>0 && ((event.getRawX() - getDa()) < (getStartPointA()+((getFinalPoint()-getStartPointA())/2))) && (event.getRawX() - getDa()) < getLimitRight())
-                    {
+                    if (getDeltaX() > 0 && ((event.getRawX() - getDa()) < (getStartPointA() + ((getFinalPoint() - getStartPointA()) / 2))) && (event.getRawX() - getDa()) < getLimitRight()) {
                         setA(getStartPointA());
                         v.setX(getA());
                     }
                     //These "if" occur that the bar is shifted by a cell if the bar moves more than half of a cell (move to the left)
-                    moveToLeft(v,event);
+                    moveToLeft(v, event);
                     //These "if" occur that the bar back to the starting position if it moves  less than half of a cell (move to the left)
-                    if(getDeltaX()<0 && ((event.getRawX() - getDa()) > (getFinalPoint()+((getStartPointA()-getFinalPoint())/2))) && (event.getRawX() - getDa()) > getLimitLeft())
-                    {
+                    if (getDeltaX() < 0 && ((event.getRawX() - getDa()) > (getFinalPoint() + ((getStartPointA() - getFinalPoint()) / 2))) && (event.getRawX() - getDa()) > getLimitLeft()) {
                         setA(getStartPointA());
                         v.setX(getA());
                     }
 
                     //These "if" occur that the bar is shifted by a cell if the bar moves more than half of a cell (move to the bottom)
-                    moveToBottom(v,event);
+                    moveToBottom(v, event);
                     //These "if" occur that the bar back to the starting position if it moves less than half of a cell (move to the bottom)
-                    if (getDeltaY()>0 && ((event.getRawY() - getDb()) < (getStartPointB()+((getFinalPoint()-getStartPointB())/2))) && (event.getRawY() - getDb()) < getLimitBottom())
-                    {
+                    if (getDeltaY() > 0 && ((event.getRawY() - getDb()) < (getStartPointB() + ((getFinalPoint() - getStartPointB()) / 2))) && (event.getRawY() - getDb()) < getLimitBottom()) {
                         setB(getStartPointB());
                         v.setY(getB());
                     }
                     //These "if" occur that the bar is shifted by a cell if the bar moves more than half of a cell (move to the top)
-                    moveToTop(v,event);
+                    moveToTop(v, event);
                     //These "if" occur that the bar back to the starting position if it moves less than half of a cell (move to the top)
-                    if (getDeltaY()<0 && ((event.getRawY() - getDb()) > (getFinalPoint()+((getStartPointB()-getFinalPoint())/2)))&& (event.getRawY() - getDb()) > getLimitTop())
-                    {
+                    if (getDeltaY() < 0 && ((event.getRawY() - getDb()) > (getFinalPoint() + ((getStartPointB() - getFinalPoint()) / 2))) && (event.getRawY() - getDb()) > getLimitTop()) {
                         setB(getStartPointB());
                         v.setY(getB());
                     }
@@ -237,13 +244,13 @@ public class PlayGameActivity extends AppCompatActivity {
                 case DragEvent.ACTION_DROP:
 
                     View view = (View) event.getLocalState();
-                    for(int i=0; i<7;i++) {
-                        for(int j=0; j<7;j++) {
-                            if(v.getContentDescription().equals("cella")) {
-                                if (game2.board.getCell(i, j).getId().equals(v.getResources().getResourceName(v.getId()).substring(21,(v.getResources().getResourceName(v.getId()).length())))) {
+                    for (int i = 0; i < 7; i++) {
+                        for (int j = 0; j < 7; j++) {
+                            if (v.getContentDescription().equals("cella")) {
+                                if (game2.board.getCell(i, j).getId().equals(v.getResources().getResourceName(v.getId()).substring(21, (v.getResources().getResourceName(v.getId()).length())))) {
                                     game2.board.getCell(i, j).setCentre(v, view.getWidth(), view.getHeight());
                                     centre = game2.board.getCell(i, j).getCentre();
-                                    if (game2.getCurrentMovingPlayer().placeBead(game2.getCurrentPlayer(),i, j) == true){
+                                    if (game2.getCurrentMovingPlayer().placeBead(game2.getCurrentPlayer(), i, j) == true) {
                                         view.setX(centre[0]);
                                         view.setY(centre[1]);
                                         view.setVisibility(View.VISIBLE);
@@ -252,8 +259,26 @@ public class PlayGameActivity extends AppCompatActivity {
                                         game2.iteratorNext();
                                         displayTurn();
                                         changeIconPlayerTurn();
-                                    }
-                                    else{
+                                        do {
+                                            if (!game2.getCurrentMovingPlayer().isHuman()) {
+                                                int pos[] = new int[2];
+                                                pos = game2.getCurrentMovingPlayer().getRandomPlace(game2.getCurrentPlayer());
+                                                int suca = ((pos[0] * 7) + pos[1]);
+                                                int player = (Integer.parseInt(game2.getCurrentPlayer())) - 1;
+                                                int num = (game2.getCurrentMovingPlayer().getBeadsInBoard()) - 1;
+                                                game2.board.getCell(pos[0], pos[1]).setCentre(cells[suca], beads[player][num].getWidth(), beads[player][num].getHeight());
+                                                centre = game2.board.getCell(pos[0], pos[1]).getCentre();
+                                                beads[player][num].setX(centre[0]);
+                                                beads[player][num].setY(centre[1]);
+                                                beads[player][num].setVisibility(View.VISIBLE);
+                                                beads[player][num].setOnTouchListener(null);
+                                                game2.setTotalBeadsInBoard(game2.getTotalBeadsInBoard() + 1);
+                                                game2.iteratorNext();
+                                                displayTurn();
+                                                changeIconPlayerTurn();
+                                            }
+                                        }while(!game2.getCurrentMovingPlayer().isHuman());
+                                    } else {
                                         view.setX(100);
                                         view.setY(900);
                                         view.setVisibility(View.VISIBLE);
@@ -264,15 +289,15 @@ public class PlayGameActivity extends AppCompatActivity {
                     }
 
 
-                    if(game2.getTotalBeadsInBoard() == (5*game2.getPlayerNum())) {
+                    if (game2.getTotalBeadsInBoard() == (5 * game2.getPlayerNum())) {
                         //Log.i("ciao","checkGrid "+game2.board.getCheckGrid());
                         //Log.i("ciao","beadsPosition "+game2.board.getBeadsPosition());
                         config.setGame2(game2);
                         config.setBoard(game2.board);
                         instruction.setText("Move Bars");
                         Log.i("PlayGame", "config " + config.getConfiguration());
-                        Log.i("PlayGame","CheckGrid "+game2.board.getCheckGrid());
-                        for(int i=0;i <7;i++) {
+                        Log.i("PlayGame", "CheckGrid " + game2.board.getCheckGrid());
+                        for (int i = 0; i < 7; i++) {
                             hbars[i].setOnTouchListener(new MyTouchListener());
                             vbars[i].setOnTouchListener(new MyTouchListener());
                         }
@@ -282,8 +307,7 @@ public class PlayGameActivity extends AppCompatActivity {
                 case DragEvent.ACTION_DRAG_ENDED:
 
                     View viewF = (View) event.getLocalState();
-                    if(!event.getResult())
-                    {
+                    if (!event.getResult()) {
                         viewF.setX(100);
                         viewF.setY(900);
                         viewF.setVisibility(View.VISIBLE);
@@ -297,7 +321,6 @@ public class PlayGameActivity extends AppCompatActivity {
         }
 
     }
-
 
 
     public float getLimitBottom() {
@@ -336,7 +359,7 @@ public class PlayGameActivity extends AppCompatActivity {
         return firstV[position];
     }
 
-    public void setFirstV(boolean firstV,int position) {
+    public void setFirstV(boolean firstV, int position) {
         this.firstV[position] = firstV;
     }
 
@@ -344,7 +367,7 @@ public class PlayGameActivity extends AppCompatActivity {
         return firstH[position];
     }
 
-    public void setFirstH(boolean firstH,int position) {
+    public void setFirstH(boolean firstH, int position) {
         this.firstH[position] = firstH;
     }
 
@@ -444,19 +467,18 @@ public class PlayGameActivity extends AppCompatActivity {
         this.b = b;
     }
 
-    public void playSoundBead(){
-        if(fxOn) {
+    public void playSoundBead() {
+        if (fxOn) {
             sounds.play(sound1, 1.0f, 1.0f, 0, 0, 1.5f);
         }
     }
 
-    void updateAlpha(View v)
-    {
+    void updateAlpha(View v) {
 
         v.setAlpha(0.1f);
     }
 
-    public void setStartViewSituation(int numPlayer){
+    public void setStartViewSituation(int numPlayer) {
         turn = (TextView) findViewById(R.id.textViewPlayerName);
         matchTime = (Chronometer) findViewById(R.id.chronometer);
         nowPlay = (ImageView) findViewById(R.id.imageViewBackgroundPlayer);
@@ -472,7 +494,7 @@ public class PlayGameActivity extends AppCompatActivity {
         instruction.setText("Place Bead");
         matchTime.setBase(SystemClock.elapsedRealtime());
         matchTime.start();
-        switch(numPlayer){
+        switch (numPlayer) {
             case 2:
                 contBeadNum1.setText("5");
                 contBeadNum2.setText("5");
@@ -499,23 +521,23 @@ public class PlayGameActivity extends AppCompatActivity {
         }
     }
 
-    public void displayTurn(){
-        turn.setText("Turn of "+ game2.getCurrentPlayer());
+    public void displayTurn() {
+        turn.setText("Turn of " + game2.getCurrentPlayer());
     }
 
-    public void createBeadView(){
+    public void createBeadView() {
         RelativeLayout mainLayout = (RelativeLayout) findViewById(R.id.relative);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(mainLayout.getLayoutParams());
-        params.setMargins(100,900,0,0);
+        params.setMargins(100, 900, 0, 0);
         beads = new ImageView[game2.getPlayerNum()][5];
 
-        for (int j = 4; j >=0; j--) {
-            for (int i = (game2.getPlayerNum()-1); i >=0 ; i--) {
+        for (int j = 4; j >= 0; j--) {
+            for (int i = (game2.getPlayerNum() - 1); i >= 0; i--) {
                 beads[i][j] = new ImageView(this);
                 mainLayout.addView(beads[i][j], params);
                 String id = "bead" + Integer.toString(i) + Integer.toString(j);
                 game2.iteratorPrevious(game2.getPlayerNum());
-                switch(Integer.parseInt(game2.getCurrentPlayer())) {
+                switch (Integer.parseInt(game2.getCurrentPlayer())) {
                     case 1:
                         beads[i][j].setImageResource(R.drawable.bead3);
                         break;
@@ -532,16 +554,16 @@ public class PlayGameActivity extends AppCompatActivity {
                         break;
                 }
                 beads[i][j].setLayoutParams(params);
-                beads[i][j].getLayoutParams().height =(int) (30 * beads[i][j].getResources().getDisplayMetrics().density);
-                beads[i][j].getLayoutParams().width =(int) (30 * beads[i][j].getResources().getDisplayMetrics().density);
+                beads[i][j].getLayoutParams().height = (int) (30 * beads[i][j].getResources().getDisplayMetrics().density);
+                beads[i][j].getLayoutParams().width = (int) (30 * beads[i][j].getResources().getDisplayMetrics().density);
                 beads[i][j].setContentDescription(id);
                 beads[i][j].setOnTouchListener(new MyTouchListener());
             }
         }
     }
 
-    public void placeHorizontalBarStartPosition(){
-        for (int i=0; i<7; i++) {
+    public void placeHorizontalBarStartPosition() {
+        for (int i = 0; i < 7; i++) {
             int id = getResources().getIdentifier("horizontalbar" + i, "id", getPackageName());
             hbars[i] = (ImageView) findViewById(id);
             posH = game2.board.horizontalBar[i].getPosition();
@@ -554,7 +576,7 @@ public class PlayGameActivity extends AppCompatActivity {
                 case 1:
                     break;
                 case 2:
-                    int subMarginLeft = (int)(marginLeftH - (32 * hbars[i].getResources().getDisplayMetrics().density));
+                    int subMarginLeft = (int) (marginLeftH - (32 * hbars[i].getResources().getDisplayMetrics().density));
                     hbars[i].setX(subMarginLeft);
                     break;
                 default:
@@ -563,8 +585,8 @@ public class PlayGameActivity extends AppCompatActivity {
         }
     }
 
-    public void placeVerticalBarStartPosition(){
-        for (int i=0; i<7; i++) {
+    public void placeVerticalBarStartPosition() {
+        for (int i = 0; i < 7; i++) {
             int id = getResources().getIdentifier("verticalbar" + i, "id", getPackageName());
             vbars[i] = (ImageView) findViewById(id);
             posV = game2.board.verticalBar[i].getPosition();
@@ -586,15 +608,15 @@ public class PlayGameActivity extends AppCompatActivity {
         }
     }
 
-    public void placeBeadsStartPosition(){
-        for (int i=0; i<49; i++) {
+    public void placeBeadsStartPosition() {
+        for (int i = 0; i < 49; i++) {
             int id = getResources().getIdentifier("cell" + i, "id", getPackageName());
             cells[i] = (ImageView) findViewById(id);
             cells[i].setOnDragListener(new MyDragListener());
         }
     }
 
-    public void setRightLeftBound(int i,View v){
+    public void setRightLeftBound(int i, View v) {
         switch (game2.board.horizontalBar[i].getPosition()) {
             case 0:
                 setLimitRight(getHystoricalPointX());
@@ -613,7 +635,7 @@ public class PlayGameActivity extends AppCompatActivity {
         }
     }
 
-    public void setBottomTopBound(int i,View v){
+    public void setBottomTopBound(int i, View v) {
         switch (game2.board.verticalBar[i].getPosition()) {
             case 0:
                 setLimitBottom(getHystoricalPointY());
@@ -632,8 +654,8 @@ public class PlayGameActivity extends AppCompatActivity {
         }
     }
 
-    public void createHystoricalPoint(View v){
-        if(v.getContentDescription().equals("horizontal") || v.getContentDescription().equals("vertical")) {
+    public void createHystoricalPoint(View v) {
+        if (v.getContentDescription().equals("horizontal") || v.getContentDescription().equals("vertical")) {
             for (int i = 0; i < 7; i++) {
                 String barh = "it.polimi.group11:id/horizontalbar" + i;
                 String barv = "it.polimi.group11:id/verticalbar" + i;
@@ -643,7 +665,7 @@ public class PlayGameActivity extends AppCompatActivity {
                         setFirstH(true, i);
 
                         //Sets limit right and left of movement
-                        setRightLeftBound(i,v);
+                        setRightLeftBound(i, v);
                     }
                 }
                 if (barv.equals(v.getResources().getResourceName(v.getId()))) {
@@ -652,55 +674,51 @@ public class PlayGameActivity extends AppCompatActivity {
                         setFirstV(true, i);
 
                         //Sets limit top and bottom of movement
-                        setBottomTopBound(i,v);
+                        setBottomTopBound(i, v);
                     }
                 }
             }
         }
     }
 
-    public void moveHorizontalBar(View v,MotionEvent event){
-        setDeltaX((event.getRawX() - getDa()) - getStartPointA()) ;
+    public void moveHorizontalBar(View v, MotionEvent event) {
+        setDeltaX((event.getRawX() - getDa()) - getStartPointA());
         //if the bar moves to the right
-        if ( getDeltaX() > 0 )
-        {
+        if (getDeltaX() > 0) {
             setFinalPoint((getStartPointA() + (32 * v.getResources().getDisplayMetrics().density)));
             //It prevents the bar to move towards the right, for more than one cell and one cell at a time
-            if(((event.getRawX() - getDa()) <= getFinalPoint()) && (event.getRawX() - getDa()) < getLimitRight()) {
+            if (((event.getRawX() - getDa()) <= getFinalPoint()) && (event.getRawX() - getDa()) < getLimitRight()) {
                 setA(event.getRawX() - getDa());
                 v.setX(getA());
             }
         }
         //if the bar moves to the left
-        if(getDeltaX() < 0 )
-        {
-            setFinalPoint(((getStartPointA()- (32 * v.getResources().getDisplayMetrics().density))));
+        if (getDeltaX() < 0) {
+            setFinalPoint(((getStartPointA() - (32 * v.getResources().getDisplayMetrics().density))));
             //It prevents the bar to move towards the left, for more than one cell and one cell at a time
-            if(((event.getRawX() - getDa()) >= getFinalPoint())  && (event.getRawX() - getDa()) > getLimitLeft()) {
+            if (((event.getRawX() - getDa()) >= getFinalPoint()) && (event.getRawX() - getDa()) > getLimitLeft()) {
                 setA(event.getRawX() - getDa());
                 v.setX(getA());
             }
         }
     }
 
-    public void moveVerticalBar(View v, MotionEvent event){
-        setDeltaY((event.getRawY() - getDb()) - getStartPointB()) ;
+    public void moveVerticalBar(View v, MotionEvent event) {
+        setDeltaY((event.getRawY() - getDb()) - getStartPointB());
         //if the bar moves to the top
-        if (getDeltaY() < 0 )
-        {
+        if (getDeltaY() < 0) {
             setFinalPoint((getStartPointB() - (32 * v.getResources().getDisplayMetrics().density)));
             //It prevents the bar to move towards the top, for more than one cell and one cell at a time
-            if(((event.getRawY() - getDb()) >= getFinalPoint()) && (event.getRawY() - getDb()) > getLimitTop()) {
+            if (((event.getRawY() - getDb()) >= getFinalPoint()) && (event.getRawY() - getDb()) > getLimitTop()) {
                 setB(event.getRawY() - getDb());
                 v.setY(getB());
             }
         }
         //if the bar moves to the bottom
-        if(getDeltaY() > 0 )
-        {
+        if (getDeltaY() > 0) {
             setFinalPoint(((getStartPointB() + (32 * v.getResources().getDisplayMetrics().density))));
             //It prevents the bar to move towards the bottom, for more than one cell and one cell at a time
-            if(((event.getRawY() - getDb()) <= getFinalPoint()) && (event.getRawY() - getDb()) < getLimitBottom()) {
+            if (((event.getRawY() - getDb()) <= getFinalPoint()) && (event.getRawY() - getDb()) < getLimitBottom()) {
                 setB(event.getRawY() - getDb());
                 v.setY(getB());
             }
@@ -708,12 +726,12 @@ public class PlayGameActivity extends AppCompatActivity {
     }
 
 
-    public void finishGame(){
+    public void finishGame() {
         Log.i("ciao ", "vince " + game2.getNextPlayer());
         Intent intent = new Intent(PlayGameActivity.this, PopUpActivity.class);
         String message = game2.getNextPlayer();
         intent.putExtra(EXTRA_MESSAGE, message);
-        for(int i=0;i <7;i++) {
+        for (int i = 0; i < 7; i++) {
             hbars[i].setOnTouchListener(null);
             vbars[i].setOnTouchListener(null);
         }
@@ -725,14 +743,14 @@ public class PlayGameActivity extends AppCompatActivity {
     public void killBead(Move moveToCheck) {
         game2.getCurrentMovingPlayer().setMovesNumber(game2.getCurrentMovingPlayer().getMovesNumber() + 1);
         game2.getMovesList().add(moveToCheck);
-        int aliveBeads=0;
+        int aliveBeads = 0;
         for (int i = 0; i < game2.getPlayerNum(); i++) {
             for (int j = 0; j < 5; j++) {
                 if (!game2.getCurrentMovingPlayer().getBead(j).getLife()) {
                     beads[(Integer.parseInt(game2.getCurrentMovingPlayer().getId())) - 1][j].setVisibility(View.INVISIBLE);
                     // playSoundBead();
                     aliveBeads = game2.getCurrentMovingPlayer().getBeadsInBoard();
-                    decrementContBeadsView(game2.getCurrentMovingPlayer().getId(),aliveBeads);
+                    decrementContBeadsView(game2.getCurrentMovingPlayer().getId(), aliveBeads);
                 }
             }
             game2.iteratorNext();
@@ -743,34 +761,33 @@ public class PlayGameActivity extends AppCompatActivity {
                 moveToCheck = new Move("RIP", game2.getCurrentMovingPlayer().getId());
                 game2.getMovesList().add(moveToCheck);
             }
-        }while(!game2.getCurrentMovingPlayer().getStatus());
+        } while (!game2.getCurrentMovingPlayer().getStatus());
         displayTurn();
         changeIconPlayerTurn();
     }
 
-    public void moveToRight(View v,MotionEvent event){
-        if(getDeltaX()>0 && ((event.getRawX() - getDa()) > (getStartPointA()+((getFinalPoint()-getStartPointA())/2))) ) {
+    public void moveToRight(View v, MotionEvent event) {
+        if (getDeltaX() > 0 && ((event.getRawX() - getDa()) > (getStartPointA() + ((getFinalPoint() - getStartPointA()) / 2)))) {
             StringBuilder mov = new StringBuilder();
-            int num = Integer.parseInt((v.getResources().getResourceName(v.getId())).substring(34,35))+1;
+            int num = Integer.parseInt((v.getResources().getResourceName(v.getId())).substring(34, 35)) + 1;
             mov.append("h");
             mov.append(Integer.toString(num));
             mov.append("i");
             Move moveToCheck = new Move(mov.toString(), game2.getCurrentMovingPlayer().getId());
             Log.i("PlayGame", "la mossa è " + game2.generalMoveCheck(moveToCheck));
-            if((game2.generalMoveCheck(moveToCheck))){
+            if ((game2.generalMoveCheck(moveToCheck))) {
                 game2.getCurrentMovingPlayer().makeMove(mov.toString());
                 game2.checkRowBeadsLife(num);
                 setA(getFinalPoint());
                 v.setX(getA());
-                if(game2.getGameOver()){
+                if (game2.getGameOver()) {
                     finishGame();
-                }
-                else {
+                } else {
                     killBead(moveToCheck);
                 }
-            }
-            else{
-                setA(getStartPointA());
+                computerMove();
+        } else {
+            setA(getStartPointA());
                 v.setX(getA());
 
             }
@@ -779,29 +796,27 @@ public class PlayGameActivity extends AppCompatActivity {
         }
     }
 
-    public void moveToLeft(View v, MotionEvent event){
-        if(getDeltaX()<0 && ((event.getRawX() - getDa()) < (getFinalPoint()+((getStartPointA()-getFinalPoint())/2))))
-        {
+    public void moveToLeft(View v, MotionEvent event) {
+        if (getDeltaX() < 0 && ((event.getRawX() - getDa()) < (getFinalPoint() + ((getStartPointA() - getFinalPoint()) / 2)))) {
             StringBuilder mov = new StringBuilder();
-            int num = Integer.parseInt((v.getResources().getResourceName(v.getId())).substring(34,35))+1;
+            int num = Integer.parseInt((v.getResources().getResourceName(v.getId())).substring(34, 35)) + 1;
             mov.append("h");
             mov.append(Integer.toString(num));
             mov.append("o");
             Move moveToCheck = new Move(mov.toString(), game2.getCurrentMovingPlayer().getId());
             Log.i("PlayGame", "la mossa è " + game2.generalMoveCheck(moveToCheck));
-            if(game2.generalMoveCheck(moveToCheck)){
+            if (game2.generalMoveCheck(moveToCheck)) {
                 game2.getCurrentMovingPlayer().makeMove(mov.toString());
                 game2.checkRowBeadsLife(num);
                 setA(getFinalPoint());
                 v.setX(getA());
-                if(game2.getGameOver()){
+                if (game2.getGameOver()) {
                     finishGame();
-                }
-                else {
+                } else {
                     killBead(moveToCheck);
                 }
-            }
-            else{
+                computerMove();
+            } else {
                 setA(getStartPointA());
                 v.setX(getA());
             }
@@ -810,29 +825,27 @@ public class PlayGameActivity extends AppCompatActivity {
         }
     }
 
-    public void moveToBottom(View v, MotionEvent event){
-        if (getDeltaY()>0 && ((event.getRawY() - getDb()) > (getStartPointB()+((getFinalPoint()-getStartPointB())/2))))
-        {
+    public void moveToBottom(View v, MotionEvent event) {
+        if (getDeltaY() > 0 && ((event.getRawY() - getDb()) > (getStartPointB() + ((getFinalPoint() - getStartPointB()) / 2)))) {
             StringBuilder mov = new StringBuilder();
-            int num = Integer.parseInt((v.getResources().getResourceName(v.getId())).substring(32,33))+1;
+            int num = Integer.parseInt((v.getResources().getResourceName(v.getId())).substring(32, 33)) + 1;
             mov.append("v");
             mov.append(Integer.toString(num));
             mov.append("i");
             Move moveToCheck = new Move(mov.toString(), game2.getCurrentMovingPlayer().getId());
             Log.i("PlayGame", "la mossa è " + game2.generalMoveCheck(moveToCheck));
-            if((game2.generalMoveCheck(moveToCheck))){
+            if ((game2.generalMoveCheck(moveToCheck))) {
                 game2.getCurrentMovingPlayer().makeMove(mov.toString());
                 game2.checkColumnBeadsLife(num);
                 setB(getFinalPoint());
                 v.setY(getB());
-                if(game2.getGameOver()){
+                if (game2.getGameOver()) {
                     finishGame();
-                }
-                else {
+                } else {
                     killBead(moveToCheck);
                 }
-            }
-            else{
+                computerMove();
+            } else {
                 setB(getStartPointB());
                 v.setY(getB());
             }
@@ -841,29 +854,27 @@ public class PlayGameActivity extends AppCompatActivity {
         }
     }
 
-    public void moveToTop(View v,MotionEvent event){
-        if (getDeltaY()<0 && ((event.getRawY() - getDb()) < (getFinalPoint()+((getStartPointB()-getFinalPoint())/2))))
-        {
+    public void moveToTop(View v, MotionEvent event) {
+        if (getDeltaY() < 0 && ((event.getRawY() - getDb()) < (getFinalPoint() + ((getStartPointB() - getFinalPoint()) / 2)))) {
             StringBuilder mov = new StringBuilder();
-            int num = Integer.parseInt((v.getResources().getResourceName(v.getId())).substring(32,33))+1;
+            int num = Integer.parseInt((v.getResources().getResourceName(v.getId())).substring(32, 33)) + 1;
             mov.append("v");
             mov.append(Integer.toString(num));
             mov.append("o");
             Move moveToCheck = new Move(mov.toString(), game2.getCurrentMovingPlayer().getId());
             Log.i("PlayGame", "la mossa è " + game2.generalMoveCheck(moveToCheck));
-            if((game2.generalMoveCheck(moveToCheck))){
+            if ((game2.generalMoveCheck(moveToCheck))) {
                 game2.getCurrentMovingPlayer().makeMove(mov.toString());
                 game2.checkColumnBeadsLife(num);
                 setB(getFinalPoint());
                 v.setY(getB());
-                if(game2.getGameOver()){
+                if (game2.getGameOver()) {
                     finishGame();
-                }
-                else{
+                } else {
                     killBead(moveToCheck);
                 }
-            }
-            else{
+                computerMove();
+            } else {
                 setB(getStartPointB());
                 v.setY(getB());
             }
@@ -872,14 +883,14 @@ public class PlayGameActivity extends AppCompatActivity {
         }
     }
 
-    public void showAlert(View view){
+    public void showAlert(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Pause");
         builder.setPositiveButton("Resume Game", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-                matchTime.setBase(matchTime.getBase()+SystemClock.elapsedRealtime()-lastPause);
+                matchTime.setBase(matchTime.getBase() + SystemClock.elapsedRealtime() - lastPause);
                 matchTime.start();
             }
         });
@@ -900,29 +911,29 @@ public class PlayGameActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void decrementContBeadsView(String player,int aliveBeads){
-        switch(player){
+    public void decrementContBeadsView(String player, int aliveBeads) {
+        switch (player) {
             case "1":
                 contBeadNum1.setText(Integer.toString(aliveBeads));
-                if(aliveBeads == 0) {
+                if (aliveBeads == 0) {
                     updateAlpha(playerIcon1);
                 }
                 break;
             case "2":
                 contBeadNum2.setText(Integer.toString(aliveBeads));
-                if(aliveBeads == 0) {
+                if (aliveBeads == 0) {
                     updateAlpha(playerIcon2);
                 }
                 break;
             case "3":
                 contBeadNum3.setText(Integer.toString(aliveBeads));
-                if(aliveBeads == 0) {
+                if (aliveBeads == 0) {
                     updateAlpha(playerIcon3);
                 }
                 break;
             case "4":
                 contBeadNum4.setText(Integer.toString(aliveBeads));
-                if(aliveBeads == 0) {
+                if (aliveBeads == 0) {
                     updateAlpha(playerIcon4);
                 }
                 break;
@@ -931,8 +942,8 @@ public class PlayGameActivity extends AppCompatActivity {
         }
     }
 
-    public void changeIconPlayerTurn(){
-        switch(game2.getCurrentPlayer()) {
+    public void changeIconPlayerTurn() {
+        switch (game2.getCurrentPlayer()) {
             case "1":
                 nowPlay.setImageResource(R.drawable.planet_statusbar);
                 break;
@@ -949,5 +960,55 @@ public class PlayGameActivity extends AppCompatActivity {
                 break;
         }
     }
+
+    public String getRandomMove(String idPlayer) {
+        String randomMove = "";
+        Move move = new Move(randomMove, idPlayer);
+        do {
+            if (Math.random() <= 0.5)
+                randomMove = "h";
+            else
+                randomMove = "v";
+            randomMove = randomMove + (int) Math.floor(Math.random() * 7+1);
+            if (Math.random() <= 0.5)
+                randomMove = randomMove + "i";
+            else
+                randomMove = randomMove + "o";
+            move = new Move(randomMove, idPlayer);
+        } while (!game2.generalMoveCheck(move));
+        game2.getMovesList().add(move);
+        return randomMove;
+    }
+
+
+public void computerMove(){
+    do {
+        if (!game2.getCurrentMovingPlayer().isHuman()) {
+            String randomMove = getRandomMove(game2.getCurrentPlayer());
+            char orientation = randomMove.charAt(0);
+            int num = Character.getNumericValue(randomMove.charAt(1))-1;
+            char movement = randomMove.charAt(2);
+            Log.i("ciao","mossa Robot"+randomMove);
+
+            if(orientation == 'h'){
+                if(movement == 'o'){
+                    hbars[num].setX(hbars[num].getX() - (32 * hbars[num].getResources().getDisplayMetrics().density));
+                }
+                else{
+                    hbars[num].setX(hbars[num].getX() + (32 * hbars[num].getResources().getDisplayMetrics().density));
+                }
+            }
+            else{
+                if(movement == 'i'){
+                    vbars[num].setY(vbars[num].getY() - (32 * vbars[num].getResources().getDisplayMetrics().density));
+                }
+                else{
+                    vbars[num].setY(vbars[num].getY() + (32 * vbars[num].getResources().getDisplayMetrics().density));
+                }
+            }
+        }
+        game2.iteratorNext();
+    }while(!game2.getCurrentMovingPlayer().isHuman());
+}
 
 }
