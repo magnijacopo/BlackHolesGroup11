@@ -30,7 +30,7 @@ public class InstructionsActivity extends AppCompatActivity {
                 "            How to play:\n" +
                 "        </h2>\n" +
                 "        <h4>\n" +
-                "            Game setup:\n" +
+                "            GameFirstReleaseTest setup:\n" +
                 "        </h4>\n" +
                 "        <p>\n" +
                 "            At the start of a game each player has to place 5 beads on the board in a round robin fashion.\n" +
@@ -116,7 +116,7 @@ public class InstructionsActivity extends AppCompatActivity {
                 "            How to play:\n" +
                 "        </h2>\n" +
                 "        <h4>\n" +
-                "            Game setup:\n" +
+                "            GameFirstReleaseTest setup:\n" +
                 "        </h4>\n" +
                 "        <p>\n" +
                 "            At the start of a game each player has to place 5 beads on the board in a round robin fashion.\n" +

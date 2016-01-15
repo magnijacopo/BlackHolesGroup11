@@ -31,9 +31,9 @@ public class Player {
 
     private boolean human;
 
-    private Game2 game2;
+    private Game game;
 
-    private Board2 board;
+    private Board board;
 
     private Configuration config;
 
@@ -178,7 +178,7 @@ public class Player {
      * @param /input the String that represents the move. {@link Move#moveId}
      * @param "board"
      */
-     /*void makeMove(String input, Board board) {
+     /*void makeMove(String input, BoardFirstReleaseTests board) {
         //the input move is sliced in three parts:
         char orientation = input.charAt(0); //vertical or horizontal bar
         int number = Character.getNumericValue(input.charAt(1))-1; //number of the bar
@@ -215,7 +215,7 @@ public class Player {
         do {
             randomPlace[0] = (int) Math.floor(Math.random() * 7);
             randomPlace[1] = (int) Math.floor(Math.random() * 7);
-        } while (!game2.getCurrentMovingPlayer().placeBead(owner, randomPlace[0], randomPlace[1]));
+        } while (!game.getCurrentMovingPlayer().placeBead(owner, randomPlace[0], randomPlace[1]));
         return randomPlace;
     }
 
@@ -260,12 +260,12 @@ public class Player {
         this.bead[i] = new Bead();
     }
 
-    public void setBoard(Board2 board) {
+    public void setBoard(Board board) {
         this.board = board;
     }
 
-    public void setGame2(Game2 game2) {
-        this.game2 = game2;
+    public void setGame(Game game) {
+        this.game = game;
     }
 
     public void setConfiguration(Configuration config) {

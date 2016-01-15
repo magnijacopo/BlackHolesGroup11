@@ -1,226 +1,286 @@
 package it.polimi.group11.model;
 
+import android.util.Log;
+
+
 /**
- * Situation of the game board,
- * definition of the structure of vertical and horizontal bars and their position on the board,
- * it also contains methods to change the setting of the board
+ * Created by Lale on 29/12/2015.
  */
-
 public class Board {
-    /**
-     *  Non mutable holes configuration in the vertical bars
-     */
-    private final boolean[][] VERTICALHOLES = {
-            {true, false, false, false, false, true, false, true, true },
-            {true, false, false, false, true, true, false, false, true },
-            {true, false, true, false, false, true, false, true, true },
-            {true, false, false, true, true, false, false, false, true },
-            {true, true, false, false, false, true, false, true, true },
-            {true, true, false, false, false, false, false, true, true },
-            {true, false, false, true, false, false, true, false, true }
-    };
 
-    /**
-     *  Non mutable holes configuration in the horizontal bars
-     */
-    private final boolean[][] HORIZONTALHOLES = {
-            {true, false, true, false, true, false, true, false, true},
-            {true, false, false, true, false, false, true, false, true},
-            {true, false, false, false, true, false, false, false, true},
-            {true, false, true, false, true, false, true, false, true},
-            {true, false, false, false, false, false, false, false, true},
-            {true, true, false, false, false, true, false, true, true},
-            {true, false, false, true, false, true, false, true, true}
-    };
+    public Bar[] horizontalBar = new Bar[7];
+    public Bar[] verticalBar = new Bar[7];
+    private Cell[][] grid = new Cell[7][7];
+    Composition composition = new Composition();
 
-    /**
-     *  Distribution of the vertical bar's holes in the board grid
-     */
-    private boolean[][] gridY = new boolean[7][7];
+   public Board(){
+       for(int i=0;i<7;i++) {
+           horizontalBar[i] = new Bar();
+           verticalBar[i] = new Bar();
+           for (int j = 0; j < 7; j++)
+               grid[i][j] = new Cell();
+       }
+       generateBoard();
+   }
 
-    /**
-     *  Distribution of the horizontal bar's holes in the board grid
-     */
-    private boolean[][] gridX = new boolean[7][7];
-
-    /**
-     *  Position of the vertical bars on the board
-     */
-    private int[] verticalBarsPosition = new int[7];
-
-    /**
-     *  Position of the horizontal bars on the board
-     */
-    private int[] horizontalBarsPosition = new int[7];
-
-    // Getters and Setters
-
-    /**
-     * Return the positions all of the horizontal bars.
-     *
-     * @return {@link Board#horizontalBarsPosition}
-     */
-    public int[] getHorizontalBarsPosition(){
-        return horizontalBarsPosition;
-    }
-
-    /**
-     * Return the positions all of the vertical bars.
-     *
-     * @return {@link Board#verticalBarsPosition}
-     */
-    public int[] getVerticalBarsPosition(){
-        return verticalBarsPosition;
-    }
-
-    /**
-     * Return the position of a specific horizontal bars.
-     *
-     * @param position the specific bar
-     * @return {@link Board#horizontalBarsPosition}
-     */
-    public int getHorizontalBarPosition(int position){
-        return horizontalBarsPosition[position];
-    }
-
-    /**
-     * Return the position of a specific vertical bars.
-     *
-     * @param position the specific bar
-     * @return {@link Board#horizontalBarsPosition}
-     */
-    public int getVerticalBarPosition(int position){
-        return verticalBarsPosition[position];
-    }
-
-    /**
-     * Sets the position of the horizontal bars.
-     *
-     * @param horizontalPosition the position which will take the bar
-     * @param position the specific bar
-     */
-    public void setHorizontalBarPosition(int horizontalPosition, int position){
-        this.horizontalBarsPosition[position] = horizontalPosition;
-    }
-
-    /**
-     * Sets the position of the vertical bars.
-     *
-     * @param verticalPosition the position which will take the bar
-     * @param position the specific bar
-     */
-    public void setVerticalBarPosition(int verticalPosition, int position){
-        this.verticalBarsPosition[position] = verticalPosition;
-    }
-
-    /**
-     * Sets the position of the horizontal bars.
-     *
-     * @param horizontalPositions the position which will take the bars
-     */
-    //this method and the next will be used in the real game when the main system will pass
-    // a random string to set all bars at once
-    public void setHorizontalBarsPosition(int[] horizontalPositions){
-        this.horizontalBarsPosition = horizontalPositions;
-    }
-
-    /**
-     * Sets the position of the vertical bars.
-     *
-     * @param verticalPositions the position which will take the bars
-     */
-    public void setVerticalBarsPosition(int[] verticalPositions){
-        this.verticalBarsPosition = verticalPositions;
-    }
-
-
-    // Methods
-
-    /**
-     * Set the position of all the bars in the board's grid.
-     *
-     * @see Board#setRow(int, int)
-     * @see Board#setColumn(int, int)
-     */
-    public void prepareGrid() {
-        for (int i=0; i<7; i++) {
-            setRow(i, horizontalBarsPosition[i]);
-            setColumn(i, verticalBarsPosition[i]);
+    private void setHolesOfBars() {
+        for (int i = 0; i < 7; i++) {
+            horizontalBar[i].setComposition(composition.getHorizontalComposition(i));
+            verticalBar[i].setComposition(composition.getVerticalComposition(i));
         }
     }
 
-    /**
-     * Updates the row of the horizontal bar's hole distribution indicated by the input.
-     *
-     * @param row the row currently considered
-     * @param barPosition {@link Board#horizontalBarsPosition}
-     * @see Board#gridX
-     */
-    public void setRow(int row, int barPosition) {
-        for (int i=0; i<7; i++) {
-            gridX[row][i] = HORIZONTALHOLES[row][i+barPosition];
+    private void setInitialPositions() {
+        for (int i = 0; i < 7; i++) {
+            horizontalBar[i].setPosition(getRandomNumber());
+            verticalBar[i].setPosition(getRandomNumber());
         }
     }
 
-    /**
-     * Updates the column of the vertical bar's holes distribution indicated by the input.
-     *
-     * @param column the column currently considered
-     * @param barPosition {@link Board#verticalBarsPosition}
-     * @see Board#gridY
-     */
-    public void setColumn(int column, int barPosition) {
-        for (int i=0; i<7; i++) {
-            gridY[column][i] = VERTICALHOLES[column][i+barPosition];
+    private int getRandomNumber() {
+            return (int)(Math.random()*3);
+        }
+
+    public void setRow(int row){
+        for (int i=0;i<7;i++)
+            grid[row][i].setHorizontal(horizontalBar[row].getValue(i + horizontalBar[row].getPosition()));
+        updateRowBeadInCellStatus(row);
+    }
+
+    public void setColumn(int column){
+        for (int i=0;i<7;i++)
+            grid[i][column].setVertical(verticalBar[column].getValue(i + verticalBar[column].getPosition()));
+        updateColumnBeadInCellStatus(column);
+    }
+
+    public void prepareGrid(){
+        for (int i=0;i<7;i++) {
+        setRow(i);
+        setColumn(i);
         }
     }
 
-    /**
-     * Overlaps the vertical and the horizontal holes distribution grids.
-     *
-     * @return a string mapping the condition of each cell
-     * @see Board#gridX
-     * @see Board#gridY
-     */
-    public String checkGrid() {
+    public String getCheckGrid() {
         String checkGrid = "";
-        String temp;
+        String temp="";
         for (int i=0; i<7; i++) {
-            for (int j=0; j<7; j++) {
-                if (gridX[i][j] && !gridY[j][i]){
-                    temp = "1"; //the cell checked is covered by a horizontal bar
-                }
-                else if (!gridX[i][j] && gridY[j][i]){
-                    temp = "2"; //the cell checked is covered by a vertical bar
-                }
-                else if (gridX[i][j] && gridY[j][i]){
-                    temp = "3"; //the cell checked is covered by both bars
-                }else{
-                    temp = "0"; //the cell checked is a hole
-                }
-                checkGrid = (checkGrid + temp);
+            for (int j = 0; j < 7; j++) {
+                if ((grid[i][j].getHorizontal()) && (grid[i][j].getVertical()))
+                    temp = "3";
+                if ((!grid[i][j].getHorizontal()) && (grid[i][j].getVertical()))
+                    temp = "2";
+                if ((grid[i][j].getHorizontal()) && (!grid[i][j].getVertical()))
+                    temp = "1";
+                if ((!grid[i][j].getHorizontal()) && (!grid[i][j].getVertical()))
+                    temp = "0";
+                checkGrid = (checkGrid+temp);
             }
         }
         return checkGrid;
     }
 
-    /**
-     * Updates the position of the beads on the board based on
-     * a configuration of the bars and the latest beads positions inputs.
-     *
-     * @param grid the return of the method {@link Board#checkGrid()}
-     * @param beadsPosition the current positions of the beads
-     * @return it returns a string representing the new position of each bead
-     */
-    public String newBeadsPosition(String grid, String beadsPosition) {
-        String newBeadsPosition = "";
-        for (int i=0; i<beadsPosition.length(); i++) {
-            if (grid.charAt(i) == '0') {
-                newBeadsPosition = newBeadsPosition+"0"; //if the cell checked is a hole, updates there can not be a bead on it
-            } else {
-                newBeadsPosition = newBeadsPosition+beadsPosition.charAt(i); //if the cell checked is filled by a bar, the old bead position valued is maintained
+    public void setIdsCells(){
+        int id;
+        for (int i=0;i<7;i++)
+            for(int j=0;j<7;j++)
+                grid[i][j].setId("cell"+Integer.toString(i*7+j));
+    }
+
+    public void setIdsHorizontalBars(){
+
+        for (int i=0;i<7;i++)
+                horizontalBar[i].setId("horizontalbar"+i);
+    }
+
+    public void setIdsVerticalBars(){
+
+        for (int i=0;i<7;i++)
+            horizontalBar[i].setId("verticalbar"+i);
+    }
+
+
+    public void generateBoard(){
+
+        setIdsCells();
+        setIdsHorizontalBars();
+        setIdsVerticalBars();
+        setHolesOfBars();
+        setInitialPositions();
+        prepareGrid();
+    }
+
+
+    public boolean checkBoundsValidity (String move) {
+
+        char orientation = move.charAt(0); // Orientation of the bar: vertical (v) or horizontal (h)
+        int number = Character.getNumericValue(move.charAt(1))-1; //Number of the bar
+        char movement = move.charAt(2); //Slide movement of the bar: inward (i) or outward (o)
+
+        if ((orientation == 'h') || (orientation == 'v')){
+            if((number >= 0) && (number <= 6)){
+                if((movement == 'o') || (movement == 'i')){
+
+                    // Now it checks all possible combinations
+                    if (orientation == 'h') {
+                        if (movement == 'o') {
+                            // Horizontal + Outward
+                            if(horizontalBar[number].getPosition() < 2){
+                                return true;
+                                //error = "the horizontal bar number "+(number+1)+" can not be pushed out";
+                            }
+                        }
+                            else if (movement == 'i') {
+                                //Horizontal + Inward
+                                if(horizontalBar[number].getPosition() > 0){
+                                    return true;
+                                    //error = "the horizontal bar number "+(number+1)+" can not be pushed in";
+                                }
+                            }
+                        }
+                    else if (orientation == 'v') {
+                        if (movement == 'o') {
+                            //Vertical + Outward
+                            if (verticalBar[number].getPosition() < 2){
+                                //error = "the vertical bar number "+(number+1)+" can not be pushed out";
+                                return true;
+                            }
+                        }
+                            else if (movement == 'i') {
+                                //Vertical + Inward
+                                if (verticalBar[number].getPosition() > 0){
+                                    //error = "the vertical bar number "+(number+1)+" can not be pushed in";
+                                    return true;
+                                }
+                            }
+                    }
+                }
+                        // End of the possible valid moves combinations.
+                else{
+                    //error = "invalid input, the third character must be 'o' or 'i'";
+                    return false;
+                }
+            }else{
+                //error = "invalid input, the second character must be a number between 1 and 7.";
+                return false;
+            }
+        }else{
+            // error = "invalid input, the first character must be 'h' or 'v'";
+            return false;
+        }
+    return false;
+    }
+
+
+    public void moveBar(String move){
+        if (checkBoundsValidity((move))){
+
+            char orientation = move.charAt(0); // Orientation of the bar: vertical (v) or horizontal (h)
+            int number = Character.getNumericValue(move.charAt(1)-1); //Number of the bar
+            char movement = move.charAt(2); //Slide movement of the bar: inward (i) or outward (o)
+
+            if(orientation=='h'){ //muovo orizzontale
+                if(movement=='o')
+                    horizontalBar[number].setPosition(horizontalBar[number].getPosition()+1);
+                else {
+                    horizontalBar[number].setPosition((horizontalBar[number].getPosition()) - 1);
+                    Log.i("Board", "la nuova posizione della barra sarà " + Integer.toString((horizontalBar[number].getPosition())));
+                }
+                setRow(number);
+            }
+            else{  //muovo verticale
+                if (movement=='o')
+                    verticalBar[number].setPosition(verticalBar[number].getPosition()+1);
+                else
+                    verticalBar[number].setPosition(verticalBar[number].getPosition()-1);
+                setColumn(number);
             }
         }
-        return newBeadsPosition;
+    }
+
+    public String getBeadsPosition(){
+        String beadsPosition="";
+        for(int i=0; i < 7;i++) {
+            for (int j=0; j < 7; j++) {
+                if (grid[i][j].getBead())
+                    beadsPosition=beadsPosition + grid[i][j].getOwner();
+                else
+                    beadsPosition=beadsPosition+"0";
+            }
+        }
+        return beadsPosition;
+    }
+
+    public String getBarStatus(){
+        String barStatus="";
+        for(int i=0;i<7;i++)
+            barStatus=barStatus+String.valueOf(horizontalBar[i].getPosition());
+        for(int i=0;i<7;i++)
+            barStatus=barStatus+String.valueOf(verticalBar[i].getPosition());
+        return barStatus;}
+
+
+    public void updateBeadsCellStatus(){
+        String checkGrid=getCheckGrid();
+        String beadsPosition=getBeadsPosition();
+
+        for (int i=0;i<7;i++) {
+            for (int j = 0; i < 7; j++) {
+                if (checkGrid.charAt(i * 7 + j) == '0') {
+                    grid[i][j].setBead(false);
+                    grid[i][j].setOwner("0");
+                }
+            }
+        }
+    }
+
+    public void updateRowBeadInCellStatus(int row){
+        for (int i=0;i<7;i++){
+            if (!grid[row][i].getHorizontal()&&!grid[row][i].getVertical()&&grid[row][i].getBead()) {
+                grid[row][i].setBead(false);
+                grid[row][i].setOwner("0");
+            }
+        }
+    }
+
+    public void updateColumnBeadInCellStatus(int column){
+        for (int i=0;i<7;i++){
+            if (!grid[i][column].getHorizontal()&&!grid[i][column].getVertical()&&grid[i][ column].getBead()) {
+                grid[i][column].setBead(false);
+                grid[i][column].setOwner("0");
+            }
+        }
+    }
+
+    public String getCurrentBeadsPosition(){
+        String checkGrid=getCheckGrid();
+        String beadsPosition=getBeadsPosition();
+        String currentBeadsPosition = "";
+        for (int i=0;i<7;i++) {
+            for (int j = 0; j < 7;j++) {
+                if (checkGrid.charAt(i*7+j) == '0') {
+                    currentBeadsPosition = currentBeadsPosition + "0"; //if the cell checked is a hole, updates there can not be a bead on it
+                    grid[i][j].setBead(false);
+                    grid[i][j].setOwner("0");
+                } else {
+                    currentBeadsPosition = currentBeadsPosition + beadsPosition.charAt(i*7+j); //if the cell checked is filled by a bar, the old bead position valued is maintained
+                }
+            }
+        }
+            return currentBeadsPosition;
+    }
+
+    public Cell getCell(int i, int j) {
+        return grid[i][j];
+    }
+
+    public void setCell(Cell grid, int i, int j) {
+        this.grid[i][j] = grid;
+    }
+
+    public void setBarsPosition(int[] horiz, int[] vert){
+        for (int i = 0; i < 7; i++) {
+            horizontalBar[i].setPosition(horiz[i]);
+            verticalBar[i].setPosition(vert[i]);
+        }
     }
 }

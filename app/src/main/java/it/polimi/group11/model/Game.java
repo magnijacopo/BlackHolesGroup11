@@ -1,171 +1,154 @@
 package it.polimi.group11.model;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
 /**
- * A game session
+ * Created by Lale on 02/01/2016.
  */
-
 public class Game {
-    private boolean movesFinished=false;
 
-    private String MOVE_NOT_VALID = "error: la mossa non è valida";
-
-    private String lastPlayer;
-    /**
-     * The game is paired with the board instantiated in this game session.
-     */
-    private Board board = new Board();
-
-    /**
-     * List of the players that will play this game.
-     * @see Player
-     */
-    private List<Player> players = new ArrayList<>();
-
-    /**
-     * Iterator used to iterate the ArrayList players
-     */
-    private ListIterator<Player> iterator;
-
-    /**
-     * It is the player that should execute the current move.
-     * @see Player
-     */
+    public Board board = new Board();
+    int alivePlayers;
+    private int playersNumber;
     private Player currentMovingPlayer;
-
-    /**
-     * The list of the moves done by all the players.
-     * @see Move
-     */
+    private ListIterator<Player> iterator;
+    public List<Player> players = new ArrayList<>();
+    private int firstPlayer=0;
+    private boolean gameOver=false;
+    private String lastPlayer;
+    private boolean validity=true;
+    private boolean movesFinished=false;
     private ArrayList<Move> movesList = new ArrayList<>();
+    private String error="";
+    private String MOVE_NOT_VALID = "error: la mossa non è valida";
+    private String movingPlayer;
+    private int totalBeadsInBoard;
+    private int numTotalMoves;
 
-    /**
-     * Number of the players that are still alive.
-     */
-    private int alivePlayers;
-
-    /**
-     * Boolean that indicates if the game is over or not,
-     * True if the game is finished,
-     * False if the game is not finished.
-     */
-    private boolean gameOver;
-
-    /**
-     * String that represent the error message related to each possible wrong move condition.
-     */
-    private String error;
-
-    /**
-     * Boolean that represent the validity of a move.
-     * true if the move is valid,
-     * false if the move is not valid.
-     */
-    private boolean validity = true;
-
-
-    // Constructor
-
-    /**
-     * Constructor of the class.
-     * It also calls definePlayers.
-     * @param playerNumber number of the players that play the game
-     * @see Game#definePlayers(int)
-     */
-    private int playerNumber;
-
-    public Game(int playerNum){
-        alivePlayers = playerNum;
-        playerNumber=playerNum;
-        definePlayers(playerNumber);
+    public void randomFirstPlayer(){
+        firstPlayer = (int) Math.floor((Math.random() * playersNumber) + 1);
+        setFirstPlayer(String.valueOf(firstPlayer));
     }
 
-
-    // Getters and Setters
-
-    /**
-     * @return {@link Game#board}
-     */
-    public Board getBoard(){ return board; }
-
-    /**
-     * @return {@link Game#players}
-     */
-    public List<Player> getPlayers(){
-        return players;
+    public String getFirstPlayer(){
+        return getCurrentPlayer();
     }
 
-    /**
-     * @return {@link Game#gameOver}
-     */
-    public boolean getGameOver(){
-        return gameOver;
+    public String getError(){
+        return error;
     }
-
-    /**
-     * @return {@link Game#validity}
-     */
     public boolean getValidity(){
         return validity;
     }
 
-    /**
-     * @return {@link Game#error}
-     */
-    public String getError(){
-        return error;
+
+    public Game(int playerNum){
+        alivePlayers = playerNum;
+        playersNumber=playerNum;
+        definePlayers(playersNumber);
+        for(int i=0;i<playerNum;i++) {
+            this.getCurrentMovingPlayer().setGame(this);
+            this.getCurrentMovingPlayer().setBoard(board);
+            iteratorNext();
+        }
+        setNumMovesTotal(0);
+        totalBeadsInBoard = 0;
     }
 
-    /**
-     * @return alivePlayers {@link Game#alivePlayers}
-     */
-    public int getAlivePlayers(){
-        return alivePlayers;
+    public int getPlayerNum(){
+        return playersNumber;
     }
 
-    public void setMovesList(ArrayList<Move> moves){
-        this.movesList = moves;
+    public void checkRowBeadsLife(int row) {
+        iteratorNext();
+        row=row-1;
+        for (int i = 0; i < playersNumber; i++) {//per tutti i giocatori
+           if(alivePlayers>1) {//se c'è più di un giocatore vivo (partita non finita)
+               if (currentMovingPlayer.getStatus()) {          //se è vivo il giocatore
+                   for (int j = 0; j < 5; j++) {                   // per tutti i bead del giocatore
+                       if (currentMovingPlayer.getBead(j).getLife()) {             //e il bead e vivo
+                           if (currentMovingPlayer.getBead(j).getRowPosition() == row) {    //guarda se il bead è nella barra mossa
+                               for (int k = 0; k < 7; k++) {      //per tutte le celle di quella riga
+                                   if (!board.getCell(row, k).getBead() && currentMovingPlayer.getBead(j).getColumnPosition() == k) {  //verifica se la cella è bucata e ha su un bead
+                                       currentMovingPlayer.getBead(j).setLife(false); //se è così, lo uccidi.
+                                       currentMovingPlayer.setBeadsInBoard(currentMovingPlayer.getBeadsInBoard() - 1);//decremento num bead del player
+                                       if (currentMovingPlayer.getBeadsInBoard() == 0) {
+                                           currentMovingPlayer.setStatus(false);
+                                           alivePlayers--;
+                                       }
+                                   }
+                               }
+                           }
+                       }
+                   }
+               }
+           }
+            iteratorNext();
+        }
+        iteratorPrevious(playersNumber);
+        if (alivePlayers==1){
+            gameOver=true;
+        }
+
     }
 
-    /**
-     * @return error
-     */
-    public String getMoveNotValid(){
-        return MOVE_NOT_VALID;
+    public void checkColumnBeadsLife(int column) {
+        iteratorNext();
+        column=column-1;
+        for (int i = 0; i < playersNumber; i++) {   //per tutti i giocatori
+            if(alivePlayers>1) {
+                if (currentMovingPlayer.getStatus()) {          //se è vivo il giocatore
+                    for (int j = 0; j < 5; j++) {                   // per tutti i bead del giocatore
+                        if (currentMovingPlayer.getBead(j).getLife()) {             //e il bead e vivo
+                            if (currentMovingPlayer.getBead(j).getColumnPosition() == column) {    //guarda se il bead è nella barra mossa
+                                for (int k = 0; k < 7; k++) {      //per tutte le celle di quella riga
+                                    if (!board.getCell(k, column).getBead() && currentMovingPlayer.getBead(j).getRowPosition() == k) {  //verifica se la cella è bucata e ha su un bead
+                                        currentMovingPlayer.getBead(j).setLife(false); //se è così, lo uccidi.
+                                        currentMovingPlayer.setBeadsInBoard(currentMovingPlayer.getBeadsInBoard() - 1);
+                                        if (currentMovingPlayer.getBeadsInBoard() == 0) {
+                                            currentMovingPlayer.setStatus(false);
+                                            alivePlayers--;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            iteratorNext();
+        }
+        iteratorPrevious(playersNumber);
+        if (alivePlayers==1){
+            gameOver=true;
+        }
     }
 
-    // Methods
+    public void iteratorNext(){
+        if(!iterator.hasNext())
+            iterator = players.listIterator();
+        currentMovingPlayer = iterator.next();
+    }
 
-    /**
-     * It instantiate a {@link Player} and adds it in {@link Game#players}
-     * @param playerNumber number of the players that play the game
-     */
-    private void definePlayers(int playerNumber){
-        for (int i=1; i<=playerNumber; i++){
-                players.add(new Player(i));
+    private void definePlayers(int playerNumber) {
+        for (int i = 1; i <= playerNumber; i++) {
+            players.add(new Player(i));
         }
         iterator = players.listIterator();
+        currentMovingPlayer = iterator.next();
     }
 
-    /**
-     * Check the life status of all the players next to the player's id input, until the iterator reaches the current id player again.
-     * @param newBeadsPosition {@link Board#newBeadsPosition(String, String)}
-     */
     private void checkLives(String newBeadsPosition) {
-        for (int i=0;i<playerNumber;i++){
+        for (int i=0;i<playersNumber;i++){
             checkLife(newBeadsPosition, currentMovingPlayer.getId());
             iteratorNext();
         }
     }
 
-    /**
-     * Checks in the beadsStatus input if the player associated with the id input has beads in it.
-     * @param beadsStatus return of {@link Board#newBeadsPosition(String, String)}
-     * @param id {@link Player#id}
-     */
     private void checkLife(String beadsStatus, String id) {
         if (currentMovingPlayer.getStatus()){
             int i = 0;
@@ -174,7 +157,7 @@ public class Game {
             }
             if (i == beadsStatus.length()-1 && !beadsStatus.substring(i, i+1).equals(id)){
                 currentMovingPlayer.setStatus(false);
-                System.out.println("player " + id + " is dead");
+                System.out.println("player "+id+" is dead");
                 alivePlayers--;
                 checkVictory();
             }
@@ -182,102 +165,12 @@ public class Game {
         checkVictory();
     }
 
-    /**
-     * Checks if the game is over.
-     */
     private void checkVictory() {
         if (alivePlayers == 1){ //The game ends when only one player is alive
             System.out.println("GG");
             gameOver = true;}
-    } // If a player moves, eliminates all the players and dies, he will results as the winner thanks to checkLives method's rules.
-
-
-    /**
-     * Selects the next indexed element in {@link Game#players}.
-     * If the {@link Game#iterator} arrives to the end of the array, it restarts from the first element.
-     */
-    private void iteratorNext(){
-        if(!iterator.hasNext())
-            iterator = players.listIterator();
-        currentMovingPlayer = iterator.next();
     }
 
-    /**
-     * Verify if the input move sets the selected bar in an allowed position.
-     * @param move String that represents the move to check {@link Move#moveId}
-     * @return {@link Game#validity}
-     */
-    public boolean checkBoundsValidity(String move) {
-
-        char orientation = move.charAt(0); // Orientation of the bar: vertical (v) or horizontal (h)
-        int number = Character.getNumericValue(move.charAt(1))-1; //Number of the bar
-        char movement = move.charAt(2); //Slide movement of the bar: inward (i) or outward (o)
-
-        /*
-          The first three if conditions check that the move is sintactically correct
-          the orientation can be only "h" or "v"
-          the number can be between 0 and 6
-          the movement can be only "o" or "i"
-         */
-        if ((orientation == 'h') || (orientation == 'v')){
-            if((number >= 0) && (number <= 6)){
-                if((movement == 'o') || (movement == 'i')){
-
-                    // Now it checks all possible combinations
-                    if (orientation == 'h') {
-                        if (movement == 'o') {
-                            // Horizontal + Outward
-                            if(board.getHorizontalBarPosition(number) == 2){
-                                validity = false;
-                                error = "the horizontal bar number "+(number+1)+" can not be pushed out";}
-                        }
-                        else if (movement == 'i') {
-                            //Horizontal + Inward
-                            if(board.getHorizontalBarPosition(number) == 0){
-                                validity = false;
-                                error = "the horizontal bar number "+(number+1)+" can not be pushed in";}
-                        }
-                    }
-                    else if (orientation == 'v') {
-                        if (movement == 'o') {
-                            //Vertical + Outward
-                            if (board.getVerticalBarPosition(number) == 2){
-                                error = "the vertical bar number "+(number+1)+" can not be pushed out";
-                                validity = false;}
-                        }
-                        else if (movement == 'i') {
-                            //Vertical + Inward
-                            if (board.getVerticalBarPosition(number) == 0){
-                                error = "the vertical bar number "+(number+1)+" can not be pushed in";
-                                validity = false;}
-                        }
-                    }}
-                // End of the possible valid moves combinations.
-                else{
-                    error = "invalid input, the third character must be 'o' or 'i'";
-                    validity = false;
-                }
-            }else{
-                error = "invalid input, the second character must be a number between 1 and 7.";
-                validity = false;
-            }
-        }else{
-            error = "invalid input, the first character must be 'h' or 'v'";
-            validity = false;
-        }
-        // Each of the previous "else" condition outputs the invalidity message
-        // relative to the "move" character checked by its "if" condition
-        return validity;
-    }
-
-    /**
-     * Checks that the current player is not moving the same bar
-     * that has been already moved by a different player in the same turn.
-     *
-     * @param moveToCheck The {@link Move} that has to be checked
-     * @return {@link Game#validity}
-     *
-     */
     public boolean checkMove(Move moveToCheck){
         int movesToCheck = players.size()-1;
         /*
@@ -300,7 +193,9 @@ public class Game {
              */
             }else{
                 for(int i=0; i<movesList.size(); i++){
+                    Log.i("Game","for");
                     if (movesList.get(i).getMoveId().substring(0, 2).equals(moveToCheck.getMoveId().substring(0, 2))){
+                        Log.i("Game","if");
                         return validity = false;
                     }
                 }
@@ -309,15 +204,19 @@ public class Game {
         return validity;
     }
 
-    /**
-     * Checks the extra rule for two players.
-     * When only two players are left, a player
-     * cannot slide the same bar for more than two
-     * consecutive turns.
-     *
-     * @param moveToCheck {@link Move#moveId}
-     * @return {@link Game#validity}
-     */
+
+    public boolean generalMoveCheck(Move moveCheck){
+
+        validity = board.checkBoundsValidity(moveCheck.getMoveId()) && checkMove(moveCheck);
+
+        if( alivePlayers == 2){
+            boolean validityFlagTwo = checkMoveTwoPlayers(moveCheck);
+
+            return validity && validityFlagTwo;
+        }
+        return validity;
+    }
+
     public boolean checkMoveTwoPlayers(Move moveToCheck){
 
         int sizeL = movesList.size();
@@ -347,47 +246,45 @@ public class Game {
         return validity;
     }
 
-    /**
-     * Calls the methods that check different rules and decides if the moves is valid or not
-     * @param moveCheck {@link Move}
-     * @return {@link Game#validity}
-     */
-    public boolean generalMoveCheck(Move moveCheck){
-
-        validity = checkBoundsValidity(moveCheck.getMoveId()) && checkMove(moveCheck);
-
-        if( alivePlayers == 2){
-            boolean validityFlagTwo = checkMoveTwoPlayers(moveCheck);
-
-            return validity && validityFlagTwo;
+    public void setFirstPlayer(String firstPlayer){
+        if (firstPlayer.equals("2")) {
+            iteratorNext();
         }
-
-        return validity;
+        if (firstPlayer.equals("3")){
+            iteratorNext();
+            iteratorNext();
+        }
+        if (firstPlayer.equals("4")){
+            iteratorNext();
+            iteratorNext();
+            iteratorNext();
+        }
     }
 
-    /**
-     * Manages the relation between a move and the player doing it.
-     * @param move {@link Move#moveId}
-     * @param beadsStatus {@link Board#newBeadsPosition(String, String)}
-     * @return the player who executed the input move or an error if the move is not valid
-     */
-    public String currentPlayer(String move, String beadsStatus){
+    public String getNextPlayer(){
+        iteratorNext();
+        while (!currentMovingPlayer.getStatus()){
+            iteratorNext();
+        }
+        return currentMovingPlayer.getId();
+    }
 
-        if (!gameOver){
-            iteratorNext(); //goes to the player who has to move
+    public String currentPlayer(String move){
+
+        if (!gameOver){ //goes to the player who has to move
             if(currentMovingPlayer.getStatus()){ //if he is alive
                 Move moveToCheck = new Move(move, currentMovingPlayer.getId());
                 // the validity of the input move is checked
                 if(generalMoveCheck(moveToCheck)){ //if the move is valid
-                    currentMovingPlayer.makeMove(moveToCheck.getMoveId());
+                    board.moveBar(moveToCheck.getMoveId());
                     System.out.println("the move > " + move + " < is valid");//the player makes the move
                     System.out.println("giocatore che muove " + currentMovingPlayer.getId());
                     currentMovingPlayer.setMovesNumber(currentMovingPlayer.getMovesNumber() + 1); //increases the number of moves made by him
-                    checkLives(board.newBeadsPosition(board.checkGrid(), beadsStatus)); //checks the life status of the other player
+                    checkLives(board.getCurrentBeadsPosition()); //checks the life status of the other player
                     movesList.add(moveToCheck); //adds the move to the list of completed moves
-
+                    iteratorNext();
                     if (movesFinished && !gameOver){
-                       return getNextPlayer();
+                        return getNextPlayer();
                     }
                     if (gameOver){
                         return currentMovingPlayer.getId();
@@ -407,7 +304,7 @@ public class Game {
             }else{
                 Move deadMove = new Move("RIP", currentMovingPlayer.getId());
                 movesList.add(deadMove); //if the player iterated is dead it inserts a mock move in the moves list
-                return currentPlayer(move, beadsStatus); //and reiterates itself
+                return currentPlayer(move); //and reiterates itself
             }
         }else{
             iteratorNext(); //if the game is ended, the "moving player" set in the final configuration is the one who won
@@ -415,36 +312,51 @@ public class Game {
         }
     }
 
-    /**
-     * Returns the player able to do the next move.
-     * @return {@link Player#id}
-     */
-
-
-
-    public void setFirstPlayer(String firstPlayer){
-        if (firstPlayer.equals("2")) {
-            iteratorNext();
-        }
-        if (firstPlayer.equals("3")){
-            iteratorNext();
-            iteratorNext();
-        }
-        if (firstPlayer.equals("4")){
-            iteratorNext();
-            iteratorNext();
-            iteratorNext();}
-        }
-
-    public String getNextPlayer(){
-        iteratorNext();
-        while (!currentMovingPlayer.getStatus()){
-            iteratorNext();
-        }
+    public String getCurrentPlayer(){
         return currentMovingPlayer.getId();
     }
 
-    public void setMovesFinished(boolean b) {
-        movesFinished=b;
+
+
+    public Player getCurrentMovingPlayer() {
+        return currentMovingPlayer;
     }
+
+
+    public int getTotalBeadsInBoard(){
+        return totalBeadsInBoard;
+    }
+    public void setTotalBeadsInBoard(int totalBeadsInBoard){
+        this.totalBeadsInBoard=totalBeadsInBoard;
+    }
+
+    public void iteratorPrevious(int numPlayers){
+        for (int i=0;i<numPlayers-1;i++)
+            iteratorNext();
+    }
+
+    public void setValidity(boolean validity) {
+        this.validity = validity;
+    }
+
+    public ArrayList<Move> getMovesList() {
+        return movesList;
+    }
+
+    public boolean getGameOver() {
+        return gameOver;
+    }
+
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
+    }
+
+    public int getNumMovesTotal() {
+        return numTotalMoves;
+    }
+
+    public void setNumMovesTotal(int numMovesTotal) {
+        this.numTotalMoves = numMovesTotal;
+    }
+
 }

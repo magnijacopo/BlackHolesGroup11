@@ -43,8 +43,6 @@ public class MainActivity extends AppCompatActivity {
         credits_button.setTypeface(myTypeface);
         profiles_button = (Button) findViewById(R.id.profiles_button);
         profiles_button.setTypeface(myTypeface);
-        leaderboard_button = (Button) findViewById(R.id.leaderboard_button);
-        leaderboard_button.setTypeface(myTypeface);
         options_button = (Button) findViewById(R.id.options_button);
         options_button.setTypeface(myTypeface);
         instructions_button = (Button) findViewById(R.id.instructions_button);

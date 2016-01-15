@@ -9,12 +9,12 @@ public class BoardTest {
     //given a chosen configuration, the board grid should updates itself with the correct holes and fills values
     @Test
     public void testCheckGrid() throws Exception {
-        Board board=new Board();
+        BoardFirstReleaseTests boardFirstReleaseTests =new BoardFirstReleaseTests();
         int set[]={0,0,0,0,0,0,0};
-        board.setHorizontalBarsPosition(set);
-        board.setVerticalBarsPosition(set);
-        board.prepareGrid();
-        String grid=board.checkGrid();
+        boardFirstReleaseTests.setHorizontalBarsPosition(set);
+        boardFirstReleaseTests.setVerticalBarsPosition(set);
+        boardFirstReleaseTests.prepareGrid();
+        String grid= boardFirstReleaseTests.checkGrid();
         String expectedGrid="" +
                 "3232323" +
                 "1001221" +
@@ -29,7 +29,7 @@ public class BoardTest {
     //given an updated grid holes distribution and a beads configuration the method should returns the new beads configuration
     @Test
     public void testNewBeadsPosition() throws Exception {
-        Board board = new Board();
+        BoardFirstReleaseTests boardFirstReleaseTests = new BoardFirstReleaseTests();
         String currentBeadsPosition="" +
                 "0000001" +
                 "0000200" +
@@ -55,7 +55,7 @@ public class BoardTest {
                 "0100000" +
                 "0000200";
         String nextBeadsPosition;
-        nextBeadsPosition = board.newBeadsPosition(grid, currentBeadsPosition);
+        nextBeadsPosition = boardFirstReleaseTests.newBeadsPosition(grid, currentBeadsPosition);
         assertEquals(expectedBeads,nextBeadsPosition);
     }
 }

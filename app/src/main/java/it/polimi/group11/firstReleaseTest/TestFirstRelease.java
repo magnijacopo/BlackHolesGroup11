@@ -3,20 +3,20 @@ package it.polimi.group11.firstReleaseTest;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import it.polimi.group11.model.Board;
-import it.polimi.group11.model.Game;
+import it.polimi.group11.model.BoardFirstReleaseTests;
+import it.polimi.group11.model.GameFirstReleaseTest;
 
 
 public class TestFirstRelease {
 
     /**
-     * {@link Board}
+     * {@link BoardFirstReleaseTests}
      */
-    private Board board;
+    private BoardFirstReleaseTests boardFirstReleaseTests;
     /**
-     * {@link Game}
+     * {@link GameFirstReleaseTest}
      */
-    private Game game;
+    private GameFirstReleaseTest gameFirstReleaseTest;
     /**
      * Number of players
      */
@@ -26,11 +26,11 @@ public class TestFirstRelease {
      */
     String movingPlayer;
     /**
-     * {@link Board#horizontalBarsPosition}
+     * {@link BoardFirstReleaseTests#horizontalBarsPosition}
      */
     String horizontalBarsPosition;
     /**
-     * {@link Board#verticalBarsPosition}
+     * {@link BoardFirstReleaseTests#verticalBarsPosition}
      */
     String verticalBarsPosition;
     /**
@@ -62,12 +62,12 @@ public class TestFirstRelease {
 
     boolean checkMove = true;
     /**
-     * Indicates the last Configuration of the board , including setting of the bars,
+     * Indicates the last Configuration of the boardFirstReleaseTests , including setting of the bars,
      * position of the beads, and situation of the players before the current move
      */
     String lastConfiguration;
     /**
-     * Indicates the configuration of the Board after the current move including setting of the bars,
+     * Indicates the configuration of the BoardFirstReleaseTests after the current move including setting of the bars,
      * position of the beads, and situation of the players, but in the case of an
      * irregularity it returns an error
      */
@@ -88,7 +88,7 @@ public class TestFirstRelease {
         setBarsPosition(test);
         setConfigurationBeads(test);
 
-        board.prepareGrid();
+        boardFirstReleaseTests.prepareGrid();
 
         if (checkConfigurationPlayers) {
             if (checkConfigurationMovingPlayer) {
@@ -101,8 +101,8 @@ public class TestFirstRelease {
                             output = finalConfiguration(configuration, moves.remove());
                         }
 
-                        if (!game.getValidity()) {
-                            output = ("error: " + game.getError());
+                        if (!gameFirstReleaseTest.getValidity()) {
+                            output = ("error: " + gameFirstReleaseTest.getError());
                         }
                     } else {
                         output = "error : move doesn't work";
@@ -121,27 +121,27 @@ public class TestFirstRelease {
     private String finalConfiguration(String configuration, String mossa) {
 
         if (moves.size() == 0) {
-            game.setMovesFinished(true);
+            gameFirstReleaseTest.setMovesFinished(true);
         }
 
-        movingPlayer = game.currentPlayer(mossa, configuration.substring(16, 65));
+        movingPlayer = gameFirstReleaseTest.currentPlayer(mossa, configuration.substring(16, 65));
 
-        if (movingPlayer.equals(game.getError())) {
+        if (movingPlayer.equals(gameFirstReleaseTest.getError())) {
 
             lastConfiguration = "error: the move is not valid";
 
         } else {
 
-            if (game.getValidity()) {
+            if (gameFirstReleaseTest.getValidity()) {
                 setBars();
                 beadsPosition = setBeads(configuration.substring(16, 65));
 
                 StringBuilder stringBuilder = new StringBuilder();
-                playersNumber = game.getPlayers().size();
+                playersNumber = gameFirstReleaseTest.getPlayers().size();
                 stringBuilder.append(playersNumber).append(movingPlayer);
                 configuration = stringBuilder + horizontalBarsPosition + verticalBarsPosition + beadsPosition;
                 System.out.println("  move " + configuration);
-                if (moves.peek() != null && !(game.getGameOver())) {
+                if (moves.peek() != null && !(gameFirstReleaseTest.getGameOver())) {
                     finalConfiguration(configuration, moves.remove());
                 } else {
                     lastConfiguration = configuration;
@@ -159,8 +159,8 @@ public class TestFirstRelease {
         horizontalBarsPosition = "";
         verticalBarsPosition = "";
         for (int i=0; i<7; i++){
-            horizontalBarsPosition += board.getHorizontalBarPosition(i);
-            verticalBarsPosition += board.getVerticalBarPosition(i);
+            horizontalBarsPosition += boardFirstReleaseTests.getHorizontalBarPosition(i);
+            verticalBarsPosition += boardFirstReleaseTests.getVerticalBarPosition(i);
         }
     }
 
@@ -170,8 +170,8 @@ public class TestFirstRelease {
      * @return
      */
     private String setBeads(String input){
-        String checkGrid = board.checkGrid();
-        return board.newBeadsPosition(checkGrid, input);
+        String checkGrid = boardFirstReleaseTests.checkGrid();
+        return boardFirstReleaseTests.newBeadsPosition(checkGrid, input);
     }
 
     /**
@@ -191,13 +191,13 @@ public class TestFirstRelease {
     private void setBarsPosition(String test){
         for (int i=0; i<7; i++){
             if((Character.getNumericValue((test.charAt(i+2))) >= 0) && (Character.getNumericValue((test.charAt(i+2))) <= 2)){
-                board.setHorizontalBarPosition(Character.getNumericValue((test.charAt(i+2))), i);
+                boardFirstReleaseTests.setHorizontalBarPosition(Character.getNumericValue((test.charAt(i+2))), i);
             }else{
                 output="error :horizontal and vertical bar must be setted from 0 to 2";
                 checkConfigurationBars=false;
             }
             if((Integer.parseInt(test.substring(i+9, i+10)) >= 0) && (Integer.parseInt(test.substring(i+9, i+10)) <= 2)){
-                board.setVerticalBarPosition(Integer.parseInt(test.substring(i+9, i+10)), i);
+                boardFirstReleaseTests.setVerticalBarPosition(Integer.parseInt(test.substring(i+9, i+10)), i);
             }else{
                 output = "error :horizontal and vertical bar must be setted from 0 to 2";
                 checkConfigurationBars = false;
@@ -219,14 +219,14 @@ public class TestFirstRelease {
     }
 
     /**
-     * From the String used as a test it gets the numbers of players and create a game with that players.
+     * From the String used as a test it gets the numbers of players and create a gameFirstReleaseTest with that players.
      * @param input
      */
     private void setPlayersNumber(String input){
         playersNumber = Character.getNumericValue(input.charAt(0));
         if(playersNumber > 1 && playersNumber < 5){
-            game = new Game(playersNumber);
-            board = game.getBoard();
+            gameFirstReleaseTest = new GameFirstReleaseTest(playersNumber);
+            boardFirstReleaseTests = gameFirstReleaseTest.getBoardFirstReleaseTests();
         }else{
             checkConfigurationPlayers = false;
             output = ("error: the number of players is invalid, it must be from 2 to 4");
@@ -243,13 +243,13 @@ public class TestFirstRelease {
             checkConfigurationMovingPlayer = false;
             output = ("error: the moving player must be between 1 and the number of players");
         }else{
-            game.setFirstPlayer(movingPlayer);
+            gameFirstReleaseTest.setFirstPlayer(movingPlayer);
         }
     }
 
 
     /**
-     * From the String used as a test it gets and sets the configuration of the beads on the board.
+     * From the String used as a test it gets and sets the configuration of the beads on the boardFirstReleaseTests.
      * It checks also that the number of the beads it is not bigger than 5 for each player.
      * @param test
      */

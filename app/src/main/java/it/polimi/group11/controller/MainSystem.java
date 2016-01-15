@@ -2,13 +2,13 @@ package it.polimi.group11.controller;
 
 import java.util.Scanner;
 
-import it.polimi.group11.model.Game;
+import it.polimi.group11.model.GameFirstReleaseTest;
 
 public class MainSystem {
-    private Game game;
+    private GameFirstReleaseTest gameFirstReleaseTest;
 
     public void newGame(){
-        game = new Game(setPlayersNumber());
+        gameFirstReleaseTest = new GameFirstReleaseTest(setPlayersNumber());
     }
 
     public static void main(String[] args){

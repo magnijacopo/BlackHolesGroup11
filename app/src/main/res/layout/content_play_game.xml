@@ -149,7 +149,7 @@
     <!-- ================================================= -->
 
     <!-- Table layout.
-     Layout per la board del gioco.
+     Layout per la boardFirstReleaseTests del gioco.
     -->
     <RelativeLayout
         android:layout_width="378dp"
@@ -340,7 +340,7 @@
             android:layout_centerVertical="true" />
 
         <!-- Table layout.
-             Layout per la board del gioco.
+             Layout per la boardFirstReleaseTests del gioco.
         -->
 
         <TableLayout
