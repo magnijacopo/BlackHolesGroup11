@@ -10,36 +10,40 @@
     <android.support.v7.widget.CardView
         android:id="@+id/card_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="56dp"
         card_view:cardCornerRadius="3dp"
         card_view:cardElevation="5dp"
         android:layout_margin="5dp"
         android:foreground="?android:attr/selectableItemBackground"
-        android:onClick="goToChoosePlayerType">
+        android:onClick="goToChoosePlayerType"
+        android:clickable="false">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:adjustViewBounds="true"
+            android:orientation="horizontal"
+            android:weightSum="1">
 
             <ImageView
                 android:id="@+id/avatar"
                 android:tag="image_tag"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:src="@drawable/ic_account_circle_black_24dp"/>
+                android:src="@drawable/ic_account_circle_black_24dp"
+                android:onClick="goToChoosePlayerType"
+                android:layout_weight="0.2"/>
 
             <TextView
                 android:id="@+id/name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|start"
                 android:text="Large Text"
-                android:textAppearance="?android:attr/textAppearanceLarge"/>
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:onClick="goToChoosePlayerType"
+                android:layout_weight="0.8" />
 
         </LinearLayout>
 

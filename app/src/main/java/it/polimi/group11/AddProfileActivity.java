@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import it.polimi.group11.helper.DatabaseHelper;
+import it.polimi.group11.helper.Guest;
+import it.polimi.group11.helper.GuestData;
 
 public class AddProfileActivity extends AppCompatActivity {
 
@@ -25,6 +27,9 @@ public class AddProfileActivity extends AppCompatActivity {
     private Uri imageUri;
     private String imageUriString;
     private String uri;
+
+    public final String KEY_RETURN_NAME = "KEY_RETURN_NAME";
+    Guest guest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +63,6 @@ public class AddProfileActivity extends AppCompatActivity {
             }
 
         });
-
     }
 
 
@@ -69,7 +73,10 @@ public class AddProfileActivity extends AppCompatActivity {
 
         if(success){
             Toast.makeText(getApplicationContext(), "Person Inserted", Toast.LENGTH_SHORT).show();
+            //guest.setName(editTextProfileName.getText().toString());
+            GuestData.nameArray[GuestData.cardPosition] = editTextProfileName.getText().toString();
             Intent intent = new Intent(this, SelectPlayersActivity.class);
+            //intent.putExtra(KEY_RETURN_NAME, editTextProfileName.getText().toString());
             startActivity(intent);
         }else{
             Toast.makeText(getApplicationContext(), "Could not Insert person", Toast.LENGTH_SHORT).show();

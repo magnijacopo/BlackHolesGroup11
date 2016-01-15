@@ -15,8 +15,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
     private final ItemTouchHelperAdapter mAdapter;
-    private int playersNumberCallback = 2;
-    private FloatingActionButton fab;
+    private int playersNumberCallback = 4;
     public SimpleItemTouchHelperCallback(ItemTouchHelperAdapter adapter) {
         mAdapter = adapter;
     }
@@ -80,9 +79,5 @@ public class SimpleItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
     public void setPlayersNumberCallback(int playersNumberCallback){
         this.playersNumberCallback = playersNumberCallback;
-    }
-
-    public int getPlayersNumberCallback(){
-        return playersNumberCallback;
     }
 }

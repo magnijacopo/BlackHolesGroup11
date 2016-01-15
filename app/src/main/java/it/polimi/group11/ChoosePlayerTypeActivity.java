@@ -1,12 +1,16 @@
 package it.polimi.group11;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import it.polimi.group11.helper.Guest;
 
 public class ChoosePlayerTypeActivity extends AppCompatActivity {
 
@@ -14,10 +18,17 @@ public class ChoosePlayerTypeActivity extends AppCompatActivity {
     Button existingProfileButton;
     Button artificialIntelligenceButton;
 
+    public final String KEY_PASS_GUEST = "KEY_PASS_GUEST";
+    Guest guest;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_player_type);
+
+        Intent i = getIntent();
+        guest = i.getParcelableExtra("KEY_EXTRA_GUEST");
+        //Log.i("2guest: ", guest.getName());
 
         Typeface myTypeface = Typeface.createFromAsset(getAssets(), "fonts/SignPainter-HouseScript.ttf");
 
@@ -34,11 +45,14 @@ public class ChoosePlayerTypeActivity extends AppCompatActivity {
 
     public void goToAddProfile(View view){
         Intent intent = new Intent(this, AddProfileActivity.class);
+        intent.putExtra(KEY_PASS_GUEST, guest);
         startActivity(intent);
+        //Log.i("3guest: ", guest.getName());
     }
 
     public void goToViewProfilesSelection(View view) {
         Intent intent = new Intent(this, ViewProfilesSelectionActivity.class);
+        intent.putExtra(KEY_PASS_GUEST, guest);
         startActivity(intent);
     }
 

@@ -8,8 +8,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Toast;
 
 import it.polimi.group11.helper.DatabaseHelper;
+import it.polimi.group11.helper.GuestData;
 
 public class ViewProfilesSelectionActivity extends AppCompatActivity {
 
@@ -45,14 +47,23 @@ public class ViewProfilesSelectionActivity extends AppCompatActivity {
         listView.setAdapter(cursorAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView listView, View view,
-                                    int position, long id) {
+            public void onItemClick(AdapterView listView, View view, int position, long id) {
                 Cursor itemCursor = (Cursor) ViewProfilesSelectionActivity.this.listView.getItemAtPosition(position);
                 int playerID = itemCursor.getInt(itemCursor.getColumnIndex(DatabaseHelper.PLAYER_COLUMN_ID));
                 finish();
                 namePlayer = dbHelper.getNamePlayerFromCursor(dbHelper.getProfile(playerID));
+                boolean alreadyInserted = false;
+                for(int i = 0; i < GuestData.nameArray.length; i++){
+                    if(namePlayer.equals(GuestData.nameArray[i])){
+                        alreadyInserted = true;
+                    }
+                }
+                if (alreadyInserted){
+                    Toast.makeText(getApplicationContext(), "Player already playing", Toast.LENGTH_SHORT).show();
+                }else{
+                    GuestData.nameArray[GuestData.cardPosition] = namePlayer;
+                }
                 Intent intent = new Intent(ViewProfilesSelectionActivity.this, SelectPlayersActivity.class);
-                intent.putExtra(KEY_EXTRA_NAME_PROFILE, namePlayer);
                 startActivity(intent);
             }
         });
