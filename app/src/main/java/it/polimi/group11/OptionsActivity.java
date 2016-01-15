@@ -119,7 +119,6 @@ public class OptionsActivity extends AppCompatActivity implements ConfirmDeletio
         }
     }
 
-
     public void deleteDatabase(){
         getApplicationContext().deleteDatabase(DatabaseHelper.DATABASE_NAME);
         Toast.makeText(getApplicationContext(), "All data deleted", Toast.LENGTH_SHORT).show();

@@ -15,6 +15,8 @@ public class CreditsActivity extends MainActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_credits);
+
+        // Setting fonts.
         Typeface myTypeface = Typeface.createFromAsset(getAssets(), "fonts/SignPainter-HouseScript.ttf");
         textViewCredits = (TextView) findViewById(R.id.textViewCredits);
         textViewCredits.setText(Html.fromHtml("<html>\n" +
@@ -34,6 +36,7 @@ public class CreditsActivity extends MainActivity {
         startActivity(intent);
     }
 
+    // Methods to go to the other activity.
     public void goToMainActivity(View view){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);

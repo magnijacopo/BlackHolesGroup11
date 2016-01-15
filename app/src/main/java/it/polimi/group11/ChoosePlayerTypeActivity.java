@@ -24,12 +24,12 @@ public class ChoosePlayerTypeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_player_type);
 
+        // Processing the intent from the previous actvity.
         Intent i = getIntent();
         guest = i.getParcelableExtra("KEY_EXTRA_GUEST");
-        //Log.i("2guest: ", guest.getName());
 
+        // Setting the font to buttons.
         Typeface myTypeface = Typeface.createFromAsset(getAssets(), "fonts/SignPainter-HouseScript.ttf");
-
         newProfileButton = (Button) findViewById(R.id.new_profile_button);
         newProfileButton.setTypeface(myTypeface);
         existingProfileButton = (Button) findViewById(R.id.existing_profile_button);
@@ -44,11 +44,12 @@ public class ChoosePlayerTypeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    // Methods to navigate to other activities.
+
     public void goToAddProfile(View view){
         Intent intent = new Intent(this, AddProfileActivity.class);
         intent.putExtra(KEY_PASS_GUEST, guest);
         startActivity(intent);
-        //Log.i("3guest: ", guest.getName());
     }
 
     public void goToViewProfilesSelection(View view) {

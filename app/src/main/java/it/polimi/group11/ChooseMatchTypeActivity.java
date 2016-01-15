@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.Button;
 
 public class ChooseMatchTypeActivity extends AppCompatActivity {
+
+    // Buttons
     Button buttonQuickGame;
     Button buttonCustomizedGame;
 
@@ -16,13 +18,15 @@ public class ChooseMatchTypeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_match_type);
 
+        // Import of the font. Setting the font to the button.
         Typeface myTypeface = Typeface.createFromAsset(getAssets(), "fonts/SignPainter-HouseScript.ttf");
-
         buttonQuickGame = (Button) findViewById(R.id.button_quick_game);
         buttonQuickGame.setTypeface(myTypeface);
         buttonCustomizedGame = (Button) findViewById(R.id.button_customized_game);
         buttonCustomizedGame.setTypeface(myTypeface);
     }
+
+    // Method to navigate to other activities.
 
     public void goToMainActivity(View view) {
         Intent intent = new Intent(this, MainActivity.class);

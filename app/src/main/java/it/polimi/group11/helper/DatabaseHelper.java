@@ -340,6 +340,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return namePlayer;
     }
 
+    public int getIdPlayerFromCursor(Cursor cursor){
+        int idPlayer = 0;
+        if(cursor.moveToFirst()){
+            idPlayer = cursor.getInt(cursor.getColumnIndex(PLAYER_COLUMN_ID));
+        }
+        return idPlayer;
+    }
+
    public int getNumberMatchPlayedFromCursor(Cursor cursor) {
        int mp = 0;
        if(cursor.moveToFirst()) {

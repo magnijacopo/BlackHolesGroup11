@@ -19,6 +19,8 @@ public class InstructionsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_instructions);
 
         textViewInstructions = (TextView) findViewById(R.id.textViewInstructions);
+
+        // Setting the font.
         textViewInstructions.setMovementMethod(new ScrollingMovementMethod());
         Typeface myTypeface = Typeface.createFromAsset(getAssets(), "fonts/SignPainter-HouseScript.ttf");
         textViewInstructions.setTypeface(myTypeface);
@@ -61,6 +63,8 @@ public class InstructionsActivity extends AppCompatActivity {
 
     public void changeLanguageIta(View view){
         textViewInstructions = (TextView) findViewById(R.id.textViewInstructions);
+
+        // Setting the font.
         Typeface myTypeface = Typeface.createFromAsset(getAssets(), "fonts/SignPainter-HouseScript.ttf");
         textViewInstructions.setTypeface(myTypeface);
         textViewInstructions.setText(Html.fromHtml("<html>\n" +
@@ -102,6 +106,8 @@ public class InstructionsActivity extends AppCompatActivity {
 
     public void changeLanguageEng(View view){
         textViewInstructions = (TextView) findViewById(R.id.textViewInstructions);
+
+        // Setting the font.
         Typeface myTypeface = Typeface.createFromAsset(getAssets(), "fonts/SignPainter-HouseScript.ttf");
         textViewInstructions.setTypeface(myTypeface);
         textViewInstructions.setText(Html.fromHtml("<html>\n" +
@@ -147,6 +153,7 @@ public class InstructionsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    // Methods to go to the other activity.
     public void goToMainActivity(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
