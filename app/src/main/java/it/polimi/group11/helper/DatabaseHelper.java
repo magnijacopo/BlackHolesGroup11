@@ -45,6 +45,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
+    // Creation table.
     @Override
     public void onCreate(SQLiteDatabase db) {
 
@@ -109,31 +110,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-
     //--------------- "player" table methods ---------------//
 
-    /*
     /**
-     * Insert a new profile into the DB.
+     * Insert a profile into the database.
      * @param name
      * @return
-
-    public boolean insertProfile(String name, String image) {
-        SQLiteDatabase db = getWritableDatabase();
-
-        ContentValues contentValues = new ContentValues();
-
-        contentValues.put(PLAYER_COLUMN_NAME, name);
-        contentValues.put(PLAYER_COLUMN_IMAGE, image);
-
-        try{
-            db.insertOrThrow(PLAYER_TABLE_NAME, null, contentValues);
-            return true;} catch(SQLiteException e){
-            e.printStackTrace();
-            return false;}
-    }
-    */
-
+     */
     public boolean insertProfile(String name) {
         SQLiteDatabase db = getWritableDatabase();
 
@@ -212,6 +195,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //--------------- "matchmaking" table methods ---------------//
 
+    /**
+     * Insert a matchMaking into the database.
+     * @param idPlayer
+     * @param idMatch
+     * @return
+     */
     public boolean insertMatchMaking(int idPlayer, int idMatch) {
 
         SQLiteDatabase db = getWritableDatabase();
@@ -225,6 +214,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return true;
     }
 
+    /**
+     * Get a Matchmaking from the database.
+     * @param id
+     * @return
+     */
     public Cursor getMatchMaking(int id){
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -235,6 +229,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //--------------- "match" table methods ---------------//
 
+    /**
+     * Insert a match into the db.
+     * @param idWinner
+     * @param moves
+     */
     public void insertMatch(int idWinner, int moves) {
         SQLiteDatabase db = getWritableDatabase();
 
@@ -246,6 +245,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.insert(MATCH_TABLE_NAME, null, contentValues);
     }
 
+    /**
+     * Get a match
+     * @param id
+     * @return
+     */
     public Cursor getMatch(int id){
         SQLiteDatabase db = this.getReadableDatabase();
 
