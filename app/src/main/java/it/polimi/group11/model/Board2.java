@@ -53,7 +53,7 @@ public class Board2 {
         updateColumnBeadInCellStatus(column);
     }
 
-    private void prepareGrid(){
+    public void prepareGrid(){
         for (int i=0;i<7;i++) {
         setRow(i);
         setColumn(i);
@@ -275,5 +275,12 @@ public class Board2 {
 
     public void setCell(Cell grid, int i, int j) {
         this.grid[i][j] = grid;
+    }
+
+    public void setBarsPosition(int[] horiz, int[] vert){
+        for (int i = 0; i < 7; i++) {
+            horizontalBar[i].setPosition(horiz[i]);
+            verticalBar[i].setPosition(vert[i]);
+        }
     }
 }

@@ -11,9 +11,7 @@ public class ChooseMatchTypeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_match_type);
-
     }
-
 
     public void goToMainActivity(View view) {
         Intent intent = new Intent(this, MainActivity.class);

@@ -1,6 +1,7 @@
 package it.polimi.group11;
 
 import android.content.ClipData;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -13,10 +14,13 @@ import it.polimi.group11.model.Move;
 
 public class SetYourBarsActivity extends AppCompatActivity {
 
+
+    public static boolean customModeOn = false;
+
     private ImageView hbars[] = new ImageView[7];
     private ImageView vbars[] = new ImageView[7];
-    private int hbarsPoisiton[] = new int[7];
-    private int vbarsPosition[] = new int[7];
+    private static int hbarsPoisiton[] = new int[7];
+    private static int vbarsPosition[] = new int[7];
     private float a;
     private float b;
     private float da;
@@ -35,10 +39,19 @@ public class SetYourBarsActivity extends AppCompatActivity {
     private float limitBottom;
     private boolean firstH[] = new boolean[7];
     private boolean firstV[] = new boolean[7];
-    private Button start;
+    Button startconfig;
 
 
-    public SetYourBarsActivity() {
+/*    public SetYourBarsActivity() {
+
+
+    }*/
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_make_your_bars);
+        startconfig = (Button) findViewById(R.id.startconfig);
         setB(0.0f);
         setA(0.0f);
         setMoving(false);
@@ -49,14 +62,6 @@ public class SetYourBarsActivity extends AppCompatActivity {
             vbarsPosition[i] = 1;
         }
 
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_make_your_bars);
-        start = (Button) findViewById(R.id.buttonsaveconfig);
-
         for (int i=0; i<7; i++){
             int id = getResources().getIdentifier("horizontalbar" + i, "id", getPackageName());
             hbars[i] = (ImageView) findViewById(id);
@@ -64,7 +69,7 @@ public class SetYourBarsActivity extends AppCompatActivity {
         }
 
         for (int i=0; i<7; i++){
-            int id = getResources().getIdentifier("vertical" + i, "id", getPackageName());
+            int id = getResources().getIdentifier("verticalbar" + i, "id", getPackageName());
             vbars[i] = (ImageView) findViewById(id);
             vbars[i].setOnTouchListener(new MyTouchListener());
         }
@@ -276,8 +281,10 @@ public class SetYourBarsActivity extends AppCompatActivity {
         }
     }
 
-    public void goToPlayGame(){
-
+    public void goToSelectPlayerFromCustom(View view){
+        customModeOn = true;
+        Intent intent = new Intent(this, SelectPlayersActivity.class);
+        startActivity(intent);
     }
 
     public float getDb() {
@@ -424,6 +431,12 @@ public class SetYourBarsActivity extends AppCompatActivity {
         this.firstH[position] = firstH;
     }
 
+    public static int[] getHbarsPoisiton() {
+        return hbarsPoisiton;
+    }
 
+    public static int[] getVbarsPosition() {
+        return vbarsPosition;
+    }
 
 }
