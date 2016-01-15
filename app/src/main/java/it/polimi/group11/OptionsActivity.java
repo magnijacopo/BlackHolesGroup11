@@ -89,7 +89,11 @@ public class OptionsActivity extends AppCompatActivity implements ConfirmDeletio
 
     }
 
-
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 
     public void checkedChanged(){
         fxSoundsCheckbox = (CheckBox) findViewById(R.id.fx_sounds_checkbox);

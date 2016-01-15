@@ -71,6 +71,12 @@ public class SelectPlayersActivity extends AppCompatActivity implements PlayersN
     }
 
     @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
     public void onResume(){
         super.onResume();
         perFavore();

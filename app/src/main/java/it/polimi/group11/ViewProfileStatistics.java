@@ -130,4 +130,10 @@ public class ViewProfileStatistics extends AppCompatActivity implements ConfirmD
         startActivity(intent);
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, ViewProfileListActivity.class);
+        startActivity(intent);
+    }
+
 }

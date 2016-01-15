@@ -1,11 +1,9 @@
 package it.polimi.group11;
 
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -38,10 +36,13 @@ public class ChoosePlayerTypeActivity extends AppCompatActivity {
         existingProfileButton.setTypeface(myTypeface);
         artificialIntelligenceButton = (Button) findViewById(R.id.artificial_intelligence_button);
         artificialIntelligenceButton.setTypeface(myTypeface);
-
-
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, SelectPlayersActivity.class);
+        startActivity(intent);
+    }
 
     public void goToAddProfile(View view){
         Intent intent = new Intent(this, AddProfileActivity.class);
@@ -57,9 +58,12 @@ public class ChoosePlayerTypeActivity extends AppCompatActivity {
     }
 
     public void goToArtificialIntelligence(View view) {
-
         Toast.makeText(getApplicationContext(), "COMING SOON", Toast.LENGTH_SHORT).show();
+    }
 
+    public void goToSelectPlayers(View view) {
+        Intent intent = new Intent(this, SelectPlayersActivity.class);
+        startActivity(intent);
     }
 
 }

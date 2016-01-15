@@ -65,7 +65,11 @@ public class AddProfileActivity extends AppCompatActivity {
         });
     }
 
-
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, ChoosePlayerTypeActivity.class);
+        startActivity(intent);
+    }
 
     public void persistPerson() {
         db = new DatabaseHelper(getApplicationContext());
@@ -116,14 +120,10 @@ public class AddProfileActivity extends AppCompatActivity {
     }
 
 
-    public void goToCreateMatch(View view){
-        Intent intent = new Intent(this, CreateMatchActivity.class);
+    public void goToChoosePlayer(View view){
+        Intent intent = new Intent(this, ChoosePlayerTypeActivity.class);
         startActivity(intent);
     }
 
-    public void goToMainActivity(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
 }
 

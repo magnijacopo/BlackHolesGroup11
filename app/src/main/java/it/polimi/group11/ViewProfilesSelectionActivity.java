@@ -69,4 +69,10 @@ public class ViewProfilesSelectionActivity extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, ChoosePlayerTypeActivity.class);
+        startActivity(intent);
+    }
 }

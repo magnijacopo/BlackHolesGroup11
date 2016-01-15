@@ -130,10 +130,6 @@
                 android:value="it.polimi.group11.LeaderboardActivity" />
         </activity>
         <activity
-            android:name=".CreateMatchActivity"
-            android:label="@string/title_activity_create_match"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".ViewMatchStatisticsActivity"
             android:label="@string/title_activity_view_match_statistics"
             android:theme="@style/AppTheme.NoActionBar" />

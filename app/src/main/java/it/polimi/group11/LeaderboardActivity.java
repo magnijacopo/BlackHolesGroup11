@@ -14,6 +14,12 @@ public class LeaderboardActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
     public void goToViewProfileLeaderboard(View view) {
         Intent intent = new Intent(this, ViewProfileLeaderboardActivity.class);
         startActivity(intent);

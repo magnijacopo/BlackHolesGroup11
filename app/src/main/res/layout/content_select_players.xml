@@ -11,15 +11,13 @@
         android:layout_height="15.5dp"
         android:id="@+id/select_players_back_button"
         android:onClick="goToMainActivity"
-        android:textColor="#ffffff"
-        android:background="@drawable/back_button"/>
+        android:textColor="#ffffff" />
 
     <Button
         android:layout_width="55dp"
         android:layout_height="30dp"
         android:id="@+id/select_players_play_button"
         android:onClick="goToPlayGame"
-        android:background="@drawable/play_button"
         android:layout_alignParentEnd="true" />
 
     <LinearLayout

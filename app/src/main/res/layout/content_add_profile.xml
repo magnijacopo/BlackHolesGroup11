@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/button_back_home"
         android:background="#00ffffff"
-        android:onClick="goToMainActivity" />
+        android:onClick="goToChoosePlayer" />
 
     <ImageView
         android:layout_width="100dp"
