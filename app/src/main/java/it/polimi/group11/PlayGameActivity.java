@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.ClipData;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
@@ -74,6 +75,9 @@ public class PlayGameActivity extends AppCompatActivity {
     private long lastPause;
     DatabaseHelper dbHelper;
 
+    MediaPlayer backgroundMusic;
+    int length = 0;
+    private boolean musicCheck;
 
 
     /**
@@ -99,6 +103,15 @@ public class PlayGameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_game);
+
+
+        musicCheck = OptionsActivity.backgroundMusicCheck;
+        if(musicCheck) {
+            backgroundMusic = MediaPlayer.create(this, R.raw.somuchlove);
+            backgroundMusic.setLooping(true);
+            backgroundMusic.setVolume(60, 60);
+        }
+
         int k = 0;
         dbHelper = new DatabaseHelper(getApplicationContext());
         //Get intents from previous activity
@@ -150,6 +163,30 @@ public class PlayGameActivity extends AppCompatActivity {
 
         //Initialization of the cells
         placeBeadsStartPosition();
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        if(musicCheck)
+            pauseMusic();
+        OptionsActivity.backgroundMusicCheck = false;
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        if(musicCheck)
+            resumeMusic();
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        if(backgroundMusic != null){
+            stopMusic();
+        }
+        OptionsActivity.backgroundMusicCheck = false;
     }
 
 
@@ -986,6 +1023,27 @@ public class PlayGameActivity extends AppCompatActivity {
             default:
                 break;
         }
+    }
+
+    public void pauseMusic(){
+        if(backgroundMusic.isPlaying()){
+            backgroundMusic.pause();
+            length=backgroundMusic.getCurrentPosition();
+
+        }
+    }
+
+    public void resumeMusic(){
+        if(!backgroundMusic.isPlaying()){
+            backgroundMusic.seekTo(length);
+            backgroundMusic.start();
+        }
+    }
+
+    public void stopMusic(){
+        backgroundMusic.stop();
+        backgroundMusic.release();
+        backgroundMusic = null;
     }
 
 }
