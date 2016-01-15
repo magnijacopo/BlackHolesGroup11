@@ -207,7 +207,6 @@ public class Board {
     return false;
     }
 
-
     /**
      * The methods that allow to a bar the movement.
      * @param move
