@@ -100,11 +100,7 @@ public class OptionsActivity extends AppCompatActivity implements ConfirmDeletio
         fxSoundsCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (fxSoundsCheckbox.isChecked()) {
-                    fxSoundsCheck = true;
-                } else {
-                    fxSoundsCheck = false;
-                }
+                fxSoundsCheck = fxSoundsCheckbox.isChecked();
             }
         });
     }

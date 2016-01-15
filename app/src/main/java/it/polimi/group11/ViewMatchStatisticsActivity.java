@@ -50,7 +50,7 @@ public class ViewMatchStatisticsActivity extends AppCompatActivity {
 
     public int getIdMatchFromCursor(Cursor cursor){
         if(cursor.moveToFirst()){
-            idMatch = cursor.getInt(cursor.getColumnIndex(dbHelper.MATCH_COLUMN_ID));
+            idMatch = cursor.getInt(cursor.getColumnIndex(DatabaseHelper.MATCH_COLUMN_ID));
         }
         return idMatch;
     }
@@ -82,7 +82,7 @@ public class ViewMatchStatisticsActivity extends AppCompatActivity {
 
     public String getNamePlayerFromCursor(Cursor cursor){
         if(cursor.moveToFirst()){
-            namePlayer = cursor.getString(cursor.getColumnIndex(dbHelper.PLAYER_COLUMN_NAME));
+            namePlayer = cursor.getString(cursor.getColumnIndex(DatabaseHelper.PLAYER_COLUMN_NAME));
         }
         return namePlayer;
     }
