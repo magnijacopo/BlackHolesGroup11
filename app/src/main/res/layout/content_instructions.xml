@@ -11,7 +11,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="it.polimi.group11.InstructionsActivity"
     tools:showIn="@layout/activity_instructions"
-    android:background="@drawable/background_game">
+    android:background="@drawable/background_instructions">
 
         <Button
             android:layout_width="45dp"
