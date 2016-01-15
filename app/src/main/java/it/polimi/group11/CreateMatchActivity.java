@@ -1,6 +1,5 @@
 package it.polimi.group11;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import it.polimi.group11.helper.DatabaseHelper;
 
@@ -41,8 +39,8 @@ public class CreateMatchActivity extends AppCompatActivity {
 
         editTextMoves = (EditText) findViewById(R.id.editTextMoves);
         editTextWinner = (EditText) findViewById(R.id.editTextWinner);
-
-
+    }
+/*
         boolean success = db.insertMatch(Integer.parseInt(editTextWinner.getText().toString()),
                     Integer.parseInt(editTextMoves.getText().toString()));
         if(success){
@@ -52,5 +50,5 @@ public class CreateMatchActivity extends AppCompatActivity {
         }else{
             Toast.makeText(getApplicationContext(), "Could not Insert person", Toast.LENGTH_SHORT).show();
         }
-    }
+    } */
 }

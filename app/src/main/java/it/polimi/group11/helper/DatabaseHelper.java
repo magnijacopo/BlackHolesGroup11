@@ -9,6 +9,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
+    public static final String MATCHPLAYED = "MATCHPLAYED";
+    public static final String MATCHWON = "MATCHWON";
+    public static final String MINMOVES = "MINMOVES";
+
     //Database name and version
     public static final String DATABASE_NAME = "Database.db";
     private static final int DATABASE_VERSION = 1;
@@ -226,8 +230,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
     //--------------- "match" table methods ---------------//
-
-    public boolean insertMatch(int idWinner, int moves) {
+    public void insertMatch(int idWinner, int moves) {
         SQLiteDatabase db = getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
@@ -235,8 +238,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(MATCH_COLUMN_WINNER, idWinner);
         contentValues.put(MATCH_COLUMN_MOVESNUMBER, moves);
 
-        db.insert(PLAYER_TABLE_NAME, null, contentValues);
-        return true;
+        db.insert(MATCH_TABLE_NAME, null, contentValues);
     }
 
     public Cursor getMatch(int id){
@@ -262,7 +264,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor res = db.rawQuery( "SELECT COUNT(*) FROM " + MATCHMAKING_TABLE_NAME + " WHERE " +
+        Cursor res = db.rawQuery( "SELECT COUNT(*) AS " +  MATCHPLAYED + " FROM " + MATCHMAKING_TABLE_NAME + " WHERE " +
                 MATCHMAKING_COLUMN_PLAYERID + "=?", new String[] { Integer.toString(idPlayer) } );
 
         return res;
@@ -272,18 +274,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor res = db.rawQuery( "SELECT COUNT(*) FROM " + MATCHMAKING_TABLE_NAME + " WHERE " +
-                        MATCHMAKING_COLUMN_PLAYERID + "=? AND " + MATCH_COLUMN_WINNER + "=?",
-                new String[] { Integer.toString(idPlayer), Integer.toString(idPlayer) } );
-
+        Cursor res = db.rawQuery( "SELECT COUNT(*) AS " + MATCHWON + " FROM " + MATCH_TABLE_NAME + " WHERE " + MATCH_COLUMN_WINNER + "=?",
+                new String[] { Integer.toString(idPlayer) } );
         return res;
     }
 
     public Cursor getMinNumberMoves(int idPlayer){
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor res = db.rawQuery( "SELECT MIN(" + MATCH_COLUMN_MOVESNUMBER + ") FROM " + MATCH_TABLE_NAME + " WHERE " +
-                MATCH_COLUMN_ID + "=?", new String[] { Integer.toString(idPlayer) } );
+        Cursor res = db.rawQuery( "SELECT MIN(" + MATCH_COLUMN_MOVESNUMBER + ") AS " + MINMOVES + " FROM " + MATCH_TABLE_NAME + " WHERE " +
+                MATCH_COLUMN_WINNER + "=?", new String[] { Integer.toString(idPlayer) } );
         return res;
     }
 
@@ -316,6 +316,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             namePlayer = cursor.getString(cursor.getColumnIndex(PLAYER_COLUMN_NAME));
         }
         return namePlayer;
+    }
+
+   public int getNumberMatchPlayedFromCursor(Cursor cursor) {
+       int mp = 0;
+       if(cursor.moveToFirst()) {
+           mp = cursor.getInt(cursor.getColumnIndex(MATCHPLAYED));
+       }
+       return mp;
+   }
+
+    public int getNumberMatchWonFromCursor(Cursor cursor) {
+        int mw = 0;
+        if(cursor.moveToFirst()) {
+            mw = cursor.getInt(cursor.getColumnIndex(MATCHWON));
+        }
+        return mw;
+    }
+
+    public int getNumberMinMovesFromCursor(Cursor cursor) {
+        int mm = 0;
+        if(cursor.moveToFirst()) {
+            mm = cursor.getInt(cursor.getColumnIndex(MINMOVES));
+        }
+        return mm;
     }
 
 }

@@ -7,10 +7,8 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
 import it.polimi.group11.helper.DatabaseHelper;
@@ -54,12 +52,14 @@ public class ViewProfileStatistics extends AppCompatActivity implements ConfirmD
         Bundle extras = intent.getExtras();
         playerID = extras.getInt("KEY_EXTRA_CONTACT_ID");
 
+
         // Getting the data from the Database.
         dbHelper = new DatabaseHelper(getApplicationContext());
         final Cursor cursor = dbHelper.getProfile(playerID);
-        final Cursor cursorMatches = dbHelper.getLastFiveMatches(playerID);
+        //final Cursor cursorMatches = dbHelper.getLastFiveMatches(playerID);
         final Cursor cursorMatchPlayed = dbHelper.getMatchPlayed(playerID);
         final Cursor cursorMatchWon = dbHelper.getMatchWon(playerID);
+        final Cursor cursorMinMoves = dbHelper.getMinNumberMoves(playerID);
 
 
         // Setting the Name of the player and his statistics
@@ -67,7 +67,11 @@ public class ViewProfileStatistics extends AppCompatActivity implements ConfirmD
 
         textViewProfileName.setTypeface(myTypeface);
 
+        textViewMatchPlayed.setText("MATCH PLAYED " + dbHelper.getNumberMatchPlayedFromCursor(cursorMatchPlayed));
+        textViewMatchWon.setText("MATCH WON " + dbHelper.getNumberMatchWonFromCursor(cursorMatchWon));
+        textViewMinNumberMoves.setText("MIN MOVES " + dbHelper.getNumberMinMovesFromCursor(cursorMinMoves));
 
+    /*
         // Setting the Last Five Matches
         String [] columns = new String[] {
                 DatabaseHelper.PLAYER_COLUMN_NAME
@@ -92,6 +96,7 @@ public class ViewProfileStatistics extends AppCompatActivity implements ConfirmD
                 startActivity(intent);
             }
         });
+        */
 }
 
     /**
