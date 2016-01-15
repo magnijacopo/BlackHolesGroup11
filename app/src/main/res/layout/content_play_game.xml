@@ -11,7 +11,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="it.polimi.group11.PlayGameActivity"
     tools:showIn="@layout/activity_play_game"
-    android:background="@drawable/bg">
+    android:background="@drawable/background_game">
 
     <!--Primo linear layout
         4 imageView per le quattro icone dei player
