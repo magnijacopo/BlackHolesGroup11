@@ -35,7 +35,8 @@
         android:textSize="25sp"
         android:layout_below="@+id/button_back_home"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="41dp" />
+        android:layout_marginTop="40dp"
+        android:gravity="center" />
 
     <LinearLayout
         android:orientation="vertical"
@@ -46,19 +47,6 @@
         android:layout_below="@+id/TextViewProfileName"
         android:layout_alignParentStart="true"
         android:layout_above="@+id/buttonDeleteProfile">
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="190dp"
-            android:id="@+id/scrollView"
-            android:layout_above="@+id/linearLayout"
-            android:layout_centerHorizontal="true" >
-
-            <ListView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/listViewMatches" />
-        </ScrollView>
 
         <LinearLayout
             android:orientation="vertical"
@@ -71,7 +59,7 @@
                 android:text="MATCH PLAYED"
                 android:id="@+id/textViewMatchPlayed"
                 android:textColor="#ffffff"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="25dp"
                 android:layout_marginLeft="25dp"
                 android:textSize="15sp" />
 
@@ -81,7 +69,7 @@
                 android:text="MATCH WON"
                 android:id="@+id/textViewMatchWon"
                 android:textColor="#ffffff"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="60dp"
                 android:layout_marginLeft="25dp"
                 android:textSize="15sp" />
 
@@ -92,15 +80,9 @@
                 android:id="@+id/textViewMinNumberMoves"
                 android:textColor="#ffffff"
                 android:layout_marginLeft="25dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="60dp"
                 android:textSize="15sp" />
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>

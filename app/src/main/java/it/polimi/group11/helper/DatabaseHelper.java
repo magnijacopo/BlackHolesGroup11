@@ -153,7 +153,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getProfile(String name){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res = db.rawQuery("SELECT * FROM " + PLAYER_TABLE_NAME + " WHERE " +
-                PLAYER_COLUMN_NAME + "=?", new String[]{name } );
+                PLAYER_COLUMN_NAME + "=?", new String[]{name});
         return res;
     }
 
@@ -246,7 +246,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Get a match
+     * Get a match from its id.
      * @param id
      * @return
      */
@@ -258,6 +258,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
+    /**
+     * Get the Last match inserted into the database.
+     * @return
+     */
     public Cursor getLastMatch(){
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -269,6 +273,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //--------------- various queries methods ---------------//
 
+    /**
+     * Get the match played.
+     * @param idPlayer player of which the match played
+     * @return
+     */
     public Cursor getMatchPlayed(int idPlayer){
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -279,6 +288,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
+    /**
+     * Get the match won.
+     * @param idPlayer
+     * @return
+     */
     public Cursor getMatchWon(int idPlayer){
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -288,6 +302,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
+    /**
+     * Get the minimum number of moves.
+     * @param idPlayer
+     * @return
+     */
     public Cursor getMinNumberMoves(int idPlayer){
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -316,18 +335,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
     */
 
-    public Cursor getLeaderboard() {
-
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor res = db.rawQuery("SELECT COUNT(" + MATCH_COLUMN_ID + ") FROM " +
-                        MATCH_TABLE_NAME + " GROUP BY " + MATCH_COLUMN_WINNER,
-                    new String[] {});
-        return res;
-    }
-
-
-
         /**
          * From the cursor it gets the name of the profile.
          * @param cursor that has done the query.
@@ -341,6 +348,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return namePlayer;
     }
 
+    /**
+     * From the cursor it gets the id of the profile.
+     * @param cursor that has done the query.
+     * @return the id of the player.
+     */
     public int getIdPlayerFromCursor(Cursor cursor){
         int idPlayer = 0;
         if(cursor.moveToFirst()){
@@ -349,6 +361,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return idPlayer;
     }
 
+    /**
+     * From the cursor it gets the number of match played by the player.
+     * @param cursor that has done the query.
+     * @return the match played.
+     */
    public int getNumberMatchPlayedFromCursor(Cursor cursor) {
        int mp = 0;
        if(cursor.moveToFirst()) {
@@ -357,6 +374,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
        return mp;
    }
 
+    /**
+     * From the cursor it gets the match won by the player.
+     * @param cursor that has done the query.
+     * @return the number of match won.
+     */
     public int getNumberMatchWonFromCursor(Cursor cursor) {
         int mw = 0;
         if(cursor.moveToFirst()) {
@@ -365,6 +387,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return mw;
     }
 
+    /**
+     * From the cursor it gets the minimum number of moves.
+     * @param cursor that has done the query.
+     * @return number of moves.
+     */
     public int getNumberMinMovesFromCursor(Cursor cursor) {
         int mm = 0;
         if(cursor.moveToFirst()) {
@@ -373,6 +400,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return mm;
     }
 
+    /**
+     * From the cursor it gets the id of the last match.
+     * @param cursor that has done the query.
+     * @return the id of the match.
+     */
     public int getIdLastMatchFromCursor(Cursor cursor) {
         int idL = 0;
         if(cursor.moveToFirst()) {

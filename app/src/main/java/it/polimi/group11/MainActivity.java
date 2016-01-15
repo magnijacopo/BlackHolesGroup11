@@ -86,12 +86,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void goToLeaderboard(View view) {
-        playSoundButton();
-        Intent intent = new Intent(this, LeaderboardActivity.class);
-        startActivity(intent);
-    }
-
     public void goToInstructions(View view){
         playSoundButton();
         Intent intent = new Intent(this, InstructionsActivity.class);

@@ -44,38 +44,12 @@
         android:text="@string/profiles"
         android:id="@+id/profiles_button"
         android:onClick="goToViewProfileList"
-        android:layout_below="@+id/leaderboard_button"
         android:layout_centerHorizontal="true"
         android:textSize="25dp"
         android:textColor="#ffffff"
         android:background="#00ffffff"
-        style="?android:attr/borderlessButtonStyle"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/leaderboard"
-        android:id="@+id/leaderboard_button"
-        android:onClick="goToLeaderboard"
-        android:layout_below="@+id/play_button"
-        android:layout_centerHorizontal="true"
-        android:textSize="25dp"
-        android:textColor="#ffffff"
-        android:background="#00ffffff"
-        style="?android:attr/borderlessButtonStyle"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/options"
-        android:id="@+id/options_button"
-        android:onClick="goToOptions"
-        android:layout_below="@+id/credits_button"
-        android:layout_centerHorizontal="true"
-        android:textSize="25dp"
-        android:textColor="#ffffff"
-        android:background="#00ffffff"
-        style="?android:attr/borderlessButtonStyle"/>
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_below="@+id/play_button" />
 
     <Button
         android:layout_width="wrap_content"
@@ -85,8 +59,21 @@
         android:background="#00ffffff"
         android:textColor="#ffffff"
         android:textSize="25sp"
-        android:layout_below="@+id/options_button"
-        android:layout_alignStart="@+id/leaderboard_button"
-        android:onClick="goToInstructions" />
+        android:onClick="goToInstructions"
+        android:layout_below="@+id/credits_button"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/options"
+        android:id="@+id/options_button"
+        android:onClick="goToOptions"
+        android:textSize="25dp"
+        android:textColor="#ffffff"
+        android:background="#00ffffff"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_below="@+id/instructions_button"
+        android:layout_alignStart="@+id/profiles_button" />
 
 </RelativeLayout>

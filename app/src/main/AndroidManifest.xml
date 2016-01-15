@@ -110,26 +110,6 @@
                 android:value="it.polimi.group11.ChoosePlayerTypeActivity" />
         </activity>
         <activity
-            android:name=".LeaderboardActivity"
-            android:label="@string/title_activity_leaderboard"
-            android:parentActivityName=".MainActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="it.polimi.group11.MainActivity" />
-        </activity>
-        <activity
-            android:name=".ViewProfileLeaderboardActivity"
-            android:label="@string/title_activity_view_profile_leaderboard"
-            android:parentActivityName=".LeaderboardActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="it.polimi.group11.LeaderboardActivity" />
-        </activity>
-        <activity
             android:name=".ViewMatchStatisticsActivity"
             android:label="@string/title_activity_view_match_statistics"
             android:theme="@style/AppTheme.NoActionBar" />
