@@ -16,6 +16,7 @@ public class ChoosePlayerTypeActivity extends AppCompatActivity {
     Button existingProfileButton;
     Button artificialIntelligenceButton;
 
+
     public final String KEY_PASS_GUEST = "KEY_PASS_GUEST";
     Guest guest;
 
@@ -52,18 +53,17 @@ public class ChoosePlayerTypeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void goToViewProfilesSelection(View view) {
-        Intent intent = new Intent(this, ViewProfilesSelectionActivity.class);
-        intent.putExtra(KEY_PASS_GUEST, guest);
-        startActivity(intent);
-    }
-
     public void goToArtificialIntelligence(View view) {
         Toast.makeText(getApplicationContext(), "COMING SOON", Toast.LENGTH_SHORT).show();
     }
 
     public void goToSelectPlayers(View view) {
         Intent intent = new Intent(this, SelectPlayersActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToChoosePlayerType(View view) {
+        Intent intent = new Intent(this, ChoosePlayerTypeActivity.class);
         startActivity(intent);
     }
 
