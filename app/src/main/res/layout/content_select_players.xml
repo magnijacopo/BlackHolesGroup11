@@ -7,18 +7,21 @@
     android:layout_width="match_parent">
 
     <Button
-        android:layout_width="55dp"
-        android:layout_height="15.5dp"
+        android:layout_width="100dp"
+        android:layout_height="200dp"
         android:id="@+id/select_players_back_button"
         android:onClick="goToMainActivity"
-        android:textColor="#ffffff" />
+        android:textColor="#ffffff"
+        android:layout_alignBottom="@+id/select_players_play_button"
+        android:background="#00ffffff" />
 
     <Button
-        android:layout_width="55dp"
-        android:layout_height="30dp"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
         android:id="@+id/select_players_play_button"
         android:onClick="goToPlayGame"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:background="#00ffffff" />
 
     <LinearLayout
     android:layout_width="match_parent"
