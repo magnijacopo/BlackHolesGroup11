@@ -725,9 +725,8 @@ public class PlayGameActivity extends AppCompatActivity {
 
 
     public void finishGame() {
-        Log.i("ciao ", "vince " + game.getNextPlayer());
         Intent intent = new Intent(PlayGameActivity.this, PopUpActivity.class);
-        String message = game.getNextPlayer();
+        String message = GuestData.nameArray[Integer.parseInt(game.getCurrentPlayer())-1];
         intent.putExtra(EXTRA_MESSAGE, message);
         for (int i = 0; i < 7; i++) {
             hbars[i].setOnTouchListener(null);
