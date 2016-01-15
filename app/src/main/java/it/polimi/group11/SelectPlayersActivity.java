@@ -79,24 +79,9 @@ public class SelectPlayersActivity extends AppCompatActivity implements PlayersN
     @Override
     public void onResume(){
         super.onResume();
-        perFavore();
+        adapter.mItems.get(GuestData.cardPosition).setName(GuestData.nameArray[GuestData.cardPosition]);
+        adapter.notifyDataSetChanged();
     }
-
-   public void perFavore() {
-       //Bundle bundle = getIntent().getExtras();
-       //name = bundle.getString("KEY_RETURN_NAME");
-       Log.i("position_spa: ", Integer.toString(adapter.guestNumber));
-       Log.i("amicizia: ", adapter.mItems.get(0).getName());
-       Log.i("amicizia: ", adapter.mItems.get(1).getName());
-
-       Log.i("numero negro: ", Integer.toString(GuestData.cardPosition));
-
-       adapter.mItems.get(GuestData.cardPosition).setName(GuestData.nameArray[GuestData.cardPosition]);
-       adapter.notifyDataSetChanged();
-
-       Log.i("amicizia: ", adapter.mItems.get(1).getName());
-   }
-
 
     public void goToPlayGame(View view){
         Intent intent = new Intent(this, PlayGameActivity.class);
@@ -136,6 +121,11 @@ public class SelectPlayersActivity extends AppCompatActivity implements PlayersN
 
     public void goToMainActivity(View view) {
         Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void goToChooseMatchType(View view) {
+        Intent intent = new Intent(this, ChooseMatchTypeActivity.class);
         startActivity(intent);
     }
 }

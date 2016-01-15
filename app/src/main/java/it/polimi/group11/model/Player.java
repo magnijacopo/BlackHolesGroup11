@@ -1,10 +1,5 @@
 package it.polimi.group11.model;
 
-import android.util.Log;
-
-import it.polimi.group11.PlayGameActivity;
-import it.polimi.group11.enumeration.PlayerID;
-
 
 /**
  * Player class. Represents an instance of a player that is playing a game.
@@ -74,21 +69,6 @@ public class Player {
         this.setHuman(true);
         this.setStatus(true); //the player is alive when created
     }
-
-
-    /**
-     * Full constructor
-     *
-     * @param playerName player's name {@link Player#name}
-     * @param playerID player's id {@link Player#id}
-     * @param colour player's colour {@link Player#colour}
-     */
-    /*public Player(String playerName, PlayerID playerID, String colour){
-        this.setName(playerName);
-        this.setId(playerID.toString());
-        this.setStatus(true); //the player is alive when created
-        this.setColour(colour);
-    }*/
 
     // Getters and Setters
 
@@ -244,10 +224,7 @@ public class Player {
     }
 
     public boolean checkPlace(int rowPosition, int columnPosition){
-        if (((board.getCell(rowPosition, columnPosition).getHorizontal())||(board.getCell(rowPosition,columnPosition).getVertical()))&&(!board.getCell(rowPosition,columnPosition).getBead()))
-            return true;
-        else
-            return false;
+        return ((board.getCell(rowPosition, columnPosition).getHorizontal()) || (board.getCell(rowPosition, columnPosition).getVertical())) && (!board.getCell(rowPosition, columnPosition).getBead());
     }
 
     public boolean placeBead(String owner, int rowPosition, int columnPosition){

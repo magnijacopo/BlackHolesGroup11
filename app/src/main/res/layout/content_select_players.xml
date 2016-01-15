@@ -10,7 +10,7 @@
         android:layout_width="100dp"
         android:layout_height="200dp"
         android:id="@+id/select_players_back_button"
-        android:onClick="goToMainActivity"
+        android:onClick="goToChooseMatchType"
         android:textColor="#ffffff"
         android:layout_alignBottom="@+id/select_players_play_button"
         android:background="#00ffffff" />
