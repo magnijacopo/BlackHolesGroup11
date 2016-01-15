@@ -7,11 +7,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String MATCHPLAYED = "MATCHPLAYED";
     public static final String MATCHWON = "MATCHWON";
     public static final String MINMOVES = "MINMOVES";
+    public static final String VINTE = "VINTE";
 
     //Database name and version
     public static final String DATABASE_NAME = "Database.db";
@@ -22,7 +25,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String PLAYER_COLUMN_ID = "_id";
     public static final String PLAYER_COLUMN_NAME = "name";
     public static final String PLAYER_COLUMN_IMAGE = "image";
-    public static final String PLAYER_COLUMN_CREATEDAT = "date";
+    public static final String PLAYER_COLUMN_CREATEDAT = "dateCreation";
 
     //Table MatchMaking
     public static final String MATCHMAKING_TABLE_NAME = "matchmaking";
@@ -110,11 +113,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     //--------------- "player" table methods ---------------//
 
+    /*
     /**
      * Insert a new profile into the DB.
      * @param name
      * @return
-     */
+
     public boolean insertProfile(String name, String image) {
         SQLiteDatabase db = getWritableDatabase();
 
@@ -129,6 +133,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             e.printStackTrace();
             return false;}
     }
+    */
 
     public boolean insertProfile(String name) {
         SQLiteDatabase db = getWritableDatabase();
@@ -175,6 +180,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      * @return
      */
     public Cursor getAllProfiles() {
+
         SQLiteDatabase db = this.getReadableDatabase();
         String guest1 = "guest1";
         String guest2 = "guest2";
@@ -228,8 +234,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
-
     //--------------- "match" table methods ---------------//
+
     public void insertMatch(int idWinner, int moves) {
         SQLiteDatabase db = getWritableDatabase();
 
@@ -249,12 +255,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
-    public Cursor getLastFiveMatches(int id){
+    public Cursor getAllMatches(int id){
 
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor res = db.rawQuery( "SELECT match.* FROM matchMaking JOIN players ON matchMaking.playerId = players._id" +
-                "JOIN match ON matchMaking.matchId = match.id WHERE players.id = ? ORDER BY date LIMIT 5", new String[] { Integer.toString(id)});
+        Cursor res = db.rawQuery("SELECT " + MATCH_COLUMN_DATE + " FROM " + MATCH_TABLE_NAME + ", " +  MATCHMAKING_TABLE_NAME + ", " + PLAYER_TABLE_NAME
+                    +  " WHERE " + MATCH_COLUMN_ID + " = " + MATCHMAKING_COLUMN_MATCHID + " AND " + MATCHMAKING_COLUMN_PLAYERID
+                    + " = " + PLAYER_COLUMN_ID + " AND " + PLAYER_COLUMN_ID + " AS =?",
+                    new String [] { Integer.toString(id)});
         return res;
     }
 
@@ -287,6 +295,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
+    /*
     public Cursor getShortestMatch(int idPlayer){
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -304,12 +313,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + MATCH_COLUMN_WINNER + "=?" , new String[] { Integer.toString(idPlayer) } );
         return res;
     }
+    */
 
-    /**
-     * From the cursor it gets the name of the profile.
-     * @param cursor that has done the query.
-     * @return the name of the player.
-     */
+    public Cursor getLeaderboard() {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor res = db.rawQuery("SELECT COUNT(" + MATCH_COLUMN_ID + ") FROM " +
+                        MATCH_TABLE_NAME + " GROUP BY " + MATCH_COLUMN_WINNER,
+                    new String[] {});
+        return res;
+    }
+
+
+
+        /**
+         * From the cursor it gets the name of the profile.
+         * @param cursor that has done the query.
+         * @return the name of the player.
+         */
     public String getNamePlayerFromCursor(Cursor cursor){
         String namePlayer = null;
         if(cursor.moveToFirst()){
@@ -340,6 +362,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             mm = cursor.getInt(cursor.getColumnIndex(MINMOVES));
         }
         return mm;
+    }
+
+    public ArrayList<String> getListDateFromCursor(Cursor cursor) {
+        ArrayList<String> listDate = new ArrayList<>();
+
+        while (cursor.moveToNext()){
+            listDate.add(Integer.toString(cursor.getInt(cursor.getColumnIndex(MATCH_COLUMN_DATE))));
+        }
+        return listDate;
     }
 
 }

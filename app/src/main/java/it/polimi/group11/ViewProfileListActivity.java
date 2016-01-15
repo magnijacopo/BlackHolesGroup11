@@ -46,10 +46,7 @@ public class ViewProfileListActivity extends AppCompatActivity {
                 cursor, columns, widgets, 0);
         listView = (ListView)findViewById(R.id.listView1);
         listView.setAdapter(cursorAdapter);
-
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
             @Override
             public void onItemClick(AdapterView listView, View view,
                                     int position, long id) {

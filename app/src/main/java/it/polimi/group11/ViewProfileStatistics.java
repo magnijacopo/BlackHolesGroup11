@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import it.polimi.group11.helper.DatabaseHelper;
@@ -21,16 +20,10 @@ public class ViewProfileStatistics extends AppCompatActivity implements ConfirmD
     TextView textViewMatchWon;
     TextView textViewMinNumberMoves;
     Button buttonDelete;
-    ListView listViewMatches;
 
     // Variable for the database.
     DatabaseHelper dbHelper;
     int playerID;
-    String namePlayer;
-
-    // String for the Extra of the Intent.
-    public final String KEY_EXTRA_PROVA = "Prova";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +45,11 @@ public class ViewProfileStatistics extends AppCompatActivity implements ConfirmD
         Bundle extras = intent.getExtras();
         playerID = extras.getInt("KEY_EXTRA_CONTACT_ID");
 
-
         // Getting the data from the Database.
         dbHelper = new DatabaseHelper(getApplicationContext());
+
         final Cursor cursor = dbHelper.getProfile(playerID);
-        //final Cursor cursorMatches = dbHelper.getLastFiveMatches(playerID);
+        //final Cursor cursorMatches = dbHelper.getAllMatches(playerID);
         final Cursor cursorMatchPlayed = dbHelper.getMatchPlayed(playerID);
         final Cursor cursorMatchWon = dbHelper.getMatchWon(playerID);
         final Cursor cursorMinMoves = dbHelper.getMinNumberMoves(playerID);
@@ -71,33 +64,7 @@ public class ViewProfileStatistics extends AppCompatActivity implements ConfirmD
         textViewMatchWon.setText("MATCH WON " + dbHelper.getNumberMatchWonFromCursor(cursorMatchWon));
         textViewMinNumberMoves.setText("MIN MOVES " + dbHelper.getNumberMinMovesFromCursor(cursorMinMoves));
 
-    /*
-        // Setting the Last Five Matches
-        String [] columns = new String[] {
-                DatabaseHelper.PLAYER_COLUMN_NAME
-        };
-        int [] widgets = new int[] {
-                R.id.player_name
-        };
-
-        listViewMatches = (ListView) findViewById(R.id.listViewMatches);
-        SimpleCursorAdapter cursorAdapter = new SimpleCursorAdapter(this, R.layout.player_info,
-                cursorMatches, columns, widgets, 0);
-        listViewMatches = (ListView)findViewById(R.id.listViewMatches);
-        listViewMatches.setAdapter(cursorAdapter);
-        listViewMatches.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView listView, View view,
-                                    int position, long id) {
-                Cursor itemCursor = (Cursor) ViewProfileStatistics.this.listViewMatches.getItemAtPosition(position);
-                int playerID = itemCursor.getInt(itemCursor.getColumnIndex(DatabaseHelper.PLAYER_COLUMN_ID));
-                Intent intent = new Intent(ViewProfileStatistics.this, ViewMatchStatisticsActivity.class);
-                intent.putExtra(KEY_EXTRA_PROVA, playerID);
-                startActivity(intent);
-            }
-        });
-        */
-}
+    }
 
     /**
      * Alert Dialog that ask to the user if he is sure to delete the profile.
