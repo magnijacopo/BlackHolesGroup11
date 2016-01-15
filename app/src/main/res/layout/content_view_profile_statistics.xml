@@ -33,16 +33,19 @@
         android:textIsSelectable="false"
         android:textColor="#ffffff"
         android:textSize="25sp"
-        android:layout_below="@+id/buttonMatch"
-        android:layout_centerHorizontal="true" />
+        android:layout_below="@+id/button_back_home"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="41dp" />
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_alignParentEnd="false"
         android:id="@+id/linearLayout"
-        android:layout_marginTop="200dp">
+        android:layout_marginTop="43dp"
+        android:layout_below="@+id/TextViewProfileName"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/buttonDeleteProfile">
 
         <ScrollView
             android:layout_width="match_parent"
@@ -57,36 +60,50 @@
                 android:id="@+id/listViewMatches" />
         </ScrollView>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="PROVA "
-            android:id="@+id/textViewMatchPlayed"
-            android:textColor="#ffffff" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="PROVA "
-            android:id="@+id/textViewMatchWon"
-            android:textColor="#ffffff" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MATCH PLAYED"
+                android:id="@+id/textViewMatchPlayed"
+                android:textColor="#ffffff"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="25dp"
+                android:textSize="15sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="PROVA "
-            android:id="@+id/textViewMinNumberMoves"
-            android:textColor="#ffffff" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MATCH WON"
+                android:id="@+id/textViewMatchWon"
+                android:textColor="#ffffff"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="25dp"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MINUMUM NUMBER OF MOVES"
+                android:id="@+id/textViewMinNumberMoves"
+                android:textColor="#ffffff"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="20dp"
+                android:textSize="15sp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </LinearLayout>
+        </LinearLayout>
+
     </LinearLayout>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="MatchStatistics"
-        android:id="@+id/buttonMatch"
-        android:onClick="goToMatchStatistics"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/buttonDeleteProfile" />
 
     <Button
         android:layout_width="wrap_content"
