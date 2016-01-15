@@ -12,7 +12,6 @@ public class Bar {
 
     public void setPosition(int position){
         this.position=position;
-        Log.i("Bar ", "STO SETTANDO LA BARRA");
     }
 
     public int getPosition() {

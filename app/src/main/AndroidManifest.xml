@@ -123,7 +123,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".PopUpActivity"
-            ></activity>
+            android:theme="@style/AppTheme.CustomTheme"></activity>
         <activity
             android:name=".InstructionsActivity"
             android:label="@string/title_activity_instructions"

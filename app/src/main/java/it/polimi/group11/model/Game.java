@@ -193,9 +193,7 @@ public class Game {
              */
             }else{
                 for(int i=0; i<movesList.size(); i++){
-                    Log.i("Game","for");
                     if (movesList.get(i).getMoveId().substring(0, 2).equals(moveToCheck.getMoveId().substring(0, 2))){
-                        Log.i("Game","if");
                         return validity = false;
                     }
                 }

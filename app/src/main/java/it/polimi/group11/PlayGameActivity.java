@@ -147,7 +147,7 @@ public class PlayGameActivity extends AppCompatActivity {
         sound1 = sounds.load(getApplicationContext(), R.raw.bead_destroyed_fx, 1);
         fxOn = OptionsActivity.fxSoundsCheck;
 
-        //Declaration of initial situation of the Play GameFirstReleaseTest Activity
+        //Declaration of initial situation of the Play Game Activity
         setStartViewSituation(k);
 
         //Beads initialization
@@ -947,7 +947,7 @@ public class PlayGameActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Pause");
         builder.setIcon(R.color.colorPrimary);
-        builder.setPositiveButton("Resume GameFirstReleaseTest", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("Resume Game", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -955,7 +955,7 @@ public class PlayGameActivity extends AppCompatActivity {
                 matchTime.start();
             }
         });
-        builder.setNegativeButton("Exit GameFirstReleaseTest", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("Exit Game", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 goToMainActivity();
