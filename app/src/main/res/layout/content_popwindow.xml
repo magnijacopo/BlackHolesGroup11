@@ -7,8 +7,8 @@
     android:fitsSystemWindows="true"
     tools:context="it.polimi.group11.PopUpActivity"
     tools:showIn="@layout/activity_popwindow"
-    android:background="@android:color/transparent"
-    android:id="@+id/popuprel">
+    android:id="@+id/popuprel"
+    android:background="#071621">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -24,7 +24,8 @@
         android:id="@+id/popup"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:autoText="false" />
+        android:autoText="false"
+        android:textColor="#ffffff" />
 
     <Button
         android:layout_width="wrap_content"
@@ -36,6 +37,8 @@
         android:layout_marginRight="90dp"
         android:onClick="goToMainActivity"
         android:background="@drawable/button_win_dismiss"
-        android:layout_alignTop="@+id/popup" />
+        android:layout_alignTop="@+id/popup"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

@@ -2,6 +2,7 @@ package it.polimi.group11;
 
 import android.content.ClipData;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
@@ -49,6 +50,8 @@ public class SetYourBarsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_your_bars);
         startconfig = (Button) findViewById(R.id.startconfig);
+        Typeface myTypeface = Typeface.createFromAsset(getAssets(), "fonts/SignPainter-HouseScript.ttf");
+        startconfig.setTypeface(myTypeface);
         setB(0.0f);
         setA(0.0f);
         setMoving(false);
@@ -436,6 +439,10 @@ public class SetYourBarsActivity extends AppCompatActivity {
         return vbarsPosition;
     }
 
+    public void goToSelectMatchType(View view) {
+        Intent intent = new Intent(this, ChooseMatchTypeActivity.class);
+        startActivity(intent);
+    }
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(this, MainActivity.class);

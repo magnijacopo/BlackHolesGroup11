@@ -17,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
     Button play_button;
     Button credits_button;
     Button profiles_button;
-    Button leaderboard_button;
     Button options_button;
     Button instructions_button;
 

@@ -11,7 +11,7 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".SetYourBarsActivity"
     tools:showIn="@layout/activity_make_your_bars"
-    android:background="@drawable/bg">
+    android:background="@drawable/background_instructions">
 
         <!-- imageView per barre -->
 
@@ -33,8 +33,7 @@
             android:layout_marginTop="157dp"
             android:layout_marginLeft="30dp"
             android:contentDescription="horizontal"
-            android:background="@drawable/bar_red_1"
-            android:layout_centerHorizontal="true" />
+            android:background="@drawable/bar_red_1" />
 
         <ImageView
             android:id="@+id/horizontalbar1"
@@ -44,8 +43,7 @@
             android:layout_marginLeft="30dp"
             android:contentDescription="horizontal"
             android:layout_alignTop="@+id/horizontalbar0"
-            android:background="@drawable/bar_red_2"
-            android:layout_centerHorizontal="true" />
+            android:background="@drawable/bar_red_2" />
 
         <ImageView
             android:id="@+id/horizontalbar2"
@@ -55,8 +53,7 @@
             android:layout_marginLeft="30dp"
             android:contentDescription="horizontal"
             android:layout_alignTop="@+id/horizontalbar1"
-            android:background="@drawable/bar_red_3"
-            android:layout_centerHorizontal="true" />
+            android:background="@drawable/bar_red_3" />
 
         <ImageView
             android:id="@+id/horizontalbar3"
@@ -66,8 +63,7 @@
             android:contentDescription="horizontal"
             android:layout_marginLeft="30dp"
             android:layout_alignTop="@+id/horizontalbar2"
-            android:background="@drawable/bar_red_4"
-            android:layout_centerHorizontal="true" />
+            android:background="@drawable/bar_red_4" />
 
         <ImageView
             android:id="@+id/horizontalbar4"
@@ -77,8 +73,7 @@
             android:layout_marginLeft="30dp"
             android:contentDescription="horizontal"
             android:layout_alignTop="@+id/horizontalbar3"
-            android:background="@drawable/bar_red_5"
-            android:layout_centerHorizontal="true" />
+            android:background="@drawable/bar_red_5" />
 
         <ImageView
             android:id="@+id/horizontalbar5"
@@ -88,8 +83,7 @@
             android:layout_marginLeft="30dp"
             android:contentDescription="horizontal"
             android:layout_alignTop="@+id/horizontalbar4"
-            android:background="@drawable/bar_red_6"
-            android:layout_centerHorizontal="true" />
+            android:background="@drawable/bar_red_6" />
 
         <ImageView
             android:id="@+id/horizontalbar6"
@@ -99,8 +93,7 @@
             android:layout_marginLeft="30dp"
             android:contentDescription="horizontal"
             android:layout_alignTop="@+id/horizontalbar5"
-            android:background="@drawable/bar_red_7"
-            android:layout_centerHorizontal="true" />
+            android:background="@drawable/bar_red_7" />
 
         <!-- Barre verticali -->
 
@@ -113,10 +106,11 @@
             android:layout_alignParentStart="false"
             android:layout_alignParentEnd="false"
             android:adjustViewBounds="false"
-            android:layout_marginLeft="67dp"
+            android:layout_marginLeft="65dp"
             android:background="@drawable/bar_blue_1"
             android:baselineAlignBottom="false"
-            android:layout_centerVertical="true" />
+            android:layout_centerVertical="true"
+            android:longClickable="false" />
 
         <ImageView
             android:id="@+id/verticalbar1"
@@ -202,7 +196,19 @@
         android:layout_below="@+id/verticalbar0"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="60dp"
-        android:onClick="goToSelectPlayerFromCustom" />
+        android:onClick="goToSelectPlayerFromCustom"
+        android:background="#00ffffff"
+        android:textColor="#ffffff"
+        android:textSize="25sp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_back"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:background="#00ffffff"
+        android:onClick="goToSelectMatchType" />
 
 
 </RelativeLayout>
