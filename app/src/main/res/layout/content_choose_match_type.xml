@@ -12,7 +12,7 @@
     tools:context=".ChooseMatchTypeActivity"
     tools:showIn="@layout/activity_choose_match_type"
     android:orientation="vertical"
-    android:background="@drawable/background_game"
+    android:background="@drawable/background_instructions"
     >
 
     <Button
