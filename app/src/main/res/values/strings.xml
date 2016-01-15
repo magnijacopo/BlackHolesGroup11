@@ -33,4 +33,7 @@
     <string name="title_activity_choose_match_type">ChooseMatchType</string>
     <string name="title_activity_make_your_bars">MakeYourBarsActivity</string>
     <string name="title_activity_instructions">InstructionsActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

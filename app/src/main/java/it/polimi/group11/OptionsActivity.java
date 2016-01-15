@@ -42,7 +42,6 @@ public class OptionsActivity extends AppCompatActivity implements ConfirmDeletio
         buttonDeleteData = (Button) findViewById(R.id.button_delete_data);
         buttonDeleteData.setTypeface(myTypeface);
 
-        setCheck();
         checkedChanged();
     }
 
@@ -106,6 +105,7 @@ public class OptionsActivity extends AppCompatActivity implements ConfirmDeletio
         });
     }
 
+
     public void setCheck(){
         fxSoundsCheckbox = (CheckBox) findViewById(R.id.fx_sounds_checkbox);
         if(!fxSoundsCheck){
@@ -114,6 +114,7 @@ public class OptionsActivity extends AppCompatActivity implements ConfirmDeletio
             fxSoundsCheckbox.setChecked(true);
         }
     }
+
 
     public void deleteDatabase(){
         getApplicationContext().deleteDatabase(DatabaseHelper.DATABASE_NAME);

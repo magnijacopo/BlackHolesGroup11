@@ -14,37 +14,44 @@
     android:background="@drawable/background_game">
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ITA"
-        android:id="@+id/button3"
-        android:layout_alignBottom="@+id/button2"
+        android:layout_width="45dp"
+        android:layout_height="30dp"
+        android:id="@+id/button_ita"
+        android:layout_alignBottom="@+id/button_back_home"
         android:layout_alignParentEnd="true"
-        android:onClick="changeLanguage" />
+        android:onClick="changeLanguage"
+        android:background="@drawable/italian" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="back"
-        android:id="@+id/button2"
+        android:id="@+id/button_back_home"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:onClick="goToMainActivity" />
+        android:onClick="goToMainActivity"
+        android:textColor="#ffffff"
+        android:background="#00ffffff" />
 
-    <ScrollView
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/scrollView2"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@+id/button3">
+        android:id="@+id/textViewInstructions"
+        android:textColor="#ffffff"
+        android:textSize="18sp"
+        android:gravity="center_vertical"
+        android:layout_marginTop="100dp"
+        android:layout_centerHorizontal="true" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textViewInstructions"
-            android:textColor="#ffffff"
-            android:textSize="18sp" />
-    </ScrollView>
+    <Button
+        android:layout_width="45dp"
+        android:layout_height="30dp"
+        android:id="@+id/button_eng"
+        android:onClick="changeLanguage"
+        android:background="@drawable/uk"
+        android:textColor="#ffffff"
+        android:layout_alignTop="@+id/button_ita"
+        android:layout_toStartOf="@+id/button_ita"
+        android:layout_marginRight="15dp" />
 
 </RelativeLayout>
