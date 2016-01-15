@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.TextView;
 
@@ -18,6 +19,7 @@ public class InstructionsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_instructions);
 
         textViewInstructions = (TextView) findViewById(R.id.textViewInstructions);
+        textViewInstructions.setMovementMethod(new ScrollingMovementMethod());
         Typeface myTypeface = Typeface.createFromAsset(getAssets(), "fonts/SignPainter-HouseScript.ttf");
         textViewInstructions.setTypeface(myTypeface);
         textViewInstructions.setText(Html.fromHtml("<html>\n" +

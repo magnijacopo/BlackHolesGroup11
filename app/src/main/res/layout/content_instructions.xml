@@ -13,45 +13,47 @@
     tools:showIn="@layout/activity_instructions"
     android:background="@drawable/background_game">
 
-    <Button
-        android:layout_width="45dp"
-        android:layout_height="30dp"
-        android:id="@+id/button_ita"
-        android:layout_alignBottom="@+id/button_back_home"
-        android:layout_alignParentEnd="true"
-        android:onClick="changeLanguageIta"
-        android:background="@drawable/italian" />
+        <Button
+            android:layout_width="45dp"
+            android:layout_height="30dp"
+            android:id="@+id/button_ita"
+            android:layout_alignBottom="@+id/button_back_home"
+            android:layout_alignParentEnd="true"
+            android:onClick="changeLanguageIta"
+            android:background="@drawable/italian" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="back"
-        android:id="@+id/button_back_home"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:onClick="goToMainActivity"
-        android:textColor="#ffffff"
-        android:background="#00ffffff" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button_back_home"
+            android:onClick="goToMainActivity"
+            android:textColor="#ffffff"
+            android:background="#00ffffff"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textViewInstructions"
-        android:textColor="#ffffff"
-        android:textSize="18sp"
-        android:gravity="center_vertical"
-        android:layout_marginTop="100dp"
-        android:layout_centerHorizontal="true" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewInstructions"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            android:gravity="center_vertical"
+            android:layout_marginTop="100dp"
+            android:layout_centerHorizontal="true"
+            android:scrollbars="vertical"
+            android:maxLines="30"
+            android:scrollbarAlwaysDrawVerticalTrack="true"/>
 
-    <Button
-        android:layout_width="45dp"
-        android:layout_height="30dp"
-        android:id="@+id/button_eng"
-        android:onClick="changeLanguageEng"
-        android:textColor="#ffffff"
-        android:layout_alignTop="@+id/button_ita"
-        android:layout_toStartOf="@+id/button_ita"
-        android:layout_marginRight="15dp"
-        android:background="@drawable/uk" />
+        <Button
+            android:layout_width="45dp"
+            android:layout_height="30dp"
+            android:id="@+id/button_eng"
+            android:onClick="changeLanguageEng"
+            android:textColor="#ffffff"
+            android:layout_alignTop="@+id/button_ita"
+            android:layout_toStartOf="@+id/button_ita"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/uk" />
 
 </RelativeLayout>
