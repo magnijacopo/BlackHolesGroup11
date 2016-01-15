@@ -29,13 +29,13 @@ public class PopUpActivity extends AppCompatActivity {
 
         switch(message){
             case "1":
-                player.setImageResource(R.mipmap.astronaut_win);
+                player.setImageResource(R.drawable.astronaut_win);
             case "2":
-                player.setImageResource(R.mipmap.comet_win);
+                player.setImageResource(R.drawable.comet_win);
             case "3":
-                player.setImageResource(R.mipmap.planet_win);
+                player.setImageResource(R.drawable.planet_win);
             case "4":
-                player.setImageResource(R.mipmap.rocket_win);
+                player.setImageResource(R.drawable.rocket_win);
         }
 
 

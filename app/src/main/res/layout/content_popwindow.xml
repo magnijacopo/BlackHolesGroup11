@@ -7,7 +7,7 @@
     android:fitsSystemWindows="true"
     tools:context="it.polimi.group11.PopUpActivity"
     tools:showIn="@layout/activity_popwindow"
-    android:background="@mipmap/background_win"
+    android:background="@drawable/background_win"
     android:id="@+id/popuprel">
 
     <ImageView
@@ -35,9 +35,7 @@
         android:layout_marginLeft="90dp"
         android:layout_marginRight="90dp"
         android:onClick="goToMainActivity"
-        android:background="@mipmap/buttonpopup"
+        android:background="@drawable/button_win_dismiss"
         android:layout_alignTop="@+id/popup" />
-
-
 
 </RelativeLayout>

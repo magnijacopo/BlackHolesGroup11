@@ -33,8 +33,8 @@ public class Cell {
 
         int[] locationOnScreen = new int[2];
         cell.getLocationOnScreen(locationOnScreen);
-        double addXPX = (cell.getWidth()-x)/2;
-        double subYPX = ((y/2)+(cell.getHeight()-y)/2)+(60*cell.getResources().getDisplayMetrics().density);
+        double addXPX = (cell.getWidth()-x)/2+(8*cell.getResources().getDisplayMetrics().density);
+        double subYPX = ((y/2)+(cell.getHeight()-y)/2)+(131*cell.getResources().getDisplayMetrics().density);
 
         setCentreX(locationOnScreen[0] + (int) addXPX);
         setCentreY(locationOnScreen[1] - (int) subYPX);

@@ -12,7 +12,7 @@
     tools:context=".ChooseMatchTypeActivity"
     tools:showIn="@layout/activity_choose_match_type"
     android:orientation="vertical"
-    android:background="@mipmap/home_hdpi">
+    >
 
     <Button
         android:layout_width="wrap_content"
