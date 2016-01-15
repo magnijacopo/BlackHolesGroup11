@@ -7,14 +7,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import java.util.ArrayList;
-
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public static final String MATCHPLAYED = "MATCHPLAYED";
     public static final String MATCHWON = "MATCHWON";
     public static final String MINMOVES = "MINMOVES";
     public static final String VINTE = "VINTE";
+    public static final String MAXID = "MAXID";
 
     //Database name and version
     public static final String DATABASE_NAME = "Database.db";
@@ -170,8 +169,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
      */
     public Cursor getProfile(String name){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res = db.rawQuery( "SELECT * FROM " + PLAYER_TABLE_NAME + " WHERE " +
-                PLAYER_COLUMN_NAME + "=?", new String[] { name } );
+        Cursor res = db.rawQuery("SELECT * FROM " + PLAYER_TABLE_NAME + " WHERE " +
+                PLAYER_COLUMN_NAME + "=?", new String[]{name } );
         return res;
     }
 
@@ -255,16 +254,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
-    public Cursor getAllMatches(int id){
+    public Cursor getLastMatch(){
 
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor res = db.rawQuery("SELECT " + MATCH_COLUMN_DATE + " FROM " + MATCH_TABLE_NAME + ", " +  MATCHMAKING_TABLE_NAME + ", " + PLAYER_TABLE_NAME
-                    +  " WHERE " + MATCH_COLUMN_ID + " = " + MATCHMAKING_COLUMN_MATCHID + " AND " + MATCHMAKING_COLUMN_PLAYERID
-                    + " = " + PLAYER_COLUMN_ID + " AND " + PLAYER_COLUMN_ID + " AS =?",
-                    new String [] { Integer.toString(id)});
+        Cursor res = db.rawQuery("SELECT MAX(" + MATCH_COLUMN_ID + ") AS " + MAXID + " FROM " + MATCH_TABLE_NAME, new String[] {});
         return res;
     }
+
 
     //--------------- various queries methods ---------------//
 
@@ -372,13 +369,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return mm;
     }
 
-    public ArrayList<String> getListDateFromCursor(Cursor cursor) {
-        ArrayList<String> listDate = new ArrayList<>();
-
-        while (cursor.moveToNext()){
-            listDate.add(Integer.toString(cursor.getInt(cursor.getColumnIndex(MATCH_COLUMN_DATE))));
+    public int getIdLastMatchFromCursor(Cursor cursor) {
+        int idL = 0;
+        if(cursor.moveToFirst()) {
+            idL = cursor.getInt(cursor.getColumnIndex(MAXID));
         }
-        return listDate;
+        return idL;
     }
 
 }
